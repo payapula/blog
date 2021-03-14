@@ -1,4 +1,5 @@
 import { extendTheme, ThemeOverride, ColorMode } from "@chakra-ui/react";
+import { createBreakpoints } from "@chakra-ui/theme-tools";
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
   brand: {
@@ -8,13 +9,21 @@ const colors = {
   },
 };
 
+const breakpoints = createBreakpoints({
+  sm: "320px",
+  md: "768px",
+  lg: "960px",
+  xl: "1200px",
+});
+
 const config = {
   initialColorMode: "light" as ColorMode,
-  useSystemColorMode: true,
+  useSystemColorMode: false,
 };
 
 const overrides: ThemeOverride = {
   colors,
+  breakpoints,
   config,
 };
 
