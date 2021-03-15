@@ -1,5 +1,8 @@
 import * as React from "react";
 
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
+
 const useMediaQuery = (width) => {
   const [targetReached, setTargetReached] = React.useState(false);
 
@@ -11,7 +14,7 @@ const useMediaQuery = (width) => {
     }
   }, []);
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const media = window.matchMedia(`(max-width: ${width}px)`);
     media.addListener(updateTarget);
 
