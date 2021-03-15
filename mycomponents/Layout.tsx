@@ -9,13 +9,13 @@ import {
   Link,
   IconButton,
   useColorMode,
-  useMediaQuery,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
 import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { useMediaQuery } from "../utils/hooks";
 
 function ToggleIconButton() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -63,7 +63,7 @@ function MobileMenuItem({ children }: MobileMenuItemProps) {
 }
 
 function CustomHeader() {
-  const [isLessThan768] = useMediaQuery("(max-width: 768px)");
+  const isLessThan768 = useMediaQuery(768);
   return (
     <Box as="header">
       <Flex w="100%" h="80px" alignItems="center">

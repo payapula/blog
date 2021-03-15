@@ -9,12 +9,15 @@ const colors = {
   },
 };
 
-const breakpoints = createBreakpoints({
+const BREAKPOINTS = {
   sm: "320px",
   md: "768px",
   lg: "960px",
   xl: "1200px",
-});
+  "2xl": "1440px",
+};
+
+const breakpoints = createBreakpoints(BREAKPOINTS);
 
 const config = {
   initialColorMode: "light" as ColorMode,
@@ -28,5 +31,7 @@ const overrides: ThemeOverride = {
 };
 
 const theme = extendTheme(overrides);
+
+export { BREAKPOINTS };
 
 export default theme;
