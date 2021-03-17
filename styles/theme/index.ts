@@ -9,6 +9,10 @@ const colors = {
     }
 };
 
+const breaks = [350, 450, 650, 960, 1200, 1440];
+
+const mq = breaks.map((bp) => `@media (min-width: ${bp}px)`);
+
 const BREAKPOINTS = {
     xs: '350px',
     sm: '450px',
@@ -33,6 +37,6 @@ const overrides: ThemeOverride = {
 
 const theme = extendTheme(overrides);
 
-export { BREAKPOINTS };
+export { BREAKPOINTS, mq };
 
 export default theme;
