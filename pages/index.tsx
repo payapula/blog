@@ -5,28 +5,18 @@ import { ReactElement } from 'react';
 import { Layout } from '../mycomponents/Layout';
 import { Heading } from '@chakra-ui/react';
 import Image from 'next/image';
-import { mq } from 'styles/theme';
 
 const Index = (): ReactElement => {
     return (
         <Layout>
-            <Box height="80vh">
+            {/* Till 960px -> 80vh is maintained,  after that 70vh is maintained*/}
+            <Box className="box-shape" height={['80vh', null, null, null, '70vh']}>
                 <Flex
-                    direction="column"
+                    direction={['column', null, null, null, 'row']}
                     align="center"
                     justify="space-evenly"
-                    height="100%"
-                    css={{
-                        [mq[3]]: {
-                            flexDirection: 'row'
-                        }
-                    }}>
-                    <Box
-                        css={{
-                            [mq[3]]: {
-                                display: 'none'
-                            }
-                        }}>
+                    height="100%">
+                    <Box display={[null, null, null, null, 'none']}>
                         <Image
                             src="https://source.unsplash.com/random/150x150"
                             alt="Top of the author"
@@ -38,34 +28,19 @@ const Index = (): ReactElement => {
                         />
                     </Box>
                     <Stack
-                        align="center"
+                        align={['center', null, null, null, 'start']}
                         height="260"
-                        justifyContent="space-between"
-                        css={{
-                            [mq[3]]: {
-                                alignItems: 'start'
-                            }
-                        }}>
+                        justifyContent="space-between">
                         <Heading
                             as="h1"
-                            fontSize={[null, 'xl', '2xl', '3xl']}
+                            fontSize={['xl', null, '2xl', '3xl']}
                             maxW="23rem"
-                            textAlign="center"
-                            css={{
-                                [mq[3]]: {
-                                    textAlign: 'start'
-                                }
-                            }}>
+                            textAlign={['center', null, null, null, 'start']}>
                             Hi, I&apos;m Bharathi Kannan, Frontend Engineer
                         </Heading>
                         <Text
-                            fontSize={[null, 'sm', 'md', 'lg']}
-                            align="center"
-                            css={{
-                                [mq[3]]: {
-                                    textAlign: 'start'
-                                }
-                            }}>
+                            fontSize={['sm', null, 'md', 'lg']}
+                            align={['center', null, null, null, 'start']}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar
                             ac eros in vestibulum. Vivamus et justo vitae nibh porttitor tempor. In
                             ac vehicula neque. Pellentesque pretium volutpat sem ut laoreet. Ut
@@ -75,18 +50,12 @@ const Index = (): ReactElement => {
                             Download Resume
                         </Button>
                     </Stack>
-                    <Box
-                        css={{
-                            display: 'none',
-                            [mq[3]]: {
-                                display: 'block'
-                            }
-                        }}>
+                    <Box display={['none', null, null, null, 'block']}>
                         <Image
                             src="https://source.unsplash.com/random/600x600"
                             alt="Bottom of the author"
-                            width={650}
-                            height={650}
+                            width={500}
+                            height={500}
                             css={css`
                                 border-radius: 50%;
                             `}
