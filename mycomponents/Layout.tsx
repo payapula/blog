@@ -63,7 +63,7 @@ function MobileMenuItem({ children }: MobileMenuItemProps) {
 }
 
 function CustomHeader() {
-    const isLessThan768 = useMediaQuery(768);
+    const isLessThan768 = useMediaQuery(650);
 
     return (
         <Box as="header">
@@ -111,7 +111,9 @@ function Layout({ children }: LayoutProps): ReactElement {
     return (
         <Box>
             <CustomHeader />
-            <Container as="main">{children}</Container>
+            <Container as="main" maxW={[null, null, '95%', '80%']}>
+                {children}
+            </Container>
             <Box as="footer">Footer</Box>
         </Box>
     );
