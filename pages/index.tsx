@@ -18,7 +18,7 @@ const Index = (): ReactElement => {
                     height="100%">
                     <Box display={[null, null, null, null, 'none']}>
                         <Image
-                            src="https://source.unsplash.com/random/150x150"
+                            src="https://source.unsplash.com/_7LbC5J-jw4/150x150"
                             alt="Top of the author"
                             width={180}
                             height={180}
@@ -52,7 +52,7 @@ const Index = (): ReactElement => {
                     </Stack>
                     <Box display={['none', null, null, null, 'block']}>
                         <Image
-                            src="https://source.unsplash.com/random/600x600"
+                            src="https://source.unsplash.com/_7LbC5J-jw4/600x600"
                             alt="Bottom of the author"
                             width={500}
                             height={500}
