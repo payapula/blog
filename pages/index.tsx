@@ -8,7 +8,8 @@ import {
     Stack,
     chakra,
     HStack,
-    useColorModeValue
+    useColorModeValue,
+    useColorMode
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { Layout } from '../mycomponents/Layout';
@@ -58,7 +59,7 @@ const Index = (): ReactElement => {
                         justifyContent="space-between">
                         <Heading
                             as="h1"
-                            fontSize={['xl', null, null, '30px', '35px']}
+                            fontSize={['3xl', null, null, '30px', '35px']}
                             maxW={['23rem', null, null, '30rem']}
                             textAlign={['center', null, null, null, 'start']}>
                             Hi, I&apos;m Bharathi Kannan, Frontend Engineer
@@ -130,6 +131,12 @@ const Index = (): ReactElement => {
 function DisplayCard(): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
+    const { colorMode } = useColorMode();
+
+    const hoverShadow =
+        colorMode === 'light'
+            ? 'box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);'
+            : 'box-shadow: 0 14px 28px rgba(255, 130, 47, 0.25), 0 10px 10px rgba(95, 83, 76, 0.22);';
     return (
         <Flex
             direction="column"
@@ -141,12 +148,13 @@ function DisplayCard(): ReactElement {
             borderRadius="4"
             border={cardBorder}
             padding="2"
+            cursor="pointer"
             // https://codepen.io/sdthornton/pen/wBZdXq
             css={css`
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
                 transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
                 &:hover {
-                    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+                    ${hoverShadow}
                 }
             `}>
             <Heading fontSize={['2xl', null, null, 'xl']} fontWeight="extrabold" textAlign="start">
