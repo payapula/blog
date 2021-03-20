@@ -92,7 +92,7 @@ const Index = (): ReactElement => {
                 width="100vw"
                 background={postsBackgroundColor}
                 position="relative"
-                left="calc(-50vw + 50%)">
+                left="calc(-50vw + 49%)">
                 <Box
                     height={['650px', null, null, null, '400px']}
                     mt={['3', null, null, null, '1']}
