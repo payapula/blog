@@ -25,8 +25,8 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
                   IGNORE_GITIGNORED_FILES: true
-                  LINTER_RULES_PATH: /
-                  TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.js
+                  VALIDATE_MARKDOWN: false
+                  VALIDATE_TYPESCRIPT_STANDARD: false
                   VALIDATE_JAVASCRIPT_STANDARD: false
                   VALIDATE_CSS: false
                   FILTER_REGEX_EXCLUDE: .*/_posts/.*
