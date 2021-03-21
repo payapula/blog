@@ -1,6 +1,6 @@
 import { Heading, SimpleGrid } from '@chakra-ui/react';
-import { Card } from 'mycomponents/Card';
-import { Layout } from 'mycomponents/Layout';
+import { Card } from 'mycomponents/card';
+import { Layout } from 'mycomponents/layout';
 import React, { ReactElement } from 'react';
 
 function BlogCard() {
