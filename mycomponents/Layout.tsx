@@ -6,7 +6,6 @@ import {
     Flex,
     Text,
     Spacer,
-    Link,
     IconButton,
     useColorMode,
     Menu,
@@ -16,6 +15,8 @@ import {
     HStack,
     CSSObject
 } from '@chakra-ui/react';
+import { ChakraLink } from 'mycomponents/ChakraLink';
+import NextLink from 'next/link';
 import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from 'utils/hooks';
 import { Icon } from '@chakra-ui/react';
@@ -23,6 +24,7 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
+import { ChakraNextImage } from 'mycomponents/ChakraNextImage';
 
 function ToggleIconButton() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -45,11 +47,11 @@ function NavLink({ children }: NavLinkProps) {
     return (
         <Box w="100px">
             <Center h="100%">
-                <Link>
-                    <Text fontSize="xl" fontWeight="bold">
+                <NextLink href="/blog" passHref>
+                    <ChakraLink fontSize="xl" fontWeight="bold">
                         {children}
-                    </Text>
-                </Link>
+                    </ChakraLink>
+                </NextLink>
             </Center>
         </Box>
     );
@@ -61,20 +63,41 @@ interface MobileMenuItemProps {
 
 function MobileMenuItem({ children }: MobileMenuItemProps) {
     return (
-        <MenuItem h="50px">
-            <Text fontSize="lg" fontWeight="bold">
-                {children}
-            </Text>
-        </MenuItem>
+        <NextLink href="/blog" passHref>
+            <ChakraLink>
+                <MenuItem h="50px">
+                    <Text fontSize="lg" fontWeight="bold">
+                        {children}
+                    </Text>
+                </MenuItem>
+            </ChakraLink>
+        </NextLink>
     );
 }
 
-function CustomHeader() {
+function CustomHeader({ home }: { home: boolean }) {
     const isLessThan768 = useMediaQuery(650);
-
     return (
         <Box as="header">
             <Flex w="100%" h="80px" alignItems="center">
+                <NextLink href="/" passHref>
+                    <Flex as="a" align="center" ml="5" w="220px" justify="space-between">
+                        {!home && (
+                            <ChakraNextImage
+                                src="https://source.unsplash.com/_7LbC5J-jw4/150x150"
+                                alt="Top of the author"
+                                width={60}
+                                height={60}
+                                borderRadius="50%"
+                            />
+                        )}{' '}
+                        {home ? (
+                            <Text fontSize="2xl">Bharathi Kannan</Text>
+                        ) : (
+                            <Text fontSize={['xl']}>Bharathi Kannan</Text>
+                        )}
+                    </Flex>
+                </NextLink>
                 <Spacer />
                 <ToggleIconButton />
                 {isLessThan768 ? (
@@ -111,14 +134,15 @@ function CustomHeader() {
 }
 
 interface LayoutProps {
+    home?: boolean;
     children: ReactNode;
 }
 
-function Layout({ children }: LayoutProps): ReactElement {
+function Layout({ home, children }: LayoutProps): ReactElement {
     return (
         <Box>
-            <CustomHeader />
-            <Container as="main" maxW={[null, null, '95%', '80%']}>
+            <CustomHeader home={home} />
+            <Container as="main" maxW={[null, null, '95%', '80%']} minH="80vh">
                 {children}
             </Container>
             <Footer />
