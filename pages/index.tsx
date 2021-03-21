@@ -1,19 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
-import {
-    Button,
-    Flex,
-    Box,
-    Text,
-    Stack,
-    HStack,
-    useColorModeValue,
-    useColorMode
-} from '@chakra-ui/react';
+import { Button, Flex, Box, Text, Stack, useColorModeValue, Icon, HStack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { Layout } from '../mycomponents/Layout';
 import { Heading } from '@chakra-ui/react';
 import { ChakraNextImage } from 'mycomponents/ChakraNextImage';
+import { Card } from 'mycomponents/Card';
+import NextLink from 'next/link';
+import { ChakraLink } from 'mycomponents/ChakraLink';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 
 const Index = (): ReactElement => {
     const postsBackgroundColor = useColorModeValue('#EDF7FA', 'gray.800');
@@ -84,7 +79,7 @@ const Index = (): ReactElement => {
                 position="relative"
                 left="calc(-50vw + 49%)">
                 <Box
-                    height={['650px', null, null, null, '400px']}
+                    height={['700px', null, null, null, '400px']}
                     mt={['3', null, null, null, '1']}
                     maxW={[null, null, '95%', '80%']}
                     px="1rem"
@@ -93,15 +88,19 @@ const Index = (): ReactElement => {
                         pt="5"
                         px="7"
                         justifyContent={['center', null, null, null, 'space-between']}>
-                        <Heading fontSize="xl" fontWeight="medium" textAlign="start">
+                        <Heading fontSize="xl" fontWeight="bold" textAlign="start">
                             Recent Posts
                         </Heading>
-                        <Text
-                            color={viewAllColor}
-                            fontSize={['md', null, null, 'lg']}
-                            display={['none', null, null, null, 'block']}>
-                            View All
-                        </Text>
+                        <NextLink href="/blog" passHref>
+                            <ChakraLink
+                                color={viewAllColor}
+                                fontSize="md"
+                                display={['none', null, null, null, 'block']}
+                                _hover={{ borderBottom: '1px' }}>
+                                View All
+                                <Icon as={FaLongArrowAltRight} w="8" h="6" ml="1" />
+                            </ChakraLink>
+                        </NextLink>
                     </Flex>
                     <Flex
                         height={['600px', null, null, null, '350px']}
@@ -109,58 +108,27 @@ const Index = (): ReactElement => {
                         direction={['column', null, null, null, 'row']}
                         justifyContent={['space-around']}
                         alignItems={['center']}>
-                        <DisplayCard />
-                        <DisplayCard />
+                        <Card />
+                        <Card />
                     </Flex>
+                    <NextLink href="/blog" passHref>
+                        <ChakraLink
+                            color={viewAllColor}
+                            fontSize="xl"
+                            position="absolute"
+                            left="43%"
+                            _hover={{ borderBottom: '1px' }}
+                            display={['block', null, null, null, 'none']}>
+                            <HStack>
+                                <Box>View All</Box>
+                                <Icon as={FaLongArrowAltRight} w="10" h="8" ml="1" />
+                            </HStack>
+                        </ChakraLink>
+                    </NextLink>
                 </Box>
             </Box>
         </Layout>
     );
 };
-
-function DisplayCard(): ReactElement {
-    const cardBg = useColorModeValue('white', 'gray.800');
-    const cardBorder = useColorModeValue('none', '1px');
-    const { colorMode } = useColorMode();
-
-    const hoverShadow =
-        colorMode === 'light'
-            ? 'box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);'
-            : 'box-shadow: 0 14px 28px rgba(255, 130, 47, 0.25), 0 10px 10px rgba(95, 83, 76, 0.22);';
-    return (
-        <Flex
-            direction="column"
-            height="265px"
-            justifyContent="space-between"
-            className="card-container"
-            width={['95%', null, null, null, '45%']}
-            background={cardBg}
-            borderRadius="4"
-            border={cardBorder}
-            padding="2"
-            cursor="pointer"
-            // https://codepen.io/sdthornton/pen/wBZdXq
-            css={css`
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                &:hover {
-                    ${hoverShadow}
-                }
-            `}>
-            <Heading fontSize={['2xl', null, null, 'xl']} fontWeight="extrabold" textAlign="start">
-                How to use React Context effectively
-            </Heading>
-            <HStack>
-                <Text>12 FEB 2020</Text>
-                <Text>| Design, Pattern</Text>
-            </HStack>
-            <Text fontSize={['md', null, 'lg', 'xl']} noOfLines={[4, null, 5]}>
-                Nam vel lacus id ligula convallis interdum. Fusce rhoncus orci a magna tempus
-                maximus. Pellentesque eget dictum leo, in elementum orci. Maecenas sit amet tempor
-                magna. Cras eu arcu sagittis, accumsan metus sit amet.
-            </Text>
-        </Flex>
-    );
-}
 
 export default Index;

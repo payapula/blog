@@ -1,16 +1,28 @@
-import { Heading } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Heading, SimpleGrid } from '@chakra-ui/react';
+import { Card } from 'mycomponents/Card';
 import { Layout } from 'mycomponents/Layout';
 import React, { ReactElement } from 'react';
-import { ChakraLink } from 'mycomponents/ChakraLink';
+
+function BlogCard() {
+    return <Card override={{ width: '100%', border: '1px solid teal' }} />;
+}
 
 export default function Index(): ReactElement {
     return (
         <Layout>
-            <Heading as="h1">Welcome to Blog Posts</Heading>
-            <NextLink href="/">
-                <ChakraLink>Back to home</ChakraLink>
-            </NextLink>
+            <Heading as="h1" width="100px" mx="auto" mt="8">
+                Blog
+            </Heading>
+            <SimpleGrid
+                columns={[1, null, null, null, 2, 3]}
+                mt="10"
+                spacing={[10, null, null, null]}>
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+                <BlogCard />
+            </SimpleGrid>
         </Layout>
     );
 }
