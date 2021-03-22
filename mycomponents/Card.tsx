@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import DateFormatter from './date-formatter';
+import { motion } from 'framer-motion';
 
 interface CardProps {
     title?: string;
@@ -18,6 +19,8 @@ interface CardProps {
     excerpt?: string;
     override?: ChakraProps;
 }
+
+const MotionFlex = motion(Flex);
 
 function Card({ title, date, excerpt, override }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
@@ -29,16 +32,16 @@ function Card({ title, date, excerpt, override }: CardProps): ReactElement {
             ? 'box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);'
             : 'box-shadow: 0 14px 28px rgba(255, 130, 47, 0.25), 0 10px 10px rgba(95, 83, 76, 0.22);';
     return (
-        <Flex
+        <MotionFlex
             direction="column"
-            height="265px"
             justifyContent="space-between"
-            className="card-container"
+            height="265px"
+            padding="2"
             width={['95%', null, null, null, '45%']}
+            className="card-container"
             background={cardBg}
             borderRadius="4"
             border={cardBorder}
-            padding="2"
             cursor="pointer"
             // https://codepen.io/sdthornton/pen/wBZdXq
             css={css`
@@ -48,6 +51,8 @@ function Card({ title, date, excerpt, override }: CardProps): ReactElement {
                     ${hoverShadow}
                 }
             `}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             {...override}>
             <Heading fontSize={['2xl', null, null, 'xl']} fontWeight="extrabold" textAlign="start">
                 {title ? title : `How to use React Context effectively`}
@@ -63,7 +68,7 @@ function Card({ title, date, excerpt, override }: CardProps): ReactElement {
                 maximus. Pellentesque eget dictum leo, in elementum orci. Maecenas sit amet tempor
                 magna. Cras eu arcu sagittis, accumsan metus sit amet.`}
             </Text>
-        </Flex>
+        </MotionFlex>
     );
 }
 
@@ -76,7 +81,11 @@ interface BlogCardProps {
 function BlogCard({ title, date, excerpt }: BlogCardProps): ReactElement {
     return (
         <Card
-            override={{ width: '100%', border: '1px solid teal' }}
+            override={{
+                width: '100%',
+                border: '1px solid teal',
+                height: ['280', null, '300']
+            }}
             title={title}
             date={date}
             excerpt={excerpt}

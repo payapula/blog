@@ -26,10 +26,7 @@ export default function Index({ allPosts }: Props): ReactElement {
             <Heading as="h1" width="100px" mx="auto" mt="8">
                 Blog
             </Heading>
-            <SimpleGrid
-                columns={[1, null, null, null, 2, 3]}
-                mt="10"
-                spacing={[10, null, null, null]}>
+            <SimpleGrid columns={[1, null, null, null, 2, 3]} mt="10" spacing={10}>
                 {allPosts.map((post) => {
                     return (
                         <BlogCard
