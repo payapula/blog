@@ -5,6 +5,9 @@ import { Layout } from 'mycomponents/layout';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import Post from 'types/post';
+import NextLink from 'next/link';
+import { ChakraLink } from 'mycomponents/chakra-link';
+import Head from 'next/head';
 
 type Props = {
     allPosts: Post[];
@@ -23,18 +26,29 @@ export default function Index({ allPosts }: Props): ReactElement {
     console.log(allPosts);
     return (
         <Layout>
+            <Head>
+                <title>Blogs | Bharathi Kannan</title>
+            </Head>
             <Heading as="h1" width="100px" mx="auto" mt="8">
                 Blog
             </Heading>
             <SimpleGrid columns={[1, null, null, null, 2, 3]} mt="10" spacing={10}>
                 {allPosts.map((post) => {
                     return (
-                        <BlogCard
+                        <NextLink
+                            as={`/blog/${post.slug}`}
                             key={post.slug}
-                            title={post.title}
-                            date={post.date}
-                            excerpt={post.excerpt}
-                        />
+                            href="/blog/[slug]"
+                            passHref>
+                            <ChakraLink _hover={{ textDecoration: 'none' }}>
+                                <BlogCard
+                                    key={post.slug}
+                                    title={post.title}
+                                    date={post.date}
+                                    excerpt={post.excerpt}
+                                />
+                            </ChakraLink>
+                        </NextLink>
                     );
                 })}
             </SimpleGrid>
