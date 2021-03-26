@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
     ]);
 
     //const content = await markdownToHtml(post.content || '');
-    const mdxSource = await renderToString(post.content);
+    const mdxSource = await renderToString(post.content, { components: MDXComponents });
 
     return {
         props: {

@@ -1,4 +1,4 @@
-import { extendTheme, ThemeOverride, ColorMode, ChakraProps } from '@chakra-ui/react';
+import { extendTheme, ThemeOverride, ColorMode } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
@@ -98,7 +98,10 @@ const mdx = {
         fontSize: '0.875em',
         py: '2px',
         whiteSpace: 'nowrap',
-        lineHeight: 'normal'
+        lineHeight: 'normal',
+        'font-family': 'Monaco,Menlo,Consolas,Courier New,monospace!important',
+        border: '1px solid #1d1c1d21',
+        'border-radius': '3px'
     }
 };
 

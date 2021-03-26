@@ -1,13 +1,14 @@
-import { Alert, Box, Heading, chakra, useColorModeValue } from '@chakra-ui/react';
+import { Alert, Box, Heading, chakra, Code, useColorModeValue } from '@chakra-ui/react';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
 const Test = () => <div>Hello from JSX!</div>;
 
 const InlineCode = (props: any) => (
-    <chakra.code
+    <Code
       apply="mdx.code"
-      color={useColorModeValue("purple.500", "purple.200")}
+      color={useColorModeValue('#e01e5a', '#E8912B')}
+      backgroundColor={useColorModeValue( "rgba(29, 28, 29, 0.04)", "rgba(232, 232, 232, 0.04)")}
       {...props}
     />
 );
