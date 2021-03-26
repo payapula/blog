@@ -9,3 +9,5 @@ lib
 
 #to be worked on files
 pages/posts
+
+*.mdx

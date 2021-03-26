@@ -23,7 +23,6 @@ type Props = {
  */
 
 export default function Index({ allPosts }: Props): ReactElement {
-    console.log(allPosts);
     return (
         <Layout>
             <Head>

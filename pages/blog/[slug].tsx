@@ -81,7 +81,7 @@ function PostBody({ content }): ReactElement {
                 className="blog-post-content"
                 dangerouslySetInnerHTML={{ __html: content }}
             /> */}
-            <Text>{hydratedContent}</Text>
+            {hydratedContent}
         </Box>
     );
 }
@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
     ]);
 
     //const content = await markdownToHtml(post.content || '');
-    const mdxSource = await renderToString(post.content, { components: MDXComponents });
+    const mdxSource = await renderToString(post.content);
 
     return {
         props: {
