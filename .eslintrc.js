@@ -1,4 +1,7 @@
 // Full tutorial for ESLint Configs - https://dev.to/onygami/eslint-and-prettier-for-react-apps-bonus-next-js-and-typescript-3e46
+// Added - https://github.com/mdx-js/eslint-mdx
+// Parsing error - https://github.com/mdx-js/eslint-mdx/issues/250
+// overrides - https://eslint.org/docs/user-guide/configuring/configuration-files#how-do-overrides-work
 
 module.exports = {
     parser: '@typescript-eslint/parser',
@@ -15,6 +18,7 @@ module.exports = {
         react: {
             version: 'detect' // Automatically detect the react version
         }
+        // 'mdx/code-blocks': true
     },
     env: {
         browser: true, // Enables browser globals like window and document
@@ -26,7 +30,8 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended'
+        'plugin:@typescript-eslint/recommended',
+        'plugin:mdx/recommended'
         // 'plugin:prettier/recommended' // Make this the last element so prettier config overrides other formatting rules
     ],
     rules: {
@@ -42,5 +47,11 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
         'react-hooks/exhaustive-deps': 'warn' // Checks effect dependencies
         // 'prettier/prettier': ['error', {}, { usePrettierrc: true }] // Use our .prettierrc file as source
-    }
+    },
+    overrides: [
+        {
+            files: ['*.mdx', '*.md'],
+            parser: 'eslint-mdx'
+        }
+    ]
 };

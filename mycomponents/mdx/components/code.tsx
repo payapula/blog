@@ -53,7 +53,6 @@ function checkToHideLineNums(meta) {
 }
 
 function Code({ codeString, language, metastring }) {
-    console.log(metastring);
     const shouldHighlightLine = calculateLinesToHighlight(metastring);
     const shouldHideLineNums = checkToHideLineNums(metastring);
     const color = useColorModeValue('#0a1126', '#0a0707');
