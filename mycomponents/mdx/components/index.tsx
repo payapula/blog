@@ -7,6 +7,7 @@ import {
     useColorModeValue
 } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
+import { CodePen, CodeSandbox, Tweet } from 'mdx-embed';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
@@ -52,6 +53,9 @@ const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
     Test,
+    CodePen,
+    CodeSandbox,
+    Tweet,
     h1: (props) => <Heading apply="mdx.h1" {...props} />,
     h2: (props) => <Heading apply="mdx.h2" {...props} />,
     h3: (props) => <Heading as="h3" apply="mdx.h3" {...props} />,

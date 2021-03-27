@@ -10,6 +10,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { MDXComponents } from 'mycomponents/mdx/components';
+// import { MDXEmbedProvider } from 'mdx-embed';
 
 type Props = {
     post: PostType;
@@ -56,6 +57,15 @@ const Post = ({ post, morePosts, preview }: Props): ReactElement => {
     );
 };
 
+const components = {
+    ...MDXComponents
+};
+
+// const provider = {
+//     component: MDXEmbedProvider,
+//     props: {}
+// };
+
 // eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
 function PostHeader({ title, coverImage, date, author }): ReactElement {
     return (
@@ -72,7 +82,7 @@ function PostHeader({ title, coverImage, date, author }): ReactElement {
 
 // eslint-disable-next-line react/prop-types
 function PostBody({ content }): ReactElement {
-    const hydratedContent = hydrate(content, { components: MDXComponents });
+    const hydratedContent = hydrate(content, { components });
     return (
         <Box mt="10">
             {/* <Text
@@ -105,7 +115,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'coverImage'
     ]);
 
-    const mdxSource = await renderToString(post.content, { components: MDXComponents });
+    const mdxSource = await renderToString(post.content, { components });
 
     return {
         props: {
