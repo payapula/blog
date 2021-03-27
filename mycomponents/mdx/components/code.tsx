@@ -94,7 +94,7 @@ function Code({ codeString, language, metastring }) {
                                                 display: inline-block;
                                                 width: 2em;
                                                 user-select: none;
-                                                color: rgb(246 246 244 / 30%);
+                                                color: rgb(246 246 244 / 50%);
                                             `}>
                                             {i + 1}
                                         </span>
