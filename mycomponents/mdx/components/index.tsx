@@ -1,5 +1,5 @@
 import { Alert, Box, Heading, chakra, Code as ChakraCode, useColorModeValue } from '@chakra-ui/react';
-import {Code, preToCodeBlock} from './Code';
+import {Code, preToCodeBlock} from './code';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
