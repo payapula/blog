@@ -1,11 +1,12 @@
-import { Alert, Box, Heading, chakra, Code, useColorModeValue } from '@chakra-ui/react';
+import { Alert, Box, Heading, chakra, Code as ChakraCode, useColorModeValue } from '@chakra-ui/react';
+import {Code, preToCodeBlock} from './Code';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
 const Test = () => <div>Hello from JSX!</div>;
 
 const InlineCode = (props: any) => (
-    <Code
+    <ChakraCode
       apply="mdx.code"
       color={useColorModeValue('#e01e5a', '#E8912B')}
       backgroundColor={useColorModeValue( "rgba(29, 28, 29, 0.04)", "rgba(232, 232, 232, 0.04)")}
@@ -50,7 +51,15 @@ const MDXComponents = {
     h4: (props) => <Heading as="h4" apply="mdx.h4" {...props} />,
     strong: (props) => <Box as="strong" fontWeight="extrabold" {...props} />,
     inlineCode: InlineCode,
-    pre: Pre,
+    pre: preProps => {
+      // Refer Kent C Dodds Implementation below
+      const props = preToCodeBlock(preProps)
+      if (props) {
+        return <Code {...props} />
+      } else {
+        return <Pre {...preProps} />
+      }
+    },
     table: Table,
     th: THead,
     td: TData,

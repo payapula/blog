@@ -13,6 +13,8 @@ const breaks = [350, 450, 650, 960, 1200, 1440];
 
 const mq = breaks.map((bp) => `@media (min-width: ${bp}px)`);
 
+export const bpDesktopOnly = `@media (min-width: ${1200 + 1}px)`;
+
 const BREAKPOINTS = {
     xs: '350px',
     sm: '450px',

@@ -48,10 +48,53 @@ _Emphasized text_
 
 Some Inline code `javascript`
 
+```jsx {2,3,4}
+function calculateLinesToHighlight(meta) {
+  if (RE.test(meta)) {
+    const lineNumbers = RE.exec(meta)[1]
+      .split(',')
+      .map(v => v.split('-').map(y => parseInt(y, 10)))
+    return index => {
+      const lineNumber = index + 1
+      const inRange = lineNumbers.some(([start, end]) =>
+        end ? lineNumber >= start && lineNumber <= end : lineNumber === start,
+      )
+      return inRange
+    }
+  } else {
+    return () => false
+  }
+}
+```
+
 - Bullet list
     - Nested bullet
         - Sub-nested bullet etc
 - Bullet list item 2
+
+```javascript {2,6,13,15}
+const counterElement = {
+  type: 'div',
+  props: {
+    children: [
+      {
+        type: 'button',
+        props: {
+          onClick: increment,
+          children: 'The count is 1',
+        },
+      },
+      {
+        type: Logger,
+        props: {
+          label: 'counter',
+        },
+      },
+    ],
+  },
+}
+```
+
 
 1. A numbered list 
     1. A nested numbered list 

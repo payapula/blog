@@ -105,7 +105,6 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'coverImage'
     ]);
 
-    //const content = await markdownToHtml(post.content || '');
     const mdxSource = await renderToString(post.content, { components: MDXComponents });
 
     return {
