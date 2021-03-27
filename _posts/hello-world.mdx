@@ -10,6 +10,8 @@ ogImage:
     url: '/assets/blog/hello-world/cover.jpg'
 ---
 
+[Source](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
 
 Venenatis cras sed felis eget velit. Consectetur libero id faucibus nisl tincidunt. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus. Volutpat consequat mauris nunc congue nisi vitae. Id aliquet risus feugiat in ante metus dictum at tempor. Sed blandit libero volutpat sed cras. Sed odio morbi quis commodo odio aenean sed adipiscing. Velit euismod in pellentesque massa placerat. Mi bibendum neque egestas congue quisque egestas diam in arcu. Nisi lacus sed viverra tellus in. Nibh cras pulvinar mattis nunc sed. Luctus accumsan tortor posuere ac ut consequat semper viverra. Fringilla ut morbi tincidunt augue interdum velit euismod.
@@ -117,7 +119,57 @@ const counterElement = {
 
 > Blockquote
 
----
+> If you want to skip all the deep-dive technical details and get to the "what 
+does this mean for me" go ahead and [plop yourself down there](https://codesandbox.io/s/react-codesandbox-g9mt5) 
+now
+
+## An example
+
+```jsx
+// play with this on codesandbox: https://codesandbox.io/s/react-codesandbox-g9mt5
+
+import * as React from 'react'
+import ReactDOM from 'react-dom'
+
+function Logger(props) {
+  console.log(`${props.label} rendered`)
+  return null // what is returned here is irrelevant...
+}
+
+function Counter() {
+  const [count, setCount] = React.useState(0)
+  const increment = () => setCount(c => c + 1)
+  return (
+    <div>
+      <button onClick={increment}>The count is {count}</button>
+      <Logger label="counter" />
+    </div>
+  )
+}
+
+ReactDOM.render(<Counter />, document.getElementById('root'))
+```
+
+## Demo
+
+Creating a practical demo of a slow app in React is tricky because it kinda
+requires building a full app, but I do have a contrived example app that has a
+before/after that you can check out and play with:
+
+<iframe src="https://codesandbox.io/embed/github/ghughes13/FCC-MarkdownPreviewer/tree/master/markdown?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.js&theme=dark&view=editor"
+     style={ {
+  width: "100%",
+  height: "500px",
+  border: "0",
+  borderRadius: "4px",
+  overflow: "hidden"
+}}
+     title="markdown"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
+
+- - - -
 
 ![picture alt](http://via.placeholder.com/200x150 'Title is optional')
 
