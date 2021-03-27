@@ -83,6 +83,7 @@ function Header({ home }: { home: boolean }): ReactElement {
             position={home ? 'inherit' : 'sticky'}
             background={useColorModeValue('white', 'gray.800')}
             borderBottom={home ? 'none' : '1px'}
+            zIndex={10000}
             top="0"
             // css={css`
             //     ${!home
