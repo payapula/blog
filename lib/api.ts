@@ -1,6 +1,8 @@
 import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
+import PostType from 'types/post';
+import {OverrideProps} from 'types/utils';
 
 const postsDirectory = join(process.cwd(), '_posts');
 
@@ -8,18 +10,19 @@ export function getPostSlugs() {
     return fs.readdirSync(postsDirectory);
 }
 
-export type Items = {
-    [key: string]: string;
-};
+// Content is MDXRemote.source, so overriding it to string
+type RawPostType = OverrideProps<PostType, {content: string}>;
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
+type PostKey = keyof PostType;
+
+export function getPostBySlug(slug: string, fields: PostKey[] = []) :  Partial<RawPostType>  {
     const realSlug = slug.replace(/\.mdx$/, '');
     const fullPath = join(postsDirectory, `${realSlug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
-
-    const items: Items = {};
+    // We are just sending requested fields, hence Parital<> is used
+   const items: Partial<RawPostType> = {};
 
     // Ensure only the minimal needed data is exposed
     fields.forEach((field) => {
@@ -35,12 +38,10 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
         }
     });
 
-
-
     return items;
 }
 
-export function getAllPosts(fields: string[] = []) {
+export function getAllPosts(fields: PostKey[] = []) {
     const slugs = getPostSlugs();
     const posts = slugs
         .map((slug) => getPostBySlug(slug, fields))

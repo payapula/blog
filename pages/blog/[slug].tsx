@@ -10,7 +10,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
 import hydrate from 'next-mdx-remote/hydrate';
 import { MDXComponents } from 'mycomponents/mdx/components';
-// import { MDXEmbedProvider } from 'mdx-embed';
+import { NextSeo } from 'next-seo';
+import { MdxRemote } from 'next-mdx-remote/types';
 
 type Props = {
     post: PostType;
@@ -18,8 +19,8 @@ type Props = {
     preview?: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Post = ({ post, morePosts, preview }: Props): ReactElement => {
+const Post = ({ post }: Props): ReactElement => {
+    const { title, description, ogImage, coverImage, date, content } = post;
     const router = useRouter();
     if (!router.isFallback && !post?.slug) {
         return <ErrorPage statusCode={404} />;
@@ -32,24 +33,25 @@ const Post = ({ post, morePosts, preview }: Props): ReactElement => {
                 <>
                     <article>
                         <Head>
-                            <title>{post.title} | Bharathi Kannan</title>
-                            <meta property="og:image" content={post.ogImage.url} />
+                            <title>{title} | Bharathi Kannan</title>
                         </Head>
-
-                        <PostHeader
-                            title={post.title}
-                            coverImage={post.coverImage}
-                            date={post.date}
-                            author={post.author}
+                        <NextSeo
+                            title={title}
+                            description={description}
+                            openGraph={{
+                                title: title,
+                                description: description,
+                                type: 'website',
+                                images: [
+                                    {
+                                        url: ogImage.url,
+                                        alt: ogImage.alt
+                                    }
+                                ]
+                            }}
                         />
-                        <PostBody content={post.content} />
-                        {/* <PostHeader
-                                title={post.title}
-                                coverImage={post.coverImage}
-                                date={post.date}
-                                author={post.author}
-                            />
-                            <PostBody content={post.content} /> */}
+                        <PostHeader title={title} coverImage={coverImage} date={date} />
+                        <PostBody content={content} />
                     </article>
                 </>
             )}
@@ -61,13 +63,14 @@ const components = {
     ...MDXComponents
 };
 
-// const provider = {
-//     component: MDXEmbedProvider,
-//     props: {}
-// };
+interface PostHeaderProps {
+    title: string;
+    coverImage?: string;
+    date?: string;
+}
 
-// eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
-function PostHeader({ title, coverImage, date, author }): ReactElement {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function PostHeader({ title, coverImage, date }: PostHeaderProps): ReactElement {
     return (
         <Heading
             as="h1"
@@ -80,20 +83,13 @@ function PostHeader({ title, coverImage, date, author }): ReactElement {
     );
 }
 
-// eslint-disable-next-line react/prop-types
-function PostBody({ content }): ReactElement {
+interface PostBodyProps {
+    content: MdxRemote.Source;
+}
+
+function PostBody({ content }: PostBodyProps): ReactElement {
     const hydratedContent = hydrate(content, { components });
-    return (
-        <Box mt="10">
-            {/* <Text
-                as="div"
-                fontSize="3xl"
-                className="blog-post-content"
-                dangerouslySetInnerHTML={{ __html: content }}
-            /> */}
-            {hydratedContent}
-        </Box>
-    );
+    return <Box mt="10">{hydratedContent}</Box>;
 }
 
 export default Post;
@@ -108,11 +104,11 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
     const post = getPostBySlug(params.slug, [
         'title',
         'date',
-        'slug',
-        'author',
-        'content',
+        'description',
         'ogImage',
-        'coverImage'
+        'coverImage',
+        'slug',
+        'content'
     ]);
 
     const mdxSource = await renderToString(post.content, { components });
