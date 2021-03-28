@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid } from '@chakra-ui/react';
+import { chakra, Heading, SimpleGrid } from '@chakra-ui/react';
 import { getAllPosts } from 'lib/api';
 import { BlogCard } from 'mycomponents/card';
 import { Layout } from 'mycomponents/layout';
@@ -6,7 +6,6 @@ import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';
 import Post from 'types/post';
 import NextLink from 'next/link';
-import { ChakraLink } from 'mycomponents/chakra-link';
 import Head from 'next/head';
 
 type Props = {
@@ -39,14 +38,14 @@ export default function Index({ allPosts }: Props): ReactElement {
                             key={post.slug}
                             href="/blog/[slug]"
                             passHref>
-                            <ChakraLink _hover={{ textDecoration: 'none' }}>
+                            <chakra.a _hover={{ textDecoration: 'none' }}>
                                 <BlogCard
                                     key={post.slug}
                                     title={post.title}
                                     date={post.date}
                                     excerpt={post.excerpt}
                                 />
-                            </ChakraLink>
+                            </chakra.a>
                         </NextLink>
                     );
                 })}

@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 import { CodePen, CodeSandbox, Tweet } from 'mdx-embed';
+import { ChakraLink } from 'mycomponents/chakra-link';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
@@ -86,7 +87,7 @@ const MDXComponents = {
             {...props}
         />
     ),
-    a: (props) => <chakra.a apply="mdx.a" {...props} />,
+    a: ChakraLink,
     p: (props) => <chakra.p apply="mdx.p" {...props} />,
     ul: (props) => <chakra.ul apply="mdx.ul" {...props} />,
     ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,

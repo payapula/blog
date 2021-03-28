@@ -1,4 +1,5 @@
 import { MdxRemote } from 'next-mdx-remote/types';
+import Cover from './cover';
 
 type PostType = {
     //These are from YAML in each MDX page
@@ -6,7 +7,7 @@ type PostType = {
     excerpt: string;
     date: string;
     description: string;
-    coverImage: string;
+    cover: Cover;
     ogImage: {
         url: string;
         alt: string;
