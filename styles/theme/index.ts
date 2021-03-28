@@ -1,5 +1,7 @@
 import { extendTheme, ThemeOverride, ColorMode } from '@chakra-ui/react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { mdx } from './mdx-styles';
+
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
     brand: {
@@ -12,6 +14,8 @@ const colors = {
 const breaks = [350, 450, 650, 960, 1200, 1440];
 
 const mq = breaks.map((bp) => `@media (min-width: ${bp}px)`);
+
+export const bpDesktopOnly = `@media (min-width: ${1200 + 1}px)`;
 
 const BREAKPOINTS = {
     xs: '350px',
@@ -29,10 +33,11 @@ const config = {
     useSystemColorMode: false
 };
 
-const overrides: ThemeOverride = {
+const overrides: ThemeOverride & { mdx: Record<string, unknown> } = {
     colors,
     breakpoints,
-    config
+    config,
+    mdx
 };
 
 const theme = extendTheme(overrides);

@@ -9,10 +9,14 @@ import NextLink from 'next/link';
 import { ChakraLink } from 'mycomponents/chakra-link';
 import { AuthorAvatar } from 'mycomponents/author_avatar';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import Head from 'next/head';
 
 const Index = (): ReactElement => {
     return (
         <Layout home>
+            <Head>
+                <title>Bharathi Kannan</title>
+            </Head>
             <HeroContent />
             <RecentPosts />
         </Layout>

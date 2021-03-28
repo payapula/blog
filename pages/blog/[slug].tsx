@@ -2,12 +2,15 @@ import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import { getPostBySlug, getAllPosts } from '../../lib/api';
 import Head from 'next/head';
-import markdownToHtml from '../../lib/markdownToHtml';
 import PostType from '../../types/post';
 import React, { ReactElement } from 'react';
 import { Layout } from 'mycomponents/layout';
 import { Text, Box, Heading } from '@chakra-ui/react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import renderToString from 'next-mdx-remote/render-to-string';
+import hydrate from 'next-mdx-remote/hydrate';
+import { MDXComponents } from 'mycomponents/mdx/components';
+// import { MDXEmbedProvider } from 'mdx-embed';
 
 type Props = {
     post: PostType;
@@ -54,6 +57,15 @@ const Post = ({ post, morePosts, preview }: Props): ReactElement => {
     );
 };
 
+const components = {
+    ...MDXComponents
+};
+
+// const provider = {
+//     component: MDXEmbedProvider,
+//     props: {}
+// };
+
 // eslint-disable-next-line react/prop-types, @typescript-eslint/no-unused-vars
 function PostHeader({ title, coverImage, date, author }): ReactElement {
     return (
@@ -70,14 +82,16 @@ function PostHeader({ title, coverImage, date, author }): ReactElement {
 
 // eslint-disable-next-line react/prop-types
 function PostBody({ content }): ReactElement {
+    const hydratedContent = hydrate(content, { components });
     return (
         <Box mt="10">
-            <Text
+            {/* <Text
                 as="div"
                 fontSize="3xl"
                 className="blog-post-content"
                 dangerouslySetInnerHTML={{ __html: content }}
-            />
+            /> */}
+            {hydratedContent}
         </Box>
     );
 }
@@ -100,13 +114,14 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'ogImage',
         'coverImage'
     ]);
-    const content = await markdownToHtml(post.content || '');
+
+    const mdxSource = await renderToString(post.content, { components });
 
     return {
         props: {
             post: {
                 ...post,
-                content
+                content: mdxSource
             }
         }
     };

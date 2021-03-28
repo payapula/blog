@@ -1,7 +1,7 @@
 node_modules
 
 #boorstrapped components - should be removed
-components
+/components
 pages/index_bootstrap.tsx
 
 #waitlisted files from bootstrapped repo
@@ -9,3 +9,5 @@ lib
 
 #to be worked on files
 pages/posts
+
+_posts
