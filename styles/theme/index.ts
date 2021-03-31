@@ -33,11 +33,29 @@ const config = {
     useSystemColorMode: false
 };
 
-const overrides: ThemeOverride & { mdx: Record<string, unknown> } = {
+const general = {
+    link: {
+        fontWeight: 'semibold',
+        transition: 'color 0.15s',
+        transitionTimingFunction: 'ease-out',
+        _hover: {
+            color: 'teal.600'
+        }
+    }
+};
+
+const overrides: ThemeOverride & { mdx: Record<string, unknown> } & {
+    general: Record<string, unknown>;
+} = {
     colors,
+    fonts: {
+        body: 'Roboto, sans-serif, system-ui',
+        heading: 'Roboto, sans-serif, system-ui'
+    },
     breakpoints,
     config,
-    mdx
+    mdx,
+    general
 };
 
 const theme = extendTheme(overrides);

@@ -13,7 +13,7 @@ import Head from 'next/head';
 
 const Index = (): ReactElement => {
     return (
-        <Layout home>
+        <Layout type="HOME">
             <Head>
                 <title>Bharathi Kannan</title>
             </Head>

@@ -71,12 +71,6 @@ function MobileMenuItem({ children }: MobileMenuItemProps) {
 function Header({ home }: { home: boolean }): ReactElement {
     const isLessThan768 = useMediaQuery(650);
 
-    // tried Glassmorphism
-    // const { colorMode } = useColorMode();
-    // const backGround =
-    //     colorMode === 'dark'
-    //         ? 'background: rgba(26, 33, 45, 0.60);  border-bottom: 1px solid rgba(255, 255, 255, 0.18);'
-    //         : 'background: rgba(255, 253, 253, 0.6);  border-bottom: 1px solid rgba(0, 0, 0, 0.18);';
     return (
         <Box
             as="header"
@@ -84,17 +78,7 @@ function Header({ home }: { home: boolean }): ReactElement {
             background={useColorModeValue('white', 'gray.800')}
             borderBottom={home ? 'none' : '1px'}
             zIndex={10000}
-            top="0"
-            // css={css`
-            //     ${!home
-            //         ? backGround +
-            //           `box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            //     backdrop-filter: blur(20px);
-            //     -webkit-backdrop-filter: blur(20px);
-            //     border-radius: 10px;`
-            //         : ''}
-            // `}
-        >
+            top="0">
             <Flex w="100%" h="80px" alignItems="center">
                 <NextLink href="/" passHref>
                     <Flex as="a" align="center" ml="5" w="220px" justify="space-between">
@@ -113,6 +97,7 @@ function Header({ home }: { home: boolean }): ReactElement {
                                         isActive={isOpen}
                                         as={IconButton}
                                         colorScheme="teal"
+                                        aria-label="Menu Button"
                                         icon={
                                             isOpen ? <CloseIcon /> : <HamburgerIcon />
                                         }></MenuButton>

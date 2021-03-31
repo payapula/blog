@@ -32,15 +32,6 @@ const mdx = {
         fontWeight: 'semibold',
         fontSize: '1.125rem'
     },
-    a: {
-        color: 'teal.500',
-        fontWeight: 'semibold',
-        transition: 'color 0.15s',
-        transitionTimingFunction: 'ease-out',
-        _hover: {
-            color: 'teal.600'
-        }
-    },
     p: {
         mt: '1.25rem',
         lineHeight: 1.7,

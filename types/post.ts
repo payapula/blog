@@ -1,16 +1,20 @@
-import Author from './author';
+import { MdxRemote } from 'next-mdx-remote/types';
+import Cover from './cover';
 
 type PostType = {
-    slug: string;
+    //These are from YAML in each MDX page
     title: string;
-    date: string;
-    coverImage: string;
-    author: Author;
     excerpt: string;
+    date: string;
+    description: string;
+    cover: Cover;
     ogImage: {
         url: string;
+        alt: string;
     };
-    content: string;
+    // These are fetched separately
+    slug: string; // From File Name
+    content: MdxRemote.Source; // From hydrated by next-mdx-remote
 };
 
 export default PostType;
