@@ -5,16 +5,20 @@ import { Header } from './header';
 import { Footer } from './footer';
 
 interface LayoutProps {
-    home?: boolean;
+    type?: 'HOME' | 'BLOG';
     children: ReactNode;
 }
 
-function Layout({ home, children }: LayoutProps): ReactElement {
+function Layout({ type, children }: LayoutProps): ReactElement {
+    const isBlog = type === 'BLOG';
+    const containerWidth = isBlog
+        ? [null, null, '95%', '80%', '800px']
+        : [null, null, '95%', '80%'];
     return (
         <Box>
             <Meta />
-            <Header home={home} />
-            <Container as="main" maxW={[null, null, '95%', '80%']} minH="80vh">
+            <Header home={type === 'HOME'} />
+            <Container as="main" maxW={containerWidth} minH="80vh">
                 {children}
             </Container>
             <Footer />

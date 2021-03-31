@@ -11,9 +11,9 @@ import hydrate from 'next-mdx-remote/hydrate';
 import { MDXComponents } from 'mycomponents/mdx/components';
 import { NextSeo } from 'next-seo';
 import { MdxRemote } from 'next-mdx-remote/types';
-import Image from 'next/image';
 import NextLink from 'next/link';
 import { ChakraLink } from 'mycomponents/chakra-link';
+import { ChakraNextImage } from 'mycomponents/chakra-next-image';
 
 type Props = {
     post: PostType;
@@ -24,7 +24,7 @@ type Props = {
 const Post = ({ post }: Props): ReactElement => {
     const { title, description, ogImage, cover, content } = post;
     return (
-        <Layout>
+        <Layout type="BLOG">
             <article>
                 <Head>
                     <title>{title} | Bharathi Kannan</title>
@@ -79,7 +79,14 @@ interface CoverImageProps {
 function CoverImage({ cover }: CoverImageProps) {
     return (
         <Box mt={8}>
-            <Image src={cover.src} alt={cover.alt} width={1400} height={700} priority />
+            <ChakraNextImage
+                src={cover.src}
+                alt={cover.alt}
+                width={1400}
+                height={700}
+                priority
+                objectFit="contain"
+            />
             <Text align="center">
                 Photo By
                 <NextLink href={cover.author.url} passHref>

@@ -48,6 +48,10 @@ const overrides: ThemeOverride & { mdx: Record<string, unknown> } & {
     general: Record<string, unknown>;
 } = {
     colors,
+    fonts: {
+        body: 'Roboto, sans-serif, system-ui',
+        heading: 'Roboto, sans-serif, system-ui'
+    },
     breakpoints,
     config,
     mdx,
