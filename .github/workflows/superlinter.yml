@@ -1,7 +1,9 @@
 name: Super-Linter
 
-# Run this workflow every time a new commit pushed to your repository
-on: push
+# Run this workflow every time PR is created for develop or main branch
+on:
+    pull_request:
+        branches: [main, develop]
 
 jobs:
     # Set the job key. The key is displayed as the job name
