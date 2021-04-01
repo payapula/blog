@@ -1,5 +1,5 @@
 // Inspired by https://github.com/guarmo/portfolio/blob/master/components/About.jso
-import { Flex, Text, useColorModeValue, Icon, SimpleGrid, Heading, HStack } from '@chakra-ui/react';
+import { Flex, Text, useColorModeValue, Icon, SimpleGrid, Heading } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { IconType } from 'react-icons';
 import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3, DiAndroid } from 'react-icons/di';
