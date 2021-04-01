@@ -46,9 +46,7 @@ jobs:
               run: npm install
 
             - name: Run Lint
-              run: npm run lint
-              env:
-                  CI: true
+              run: npm run lint:ci
 
             - name: Build
               run: npm run build
