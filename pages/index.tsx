@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/react';
 import { Button, Flex, Box, Text, Stack, useColorModeValue, Icon, HStack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { Layout } from '../mycomponents/layout';
