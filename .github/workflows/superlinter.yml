@@ -2,6 +2,8 @@ name: Super-Linter
 
 # Run this workflow every time PR is created for develop or main branch
 on:
+    push:
+        branches: [main, develop]
     pull_request:
         branches: [main, develop]
 

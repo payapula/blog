@@ -9,6 +9,7 @@ import NextLink from 'next/link';
 import { ChakraLink } from 'mycomponents/chakra-link';
 import { AuthorAvatar } from 'mycomponents/author_avatar';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { Technologies } from 'mycomponents/technologies';
 import Head from 'next/head';
 
 const Index = (): ReactElement => {
@@ -19,6 +20,7 @@ const Index = (): ReactElement => {
             </Head>
             <HeroContent />
             <RecentPosts />
+            <Technologies />
         </Layout>
     );
 };
