@@ -7,3 +7,5 @@ pages/index_bootstrap.tsx
 #waitlisted files from bootstrapped repo
 lib
 
+*.mdx
+*.md
