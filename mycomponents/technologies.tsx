@@ -18,7 +18,7 @@ type IconSet = {
 const iconSet: IconSet = {
     ts: { color: '#3178c6', text: 'TypeScript', icon: SiTypescript },
     react: { color: '#61dafb', text: 'React', icon: DiReact },
-    next: { color: 'black', text: 'Next', icon: SiNextDotJs },
+    next: { color: '', text: 'Next', icon: SiNextDotJs },
     node: { color: '#026e00', text: 'NodeJS', icon: DiNodejs },
     js: { color: '#fcdc00', text: 'Javascript', icon: DiJsBadge },
     html: { color: '#e54c21', text: 'HTML', icon: DiHtml5 },
