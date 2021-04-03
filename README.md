@@ -27,6 +27,15 @@ Personal Blog of Payapula
 
 ---
 
+## Bundle Analyzer
+
+Enable `productionBrowserSourceMaps: true` in `next.config.js`
+[Next Source Maps](https://nextjs.org/docs/advanced-features/source-maps)
+
+and then `npm run build` then run the source-map-explorer command
+
+source-map-explorer .next/static/chunks/d09f71c2771447e62661a7b2e7969c57ce47c1dd.48b4398aa37a6351f3f6.js
+
 ## Notes
 
 Eslint, Prettier Configs provided by [Arpit Bharti](https://dev.to/onygami/eslint-and-prettier-for-react-apps-bonus-next-js-and-typescript-3e46)
