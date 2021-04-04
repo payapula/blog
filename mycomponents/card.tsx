@@ -11,7 +11,6 @@ import {
     ChakraProps
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
-import DateFormatter from './date-formatter';
 import { motion } from 'framer-motion';
 
 interface CardProps {
@@ -23,7 +22,7 @@ interface CardProps {
 
 const MotionFlex = motion(Flex);
 
-function Card({ title, date, excerpt, override }: CardProps): ReactElement {
+function Card({ title, excerpt, override }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
     const { colorMode } = useColorMode();
@@ -59,7 +58,6 @@ function Card({ title, date, excerpt, override }: CardProps): ReactElement {
                 {title ? title : `How to use React Context effectively`}
             </Heading>
             <HStack mt={5}>
-                {/* <Text> {date ? <DateFormatter dateString={date} /> : `12 FEB 2021`}</Text> */}
                 <Text>#Design #Pattern</Text>
             </HStack>
             <Text mt={10} fontSize={['md', null, 'lg', 'xl']} noOfLines={[4]}>
