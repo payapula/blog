@@ -27,14 +27,34 @@ Personal Blog of Payapula
 
 ---
 
+## Project Status
+
+Please refer to [Projects](https://github.com/payapula/blog/projects)
+
+---
+
+## Installation
+
+`npm install`
+
+`npm run dev`
+
+---
+
 ## Bundle Analyzer
+
+`npm run analyze`
 
 Enable `productionBrowserSourceMaps: true` in `next.config.js`
 [Next Source Maps](https://nextjs.org/docs/advanced-features/source-maps)
 
 and then `npm run build` then run the source-map-explorer command
 
-source-map-explorer .next/static/chunks/d09f71c2771447e62661a7b2e7969c57ce47c1dd.48b4398aa37a6351f3f6.js
+`source-map-explorer chunk_name.js`
+
+Make sure you have installed source-map-explorer:
+
+`npm install -g source-map-explorer`
 
 ## Notes
 
