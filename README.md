@@ -1,6 +1,6 @@
 # Blog
 
-Personal Blog of Payapula
+Portfolio Website & tech blog of Payapula
 
 ---
 
