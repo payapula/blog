@@ -73,7 +73,6 @@ function HeroContent() {
 
 function RecentPosts() {
     const postsBackgroundColor = useColorModeValue('#EDF7FA', 'gray.800');
-    const viewAllColor = useColorModeValue('#2c04ff', 'white');
     return (
         <Box
             width="100vw"
@@ -91,11 +90,7 @@ function RecentPosts() {
                         Recent Posts
                     </Heading>
                     <NextLink href="/blog" passHref>
-                        <ChakraLink
-                            color={viewAllColor}
-                            display={['none', null, null, null, 'block']}
-                            _hover={{ borderBottom: '1px' }}
-                            fontSize="xl">
+                        <ChakraLink display={['none', null, null, null, 'block']} fontSize="xl">
                             View All
                             <Icon as={FaLongArrowAltRight} w="8" h="6" ml="1" />
                         </ChakraLink>
@@ -112,10 +107,8 @@ function RecentPosts() {
                 </Flex>
                 <NextLink href="/blog" passHref>
                     <ChakraLink
-                        color={viewAllColor}
                         position="absolute"
                         left="43%"
-                        _hover={{ borderBottom: '1px' }}
                         display={['block', null, null, null, 'none']}
                         fontSize="xl">
                         <HStack>

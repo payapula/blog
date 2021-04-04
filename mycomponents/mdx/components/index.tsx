@@ -17,8 +17,8 @@ const Test = () => <div>Hello from JSX!</div>;
 const InlineCode = (props: any) => (
     <ChakraCode
         apply="mdx.code"
-        color={useColorModeValue('#e01e5a', '#E8912B')}
-        backgroundColor={useColorModeValue('rgba(29, 28, 29, 0.04)', 'rgba(232, 232, 232, 0.04)')}
+        color={useColorModeValue('code.color.light', 'code.color.dark')}
+        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.light')}
         {...props}
     />
 );
@@ -59,14 +59,18 @@ const MDXComponents = {
     Tweet,
     h1: (props) => <Heading as="h2" apply="mdx.h1" {...props} />,
     h2: (props) => (
-        <Heading apply="mdx.h2" {...props} color={useColorModeValue('#3e02ab', '#27d152')} />
+        <Heading
+            apply="mdx.h2"
+            {...props}
+            color={useColorModeValue('heading.light', 'heading.dark')}
+        />
     ),
     h3: (props) => (
         <Heading
             as="h3"
             apply="mdx.h3"
             {...props}
-            color={useColorModeValue('#3e02ab', '#27d152')}
+            color={useColorModeValue('heading.light', 'heading.dark')}
         />
     ),
     h4: (props) => (
@@ -74,13 +78,13 @@ const MDXComponents = {
             as="h4"
             apply="mdx.h4"
             {...props}
-            color={useColorModeValue('#3e02ab', '#27d152')}
+            color={useColorModeValue('heading.light', 'heading.dark')}
         />
     ),
     strong: (props) => (
         <Box
             as="strong"
-            color={useColorModeValue('#ab0202', '#ffb256')}
+            color={useColorModeValue('strong.light', 'strong.dark')}
             fontWeight="extrabold"
             {...props}
         />
@@ -120,7 +124,7 @@ const MDXComponents = {
     ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,
     li: (props) => <chakra.li pb="4px" {...props} />,
     em: (props) => (
-        <chakra.p as="em" color={useColorModeValue('#8600d4', '#d895ff')} mr={1} {...props} />
+        <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
     )
 };
 

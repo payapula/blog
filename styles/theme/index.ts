@@ -4,10 +4,34 @@ import { mdx } from './mdx-styles';
 
 // 2. Extend the theme to include custom colors, fonts, etc
 const colors = {
-    brand: {
-        900: '#9d8dbf',
-        800: '#153e75',
-        700: '#2a69ac'
+    heading: {
+        light: '#3e02ab',
+        dark: '#21c54b'
+    },
+    strong: {
+        light: '#ab0202',
+        dark: '#ffb256'
+    },
+    em: {
+        light: '#8600d4',
+        dark: '#d895ff'
+    },
+    code: {
+        color: {
+            light: '#e01e5a',
+            dark: '#E8912B'
+        },
+        bg: {
+            light: 'rgba(29, 28, 29, 0.04)',
+            dark: 'rgba(232, 232, 232, 0.04)'
+        }
+    },
+    link: {
+        color: { light: '#1d612e', dark: '#3ec4c1' },
+        hover: {
+            light: '#04a82d',
+            dark: '#42f1f4'
+        }
     }
 };
 
@@ -39,7 +63,7 @@ const general = {
         transition: 'color 0.15s',
         transitionTimingFunction: 'ease-out',
         _hover: {
-            color: 'teal.600'
+            'border-bottom': '1px solid'
         }
     }
 };

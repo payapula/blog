@@ -79,7 +79,7 @@ function PostHeader({ title }: PostHeaderProps): ReactElement {
             bgClip="text"
             bgGradient={useColorModeValue(
                 'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
-                'linear(to-l, #27d152, #88dc67, #a4ce4f, #b9c03d, #cbb135)'
+                'linear(to-l, #21c54b, #88dc67, #a4ce4f, #b9c03d, #cbb135)'
             )}
             mt="7">
             {title}

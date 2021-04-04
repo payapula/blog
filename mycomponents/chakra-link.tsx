@@ -14,19 +14,17 @@ const ChakraLink = React.forwardRef(function StyledChakraLink(
     const isInternal = href.startsWith('/') || href.startsWith('#');
     return (
         <Link
-            _activeLink={{
-                bg: useColorModeValue('teal.50', 'rgba(48, 140, 122, 0.3)'),
-                color: useColorModeValue('teal.700', 'teal.200'),
-                fontWeight: '600'
-            }}
             aria-current={isActive ? 'page' : undefined}
-            {...rest}
             ref={ref}
             rel={isInternal ? rel : 'noopener noreferrer'}
             target={isInternal ? target : '_blank'}
             href={href}
             apply="general.link"
-            color={useColorModeValue('teal.600', 'teal.500')}
+            color={useColorModeValue('link.color.light', 'link.color.dark')}
+            _hover={{
+                color: useColorModeValue('link.hover.light', 'link.hover.dark')
+            }}
+            {...rest}
         />
     );
 });
