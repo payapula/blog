@@ -57,14 +57,30 @@ const MDXComponents = {
     CodePen,
     CodeSandbox,
     Tweet,
-    h1: (props) => <Heading apply="mdx.h1" {...props} />,
-    h2: (props) => <Heading apply="mdx.h2" {...props} />,
-    h3: (props) => <Heading as="h3" apply="mdx.h3" {...props} />,
-    h4: (props) => <Heading as="h4" apply="mdx.h4" {...props} />,
+    h1: (props) => <Heading as="h2" apply="mdx.h1" {...props} />,
+    h2: (props) => (
+        <Heading apply="mdx.h2" {...props} color={useColorModeValue('#3e02ab', '#27d152')} />
+    ),
+    h3: (props) => (
+        <Heading
+            as="h3"
+            apply="mdx.h3"
+            {...props}
+            color={useColorModeValue('#3e02ab', '#27d152')}
+        />
+    ),
+    h4: (props) => (
+        <Heading
+            as="h4"
+            apply="mdx.h4"
+            {...props}
+            color={useColorModeValue('#3e02ab', '#27d152')}
+        />
+    ),
     strong: (props) => (
         <Box
             as="strong"
-            color={useColorModeValue('#0200ff', '#f2b265')}
+            color={useColorModeValue('#ab0202', '#ffb256')}
             fontWeight="extrabold"
             {...props}
         />
@@ -104,7 +120,7 @@ const MDXComponents = {
     ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,
     li: (props) => <chakra.li pb="4px" {...props} />,
     em: (props) => (
-        <chakra.p as="em" color={useColorModeValue('#e01e5a', '#E8912B')} mr={1} {...props} />
+        <chakra.p as="em" color={useColorModeValue('#8600d4', '#d895ff')} mr={1} {...props} />
     )
 };
 

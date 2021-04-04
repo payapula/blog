@@ -8,7 +8,7 @@ const mdx = {
         letterSpacing: '-.025em'
     },
     h2: {
-        mt: '4rem',
+        mt: '3rem',
         mb: '0.5rem',
         lineHeight: 1.3,
         fontWeight: 'semibold',
