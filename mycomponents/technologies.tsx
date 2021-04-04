@@ -32,7 +32,7 @@ function Technologies(): ReactElement {
         <Flex direction="column" align="center" mt={10}>
             <Heading>Technologies</Heading>
             <Text fontSize={['sm', null, 'md', 'lg']} mt="7">
-                These are the toolstacks I have worked on and have hands-on experience
+                These are the toolstacks I have hands-on experience on
             </Text>
             <SimpleGrid
                 columns={{ xs: 3, lg: 4 }}

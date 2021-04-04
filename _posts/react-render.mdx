@@ -1,0 +1,209 @@
+---
+title: 'React is Just Javascript'
+excerpt: 'Rendering in React - What does it mean exactly? Lets Explore it with React Hooks and Good Old Classes.'
+date: '2020-04-04'
+description: 'React Rendering Explained with Hooks and Classes'
+cover: 
+    src: '/assets/blog/hello-world/hello-world-cover.jpg'  
+    alt: 'computer keyboard'
+    author: 
+      name: 'Christian Wiediger'
+      url: https://unsplash.com/@christianw
+ogImage:
+    url: '/assets/blog/hello-world/hello-world-cover.jpg'
+    alt: 'Computer Keyboard'
+---
+
+Lets start with the simple and basic function in Javascript.
+
+```javascript
+function add(a, b){
+  console.log(a + b); // logs 9
+}
+
+add(4, 5);
+```
+
+In the above code snippet, the function call on *line no 5* calls the `add` function
+with the arguments 4 and 5 which outputs the sum 9 to the console. Consider the below 
+function which returns a value.
+
+```javascript
+function add(a, b){
+  return a + b;
+}
+
+const sum = add(4, 5);
+console.log(sum); // logs 9
+```
+
+We are storing the value in the variable `sum` and outputting it in the console. We 
+know that Javascript is single threaded and can execute only one line at a time & the flow of execution 
+is top-to-bottom.
+
+When we execute the code, this is what happening in order :
+
+1. The Javascript engine first sees a function declaration from line *1 to 3* 
+2. Then goes to line number *5* where it sees a function being called. 
+3. Then JS engine **calls** that function and assigns the value returned from that function into the 
+`sum` variable. 
+4. In the next line the sum is outputted to the console.
+
+> To deep dive into how Javascript works, I recommened you to watch [the series](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
+
+So far so good. If we didn't return anything from a function it is would be 
+implicilty `undefined`.
+
+```javascript
+function add(a, b){
+  console.log(a + b); // logs 9
+  // return undefined implied
+}
+
+const sum = add(4, 5);
+console.log(sum) // logs undefined
+```
+
+## Enough of JS, Lets React!
+
+React is simply Javascrip. A component defined in React is just a Javascript function.
+Consider the React component below.
+
+```jsx
+function App() {
+  return (
+    <h1>
+      Hello World
+    </h1>
+  );
+}
+```
+
+This component *renders* `<h1>` with *Hello World* in the Webpage. 
+
+To reiterate,
+
+> A component defined in React is just a Javascript function
+
+If you compare our plain JS code with this react code, you would have these questions
+
+1. This is just a function declaration. Where it is being called?? 
+2. If this is a Javascript function then, how HTML is being returned from the function? Is this even valid?
+3. Also why it is called *rendering* ?
+
+Let's answer all these questions in this post.
+
+## Where it is being called?
+
+The function `App()` would actually be rendered by `ReactDOM` from `react-dom` package. 
+
+```jsx
+import ReactDOM from "react-dom";
+import App from "./App";
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+The *HTML* that is being returned from `App()` is renderd by `ReactDOM` into the rootElement.
+This rootElement can be any valid HTML DOM. Usually we prefer to go with a empty `<div>` with the id root.
+
+```html noline
+<div id="root"></div>
+```
+
+You should be careful, this should be an empty element because when the rendering occurs, 
+this div's [children](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children) would 
+be replaced with the tag h1 with text 'Hello World' inserted automatically by React (ReactDOM)
+
+```html {2}
+<div id="root">
+  <h1 class="App">Hello World</h1>
+</div>
+```
+
+## How HTML is being returned from the function? Is this even valid?
+
+To start off, the HTML *like* thing that is returned from our `App` function is called JSX. 
+
+```jsx {3,4,5}
+function App() {
+  return (
+    <h1>
+      Hello World
+    </h1>
+  );
+}
+```
+
+Technically this JSX is just a *transpiled Javascript function call* (yes it sounds scary). This HTML 
+like *thing* is converted to Javascript by a transpiler called **babel** and finally the `App` would be sent to JS 
+engine like below code that is just **pure javascript**. 
+
+```jsx {3}
+function App() {
+  return (
+    React.createElement("h1", null, "Hello World")
+  );
+}
+```
+
+[React.createElement](https://reactjs.org/docs/react-api.html#createelement) is top level API provided by react
+pacakge to create the corresponding element in Virtual DOM. 
+
+> "Babel compiles JSX down to React.createElement() calls." - *[React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)*
+
+You can play around with Babel and its transpiled code [here](https://babeljs.io/repl). Also get to know about [JSX](https://reactjs.org/docs/introducing-jsx.html).
+
+And to the most important question,
+
+## Why it is called **Rendering** ?
+
+In short, Rendering in Web refers to the apprearance of something. With a broader picture the terminology
+rendering on web can mean a lot of things like painting, server rendering etc. For our understanding lets keep it 
+short, `render` refers to appearance of a element, or a set of elements (component) on a webpage.
+
+From the React docs it is clear that React is 
+
+> A JavaScript library for building user interfaces
+
+React helps us build user interfaces, [not only on web](https://reactnative.dev/). 
+It helps us *render* something on screens that can be presented as webpage.
+
+When served from a server, both of these are same
+- A simple HTML file with the text Hello World is also *rendering* a website
+- Our React code that gets transpiled to JS with the text Hello world is also *rendering* a website 
+
+So if both are same then we can just simply write HTML files and include Javascript and CSS to make it 
+more presentable right? 
+
+Yes! you are right, we can easily build a website with plain HTML, JS and CSS and still make it cool. No one 
+can deny it.
+
+Where **our** React outshines is it can drastically simplify **how we render and rerender our elements** by
+providing set of **Declarative API**s 
+
+With the APIs provided by react, we can create **Web Applications** which are highly 
+⚡️ **interactive**, 🔥 **performant** and 🚀 **responsive**
+
+If you want some examples, all these following website are build with 🚀 React
+
+- [Facebook](Facebook)
+- [Tesla](https://www.tesla.com/)
+- [Airbnb](https://www.airbnb.com/)
+- [Atlassian](https://www.atlassian.com/)
+- [Netflix](https://www.netflix.com/)
+- [Reddit](https://www.reddit.com/)
+- [BBC](https://www.bbc.com/)
+
+Also keep in mind that,
+
+> For the end users it is all Just HTML, CSS and JavaScript!
+
+----
+
+Thanks goes to:
+
+- [10 Famous Websites Built with React JS](https://anyforsoft.com/blog/10-famous-websites-built-react-js/)
+- [React JS](https://reactjs.org/)
+- [Namaste JavaScript](https://youtu.be/pN6jk0uUrD8)

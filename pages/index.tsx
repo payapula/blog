@@ -56,10 +56,9 @@ function HeroContent() {
                 <Text
                     fontSize={['sm', null, 'md', 'lg']}
                     align={['center', null, null, null, 'start']}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar ac eros
-                    in vestibulum. Vivamus et justo vitae nibh porttitor tempor. In ac vehicula
-                    neque. Pellentesque pretium volutpat sem ut laoreet. Ut tempus efficitur nibh id
-                    imperdiet.
+                    Tech enthusisast, who is interested in developing scalable and accessible web
+                    applications. Proficient in developing applications from given business
+                    requirements and efficient in maintaining existing software.
                 </Text>
                 <Button colorScheme="linkedin" width={180}>
                     Download Resume

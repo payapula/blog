@@ -61,13 +61,24 @@ const MDXComponents = {
     h2: (props) => <Heading apply="mdx.h2" {...props} />,
     h3: (props) => <Heading as="h3" apply="mdx.h3" {...props} />,
     h4: (props) => <Heading as="h4" apply="mdx.h4" {...props} />,
-    strong: (props) => <Box as="strong" fontWeight="extrabold" {...props} />,
+    strong: (props) => (
+        <Box
+            as="strong"
+            color={useColorModeValue('#0200ff', '#f2b265')}
+            fontWeight="extrabold"
+            {...props}
+        />
+    ),
     inlineCode: InlineCode,
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
         const props = preToCodeBlock(preProps);
         if (props) {
-            return <Code {...props} />;
+            return (
+                <Box mt={5}>
+                    <Code {...props} />
+                </Box>
+            );
         } else {
             return <Pre {...preProps} />;
         }
@@ -91,7 +102,10 @@ const MDXComponents = {
     p: (props) => <chakra.p apply="mdx.p" {...props} />,
     ul: (props) => <chakra.ul apply="mdx.ul" {...props} />,
     ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,
-    li: (props) => <chakra.li pb="4px" {...props} />
+    li: (props) => <chakra.li pb="4px" {...props} />,
+    em: (props) => (
+        <chakra.p as="em" color={useColorModeValue('#e01e5a', '#E8912B')} mr={1} {...props} />
+    )
 };
 
 export { MDXComponents };
