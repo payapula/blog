@@ -102,9 +102,9 @@ function Header({ home }: { home: boolean }): ReactElement {
                                             isOpen ? <CloseIcon /> : <HamburgerIcon />
                                         }></MenuButton>
                                     <MenuList>
-                                        <MobileMenuItem>Works</MobileMenuItem>
+                                        {/* <MobileMenuItem>Works</MobileMenuItem> */}
                                         <MobileMenuItem>Blog</MobileMenuItem>
-                                        <MobileMenuItem>Contact</MobileMenuItem>
+                                        {/* <MobileMenuItem>Contact</MobileMenuItem> */}
                                     </MenuList>
                                 </>
                             )}
@@ -112,9 +112,9 @@ function Header({ home }: { home: boolean }): ReactElement {
                     </Box>
                 ) : (
                     <>
-                        <NavLink>Works</NavLink>
+                        {/* <NavLink>Works</NavLink> */}
                         <NavLink>Blog</NavLink>
-                        <NavLink>Contact</NavLink>
+                        {/* <NavLink>Contact</NavLink> */}
                     </>
                 )}
             </Flex>

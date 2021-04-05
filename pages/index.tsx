@@ -56,10 +56,9 @@ function HeroContent() {
                 <Text
                     fontSize={['sm', null, 'md', 'lg']}
                     align={['center', null, null, null, 'start']}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar ac eros
-                    in vestibulum. Vivamus et justo vitae nibh porttitor tempor. In ac vehicula
-                    neque. Pellentesque pretium volutpat sem ut laoreet. Ut tempus efficitur nibh id
-                    imperdiet.
+                    Tech enthusisast, who is interested in developing scalable and accessible web
+                    applications. Proficient in developing applications from given business
+                    requirements and efficient in maintaining existing software.
                 </Text>
                 <Button colorScheme="linkedin" width={180}>
                     Download Resume
@@ -74,7 +73,6 @@ function HeroContent() {
 
 function RecentPosts() {
     const postsBackgroundColor = useColorModeValue('#EDF7FA', 'gray.800');
-    const viewAllColor = useColorModeValue('#2c04ff', 'white');
     return (
         <Box
             width="100vw"
@@ -92,11 +90,7 @@ function RecentPosts() {
                         Recent Posts
                     </Heading>
                     <NextLink href="/blog" passHref>
-                        <ChakraLink
-                            color={viewAllColor}
-                            display={['none', null, null, null, 'block']}
-                            _hover={{ borderBottom: '1px' }}
-                            fontSize="xl">
+                        <ChakraLink display={['none', null, null, null, 'block']} fontSize="xl">
                             View All
                             <Icon as={FaLongArrowAltRight} w="8" h="6" ml="1" />
                         </ChakraLink>
@@ -113,10 +107,8 @@ function RecentPosts() {
                 </Flex>
                 <NextLink href="/blog" passHref>
                     <ChakraLink
-                        color={viewAllColor}
                         position="absolute"
                         left="43%"
-                        _hover={{ borderBottom: '1px' }}
                         display={['block', null, null, null, 'none']}
                         fontSize="xl">
                         <HStack>

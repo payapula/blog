@@ -17,8 +17,8 @@ const Test = () => <div>Hello from JSX!</div>;
 const InlineCode = (props: any) => (
     <ChakraCode
         apply="mdx.code"
-        color={useColorModeValue('#e01e5a', '#E8912B')}
-        backgroundColor={useColorModeValue('rgba(29, 28, 29, 0.04)', 'rgba(232, 232, 232, 0.04)')}
+        color={useColorModeValue('code.color.light', 'code.color.dark')}
+        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.light')}
         {...props}
     />
 );
@@ -57,17 +57,48 @@ const MDXComponents = {
     CodePen,
     CodeSandbox,
     Tweet,
-    h1: (props) => <Heading apply="mdx.h1" {...props} />,
-    h2: (props) => <Heading apply="mdx.h2" {...props} />,
-    h3: (props) => <Heading as="h3" apply="mdx.h3" {...props} />,
-    h4: (props) => <Heading as="h4" apply="mdx.h4" {...props} />,
-    strong: (props) => <Box as="strong" fontWeight="extrabold" {...props} />,
+    h1: (props) => <Heading as="h2" apply="mdx.h1" {...props} />,
+    h2: (props) => (
+        <Heading
+            apply="mdx.h2"
+            {...props}
+            color={useColorModeValue('heading.light', 'heading.dark')}
+        />
+    ),
+    h3: (props) => (
+        <Heading
+            as="h3"
+            apply="mdx.h3"
+            {...props}
+            color={useColorModeValue('heading.light', 'heading.dark')}
+        />
+    ),
+    h4: (props) => (
+        <Heading
+            as="h4"
+            apply="mdx.h4"
+            {...props}
+            color={useColorModeValue('heading.light', 'heading.dark')}
+        />
+    ),
+    strong: (props) => (
+        <Box
+            as="strong"
+            color={useColorModeValue('strong.light', 'strong.dark')}
+            fontWeight="extrabold"
+            {...props}
+        />
+    ),
     inlineCode: InlineCode,
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
         const props = preToCodeBlock(preProps);
         if (props) {
-            return <Code {...props} />;
+            return (
+                <Box mt={5}>
+                    <Code {...props} />
+                </Box>
+            );
         } else {
             return <Pre {...preProps} />;
         }
@@ -91,7 +122,10 @@ const MDXComponents = {
     p: (props) => <chakra.p apply="mdx.p" {...props} />,
     ul: (props) => <chakra.ul apply="mdx.ul" {...props} />,
     ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,
-    li: (props) => <chakra.li pb="4px" {...props} />
+    li: (props) => <chakra.li pb="4px" {...props} />,
+    em: (props) => (
+        <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
+    )
 };
 
 export { MDXComponents };

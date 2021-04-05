@@ -11,7 +11,6 @@ import {
     ChakraProps
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
-import DateFormatter from './date-formatter';
 import { motion } from 'framer-motion';
 
 interface CardProps {
@@ -23,7 +22,7 @@ interface CardProps {
 
 const MotionFlex = motion(Flex);
 
-function Card({ title, date, excerpt, override }: CardProps): ReactElement {
+function Card({ title, excerpt, override }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
     const { colorMode } = useColorMode();
@@ -35,7 +34,7 @@ function Card({ title, date, excerpt, override }: CardProps): ReactElement {
     return (
         <MotionFlex
             direction="column"
-            justifyContent="space-between"
+            justifyContent="flex-start"
             height="265px"
             padding="2"
             width={['95%', null, null, null, '45%']}
@@ -55,14 +54,13 @@ function Card({ title, date, excerpt, override }: CardProps): ReactElement {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             {...override}>
-            <Heading fontSize={['2xl', null, null, 'xl']} fontWeight="extrabold" textAlign="start">
+            <Heading fontSize={['2xl']} fontWeight="extrabold" textAlign="start">
                 {title ? title : `How to use React Context effectively`}
             </Heading>
-            <HStack>
-                <Text> {date ? <DateFormatter dateString={date} /> : `12 FEB 2021`}</Text>
-                <Text>| Design, Pattern</Text>
+            <HStack mt={5}>
+                <Text>#Design #Pattern</Text>
             </HStack>
-            <Text fontSize={['md', null, 'lg', 'xl']} noOfLines={[4, null, 5]}>
+            <Text mt={10} fontSize={['md', null, 'lg', 'xl']} noOfLines={[4]}>
                 {excerpt
                     ? excerpt
                     : `Nam vel lacus id ligula convallis interdum. Fusce rhoncus orci a magna tempus
@@ -85,7 +83,7 @@ function BlogCard({ title, date, excerpt }: BlogCardProps): ReactElement {
             override={{
                 width: '100%',
                 border: '1px solid teal',
-                height: ['280', null, '300']
+                height: ['auto', null, '300']
             }}
             title={title}
             date={date}
