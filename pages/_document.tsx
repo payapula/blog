@@ -8,10 +8,14 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link
-                        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-                        rel="stylesheet"
+                        rel="preload"
+                        href="/fonts/roboto-v20-latin-regular.woff2"
+                        as="font"
+                        type="font/woff2"
+                        // https://wp-rocket.me/blog/font-preloading-best-practices/
+                        // If crossOrigin is not given then font would be loaded twice
+                        crossOrigin="anonymous"
                     />
                 </Head>
                 <body>
