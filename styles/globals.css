@@ -1,6 +1,7 @@
-/* https://kirazhang.com/posts/nextjs-custom-fonts */
-/* Make sure to preload the font for better performance */
-/* https://wp-rocket.me/blog/font-preloading-best-practices/ */
+/* https://kirazhang.com/posts/nextjs-custom-fonts 
+   Make sure to preload the font for better performance 
+   https://wp-rocket.me/blog/font-preloading-best-practices/ 
+   https://google-webfonts-helper.herokuapp.com/fonts/roboto?subsets=latin */
 /* roboto-regular - latin */
 /* prettier-ignore */
 @font-face {
