@@ -34,9 +34,10 @@ const mdx = {
     },
     p: {
         mt: '1.25rem',
-        lineHeight: 1.7,
+        lineHeight: 2,
         'blockquote &': {
-            mt: 0
+            mt: 0,
+            lineHeight: 1.7
         },
         fontSize: '1.125rem'
     },
@@ -55,6 +56,7 @@ const mdx = {
     ul: {
         mt: '1.5rem',
         ml: '1.25rem',
+        lineHeight: 1.6,
         'blockquote &': { mt: 0 },
         '& > * + *': {
             mt: '0.25rem'

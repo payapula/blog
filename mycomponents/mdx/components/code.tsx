@@ -27,6 +27,7 @@ const preStyles = css`
     float: left;
     min-width: 100%;
     overflow: initial;
+    line-height: 1.6;
     border-radius: 4px;
     font-size: 16px;
     padding: 10px;
