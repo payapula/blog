@@ -7,7 +7,17 @@ export default class MyDocument extends Document {
     render(): ReactElement {
         return (
             <Html lang="en">
-                <Head />
+                <Head>
+                    <link
+                        rel="preload"
+                        href="/fonts/roboto-v20-latin-regular.woff2"
+                        as="font"
+                        type="font/woff2"
+                        // https://wp-rocket.me/blog/font-preloading-best-practices/
+                        // If crossOrigin is not given then font would be loaded twice
+                        crossOrigin="anonymous"
+                    />
+                </Head>
                 <body>
                     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
                     <Main />
