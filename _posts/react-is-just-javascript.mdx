@@ -20,28 +20,27 @@ ogImage:
 Lets start off this post with the simple function in Javascript.
 
 ```javascript
-function add(a, b){
-  console.log(a + b); // logs 9
+function App(){
+  console.log('Hello World'); // logs 'Hello World'
 }
 
-add(4, 5);
+App();
 ```
 
-In the above code snippet, the function call on *line no 5* calls the `add` function
-with the arguments 4 and 5 which outputs the sum 9 to the console. Consider the below 
-function which returns a value.
+In the above code snippet, the function call on *line no 5* calls the `App` function
+which outputs 'Hello World' in the console. Consider the below function which returns a string:
 
 ```javascript
-function add(a, b){
-  return a + b;
+function App(){
+  return 'Hello World';
 }
 
-const sum = add(4, 5);
-console.log(sum); // logs 9
+const text = App();
+console.log(text); // logs 'Hello World'
 ```
 
-We are storing the value in the variable `sum` and outputting it in the console. We 
-know that Javascript is single threaded and can execute only one line at a time & the flow of execution 
+We are storing the value returned from App function in variable `text` and outputting it in the console. 
+We know that Javascript is **single threaded** and can execute only one line at a time & the flow of execution 
 is top-to-bottom.
 
 When we execute the code, this is what happening in order :
@@ -49,23 +48,10 @@ When we execute the code, this is what happening in order :
 1. The Javascript engine first sees a function declaration from line *1 to 3* 
 2. Then goes to line number *5* where it sees a function being called. 
 3. Then JS engine **calls** that function and assigns the value returned from that function into the 
-`sum` variable. 
-4. In the next line the sum is outputted to the console.
+`text` variable. 
+4. In the next line the text is outputted to the console.
 
 > To deep dive into how Javascript works, I recommened you to watch [the series](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
-
-So far so good. If we didn't return anything from a function it is would be 
-implicilty `undefined`.
-
-```javascript
-function add(a, b){
-  console.log(a + b); // logs 9
-  // return undefined implied
-}
-
-const sum = add(4, 5);
-console.log(sum) // logs undefined
-```
 
 ## Enough of JS, Lets React!
 
@@ -82,21 +68,39 @@ function App() {
 }
 ```
 
-This component *renders* `<h1>` with *Hello World* in the Webpage. 
+This component *renders* `<h1>` with text 'Hello World' in the Webpage. 
 
 To reiterate,
 
 > A component defined in React is just a Javascript function
 
-If you compare our plain JS code with this react code, you would have these questions
+Just compare our plain JS code with this react code:
+
+```jsx noline
+// JS
+function App(){
+  return 'Hello World';
+}
+
+// React
+function App() {
+  return (
+    <h1>
+      Hello World
+    </h1>
+  );
+}
+```
+
+Now you would have these questions:
 
 1. This is just a function declaration. Where it is being called?? 
 2. If this is a Javascript function then, how HTML is being returned from the function? Is this even valid?
 3. Also why is it called *rendering* ?
 
-Let's answer all these questions in this post.
+Let's answer all these questions.
 
-## Where it is being called?
+## 1. Where it is being called?
 
 The function `App()` would actually be rendered by `ReactDOM` from `react-dom` package. 
 
@@ -129,7 +133,7 @@ be replaced with the tag h1 with text 'Hello World' inserted automatically by Re
 </div>
 ```
 
-## How HTML is being returned from the function? Is this even valid?
+## 2. How HTML is being returned from the function? Is this even valid?
 
 To start off, the HTML *like* thing that is returned from our `App` function is called JSX. 
 
@@ -165,7 +169,7 @@ To get to know about JSX, headover to [JSX on react docs](https://reactjs.org/do
 
 And to the most important question,
 
-## Why is it called Rendering ?
+## 3. Why is it called Rendering ?
 
 In short, Rendering in Web refers to the apprearance of something. On a broader picture the terminology
 rendering on web can mean a lot of things like painting, server rendering etc. For our understanding lets keep it 
