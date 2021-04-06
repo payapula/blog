@@ -63,7 +63,7 @@ const general = {
         transition: 'color 0.15s',
         transitionTimingFunction: 'ease-out',
         _hover: {
-            'border-bottom': '1px solid'
+            borderBottom: '1px solid'
         }
     }
 };
