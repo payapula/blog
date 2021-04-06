@@ -5,7 +5,7 @@ import { Heading } from '@chakra-ui/react';
 import { Card } from 'mycomponents/card';
 import NextLink from 'next/link';
 import { ChakraLink } from 'mycomponents/chakra-link';
-import { AuthorAvatar } from 'mycomponents/author_avatar';
+import { AuthorAvatar } from 'mycomponents/author-avatar';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { Technologies } from 'mycomponents/technologies';
 import Head from 'next/head';

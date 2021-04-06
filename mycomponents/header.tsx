@@ -17,7 +17,7 @@ import { ChakraLink } from 'mycomponents/chakra-link';
 import NextLink from 'next/link';
 import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from 'utils/hooks';
-import { AuthorAvatar } from './author_avatar';
+import { AuthorAvatar } from './author-avatar';
 import { useRouter } from 'next/router';
 
 function ToggleIconButton() {
@@ -39,7 +39,6 @@ interface NavLinkProps {
 
 function NavLink({ children }: NavLinkProps) {
     const router = useRouter();
-    console.log(router);
     const isActive = router.pathname === '/blog';
     return (
         <Center w="100px">
