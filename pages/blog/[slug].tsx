@@ -2,12 +2,12 @@ import { getPostBySlug, getAllPosts } from '../../lib/api';
 import Head from 'next/head';
 import PostType from 'types/post';
 import { ReactElement } from 'react';
-import { Layout } from 'mycomponents/layout';
+import { Layout } from 'components/layout';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import renderToString from 'next-mdx-remote/render-to-string';
-import { MDXComponents } from 'mycomponents/mdx/components';
+import { MDXComponents } from 'components/mdx/components';
 import { NextSeo } from 'next-seo';
-import { PostHeader, PostCover, PostBody, PostFooter } from 'mycomponents/post';
+import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 
 type PostProps = {
     post: PostType;

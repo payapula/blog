@@ -13,7 +13,7 @@ import {
     MenuItem,
     useColorModeValue
 } from '@chakra-ui/react';
-import { ChakraLink } from 'mycomponents/chakra-link';
+import { ChakraLink } from 'components/chakra-link';
 import NextLink from 'next/link';
 import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from 'utils/hooks';

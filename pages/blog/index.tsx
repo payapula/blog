@@ -1,7 +1,7 @@
 import { chakra, Heading, SimpleGrid } from '@chakra-ui/react';
 import { getAllPosts } from 'lib/api';
-import { BlogCard } from 'mycomponents/card';
-import { Layout } from 'mycomponents/layout';
+import { BlogCard } from 'components/card';
+import { Layout } from 'components/layout';
 import { GetStaticProps } from 'next';
 import { ReactElement } from 'react';
 import Post from 'types/post';

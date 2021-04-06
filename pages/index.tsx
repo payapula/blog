@@ -1,13 +1,13 @@
 import { Button, Flex, Box, Text, Stack, useColorModeValue, Icon, HStack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
-import { Layout } from '../mycomponents/layout';
+import { Layout } from '../components/layout';
 import { Heading } from '@chakra-ui/react';
-import { Card } from 'mycomponents/card';
+import { Card } from 'components/card';
 import NextLink from 'next/link';
-import { ChakraLink } from 'mycomponents/chakra-link';
-import { AuthorAvatar } from 'mycomponents/author-avatar';
+import { ChakraLink } from 'components/chakra-link';
+import { AuthorAvatar } from 'components/author-avatar';
 import { FaLongArrowAltRight } from 'react-icons/fa';
-import { Technologies } from 'mycomponents/technologies';
+import { Technologies } from 'components/technologies';
 import Head from 'next/head';
 
 const Index = (): ReactElement => {

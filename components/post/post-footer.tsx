@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Icon, Flex } from '@chakra-ui/react';
-import { ChakraLink } from 'mycomponents/chakra-link';
+import { ChakraLink } from 'components/chakra-link';
 import { FaGithub } from 'react-icons/fa';
 import siteConfig from 'configs/site-configs';
 

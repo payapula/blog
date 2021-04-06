@@ -2,8 +2,8 @@ import Cover from 'types/cover';
 import { ReactElement } from 'react';
 import { Text, Box } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { ChakraLink } from 'mycomponents/chakra-link';
-import { ChakraNextImage } from 'mycomponents/chakra-next-image';
+import { ChakraLink } from 'components/chakra-link';
+import { ChakraNextImage } from 'components/chakra-next-image';
 
 interface PostCoverProps {
     cover: Cover;
