@@ -3,7 +3,7 @@ import { getAllPosts } from 'lib/api';
 import { BlogCard } from 'mycomponents/card';
 import { Layout } from 'mycomponents/layout';
 import { GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import Post from 'types/post';
 import NextLink from 'next/link';
 import Head from 'next/head';

@@ -85,7 +85,11 @@ function RecentPosts() {
                 maxW={[null, null, '95%', '80%']}
                 px="1rem"
                 mx="auto">
-                <Flex pt="5" px="7" justifyContent={['center', null, null, null, 'space-between']}>
+                <Flex
+                    pt="5"
+                    px="7"
+                    justifyContent={['center', null, null, null, 'space-between']}
+                    h="52px">
                     <Heading fontSize="xl" textAlign="start">
                         Recent Posts
                     </Heading>
