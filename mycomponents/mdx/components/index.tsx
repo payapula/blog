@@ -18,7 +18,7 @@ const InlineCode = (props: any) => (
     <ChakraCode
         apply="mdx.code"
         color={useColorModeValue('code.color.light', 'code.color.dark')}
-        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.light')}
+        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.dark')}
         {...props}
     />
 );

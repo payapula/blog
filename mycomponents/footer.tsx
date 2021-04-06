@@ -35,8 +35,8 @@ function Footer(): ReactElement {
 const SocialIcons = ({ icon, hover }: { icon: IconType; hover: CSSObject }) => (
     <Icon
         as={icon}
-        w="10"
-        h="10"
+        w="8"
+        h="8"
         cursor="pointer"
         _hover={hover}
         color={useColorModeValue(hover.color as string, 'currentColor')}

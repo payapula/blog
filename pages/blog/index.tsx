@@ -28,7 +28,7 @@ export default function Index({ allPosts }: Props): ReactElement {
                 <title>Blogs | Bharathi Kannan</title>
             </Head>
             <Heading as="h1" width="100px" mx="auto" mt="8">
-                Blog
+                Posts
             </Heading>
             <SimpleGrid columns={[1, null, null, null, 2, 3]} mt="10" spacing={10}>
                 {allPosts.map((post) => {

@@ -18,6 +18,7 @@ import NextLink from 'next/link';
 import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from 'utils/hooks';
 import { AuthorAvatar } from './author_avatar';
+import { useRouter } from 'next/router';
 
 function ToggleIconButton() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -37,16 +38,31 @@ interface NavLinkProps {
 }
 
 function NavLink({ children }: NavLinkProps) {
+    const router = useRouter();
+    console.log(router);
+    const isActive = router.pathname === '/blog';
     return (
-        <Box w="100px">
-            <Center h="100%">
+        <Center w="100px">
+            <Flex
+                h="32px"
+                justify="center"
+                w="80px"
+                borderRadius="4px"
+                color={useColorModeValue(
+                    isActive ? 'teal.700' : 'initial',
+                    isActive ? 'teal.200' : 'initial'
+                )}
+                background={useColorModeValue(
+                    isActive ? 'teal.50' : 'initial',
+                    isActive ? 'link.active' : 'initial'
+                )}>
                 <NextLink href="/blog" passHref>
-                    <ChakraLink fontSize="xl" fontWeight="bold">
+                    <ChakraLink fontSize="xl" fontWeight="bold" isActive={isActive}>
                         {children}
                     </ChakraLink>
                 </NextLink>
-            </Center>
-        </Box>
+            </Flex>
+        </Center>
     );
 }
 
@@ -57,7 +73,7 @@ interface MobileMenuItemProps {
 function MobileMenuItem({ children }: MobileMenuItemProps) {
     return (
         <NextLink href="/blog" passHref>
-            <ChakraLink>
+            <ChakraLink isActive>
                 <MenuItem h="50px">
                     <Text fontSize="lg" fontWeight="bold">
                         {children}

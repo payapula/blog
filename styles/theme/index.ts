@@ -19,19 +19,20 @@ const colors = {
     code: {
         color: {
             light: '#e01e5a',
-            dark: '#E8912B'
+            dark: '#ffb256'
         },
         bg: {
             light: 'rgba(29, 28, 29, 0.04)',
-            dark: 'rgba(232, 232, 232, 0.04)'
+            dark: 'rgb(255 255 255 / 9%)'
         }
     },
     link: {
         color: { light: '#1d612e', dark: '#3ec4c1' },
         hover: {
-            light: '#04a82d',
+            light: '#1d612e',
             dark: '#42f1f4'
-        }
+        },
+        active: 'rgba(48, 140, 122, 0.3)'
     }
 };
 

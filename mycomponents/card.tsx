@@ -18,11 +18,12 @@ interface CardProps {
     date?: string;
     excerpt?: string;
     override?: ChakraProps;
+    blogCard?: boolean;
 }
 
 const MotionFlex = motion(Flex);
 
-function Card({ title, excerpt, override }: CardProps): ReactElement {
+function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
     const { colorMode } = useColorMode();
@@ -54,13 +55,21 @@ function Card({ title, excerpt, override }: CardProps): ReactElement {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             {...override}>
-            <Heading fontSize={['2xl']} fontWeight="extrabold" textAlign="start">
+            <Heading
+                fontSize={['2xl']}
+                fontWeight="extrabold"
+                textAlign="start"
+                bgClip="text"
+                bgGradient={useColorModeValue(
+                    'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
+                    'linear(to-r, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1)'
+                )}>
                 {title ? title : `How to use React Context effectively`}
             </Heading>
             <HStack mt={5}>
                 <Text>#Design #Pattern</Text>
             </HStack>
-            <Text mt={10} fontSize={['md', null, 'lg', 'xl']} noOfLines={[4]}>
+            <Text mt={10} fontSize={['md', null, 'lg', 'xl']} noOfLines={blogCard ? 5 : 4}>
                 {excerpt
                     ? excerpt
                     : `Nam vel lacus id ligula convallis interdum. Fusce rhoncus orci a magna tempus
@@ -83,11 +92,12 @@ function BlogCard({ title, date, excerpt }: BlogCardProps): ReactElement {
             override={{
                 width: '100%',
                 border: '1px solid teal',
-                height: ['auto', null, '300']
+                height: { xs: 'auto', lg: '300px' }
             }}
             title={title}
             date={date}
             excerpt={excerpt}
+            blogCard
         />
     );
 }
