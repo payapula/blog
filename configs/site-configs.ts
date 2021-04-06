@@ -4,13 +4,15 @@ import { NextSeoProps } from 'next-seo';
 interface SiteConfig {
     general: {
         siteUrl: string;
+        editUrl: string;
     };
     seo: NextSeoProps;
 }
 
 const siteConfig: SiteConfig = {
     general: {
-        siteUrl: 'TBD'
+        siteUrl: 'TBD',
+        editUrl: 'https://github.com/payapula/blog/edit/develop/_posts/'
     },
     seo: {
         title: 'Bharathi Kannan Blog',

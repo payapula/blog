@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Box, Container } from '@chakra-ui/react';
 import Meta from './meta';
 import { Header } from './header';

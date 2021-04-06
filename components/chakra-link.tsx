@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { forwardRef } from 'react';
 import { Link, LinkProps, useColorModeValue } from '@chakra-ui/react';
 
 /**
  * Refer to sidebar-link.tsx of chakra-ui
  * https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/sidebar/sidebar-link.tsx
  */
-const ChakraLink = React.forwardRef(function StyledChakraLink(
+const ChakraLink = forwardRef(function StyledChakraLink(
     props: LinkProps & { isActive?: boolean },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ref: React.Ref<any>

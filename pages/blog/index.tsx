@@ -1,9 +1,9 @@
 import { chakra, Heading, SimpleGrid } from '@chakra-ui/react';
 import { getAllPosts } from 'lib/api';
-import { BlogCard } from 'mycomponents/card';
-import { Layout } from 'mycomponents/layout';
+import { BlogCard } from 'components/card';
+import { Layout } from 'components/layout';
 import { GetStaticProps } from 'next';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import Post from 'types/post';
 import NextLink from 'next/link';
 import Head from 'next/head';
@@ -28,7 +28,7 @@ export default function Index({ allPosts }: Props): ReactElement {
                 <title>Blogs | Bharathi Kannan</title>
             </Head>
             <Heading as="h1" width="100px" mx="auto" mt="8">
-                Blog
+                Posts
             </Heading>
             <SimpleGrid columns={[1, null, null, null, 2, 3]} mt="10" spacing={10}>
                 {allPosts.map((post) => {

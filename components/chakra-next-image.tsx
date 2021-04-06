@@ -8,7 +8,7 @@ const ChakraNextImage = chakra(Image, {
         // If we allow all props, borderRadius would be passed to DOM element
         // which we dont want
         const isValidProp = isValidHTMLProp(prop);
-        if (isValidProp) return true;
+        if (isValidProp || prop === 'priority') return true;
 
         return false;
     }

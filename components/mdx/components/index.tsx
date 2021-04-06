@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 import { CodePen, CodeSandbox, Tweet } from 'mdx-embed';
-import { ChakraLink } from 'mycomponents/chakra-link';
+import { ChakraLink } from 'components/chakra-link';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
@@ -18,7 +18,7 @@ const InlineCode = (props: any) => (
     <ChakraCode
         apply="mdx.code"
         color={useColorModeValue('code.color.light', 'code.color.dark')}
-        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.light')}
+        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.dark')}
         {...props}
     />
 );

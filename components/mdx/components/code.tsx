@@ -1,8 +1,8 @@
 /** @jsxRuntime classic /
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
-import theme from 'styles/theme/draculaSoft';
-import { bpDesktopOnly } from 'styles/theme';
+import theme from 'styles/theme/dracula-soft';
+import { bpDesktopOnly } from 'styles/theme/breakpoints';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { useColorModeValue } from '@chakra-ui/react';
 
