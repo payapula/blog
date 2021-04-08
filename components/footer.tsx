@@ -26,7 +26,7 @@ function Footer(): ReactElement {
                     <SocialIcons icon={FaTwitter} hover={{ color: '#1DA1F2' }} />
                     <SocialIcons icon={FaLinkedin} hover={{ color: '#0e76a8' }} />
                 </HStack>
-                <Text>Copyright © 2021 All rights reserved</Text>
+                <Text>Opensourced on Github ❤️</Text>
             </Flex>
         </Box>
     );
