@@ -8,12 +8,12 @@ import { FaGraduationCap } from 'react-icons/fa';
 const CustomIcon = ({ icon, color }) => <Icon as={icon} width="8" height="8" color={color} />;
 
 const Title = ({ children }) => (
-    <Heading as="h3" fontSize={['2xl', null, null, null, '3xl']}>
+    <Heading as="h3" fontSize={['xl', null, null, null, '3xl']}>
         {children}
     </Heading>
 );
 const Subtitle = ({ children }) => (
-    <Heading as="h4" fontSize={['xl', null, null, null, '2xl']} fontWeight="normal" mt={2}>
+    <Heading as="h4" fontSize={['lg', null, null, null, '2xl']} fontWeight="normal" mt={2}>
         {children}
     </Heading>
 );
@@ -21,17 +21,6 @@ const Subtitle = ({ children }) => (
 const Description = ({ children }) => <chakra.p mt={2}>{children}</chakra.p>;
 
 const ChakraVerticalTimeline = chakra(VerticalTimeline);
-// const ChakraVerticalTimelineElement = chakra(VerticalTimelineElement, {
-//     shouldForwardProp: (prop) => {
-//         // Refer - https://chakra-ui.com/docs/features/chakra-factory#allowing-custom-props-to-be-forwarded
-//         // If we allow all props, borderRadius would be passed to DOM element
-//         // which we dont want
-//         const isValidProp = isValidHTMLProp(prop);
-//         if (isValidProp) return true;
-
-//         return false;
-//     }
-// });
 
 const CustomVerticalTimeLine = ({ date, icon, children, head = false }) => {
     return (
@@ -40,7 +29,7 @@ const CustomVerticalTimeLine = ({ date, icon, children, head = false }) => {
             className="vertical-timeline-element"
             date={date}
             iconStyle={{ background: '#000000', color: '#fff' }}
-            contentStyle={{ background: head ? '#0f2075' : '#015561', color: '#fff' }}
+            contentStyle={{ background: head ? 'rgb(46 61 132)' : '#015561', color: '#fff' }}
             contentArrowStyle={{ borderRight: `9px solid  ${head ? '#0f2075' : '#015561'}` }}
             icon={icon}>
             {children}
@@ -66,29 +55,32 @@ function History() {
                     head={true}>
                     <Title>Senior Software Engineer II</Title>
                     <Subtitle>Photon, Chennai</Subtitle>
-                    <Description>Working in React, Typescript & GraphQL project</Description>
+                    <Description>
+                        React | Typescript | SCSS | RXjs | GraphQL | S3 | Material UI | NodeJS
+                    </Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2019 - 2020"
                     icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
                     <Title>Software Development Senior Analyst</Title>
                     <Subtitle>NTT Data, Chennai</Subtitle>
-                    <Description>
-                        Worked on ReactJS project for Management Portal development
-                    </Description>
+                    <Description>React | Javascript | CSS | Material UI</Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2016 - 2019"
                     icon={<CustomIcon icon={SiDotNet} color="#fff" />}>
                     <Title>Programmer Analyst</Title>
                     <Subtitle>Cognizant, Coimbatore</Subtitle>
-                    <Description>Asp.Net MVC Application Developer worked on blah blah</Description>
+                    <Description>
+                        Asp.Net MVC | SQL Server | Oracle | JS | Telerik Kendo UI
+                    </Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2012 - 2016"
                     icon={<CustomIcon icon={FaGraduationCap} color="#81e6d9" />}>
                     <Title>B.E Computer Science and Engineering</Title>
                     <Subtitle>Sri Ramakrishna Engineering College, Coimbatore</Subtitle>
+                    <Description>Android | Java | Material UI | Php</Description>
                 </CustomVerticalTimeLine>
             </ChakraVerticalTimeline>
         </Flex>
