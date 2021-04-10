@@ -14,20 +14,20 @@ module.exports = withBundleAnalyzer({
     // webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     //     // Note: we provide webpack above so you should not `require` it
     //     // Perform customizations to webpack config
-    //
+
     //     // console.log(JSON.stringify(config.module.rules, null, 2));
 
-    // https://webpack.js.org/configuration/devtool/#devtool
-    //     // config.devtool = 'source-map';
-    // For debugging
-    //     // config.mode = 'development';
-    // For easier debugging to know what is contained in chunks
-    //     // config.optimization.minimize = false;
+    //     //https://webpack.js.org/configuration/devtool/#devtool
+    //     config.devtool = 'source-map';
+    //     // For debugging
+    //     config.mode = 'development';
+    //     // For easier debugging to know what is contained in chunks
+    //     config.optimization.minimize = false;
 
-    // This would function would be called twice - one for server and other for client
-    //     // if (config.name === 'client') {
-    //     //     console.log(JSON.stringify(config, null, 2));
-    //     // }
+    //     // This would function would be called twice - one for server and other for client
+    //     if (config.name === 'client') {
+    //         console.log(JSON.stringify(config, null, 2));
+    //     }
     //     // Important: return the modified config
     //     return config;
     // }

@@ -45,8 +45,6 @@ function RecentPosts({ recentPosts }: RecentPostsProps) {
                     direction={['column', null, null, null, 'row']}
                     justifyContent={['space-around']}
                     alignItems={['center']}>
-                    {/* <Card />
-                    <Card /> */}
                     {recentPosts.map((post) => {
                         return (
                             <NextLink

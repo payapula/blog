@@ -39,7 +39,7 @@ function HeroContent() {
                     applications. Proficient in developing applications from given business
                     requirements and efficient in maintaining existing software.
                 </Text>
-                <Button colorScheme="linkedin" width={180}>
+                <Button colorScheme="blue" width={180}>
                     Download Resume
                 </Button>
             </Stack>
