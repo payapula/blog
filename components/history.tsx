@@ -1,3 +1,6 @@
+/** @jsxRuntime classic /
+/** @jsx jsx */
+import { jsx, css } from '@emotion/react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { SiDotNet } from 'react-icons/si';
@@ -23,9 +26,20 @@ const Description = ({ children }) => <chakra.p mt={2}>{children}</chakra.p>;
 const ChakraVerticalTimeline = chakra(VerticalTimeline);
 
 const CustomVerticalTimeLine = ({ date, icon, children, head = false }) => {
+    const dateColor = useColorModeValue('black', 'white');
     return (
         <VerticalTimelineElement
             // as="section"
+            css={css`
+                .vertical-timeline-element-date {
+                    font-weight: bold;
+                }
+                @media only screen and (min-width: 1170px) {
+                    .vertical-timeline-element-date {
+                        color: ${dateColor};
+                    }
+                }
+            `}
             className="vertical-timeline-element"
             date={date}
             iconStyle={{ background: '#000000', color: '#fff' }}
@@ -72,7 +86,7 @@ function History() {
                     <Title>Programmer Analyst</Title>
                     <Subtitle>Cognizant, Coimbatore</Subtitle>
                     <Description>
-                        Asp.Net MVC | SQL Server | Oracle | JS | Telerik Kendo UI
+                        Asp.Net MVC | C# | SQL Server | Oracle | JS | Telerik Kendo UI
                     </Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
