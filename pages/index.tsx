@@ -9,6 +9,7 @@ import { AuthorAvatar } from 'components/author-avatar';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { Technologies } from 'components/technologies';
 import Head from 'next/head';
+import { History } from 'components/history';
 
 const Index = (): ReactElement => {
     return (
@@ -19,6 +20,7 @@ const Index = (): ReactElement => {
             <HeroContent />
             <RecentPosts />
             <Technologies />
+            <History />
         </Layout>
     );
 };
