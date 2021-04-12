@@ -51,7 +51,7 @@ When we execute the code, this is what happening in order :
 `text` variable. 
 4. In the next line the text is outputted to the console.
 
-> To deep dive into how Javascript works, I recommened you to watch [the series](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
+> To deep dive into how Javascript works, I recommened you to watch [this series on Javascript](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
 
 ## Enough of JS, Lets React!
 
@@ -159,6 +159,18 @@ function App() {
 }
 ```
 
+And this is the reason to import _React_ in the module eventhough we dont explicitly use it.
+
+```jsx {1}
+import React from 'react';
+
+function App() {
+  return (
+    <h1>Hello World</h1>
+  );
+}
+```
+
 [React.createElement](https://reactjs.org/docs/react-api.html#createelement) is top level API provided by react
 pacakge to create the corresponding element in Virtual DOM. 
 
@@ -166,6 +178,39 @@ pacakge to create the corresponding element in Virtual DOM.
 
 You can play around with Babel and its transpiled code on the [live babel repl](https://babeljs.io/repl). 
 To get to know about JSX, headover to [JSX on react docs](https://reactjs.org/docs/introducing-jsx.html).
+
+Also it is now worth pointing out that with React worked with Babel to introduce **new JSX transform** 
+which enables users to write [JSX without even importing React](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
+
+Starting with **React 17**, [babel now automatically imports](https://babeljs.io/blog/2020/03/16/7.9.0#a-new-jsx-transform-11154httpsgithubcombabelbabelpull11154) 
+_'react'_ when needed. With new JSX transform, our App component would compile from this
+
+```jsx
+// No import 'React' from 'react' needed 
+
+function App() {
+  return (
+    <h1>Hello World</h1>
+  );
+}
+```
+
+to this
+
+```jsx {1,5,6,7}
+import { jsx as _jsx } from "react/jsx-runtime";
+
+function App() {
+  return (
+    _jsx("h1", {
+      children: "Hello World"
+    });
+  );
+}
+```
+
+React core team is making these [set of changes](https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md) gradually 
+to remove the need of forwardRef in the future.
 
 And to the most important question,
 

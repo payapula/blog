@@ -15,7 +15,6 @@ import { motion } from 'framer-motion';
 
 interface CardProps {
     title?: string;
-    date?: string;
     excerpt?: string;
     override?: ChakraProps;
     blogCard?: boolean;
@@ -38,7 +37,8 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
             justifyContent="flex-start"
             height="265px"
             padding="2"
-            width={['95%', null, null, null, '45%']}
+            width={'95%'}
+            m="0 auto"
             className="card-container"
             background={cardBg}
             borderRadius="4"
@@ -82,11 +82,10 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
 
 interface BlogCardProps {
     title: string;
-    date: string;
     excerpt: string;
 }
 
-function BlogCard({ title, date, excerpt }: BlogCardProps): ReactElement {
+function BlogCard({ title, excerpt }: BlogCardProps): ReactElement {
     return (
         <Card
             override={{
@@ -95,7 +94,6 @@ function BlogCard({ title, date, excerpt }: BlogCardProps): ReactElement {
                 height: { xs: 'auto', lg: '300px' }
             }}
             title={title}
-            date={date}
             excerpt={excerpt}
             blogCard
         />
