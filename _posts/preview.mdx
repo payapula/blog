@@ -14,10 +14,145 @@ ogImage:
   alt: 'Preview Alt'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
+Temporary Drafts
 
-Venenatis cras sed felis eget velit. Consectetur libero id faucibus nisl tincidunt. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus. Volutpat consequat mauris nunc congue nisi vitae. Id aliquet risus feugiat in ante metus dictum at tempor. Sed blandit libero volutpat sed cras. Sed odio morbi quis commodo odio aenean sed adipiscing. Velit euismod in pellentesque massa placerat. Mi bibendum neque egestas congue quisque egestas diam in arcu. Nisi lacus sed viverra tellus in. Nibh cras pulvinar mattis nunc sed. Luctus accumsan tortor posuere ac ut consequat semper viverra. Fringilla ut morbi tincidunt augue interdum velit euismod.
+## Hooks Closure
 
-## Lorem Ipsum
+## Introduction to Closures
 
-Tristique senectus et netus et malesuada fames ac turpis. Ridiculous mus mauris vitae ultricies leo integer malesuada nunc vel. In mollis nunc sed id semper. Egestas tellus rutrum tellus pellentesque. Phasellus vestibulum lorem sed risus ultricies tristique nulla. Quis blandit turpis cursus in hac habitasse platea dictumst quisque. Eros donec ac odio tempor orci dapibus ultrices. Aliquam sem et tortor consequat id porta nibh. Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla. Diam vulputate ut pharetra sit amet. Ut tellus elementum sagittis vitae et leo. Arcu non odio euismod lacinia at quis risus sed vulputate.
+https://codesandbox.io/s/duplicate-vb76n
+
+```javascript
+function App(count) {
+  console.log('Counter initialized with ' + count);
+  return function print() {
+    console.log(++count);
+  };
+}
+
+let print = App(1);
+print();
+print();
+print();
+
+print = App(5);
+print();
+print();
+```
+
+The above function is a simple example of **closure** in JavaScript. The console output is as below.
+
+```
+Counter initialized with 1 
+2
+3
+4
+Counter initialized with 5 
+6
+7
+```
+
+If you can get it then great! I will go ahead and explain what is happening here. The `App` function returns another
+function `print`. This function is called as higher order function in JS. Any function that returns another function
+or that takes a funciton as argument are called **Higher order functions** in JS. This is possible because funcitons
+are first class citizens in JS.
+
+```javascript
+function App(count) {
+  console.log('Counter initialized with ' + count);
+  return function print() {
+    console.log(++count);
+  };
+}
+```
+
+The retuned function `print` **closes over** the variable `count` which is from its outer scope. This closing is referred
+to as **closure**. When we call the `App` function, we get the `print` function in return.
+
+```javascript
+let print = App(1);
+```
+
+The `App` function gets count as 1 and returns `print` which simply increases the count and logs it. So each time when we call
+`print` the count is incremented and printed.
+
+*So, what is the purpose of the returned functions in the real applications?*
+
+## Cleanup Functions
+
+Consider the below function
+
+```javascript
+function App(name) {
+  console.log(`Welcome, ${name}!`);
+
+  return () => {
+    console.clear();
+  };
+}
+
+App("Jack"); //logs: Welcome, Jack! 
+```
+
+This simply prints _Welcome, Jack!_. Instead of simply calling it, lets store the function returned from `App`
+in a variable `cleanup`
+
+```javascript
+let cleanUp = App("Jack");
+```
+
+Now, after printing if we call `cleanUp` the console would be cleared!
+
+```javascript
+let cleanUp = App("Jack"); //logs: Welcome, Jack! 
+cleanUp(); //Clears console!
+```
+
+You can't even see the logged data as it is getting cleared immediately. In a real world we would do something like this
+
+
+```javascript
+const unsubscribe =  heavyOperations();
+
+// Do some important logic
+// after all done cleanup the resources
+
+unsubscribe();
+```
+
+
+> To know more about closure, I recommened you to read [the blog post about closure](https://whatthefork.is/closure) by Dan Abramov. 
+> To deep dive into how Javascript works, I recommened you to watch [this series on Javascript](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
+
+*Alright, what these all has to do with React ?*
+
+## Enough of JS, Lets React!
+
+
+
+
+
+
+
+In order to conditionally execute any logic in the useEffect hook you would place the condition
+inside it.
+
+🚫 Wrong:
+
+```jsx {1,5}
+if(count > 5){ // React would throw a error
+  React.useEffect(() => {
+    console.log('Count is greater than 5!')
+  }, [count]);
+}
+```
+
+✅ Right:
+
+```jsx {2,4}
+React.useEffect(() => {
+  if(count > 5){ 
+    console.log('Count is greater than 5!')
+  }
+}, [count]);
+```

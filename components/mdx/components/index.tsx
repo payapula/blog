@@ -3,12 +3,14 @@ import {
     Box,
     Heading,
     chakra,
+    Center,
     Code as ChakraCode,
     useColorModeValue
 } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 import { CodePen, CodeSandbox, Tweet } from 'mdx-embed';
 import { ChakraLink } from 'components/chakra-link';
+import { ChakraNextImage } from 'components/chakra-next-image';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
@@ -125,6 +127,11 @@ const MDXComponents = {
     li: (props) => <chakra.li pb="4px" {...props} />,
     em: (props) => (
         <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
+    ),
+    img: (props) => (
+        <Center>
+            <ChakraNextImage width={600} height={400} objectFit="contain" {...props} />
+        </Center>
     )
 };
 

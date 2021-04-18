@@ -1,0 +1,285 @@
+---
+title: 'React useEffect Hook Flow'
+excerpt: 'Lets see the flow of useEffect hook in contrast with React Lifecycle methods also lets explore on the Rules of hooks
+with a eslint plugin to enforce them'
+date: '2020-04-12'
+description: 'React is just a Javascript Library for building powerful and interactive User Interfaces. 
+The React code is compiled down to plain javascript which the browsers can understand. We will also see
+why React is so powerful and where it is being used with examples'
+cover: 
+    src: '/assets/blog/react-hooks-flow/water-fall.jpg'  
+    alt: 'Waterfall'
+    author: 
+      name: 'James Morden'
+      url: https://unsplash.com/@jim74tg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/react-hooks-flow/water-fall.jpg'
+    alt: 'Waterfall'
+---
+
+> Prerequisite: This post assumes that you have basic understanding about useEffect hook and its cleanup functions
+
+Take a look at the Javascript function below, which returns a string:
+
+```javascript {5}
+function App(){
+  return 'Hello World';
+}
+
+const text = App();
+console.log(text); // logs 'Hello World'
+```
+
+We are storing the value returned from `App` function in variable `text` and displaying it in the console. 
+We know that Javascript is **single threaded** and can execute only one line at a time. The flow of execution 
+is top-to-bottom.
+
+When we execute the code, this is what happening in order :
+
+1. The Javascript engine first sees a function declaration from line *1 to 3* 
+2. Then goes to line number *5* where it sees a function being called. 
+3. Then JS engine **calls** that function and assigns the value returned from that function into the 
+`text` variable. 
+4. In the next line the text is displayed in the console.
+
+## React useEffect
+
+Lets explore useEffect in React on three Lifecycle phases of react component.
+
+1. Mount
+2. Update
+3. Unmount
+
+
+## useEffect on Mount
+
+Take a look at the react component below
+
+```jsx
+function App(){
+  React.useEffect(() => {
+    console.log('useEffect Ran!')
+  }, []);
+
+  return(
+    <div>Hello, World!</div>
+  )
+}
+```
+
+When you scan through this code and find the useEffect with empty `[]` dependencies, you would
+have guessed that this hook runs only on mount (exactly like componentdidmount). Yes, you are right, it runs
+just on the mount. so you would get this in console
+
+```bash {noline}
+useEffect Ran! 
+```
+
+Lets see an example with a dependency in useEffect,
+
+```jsx
+function App() {
+  const [count, setCount] = React.useState(0);
+
+  React.useEffect(() => {
+    console.log("Count Changed");
+  }, [count]);
+
+  return (
+    <button
+      onClick={() => {
+        setCount((c) => c + 1);
+      }}
+    >
+      {count}
+    </button>
+  );
+}
+```
+
+This is the classic counter example, when we scan the react component and find 
+the useEffect with `[count]` dependency we would think this would run when the `count` 
+changes. right, lets check it out! Look at the console when we render this component.
+
+```bash {noline}
+Count Changed
+```
+
+Whaat? We didn't even click the button but the useEffect ran! Why? 
+
+Hooks are merely side-effects, and would be used mostly for performing any side-effects in the 
+component, and the common side effect would be data fetching.
+
+When compared to class Lifecycle methods, mentioning any dependency in a hook would make that hook
+similar to componentdidupdate. If you have componentdidupdate, it would be called on the mount phase.
+
+This is how the hooks are designed to work. No matter how many dependencies you 
+specify and how many hooks you create, every hook would be called on every render of the component.
+
+> If you are curious to know why the hooks are designed in this way, take a look at [Fun with React Hooks](https://youtu.be/1jWS7cCuUXw)
+> in which Ryan Florence live codes useEffect hook and explains 
+> why hooks should only be called in the top level of react component
+
+After the mount phase is completed, our useEffect in the above counter example would be called 
+whenever the `count` changes. 
+
+```jsx
+React.useEffect(() => {
+  console.log("Count Changed");
+}, [count]);
+```
+
+So the takeaway from this section is
+
+> Every hook in a component would be called on Every Render.
+
+## useEffect on Unmount
+
+Now lets look at another example below with the Unmount behaviour.
+
+```jsx {5,6,7}
+function Child() {
+  React.useEffect(() => {
+    console.log("Child useEffect Ran!");
+
+    return () => {
+      console.log("cleanUp of Child useEffect Ran!");
+    };
+  }, []);
+
+  return <div>Hello, From Child!</div>;
+}
+
+export default function App() {
+  const [showChild, setShowChild] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log("useEffect Ran!");
+
+    return () => {
+      console.log("cleanUp of useEffect Ran!");
+    };
+  }, []);
+
+  return (
+    <div>
+      <div>Hello, World!</div>
+      {showChild ? <Child /> : null}
+      <button
+        onClick={() => {
+          setShowChild((b) => !b);
+        }}
+      >
+        {showChild ? "Show" : "Hide"} Child
+      </button>
+    </div>
+  );
+}
+```
+
+Our Parent `App` component renders a `Child` component which has useEffect with a **cleanup**
+function that would be executed when the child component unmounts. When you render the 
+component and toggle on the Hide/Show Child button you would get the corresponding logs as expected.
+
+![Clean up function in useEffect](/assets/blog/react-hooks-flow/use-effect-child.gif)
+
+If you have 3 useEffects in same component and all does return a cleanup function then when the component is unmounted, 
+all the cleanup functions would be called.
+
+```jsx
+function Child() {
+  React.useEffect(() => {
+    console.log("No Dependency!");
+
+    return () => {
+      console.log("cleanUp of No Dependency Ran!");
+    };
+  });
+
+  React.useEffect(() => {
+    console.log("Empty Dependency!");
+
+    return () => {
+      console.log("cleanUp of Empty Dependency Ran!");
+    };
+  }, []);
+
+  return <div>Hello, From Child!</div>;
+}
+```
+
+and the output is
+
+![Multiple Return](/assets/blog/react-hooks-flow/use-effect-multiple.gif)
+
+The takeaway is
+
+> When the component is unmounted, cleanup function from all the useEffects are executed. 
+
+## useEffect on Update
+
+Here comes the interesting part, when you have have specified a dependency and if the effect **re-runs** 
+because of any change in the specified dependencies, it would **execute the cleanup functions before**
+executing the hook.
+
+Lets see this behaviour with an example.
+
+<CodeSandbox codeSandboxId="react-useeffect-hooks-flow-zokln"/>
+
+> You can play around with the [above sandbox](https://codesandbox.io/s/react-useeffect-hooks-flow-zokln) 
+> to see when each effect is getting called and its order.
+
+On the first mount, we see both the useEffects of `App` running, and when you click
+on the Increment count button, we can see before running the _no deps hook_, the cleanup function
+is executed.
+
+```bash {3}
+▶️ App Render Start 
+🛑 App Render End 
+ App: useEffect no deps Cleanup 🧹
+🌀 App: useEffect no deps 
+```
+
+Similary, when you click on Show Child button, before running the _no deps hook_ of App, the 
+cleanup is executed. 
+
+```bash {5}
+▶️ App Render Start 
+🛑 App Render End 
+       ▶️ Child Render Start 
+       🛑 Child Render End 
+ App: useEffect no deps Cleanup 🧹
+       🌀 CHILD: useEffect empty [] 
+       🌀 CHILD: useEffect no deps 
+🌀 App: useEffect no deps 
+```
+
+As seen above, [from React v17](https://github.com/facebook/react/pull/17925), the cleanup of parent's 
+effects are ran **even before executing `Child`'s useEffect** calls. 
+
+This is the full rundown from the sandbox, we can see the cleanup functions are 
+executed before the hook on the update phase.
+
+![Flow of Hooks](/assets/blog/react-hooks-flow/flow-of-hooks.gif)
+
+The key takeaway is, 
+
+> React when reruning an useEffect, it executes the clean up function before executing the hook.
+
+The full picture of the flow of hooks can be understood from this [flow-chart by donavon](https://github.com/donavon/hook-flow)
+
+![Flow of Hooks by donavon](https://raw.githubusercontent.com/donavon/hook-flow/master/hook-flow.png)
+
+To Summarize
+
+> 1. Every hook in a component would be called on Every Render.
+> 2. When the component is unmounted, cleanup function from all the useEffects are executed. 
+> 3. React when reruning an useEffect, it executes the clean up function before executing the hook.
+
+
+
+----
+
+Big thanks to:
+
+- [Epic React](https://epicreact.dev/)
