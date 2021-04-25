@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { Text, Box } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ChakraLink } from 'components/chakra-link';
-import { ChakraNextImage } from 'components/chakra-next-image';
+import Image from 'next/image';
 
 interface PostCoverProps {
     cover: Cover;
@@ -11,11 +11,11 @@ interface PostCoverProps {
 function PostCover({ cover }: PostCoverProps): ReactElement {
     return (
         <Box mt={8}>
-            <ChakraNextImage
+            <Image
                 src={cover.src}
                 alt={cover.alt}
                 width={1400}
-                height={700}
+                height={800}
                 priority
                 objectFit="contain"
             />

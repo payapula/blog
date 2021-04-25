@@ -62,12 +62,8 @@ function RecentPosts({ recentPosts }: RecentPostsProps) {
                     })}
                 </Flex>
                 <NextLink href="/blog" passHref>
-                    <ChakraLink
-                        position="absolute"
-                        left="43%"
-                        display={['block', null, null, null, 'none']}
-                        fontSize="xl">
-                        <HStack>
+                    <ChakraLink display={['block', null, null, null, 'none']} fontSize="xl">
+                        <HStack justifyContent="center">
                             <Box>View All</Box>
                             <Icon as={FaLongArrowAltRight} w="10" h="8" ml="1" />
                         </HStack>

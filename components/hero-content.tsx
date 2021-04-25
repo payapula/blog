@@ -7,7 +7,7 @@ function HeroContent() {
         // Till 960px -> 70vh is maintained,  after that 60vh is maintained
         <Flex
             height={{ xs: '70vh', lg: '60vh' }}
-            direction={{ xs: 'column', lg: 'row' }}
+            direction={{ base: 'column', lg: 'row' }}
             align="center"
             justify="space-evenly">
             <Box
@@ -43,7 +43,7 @@ function HeroContent() {
                     Download Resume
                 </Button>
             </Stack>
-            <Box display={{ xs: 'none', lg: 'block' }}>
+            <Box display={{ base: 'none', lg: 'block' }}>
                 <AuthorAvatar size={500} />
             </Box>
         </Flex>
