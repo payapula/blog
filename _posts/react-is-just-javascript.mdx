@@ -7,13 +7,13 @@ description: 'React is just a Javascript Library for building powerful and inter
 The React code is compiled down to plain javascript which the browsers can understand. We will also see
 why React is so powerful and where it is being used with examples'
 cover: 
-    src: '/assets/blog/hello-world/hello-world-cover.jpg'  
+    src: '/assets/blog/react-is-just-javascript/hello-world-cover.jpg'  
     alt: 'computer keyboard'
     author: 
       name: 'Christian Wiediger'
-      url: https://unsplash.com/@christianw
+      url: https://unsplash.com/@christianw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
 ogImage:
-    url: '/assets/blog/hello-world/hello-world-cover.jpg'
+    url: '/assets/blog/react-is-just-javascript/hello-world-cover.jpg'
     alt: 'Computer Keyboard'
 ---
 
@@ -28,32 +28,9 @@ App();
 ```
 
 In the above code snippet, the function call on *line no 5* calls the `App` function
-which outputs 'Hello World' in the console. Consider the below function which returns a string:
+which outputs 'Hello World' in the console. 
 
-```javascript
-function App(){
-  return 'Hello World';
-}
-
-const text = App();
-console.log(text); // logs 'Hello World'
-```
-
-We are storing the value returned from App function in variable `text` and outputting it in the console. 
-We know that Javascript is **single threaded** and can execute only one line at a time & the flow of execution 
-is top-to-bottom.
-
-When we execute the code, this is what happening in order :
-
-1. The Javascript engine first sees a function declaration from line *1 to 3* 
-2. Then goes to line number *5* where it sees a function being called. 
-3. Then JS engine **calls** that function and assigns the value returned from that function into the 
-`text` variable. 
-4. In the next line the text is outputted to the console.
-
-> To deep dive into how Javascript works, I recommened you to watch [this series on Javascript](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
-
-## Enough of JS, Lets React!
+## Lets React!
 
 React is simply Javascript. A component defined in React is just a Javascript function.
 Consider the React component below.

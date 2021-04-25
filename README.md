@@ -41,6 +41,20 @@ Please refer to [Projects](https://github.com/payapula/blog/projects)
 
 ---
 
+## View Preview Locally on Mobile
+
+Windows:
+
+Run `ipconfig` and get the ipaddress of your localhost
+
+MAC:
+
+Run `ifconfig` and get the ipaddress of your localhost
+
+Open that address on the mobile with the same portnumber.
+
+Ex: `192.168.1.9:3001`
+
 ## Bundle Analyzer
 
 `npm run analyze`

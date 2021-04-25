@@ -15,7 +15,6 @@ type Props = {
 /*
   {
     title: 'Preview Mode for Static Generation',
-    date: '2020-03-16T05:35:07.322Z',
     slug: 'preview',
     excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
   } 

@@ -52,7 +52,9 @@ function RecentPosts({ recentPosts }: RecentPostsProps) {
                                 key={post.slug}
                                 href="/blog/[slug]"
                                 passHref>
-                                <chakra.a _hover={{ textDecoration: 'none' }}>
+                                <chakra.a
+                                    _hover={{ textDecoration: 'none' }}
+                                    width={{ xs: '100%', xl: '50%' }}>
                                     <Card title={post.title} excerpt={post.excerpt} />
                                 </chakra.a>
                             </NextLink>
