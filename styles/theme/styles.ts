@@ -8,6 +8,12 @@ const general = {
         _hover: {
             borderBottom: '1px solid'
         }
+    },
+    focus: {
+        _focus: {
+            outline: '2px dashed teal',
+            boxShadow: 'none'
+        }
     }
 };
 

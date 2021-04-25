@@ -1,8 +1,19 @@
-import { Button, Flex, Box, Text, Stack } from '@chakra-ui/react';
+import { Link, Flex, Box, Text, Stack, useStyleConfig, useColorModeValue } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 import { AuthorAvatar } from 'components/author-avatar';
 
 function HeroContent() {
+    const styles = useStyleConfig('Button');
+    const buttonStyles = {
+        ...styles,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '180',
+        height: '12',
+        background: useColorModeValue('blue.500', 'blue.200'),
+        color: useColorModeValue('white', 'gray.800')
+    };
     return (
         // Till 960px -> 70vh is maintained,  after that 60vh is maintained
         <Flex
@@ -39,9 +50,20 @@ function HeroContent() {
                     applications. Proficient in developing applications from given business
                     requirements and efficient in maintaining existing software.
                 </Text>
-                <Button colorScheme="blue" width={180}>
+                {/*//@ts-ignore*/}
+                <Link
+                    {...buttonStyles}
+                    _hover={{
+                        background: useColorModeValue('blue.600', 'blue.300')
+                    }}
+                    _focus={{
+                        background: useColorModeValue('blue.600', 'blue.300'),
+                        outline: '2px dashed teal'
+                    }}
+                    href="/assets/resume/Bharathi Kannan Full Stack Resume.pdf"
+                    download>
                     Download Resume
-                </Button>
+                </Link>
             </Stack>
             <Box display={{ base: 'none', lg: 'block' }}>
                 <AuthorAvatar size={500} />
