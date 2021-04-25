@@ -128,9 +128,9 @@ const MDXComponents = {
     em: (props) => (
         <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
     ),
-    img: (props) => (
-        <Center>
-            <ChakraNextImage width={600} height={400} objectFit="contain" {...props} />
+    Image: (props) => (
+        <Center mt="5">
+            <ChakraNextImage {...props} />
         </Center>
     )
 };

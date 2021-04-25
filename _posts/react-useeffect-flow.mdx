@@ -186,7 +186,13 @@ Our Parent `App` component renders a `Child` component which has useEffect with 
 function. This cleanup would be executed when the child component unmounts. So, When you render the 
 component and toggle on the Hide/Show Child button you would get the corresponding logs as expected.
 
-![Clean up function in useEffect](/assets/blog/react-hooks-flow/use-effect-child.gif)
+<Image
+  alt={`Clean up function in useEffect`}
+  src={`/assets/blog/react-hooks-flow/use-effect-child.gif`}
+  width={600}
+  height={400}
+  objectFit='contain'
+/>
 
 If you have 3 useEffects in same component and all does return a cleanup function then when the component is unmounted, 
 all the cleanup functions would be called.
@@ -217,7 +223,13 @@ function Child() {
 
 and the output is
 
-![Multiple Return](/assets/blog/react-hooks-flow/use-effect-multiple.gif)
+<Image
+  alt="Multiple Return"
+  src="/assets/blog/react-hooks-flow/use-effect-multiple.gif"
+  width={600}
+  height={400}
+  objectFit='contain'
+/>
 
 The takeaway is
 
@@ -270,7 +282,14 @@ effects are ran **even before executing `Child`'s useEffect**s.
 This is the full rundown from the sandbox. We can see the cleanup functions are 
 executed before the hook on the update/re-render phase.
 
-![Flow of Hooks](/assets/blog/react-hooks-flow/flow-of-hooks.gif)
+<Image
+  alt="Flow of Hooks"
+  src="/assets/blog/react-hooks-flow/flow-of-hooks.gif"
+  width={600}
+  height={400}
+  objectFit='contain'
+/>
+
 
 The key takeaway is, 
 
@@ -278,7 +297,14 @@ The key takeaway is,
 
 The full picture of the flow of hooks can be understood from this [flow-chart by donavon](https://github.com/donavon/hook-flow)
 
-![Flow of Hooks by donavon](https://raw.githubusercontent.com/donavon/hook-flow/master/hook-flow.png)
+<Image
+  alt="Flow of Hooks by donavon"
+  src="https://raw.githubusercontent.com/donavon/hook-flow/master/hook-flow.png"
+  width={600}
+  height={700}
+  objectFit='contain'
+/>
+
 
 To Summarize
 
