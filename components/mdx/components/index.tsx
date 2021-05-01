@@ -124,7 +124,7 @@ const MDXComponents = {
     p: (props) => <chakra.p apply="mdx.p" {...props} />,
     ul: (props) => <chakra.ul apply="mdx.ul" {...props} />,
     ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,
-    li: (props) => <chakra.li pb="4px" {...props} />,
+    li: (props) => <chakra.li apply="mdx.li" {...props} />,
     em: (props) => (
         <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
     ),

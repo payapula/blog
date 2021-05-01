@@ -29,6 +29,7 @@ function ToggleIconButton() {
             onClick={toggleColorMode}
             mr="5"
             icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            apply="general.focus"
         />
     );
 }

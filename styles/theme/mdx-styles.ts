@@ -62,6 +62,10 @@ const mdx = {
             mt: '0.25rem'
         }
     },
+    li: {
+        fontSize: '1.15rem',
+        paddingBottom: '4px'
+    },
     code: {
         rounded: 'sm',
         px: '1',
