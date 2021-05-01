@@ -277,10 +277,11 @@ cleanup is executed.
 ```
 
 As seen above, [from React v17](https://github.com/facebook/react/pull/17925), the cleanup of parent's 
-effects are ran **even before executing `Child`'s useEffect**s. 
+effects are executed **even before executing Child's useEffect**s. 
 
-This is the full rundown from the sandbox. We can see the cleanup functions are 
-executed before the hook on the update/re-render phase.
+Below GIF is the full rundown from the sandbox. We can see the cleanup functions are 
+executed before the hook on the update/re-render phase. I have highlighted the cleanup's with 
+bigger fonts to get it easily.
 
 <Image
   alt="Flow of Hooks"
@@ -293,7 +294,7 @@ executed before the hook on the update/re-render phase.
 
 The key takeaway is, 
 
-> React when reruning an useEffect, it executes the clean up function before executing the hook.
+> React, when reruning an useEffect, it executes the clean up function before executing the hook.
 
 The full picture of the flow of hooks can be understood from this [flow-chart by donavon](https://github.com/donavon/hook-flow)
 
