@@ -17,7 +17,7 @@ ogImage:
     alt: 'Computer Keyboard'
 ---
 
-Lets start off this post with the simple function in Javascript.
+Let's start this post with a simple function in Javascript.
 
 ```javascript
 function App(){
@@ -45,7 +45,7 @@ function App() {
 }
 ```
 
-This component *renders* `<h1>` with text 'Hello World' in the Webpage. 
+This component *renders* `<h1>` with a text 'Hello World' in the Webpage. 
 
 To reiterate,
 
@@ -89,12 +89,12 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-The function App is called here with angle brackets like `<App />` the returned HTML is 
+The Function App is called here with angle brackets like `<App />` the returned HTML is 
 rendered by _ReactDOM_ into the rootElement.
 
 > Read More about ReactDOM.render() on the [react docs](https://reactjs.org/docs/react-dom.html#render)
 
-This rootElement can be any valid HTML DOM. Usually we prefer to go with a empty `<div>` with the id root.
+This rootElement can be any valid HTML DOM. Usually, we prefer to go with an empty `<div>` with the id root.
 
 ```html noline
 <div id="root"></div>
@@ -151,7 +151,20 @@ function App() {
 [React.createElement](https://reactjs.org/docs/react-api.html#createelement) is top level API provided by react
 pacakge to create the corresponding element in Virtual DOM. 
 
-> "Babel compiles JSX down to React.createElement() calls." - *[React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)*
+_createElement_ returns React elements, which are plain JS objects that describe the intended structure of the UI.
+
+```jsx
+// This JSX syntax:
+return  <h1>Hello World</h1>
+
+// is converted to this call:
+return  React.createElement("h1", null, "Hello World")
+
+// and that becomes this element object:
+{type: 'h1', props: null, children: ["Hello World"]}
+```
+
+> "Babel compiles JSX down to React.createElement() calls." - [React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
 
 You can play around with Babel and its transpiled code on the [live babel repl](https://babeljs.io/repl). 
 To get to know about JSX, headover to [JSX on react docs](https://reactjs.org/docs/introducing-jsx.html).
@@ -249,6 +262,7 @@ Also keep in mind that,
 
 Thanks goes to:
 
+- [A (Mostly) Complete Guide to React Rendering Behavior](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
 - [10 Famous Websites Built with React JS](https://anyforsoft.com/blog/10-famous-websites-built-react-js/)
 - [React JS](https://reactjs.org/)
-- [Namaste JavaScript](https://youtu.be/pN6jk0uUrD8)
+
