@@ -1,4 +1,4 @@
-import { MdxRemote } from 'next-mdx-remote/types';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Cover from './cover';
 
 type PostType = {
@@ -14,7 +14,7 @@ type PostType = {
     };
     // These are fetched separately
     slug: string; // From File Name
-    content: MdxRemote.Source; // From hydrated by next-mdx-remote
+    content: MDXRemoteSerializeResult; // From hydrated by next-mdx-remote
 };
 
 export default PostType;

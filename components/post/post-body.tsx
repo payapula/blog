@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import { Box } from '@chakra-ui/react';
-import hydrate from 'next-mdx-remote/hydrate';
-import { MdxRemote } from 'next-mdx-remote/types';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { MDXComponents } from '../mdx/components';
 
 const components = {
@@ -9,12 +8,15 @@ const components = {
 };
 
 interface PostBodyProps {
-    content: MdxRemote.Source;
+    content: MDXRemoteSerializeResult;
 }
 
 function PostBody({ content }: PostBodyProps): ReactElement {
-    const hydratedContent = hydrate(content, { components });
-    return <Box mt={10}>{hydratedContent}</Box>;
+    return (
+        <Box mt={10}>
+            <MDXRemote {...content} components={components} />
+        </Box>
+    );
 }
 
 export { PostBody };

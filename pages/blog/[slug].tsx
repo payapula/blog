@@ -4,8 +4,7 @@ import PostType from 'types/post';
 import { ReactElement } from 'react';
 import { Layout } from 'components/layout';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import renderToString from 'next-mdx-remote/render-to-string';
-import { MDXComponents } from 'components/mdx/components';
+import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
 import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 
@@ -47,10 +46,6 @@ const Post = ({ post }: PostProps): ReactElement => {
     );
 };
 
-const components = {
-    ...MDXComponents
-};
-
 type Params = {
     params: {
         slug: string;
@@ -67,8 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'content'
     ]);
 
-    const mdxSource = await renderToString(post.content, { components });
-
+    const mdxSource = await serialize(post.content);
     return {
         props: {
             post: {
