@@ -1,0 +1,386 @@
+---
+title: 'React Hooks Dependencies and Stale Closures'
+excerpt: 'React hooks are heavily based on the Javascript Closures. To understand about the dependencies array we must know
+about Closures. We will explore closures in general and dive into React hooks world to know how the the closures `effects` hooks'
+date: '2020-05-09'
+description: 'React hooks are heavily based on the Javascript Closures. To understand about the dependencies array we must know
+about Closures. We will explore closures in general and dive into React hooks world to know how the the closures `effects` hooks'
+cover: 
+    src: '/assets/blog/react-hooks-dependencies/react-hooks-dependencies-cover.jpg'  
+    alt: 'Wheel and gears of bicycle'
+    author: 
+      name: 'Wayne Bishop'
+      url: https://unsplash.com/@wayneb250?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/react-hooks-dependencies/react-hooks-dependencies-cover.jpg'
+    alt: 'Wheel and gears of bicycle'
+---
+
+As always, lets start with a Javascript example, before looking at the output below try to guess what would be logged
+into the console.
+
+```javascript
+function App(count) {
+  console.log('Counter initialised with ' + count);
+  return function print() {
+    console.log(++count);
+  };
+}
+
+let print = App(1);
+print();
+print();
+print();
+
+print = App(5);
+print();
+print();
+```
+
+The above function is a simple example of **closure** in JavaScript. The console output is as below.
+
+```
+Counter initialised with 1 
+2
+3
+4
+Counter initialised with 5 
+6
+7
+```
+
+If you can get it then great! I will go ahead and explain what is happening.
+
+The `App` function returns another function called `print`. This makes our `App` a higher order function. 
+
+> Any function that returns another function or that takes a function as argument is called as Higher order function. 
+
+```javascript {3,4,5}
+function App(count) {
+  console.log('Counter initialised with ' + count);
+  return function print() {
+    console.log(++count);
+  };
+}
+```
+
+The retuned function `print` _closes over_ the variable `count` which from its outer scope. This closing is referred
+to as **closure**. 
+
+Please don't get confused with the names of the function, the naming need not necessarily be same, as for an example
+
+```javascript {3,8}
+function App(count) {
+  console.log('Counter initialised with ' + count);
+  return function increment() {
+    console.log(++count);
+  };
+}
+
+let someRandomName = App(1);
+someRandomName(); //logs 2
+```
+
+Here App is returning a function `increment` and we are assiging it to the variable `someRandomName`
+
+To define Closure,
+
+> A closure is the combination of a function bundled together (enclosed) 
+> with references to its surrounding state (the lexical environment). In other words, 
+> a closure gives you access to an outer function’s scope from an inner function.
+> ~ [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+
+Ah? that doesn't look like simple definition right ?
+
+Alright, MDN is not much helpful here, lets see what w3schools says 
+
+> A closure is a function having access to the parent scope, even after the parent function has closed. ~ [W3Schools](https://www.w3schools.com/js/js_function_closures.asp)
+
+When we call the `App` function, we get the `print` function in return.
+
+```javascript
+let print = App(1);
+```
+
+The `App` function gets count as 1 and returns `print` which simply increases 
+the count and logs it. So each time when we call `print`, the count is incremented 
+and printed.
+
+_If we are writing logic which uses closures and if we are not careful enough then 
+we may fall into a pitfall called...._ 
+
+## Stale Closures
+
+To learn what is stale closures, let us take our same example and modify it further. 
+
+Take a look at this code and guess what would be logged into the console.
+
+```javascript
+function App() {
+
+  let count = 0;
+
+  function increment() {
+    count = count + 1;
+  }
+
+  let message = `Count is ${count}`;
+  
+  function log() {
+    console.log(message);
+  }
+
+  return [increment, log];
+}
+
+let [increment, log] = App();
+increment();
+increment();
+increment();
+log();
+```
+
+To break it down,
+
+1. There are two variables `count` and `message` in our App.
+2. We are returning two functions `increment` and `log`. 
+3. As per the name `increment` increases our `count` and `log` simply logs the `message`. 
+
+Try to guess the output, Let me give you some space think.................................... 
+
+<div style={{height: 400}} />
+
+Warning! 🚨 Spoilers 🚨 ahead
+
+<div style={{height: 300}} />
+
+The output is
+
+```bash {noline}
+Count is 0
+```
+
+oh, we are not incrementing the count right ? or do we ?
+
+Lets find out by placing console log inside our `increment` function 
+
+```javascript {7}
+function App() {
+
+  let count = 0;
+
+  function increment() {
+    count = count + 1;
+    console.log(count);
+  }
+
+  let message = `Count is ${count}`;
+  
+  function log() {
+    console.log(message);
+  }
+
+  return [increment, log];
+}
+
+let [increment, log] = App();
+increment();
+increment();
+increment();
+log();
+```
+
+And this time, the output will be 
+
+```bash {noline}
+1
+
+2
+
+3
+
+Count is 0
+```
+
+Yes we are incrementing and modifying the `count` that is present in the lexical scope
+of `increment`. However, the problem lies with the `message` and `log`.
+
+Our `log` function _captured_ the `message` variable and kept it. So, when we increment the count 
+the `message` is not updated and our `log` returns the message "Count is 0".
+
+To fix this stale closure, we can move the message inside of `log`
+
+```javascript {11}
+function App() {
+
+  let count = 0;
+
+  function increment() {
+    count = count + 1;
+    console.log(count);
+  }
+
+  function log() {
+    let message = `Count is ${count}`;
+    console.log(message);
+  }
+
+  return [increment, log];
+}
+
+let [increment, log] = App();
+increment();
+increment();
+increment();
+log();
+```
+
+And running, would produce the result,
+
+```
+1
+
+2
+
+3
+
+Count is 3 
+```
+
+What does this _stale closure_ thing has to do in React world?
+
+## Hooks are nothing but Closures!
+
+Lets reproduce the same example we saw in JS world and bring it into the react world, 
+
+```jsx
+function App() {
+  const [count, setCount] = React.useState(0);
+
+  let message = `Count is ${count}`;
+
+  React.useEffect(() => {
+    if (count === 3) {
+      console.log(message);
+    }
+  }, []);
+
+  return (
+    <div className="App">
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          setCount((c) => c + 1);
+        }}
+      >
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+After hitting `Increment` button three times, we should have a log that says 
+"Count is 3", but sadly we don't event get anything logged from our example.
+
+This is however not exact replica of our example from our JS world, the key 
+difference is in our React world, `message` does get updated but our `useEffect` 
+just failed to capture the updated message. 
+
+To fix this stale closure problem, we need to specify both `count` and `message` 
+as our dependency array.
+
+```jsx {10}
+function App() {
+  const [count, setCount] = React.useState(0);
+
+  let message = `Count is ${count}`;
+
+  React.useEffect(() => {
+    if (count === 3) {
+      console.log(message);
+    }
+  }, [count, message]);
+
+  return (
+    <div className="App">
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          setCount((c) => c + 1);
+        }}
+      >
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+Note - This is just a contrieved example, you may choose to ignore either of 
+those dependencies as both are related, if `count` is updated, `message` does get 
+updated, so specifying just either of those is fine to get the expected output. 
+
+Things are simple with our example, the logic that we wrote inside the hook is 
+not really a side effect, but it will get more and more complicated if we start 
+to write hooks for data fetching logic and other **real side effects**
+
+The one thing that, always we need to make sure is,
+
+> All of our dependencies for hooks must be specified in the 
+> dependency array and, we should not [lie to React about dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#dont-lie-to-react-about-dependencies)
+
+As I said, things get really complicated with closures in real world applications
+and it is so very easy to miss a dependency in our hooks. 
+
+From my experience, if we failed to specify a dependency and if not caught 
+during the testing, later it would eventually cause a bug and at that time when
+in order to fix it we may need to re-write entire logic from scratch !!
+
+This is a big 🚫 NO 🚫 and **MUST BE AVOIDED** at all cost, but how ?
+
+## ESLint Plugin React Hooks
+
+In order to make our life simpler, the react team wrote a ESLint Plugin called 
+`eslint-plugin-react-hooks` to capture all possible errors with the usage of hooks.
+
+So when you are all set up with the [eslint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) 
+When you miss a dependency, it would warn you about the possible consequence.
+
+If you are using latest create-react-app then this comes out of the box (`react-scripts` >= 3.0)
+
+As seen below, when we violate the [rules of hooks](https://reactjs.org/docs/hooks-rules.html) 
+we will get a nice warningm suggesting that we are probably doing something wrong.
+
+<Image
+  alt="ESLint Plugin Shows Warning"
+  src="/assets/blog/react-hooks-dependencies/eslint-missing-deps.gif"
+  width={700}
+  height={500}
+  objectFit='contain'
+/>
+
+The above GIF shows the error from ESLint that reads, _React Hook React.useEffect has 
+missing dependencies: 'count' and 'message'. Either include them or remove the dependency array._
+
+It even fixes the dependency problem with just a single click!
+
+
+Keep in mind that stale closure problem does not only affect `useEffect`, we would
+run into the same problem with other hooks as well like `useMemo` and `useCallback`.
+
+The Eslint plugin works with all the React hooks, can also be configured to run 
+on custom hooks. So, make a good use of it!
+
+Again to enforce,
+
+> 🚫 Don't Lie to React about Dependencies and 🚫 Don't disable this ESLint rule 🤷🏾‍♂️
+
+
+---
+
+Big Thanks to:
+
+- [Getting Closure on Hooks by Shawn Wang](https://www.swyx.io/getting-closure-on-hooks/)
+- [Be Aware of Stale Closures when Using React Hooks](https://dmitripavlutin.com/react-hooks-stale-closures/)
+- [A Complete Guide to useEffect](https://overreacted.io/a-complete-guide-to-useeffect/)
