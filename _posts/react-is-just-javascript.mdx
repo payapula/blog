@@ -1,6 +1,6 @@
 ---
 title: 'React is Just Javascript'
-excerpt: 'No! React components are not returning HTML & React is not magic ! React is just plain Javascript Library 
+excerpt: 'No! React components are not returning HTML & React is not magic! React is just plain Javascript Library 
 for building powerful and interactive User Interfaces. In this post we will also see where React is being used.'
 date: '2020-04-04'
 description: 'React is just a Javascript Library for building powerful and interactive User Interfaces. 
@@ -30,7 +30,7 @@ App();
 In the above code snippet, the function call on *line no 5* calls the `App` function
 which outputs 'Hello World' in the console. 
 
-## Lets React!
+## Let's React!
 
 React is simply Javascript. A component defined in React is just a Javascript function.
 Consider the React component below.
@@ -73,11 +73,11 @@ Now you would have these questions:
 
 1. This is just a function declaration. Where it is being called?? 
 2. If this is a Javascript function then, how HTML is being returned from the function? Is this even valid?
-3. Also why is it called *rendering* ?
+3. Also, Why is it called *rendering*?
 
 Let's answer all these questions.
 
-## 1. Where it is being called?
+## 1. Where its being called?
 
 The function `App()` would actually be rendered by `ReactDOM` from react-dom package. 
 
@@ -125,7 +125,7 @@ function App() {
 ```
 
 Technically this JSX is just a *transpiled Javascript function call* (yes it sounds scary). This *HTML like* 
-thing is converted to Javascript by a transpiler called **babel** and finally the `App` would be sent to JS 
+thing is converted to Javascript by a transpiler called **babel** and, Finally the `App` would be sent to JS 
 engine like below code that is just **pure javascript**. 
 
 ```jsx {3}
@@ -136,7 +136,7 @@ function App() {
 }
 ```
 
-And this is the reason to import _React_ in the module eventhough we dont explicitly use it.
+And this is the reason to import _React_ in the module even though we don't explicitly use it.
 
 ```jsx {1}
 import React from 'react';
@@ -149,7 +149,7 @@ function App() {
 ```
 
 [React.createElement](https://reactjs.org/docs/react-api.html#createelement) is top level API provided by react
-pacakge to create the corresponding element in Virtual DOM. 
+package to create the corresponding element in Virtual DOM. 
 
 _createElement_ returns React elements, which are plain JS objects that describe the intended structure of the UI.
 
@@ -167,13 +167,13 @@ return  React.createElement("h1", null, "Hello World")
 > "Babel compiles JSX down to React.createElement() calls." - [React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
 
 You can play around with Babel and its transpiled code on the [live babel repl](https://babeljs.io/repl). 
-To get to know about JSX, headover to [JSX on react docs](https://reactjs.org/docs/introducing-jsx.html).
+To get to know about JSX, head-over to [JSX on react docs](https://reactjs.org/docs/introducing-jsx.html).
 
-Also it is now worth pointing out that with React worked with Babel to introduce **new JSX transform** 
+Also, it is now worth pointing out that with React worked with Babel to introduce **new JSX transform** 
 which enables users to write [JSX without even importing React](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
 Starting with **React 17**, [babel now automatically imports](https://babeljs.io/blog/2020/03/16/7.9.0#a-new-jsx-transform-11154httpsgithubcombabelbabelpull11154) 
-_'react'_ when needed. With new JSX transform, our App component would compile from this
+_'react'_ when needed. After the new JSX transform, our App component would compile from this
 
 ```jsx
 // No import 'React' from 'react' needed 
@@ -206,15 +206,15 @@ And to the most important question,
 
 ## 3. Why is it called Rendering ?
 
-In short, Rendering in Web refers to the apprearance of something. On a broader picture the terminology
-rendering on web can mean a lot of things like painting, server rendering etc. For our understanding lets keep it 
-short, *render* refers to appearance of a element, or a set of elements (component) on a webpage.
+In short, Rendering in Web refers to the appearance of something. On a broader picture, the terminology
+rendering on the web can mean a lot of things like painting, server-rendering, etc. For our understanding, Let's keep it
+short, *Render* refers to appearance of a element, or a set of elements (component) on a webpage.
 
 From the React docs it is clear that React is 
 
 > A JavaScript library for building user interfaces
 
-React helps us build user interfaces, [not only on web](https://reactnative.dev/). 
+React helps us build user interfaces, [not only on the Web](https://reactnative.dev/). 
 It helps us *render* something on screens that can be presented to the user.
 
 A revist to the example of ReactDOM API:
@@ -234,15 +234,15 @@ this virual DOM would be synced with real DOM and during this process `<h1>` tag
 > The costliest operation on Web is DOM painting and manipulation.
 
 If you are wondering this is *too much boilerplate*, why can't we just simply write HTML files and include Javascript and CSS to make it 
-more presentable ? 
+more presentable? 
 
-Yes! you are right, we can easily build a website with plain HTML, JS and CSS and still make it cool. No one 
+Yes! You are right, We can easily build a website with plain HTML, JS, and CSS and still make it cool. No one 
 can deny it.
 
 Where **our** React shines is, it will drastically simplify **how we render and rerender our elements** by
 providing set of **Declarative API**s 
 
-> **Declarative** : You just tell what you need and dont need on DOM and React would take care of that for you!
+> **Declarative** : You just tell what you need and don't need on DOM and React would take care of that for you!
 
 With the APIs provided by react, we can create **Web Applications** which are highly 
 ⚡️ **interactive**, 🔥 **performant** and 🚀 **responsive**
@@ -254,13 +254,13 @@ If you want some examples, all these following websites are built with 🚀 Reac
 - [Atlassian](https://www.atlassian.com/)
 - [Netflix](https://www.netflix.com/)
 
-Also keep in mind that,
+Also, keep in mind that,
 
-> For the end users it is all just HTML, CSS and JavaScript!
+> For the end-users, it is all just HTML, CSS, and JavaScript!
 
 ----
 
-Thanks goes to:
+Thanks go to:
 
 - [A (Mostly) Complete Guide to React Rendering Behavior](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
 - [10 Famous Websites Built with React JS](https://anyforsoft.com/blog/10-famous-websites-built-react-js/)
