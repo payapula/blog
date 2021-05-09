@@ -16,8 +16,7 @@ ogImage:
     alt: 'Wheel and gears of bicycle'
 ---
 
-As always, lets start with a Javascript example, before looking at the output below try to guess what would be logged
-into the console.
+As always, lets start with a Javascript example, before looking at the output try to guess what would be logged.
 
 ```javascript
 function App(count) {
@@ -51,9 +50,11 @@ Counter initialised with 5
 
 If you can get it then great! I will go ahead and explain what is happening.
 
-The `App` function returns another function called `print`. This makes our `App` a higher order function. 
+The `App` function returns another function called `print`. This makes our `App`, 
+a higher order function. 
 
-> Any function that returns another function or that takes a function as argument is called as Higher order function. 
+> Any function that returns another function or that takes a function as argument 
+> is called as Higher order function. 
 
 ```javascript {3,4,5}
 function App(count) {
@@ -64,10 +65,11 @@ function App(count) {
 }
 ```
 
-The retuned function `print` _closes over_ the variable `count` which from its outer scope. This closing is referred
-to as **closure**. 
+The retuned function `print` _closes over_ the variable `count` which is from its outer scope. 
+This closing is referred to as **closure**. 
 
-Please don't get confused with the names of the function, the naming need not necessarily be same, as for an example
+Please don't get confused with the name of the functions, the names need not 
+necessarily be same, as for an example
 
 ```javascript {3,8}
 function App(count) {
@@ -83,7 +85,7 @@ someRandomName(); //logs 2
 
 Here App is returning a function `increment` and we are assiging it to the variable `someRandomName`
 
-To define Closure,
+To define a "Closure",
 
 > A closure is the combination of a function bundled together (enclosed) 
 > with references to its surrounding state (the lexical environment). In other words, 
@@ -92,7 +94,7 @@ To define Closure,
 
 Ah? that doesn't look like simple definition right ?
 
-Alright, MDN is not much helpful here, lets see what w3schools says 
+Alright, MDN is not much helpful here, lets see what W3Dchools says 
 
 > A closure is a function having access to the parent scope, even after the parent function has closed. ~ [W3Schools](https://www.w3schools.com/js/js_function_closures.asp)
 
@@ -103,15 +105,15 @@ let print = App(1);
 ```
 
 The `App` function gets count as 1 and returns `print` which simply increases 
-the count and logs it. So each time when we call `print`, the count is incremented 
+the count and logs it. So each time when `print` is called, the count is incremented 
 and printed.
 
-_If we are writing logic which uses closures and if we are not careful enough then 
-we may fall into a pitfall called...._ 
+_If we are writing logic that uses closures and not careful enough then we may 
+fall into a pitfall called...._ 
 
 ## Stale Closures
 
-To learn what is stale closures, let us take our same example and modify it further. 
+To understand what is stale closures, let us take our same example and modify it further. 
 
 Take a look at this code and guess what would be logged into the console.
 
@@ -144,7 +146,7 @@ To break it down,
 
 1. There are two variables `count` and `message` in our App.
 2. We are returning two functions `increment` and `log`. 
-3. As per the name `increment` increases our `count` and `log` simply logs the `message`. 
+3. As per the name, `increment` increases our `count` and `log` simply logs the `message`. 
 
 Try to guess the output, Let me give you some space think.................................... 
 
@@ -160,7 +162,7 @@ The output is
 Count is 0
 ```
 
-oh, we are not incrementing the count right ? or do we ?
+oh, did we fail to increment the count ?
 
 Lets find out by placing console log inside our `increment` function 
 
@@ -194,19 +196,17 @@ And this time, the output will be
 
 ```bash {noline}
 1
-
 2
-
 3
-
 Count is 0
 ```
 
-Yes we are incrementing and modifying the `count` that is present in the lexical scope
-of `increment`. However, the problem lies with the `message` and `log`.
+Yes, we are incrementing the `count` that is present in the lexical scope
+of `increment`. However, the problem is with the `message` and `log`.
 
-Our `log` function _captured_ the `message` variable and kept it. So, when we increment the count 
-the `message` is not updated and our `log` returns the message "Count is 0".
+Our `log` function _captured_ the `message` variable and kept it. So, when we 
+increment the count, the `message` is not updated and our `log` returns the 
+message "Count is 0".
 
 To fix this stale closure, we can move the message inside of `log`
 
@@ -235,23 +235,23 @@ increment();
 log();
 ```
 
-And running, would produce the result,
+And executing, would produce the result,
 
 ```
 1
-
 2
-
 3
-
 Count is 3 
 ```
 
-What does this _stale closure_ thing has to do in React world?
+As per the name, _stale closure_ is when we fail to capture updated value from the
+outer scope and instead getting the _staled_ value.
+
+Hmm.. So, what does this _stale closure_ has to do in React?
 
 ## Hooks are nothing but Closures!
 
-Lets reproduce the same example we saw in JS world and bring it into the react world, 
+Let us bring the same JS example we saw into the react world, 
 
 ```jsx
 function App() {
@@ -281,7 +281,9 @@ function App() {
 ```
 
 After hitting `Increment` button three times, we should have a log that says 
-"Count is 3", but sadly we don't event get anything logged from our example.
+"Count is 3".
+
+Sadly we don't event get anything logged !!!
 
 This is however not exact replica of our example from our JS world, the key 
 difference is in our React world, `message` does get updated but our `useEffect` 
@@ -334,8 +336,8 @@ As I said, things get really complicated with closures in real world application
 and it is so very easy to miss a dependency in our hooks. 
 
 From my experience, if we failed to specify a dependency and if not caught 
-during the testing, later it would eventually cause a bug and at that time when
-in order to fix it we may need to re-write entire logic from scratch !!
+during the testing, later it would eventually cause a bug and in order to fix it 
+we may need to **re-write entire logic** from scratch !!
 
 This is a big 🚫 NO 🚫 and **MUST BE AVOIDED** at all cost, but how ?
 
@@ -350,7 +352,7 @@ When you miss a dependency, it would warn you about the possible consequence.
 If you are using latest create-react-app then this comes out of the box (`react-scripts` >= 3.0)
 
 As seen below, when we violate the [rules of hooks](https://reactjs.org/docs/hooks-rules.html) 
-we will get a nice warningm suggesting that we are probably doing something wrong.
+we will get a nice warning suggesting that we are probably doing something wrong.
 
 <Image
   alt="ESLint Plugin Shows Warning"
@@ -370,7 +372,8 @@ Keep in mind that stale closure problem does not only affect `useEffect`, we wou
 run into the same problem with other hooks as well like `useMemo` and `useCallback`.
 
 The Eslint plugin works with all the React hooks, can also be configured to run 
-on custom hooks. So, make a good use of it!
+on custom hooks. Apart from just alerting with dependency issues it would also
+check for all the rules of hooks, So, make a good use of it! 
 
 Again to enforce,
 
@@ -384,3 +387,5 @@ Big Thanks to:
 - [Getting Closure on Hooks by Shawn Wang](https://www.swyx.io/getting-closure-on-hooks/)
 - [Be Aware of Stale Closures when Using React Hooks](https://dmitripavlutin.com/react-hooks-stale-closures/)
 - [A Complete Guide to useEffect](https://overreacted.io/a-complete-guide-to-useeffect/)
+- [5 Tips to Help You Avoid React Hooks Pitfalls](https://kentcdodds.com/blog/react-hooks-pitfalls)
+- [Epic React by Kent.C.Dodds](https://epicreact.dev/)
