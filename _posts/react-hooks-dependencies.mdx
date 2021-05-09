@@ -16,11 +16,11 @@ ogImage:
     alt: 'Wheel and gears of bicycle'
 ---
 
-As always, lets start with a Javascript example, before looking at the output try to guess what would be logged.
+As always, let's start with a Javascript example. Before looking at the output, try to guess what would be logged.
 
 ```javascript
 function App(count) {
-  console.log('Counter initialised with ' + count);
+  console.log('Counter initialized with ' + count);
   return function print() {
     console.log(++count);
   };
@@ -39,18 +39,18 @@ print();
 The above function is a simple example of **closure** in JavaScript. The console output is as below.
 
 ```
-Counter initialised with 1 
+Counter initialized with 1 
 2
 3
 4
-Counter initialised with 5 
+Counter initialized with 5 
 6
 7
 ```
 
-If you can get it then great! I will go ahead and explain what is happening.
+If you can get it, then great! I will go ahead and explain what is happening.
 
-The `App` function returns another function called `print`. This makes our `App`, 
+The `App` function returns another function called `print` this makes our `App`, 
 a higher order function. 
 
 > Any function that returns another function or that takes a function as argument 
@@ -58,7 +58,7 @@ a higher order function.
 
 ```javascript {3,4,5}
 function App(count) {
-  console.log('Counter initialised with ' + count);
+  console.log('Counter initialized with ' + count);
   return function print() {
     console.log(++count);
   };
@@ -68,12 +68,12 @@ function App(count) {
 The retuned function `print` _closes over_ the variable `count` which is from its outer scope. 
 This closing is referred to as **closure**. 
 
-Please don't get confused with the name of the functions, the names need not 
-necessarily be same, as for an example
+Please don't get confused with the name of the functions. Names need not 
+necessarily be identical, as for an example
 
 ```javascript {3,8}
 function App(count) {
-  console.log('Counter initialised with ' + count);
+  console.log('Counter initialized with ' + count);
   return function increment() {
     console.log(++count);
   };
@@ -83,7 +83,7 @@ let someRandomName = App(1);
 someRandomName(); //logs 2
 ```
 
-Here App is returning a function `increment` and we are assiging it to the variable `someRandomName`
+Here App is returning a function `increment` and we are assigning it to the variable `someRandomName`
 
 To define a "Closure",
 
@@ -94,7 +94,7 @@ To define a "Closure",
 
 Ah? that doesn't look like simple definition right ?
 
-Alright, MDN is not much helpful here, lets see what W3Dchools says 
+Alright, MDN is not much helpful here let us see what W3Schools says 
 
 > A closure is a function having access to the parent scope, even after the parent function has closed. ~ [W3Schools](https://www.w3schools.com/js/js_function_closures.asp)
 
@@ -105,17 +105,17 @@ let print = App(1);
 ```
 
 The `App` function gets count as 1 and returns `print` which simply increases 
-the count and logs it. So each time when `print` is called, the count is incremented 
+the count and logs it. So each time when `print` is called, the count is incremented
 and printed.
 
-_If we are writing logic that uses closures and not careful enough then we may 
+_If we are writing logic that uses closures and not careful enough, then we may 
 fall into a pitfall called...._ 
 
 ## Stale Closures
 
 To understand what is stale closures, let us take our same example and modify it further. 
 
-Take a look at this code and guess what would be logged into the console.
+Take a look at this code and guess what would be getting logged into the console.
 
 ```javascript
 function App() {
@@ -148,7 +148,7 @@ To break it down,
 2. We are returning two functions `increment` and `log`. 
 3. As per the name, `increment` increases our `count` and `log` simply logs the `message`. 
 
-Try to guess the output, Let me give you some space think.................................... 
+Try to guess the output. Let me give you some space to think.................................... 
 
 <div style={{height: 400}} />
 
@@ -162,9 +162,9 @@ The output is
 Count is 0
 ```
 
-oh, did we fail to increment the count ?
+Oh, did we fail to increment the count?
 
-Lets find out by placing console log inside our `increment` function 
+Let's find out by placing console log inside our `increment` function 
 
 ```javascript {7}
 function App() {
@@ -235,7 +235,7 @@ increment();
 log();
 ```
 
-And executing, would produce the result,
+And executing would produce the result,
 
 ```
 1
@@ -245,7 +245,7 @@ Count is 3
 ```
 
 As per the name, _stale closure_ is when we fail to capture updated value from the
-outer scope and instead getting the _staled_ value.
+outer scope, and getting the _staled_ value.
 
 Hmm.. So, what does this _stale closure_ has to do in React?
 
@@ -286,7 +286,7 @@ After hitting `Increment` button three times, we should have a log that says
 Sadly we don't event get anything logged !!!
 
 This is however not exact replica of our example from our JS world, the key 
-difference is in our React world, `message` does get updated but our `useEffect` 
+difference is in our React world, `message` does get updated, but our `useEffect` 
 just failed to capture the updated message. 
 
 To fix this stale closure problem, we need to specify both `count` and `message` 
@@ -319,11 +319,11 @@ function App() {
 }
 ```
 
-Note - This is just a contrieved example, you may choose to ignore either of 
-those dependencies as both are related, if `count` is updated, `message` does get 
+Note - This is just a contrived example, You may choose to ignore either of 
+those dependencies as both are related if `count` is updated, `message` does get 
 updated, so specifying just either of those is fine to get the expected output. 
 
-Things are simple with our example, the logic that we wrote inside the hook is 
+Things are simple with our example, The logic that we wrote inside the hook is 
 not really a side effect, but it will get more and more complicated if we start 
 to write hooks for data fetching logic and other **real side effects**
 
@@ -332,18 +332,18 @@ The one thing that, always we need to make sure is,
 > All of our dependencies for hooks must be specified in the 
 > dependency array and, we should not [lie to React about dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#dont-lie-to-react-about-dependencies)
 
-As I said, things get really complicated with closures in real world applications
+As I said, things get really complicated with closures in real-world applications
 and it is so very easy to miss a dependency in our hooks. 
 
 From my experience, if we failed to specify a dependency and if not caught 
 during the testing, later it would eventually cause a bug and in order to fix it 
-we may need to **re-write entire logic** from scratch !!
+we may need to **re-write the entire logic** from scratch !!
 
-This is a big 🚫 NO 🚫 and **MUST BE AVOIDED** at all cost, but how ?
+This is a big 🚫 NO 🚫 and **MUST BE AVOIDED** at all cost. But how?
 
 ## ESLint Plugin React Hooks
 
-In order to make our life simpler, the react team wrote a ESLint Plugin called 
+In order to make our life simpler, the react team wrote an ESLint Plugin called 
 `eslint-plugin-react-hooks` to capture all possible errors with the usage of hooks.
 
 So when you are all set up with the [eslint plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) 
@@ -368,12 +368,12 @@ missing dependencies: 'count' and 'message'. Either include them or remove the d
 It even fixes the dependency problem with just a single click!
 
 
-Keep in mind that stale closure problem does not only affect `useEffect`, we would
+Keep in mind that a stale closure problem does not only affect `useEffect`, we would
 run into the same problem with other hooks as well like `useMemo` and `useCallback`.
 
 The Eslint plugin works with all the React hooks, can also be configured to run 
-on custom hooks. Apart from just alerting with dependency issues it would also
-check for all the rules of hooks, So, make a good use of it! 
+on custom hooks. Apart from just alerting with dependency issues, it would also
+check for all the rules of hooks, So, make good use of it! 
 
 Again to enforce,
 

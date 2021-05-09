@@ -30,7 +30,7 @@ We are storing the value returned from `App` function in variable `text` and dis
 We know that Javascript is **single threaded** and can execute only one line at a time. The flow of execution 
 is top-to-bottom.
 
-When we execute the code, this is what happening in order :
+When we execute the code, this is what would happen
 
 1. The Javascript engine first sees a function declaration from line *1 to 3* 
 2. Then goes to line number *5* where it sees a function being called. 
@@ -38,12 +38,12 @@ When we execute the code, this is what happening in order :
 `text` variable. 
 4. In the next line the text is displayed in the console.
 
-Now that we understand the flow of Javascript in general, lets explore the useEffect() hook in a react
+Now that we understand the flow of Javascript in general, let's explore the useEffect() hook in a react
 component and explore when it is called and in what order.
 
 ## React useEffect
 
-Lets explore useEffect in React on three Lifecycle phases of react component.
+Let's explore useEffect in React on three Lifecycle phases of react component.
 
 1. Mount
 2. Update
@@ -115,7 +115,7 @@ Hooks are side-effects, and would be used mostly for performing any side-effects
 component, and the common side effect would be data fetching.
 
 When compared to class Lifecycle methods, mentioning any dependency in a hook would make that hook
-similar to componentdidupdate. If you have componentdidupdate (in class component ofcourse!) 
+similar to componentdidupdate. If you have componentdidupdate (in class component of course!) 
 it would still be called on the mount phase! 
 
 This is how the hooks are designed to work. No matter how many dependencies you 
@@ -140,7 +140,7 @@ So the takeaway from this section is
 
 ## useEffect on Unmount
 
-Now lets look at another example below with the Unmount behaviour.
+Now let's look at another example below with the Unmount behaviour.
 
 ```jsx {5,6,7}
 function Child() {
@@ -184,7 +184,7 @@ export default function App() {
 
 Our Parent `App` component renders a `Child` component which has useEffect with a **cleanup**
 function. This cleanup would be executed when the child component unmounts. So, When you render the 
-component and toggle on the Hide/Show Child button you would get the corresponding logs as expected.
+component and toggle on the Hide/Show child button, You would get the corresponding logs as expected.
 
 <Image
   alt={`Clean up function in useEffect`}
@@ -240,11 +240,11 @@ part that would be executed on the unmount phase of that component.
 
 ## useEffect on Update
 
-Here comes the interesting part, when you have have specified a dependency and if the effect **re-runs** 
+Here comes the interesting part, when you have specified a dependency and if the effect **re-runs** 
 because of any change in the specified dependencies, it would **execute the cleanup functions before**
 executing the hook.
 
-Lets see this behaviour with an example. Open up the console section, and play around with the buttons.
+Let's see this behaviour with an example. Open up the console section, and play around with the buttons.
 
 <CodeSandbox codeSandboxId="react-useeffect-hooks-flow-zokln"/>
 
@@ -280,7 +280,7 @@ As seen above, [from React v17](https://github.com/facebook/react/pull/17925), t
 effects are executed **even before executing Child's useEffect**s. 
 
 Below GIF is the full rundown from the sandbox. We can see the cleanup functions are 
-executed before the hook on the update/re-render phase. I have highlighted the cleanup's with 
+executed before the hook on the update/re-render phase. I have highlighted the cleanups with 
 bigger fonts to get it easily.
 
 <Image
@@ -294,7 +294,7 @@ bigger fonts to get it easily.
 
 The key takeaway is, 
 
-> React, when reruning an useEffect, it executes the clean up function before executing the hook.
+> React, when re-running an useEffect, it executes the clean up function before executing the hook.
 
 The full picture of the flow of hooks can be understood from this [flow-chart by donavon](https://github.com/donavon/hook-flow)
 
