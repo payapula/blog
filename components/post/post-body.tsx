@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import { Box } from '@chakra-ui/react';
-import { MDXRemote } from 'next-mdx-remote';
-import { MdxRemote } from 'next-mdx-remote/types';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { MDXComponents } from '../mdx/components';
 
 const components = {
@@ -9,7 +8,7 @@ const components = {
 };
 
 interface PostBodyProps {
-    content: MdxRemote.Source;
+    content: MDXRemoteSerializeResult;
 }
 
 function PostBody({ content }: PostBodyProps): ReactElement {
