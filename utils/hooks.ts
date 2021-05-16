@@ -104,7 +104,7 @@ const useScrollPosition: useScrollPositionFunction = (
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, [effect, element, useWindow, wait, deps]);
 };
 
