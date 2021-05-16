@@ -5,7 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
     images: {
-        domains: ['source.unsplash.com', 'raw.githubusercontent.com']
+        domains: ['raw.githubusercontent.com']
     }
     // https://nextjs.org/docs/advanced-features/source-maps
     // The below code is needed to generate source-map visualizations

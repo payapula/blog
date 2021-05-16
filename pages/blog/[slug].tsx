@@ -1,12 +1,14 @@
 import { getPostBySlug, getAllPosts } from '../../lib/api';
 import Head from 'next/head';
 import PostType from 'types/post';
-import { ReactElement } from 'react';
+import { ReactElement, useRef, useState } from 'react';
 import { Layout } from 'components/layout';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
 import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
+import { useScrollPosition } from 'utils/hooks';
+import { Box } from '@chakra-ui/react';
 
 type PostProps = {
     post: PostType;
@@ -16,9 +18,41 @@ type PostProps = {
 
 const Post = ({ post }: PostProps): ReactElement => {
     const { title, description, ogImage, cover, content, slug } = post;
+
+    const intersectionRef = useRef<HTMLDivElement | null>(null);
+
+    const [sticky, setSticky] = useState(true);
+
+    useScrollPosition(
+        ({ prevPos, currPos }) => {
+            const isShow = currPos.y > prevPos.y;
+            const difference = prevPos.y - currPos.y;
+
+            // currPos.y would be negative once our `PostBody` starts leaving the viewport
+            // Hiding our header only near the `PostBody` div
+            const shouldHide = !isShow && Math.sign(currPos.y) === -1;
+
+            // `difference` indicates how much difference it should be before we show up/hide the header
+            //  => If user is scrolling top a little, we shouldn't show the header immediately
+            //  => If user is scrolling bottom a little, we shouldn't hide the header immediately
+
+            if (shouldHide && difference > 50) {
+                setSticky(false);
+            } else {
+                if (isShow !== sticky && difference < -150) {
+                    setSticky(true);
+                }
+            }
+        },
+        [sticky],
+        intersectionRef,
+        null,
+        300
+    );
+
     return (
-        <Layout type="BLOG">
-            <article>
+        <Layout type="BLOG" headerSticky={sticky}>
+            <Box as="article" mt="120px">
                 <Head>
                     <title>{title} | Bharathi Kannan</title>
                 </Head>
@@ -39,9 +73,9 @@ const Post = ({ post }: PostProps): ReactElement => {
                 />
                 <PostHeader title={title} />
                 <PostCover cover={cover} />
-                <PostBody content={content} />
+                <PostBody content={content} intersectionRef={intersectionRef} />
                 <PostFooter slug={slug} />
-            </article>
+            </Box>
         </Layout>
     );
 };

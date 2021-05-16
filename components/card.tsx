@@ -67,9 +67,9 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
                 {title ? title : `How to use React Context effectively`}
             </Heading>
             <HStack mt={5}>
-                <Text>#Design #Pattern</Text>
+                <Text>#React #Javascript</Text>
             </HStack>
-            <Text mt={10} fontSize={['md', null, 'lg', 'xl']} noOfLines={blogCard ? 5 : 4}>
+            <Text mt={7} fontSize={['md', null, 'lg', 'xl']} noOfLines={blogCard ? 5 : 4}>
                 {excerpt
                     ? excerpt
                     : `Nam vel lacus id ligula convallis interdum. Fusce rhoncus orci a magna tempus

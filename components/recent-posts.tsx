@@ -1,4 +1,4 @@
-import { Flex, Box, useColorModeValue, Icon, HStack, chakra } from '@chakra-ui/react';
+import { Flex, Box, useColorModeValue, Icon, HStack, chakra, Text } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 import { Card } from 'components/card';
 import NextLink from 'next/link';
@@ -61,14 +61,16 @@ function RecentPosts({ recentPosts }: RecentPostsProps) {
                         );
                     })}
                 </Flex>
-                <NextLink href="/blog" passHref>
-                    <ChakraLink display={['block', null, null, null, 'none']} fontSize="xl">
-                        <HStack justifyContent="center">
-                            <Box>View All</Box>
-                            <Icon as={FaLongArrowAltRight} w="10" h="8" ml="1" />
-                        </HStack>
-                    </ChakraLink>
-                </NextLink>
+                <Flex justifyContent="center">
+                    <NextLink href="/blog" passHref>
+                        <ChakraLink display={['block', null, null, null, 'none']} fontSize="xl">
+                            <HStack justifyContent="center">
+                                <Text>View All</Text>
+                                <Icon as={FaLongArrowAltRight} w="10" h="8" ml="1" />
+                            </HStack>
+                        </ChakraLink>
+                    </NextLink>
+                </Flex>
             </Box>
         </Box>
     );
