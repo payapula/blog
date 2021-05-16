@@ -15,10 +15,51 @@ import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import { ReactElement } from 'react';
 import { SiGmail } from 'react-icons/si';
+import siteConfig from 'configs/site-configs';
+
+function GMAIL() {
+    const toast = useToast();
+
+    // iOS doesn't easily let you copy to clipboard, hence navigating those users
+    // directly to Default Mail App
+    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+        return (
+            <Link href={`mailto:${siteConfig.general.authorEmail}`}>
+                <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
+            </Link>
+        );
+    } else {
+        return (
+            <Button
+                width={0}
+                height={'auto'}
+                background="transparent"
+                _hover={{
+                    background: 'transparent'
+                }}
+                _active={{
+                    background: 'transparent'
+                }}
+                onClick={() => {
+                    navigator.clipboard.writeText(siteConfig.general.authorEmail);
+                    toast({
+                        title: 'Email ID Copied!',
+                        position: 'top-left',
+                        description:
+                            'Email Address copied to clipboard. Paste it in your favorite mail client to send out an email!',
+                        status: 'success',
+                        duration: 5000,
+                        isClosable: true
+                    });
+                }}>
+                <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
+            </Button>
+        );
+    }
+}
 
 function Footer(): ReactElement {
     const postsBackgroundColor = useColorModeValue('#EDF7FA', 'gray.800');
-    const toast = useToast();
     return (
         <Box
             height="150px"
@@ -34,34 +75,11 @@ function Footer(): ReactElement {
                 direction="column"
                 mt="10">
                 <HStack justify="space-between" w="200px" mt="5">
-                    <Button
-                        width={0}
-                        height={'auto'}
-                        background="transparent"
-                        _hover={{
-                            background: 'transparent'
-                        }}
-                        _active={{
-                            background: 'transparent'
-                        }}
-                        onClick={() => {
-                            navigator.clipboard.writeText('bharathikannanv@gmail.com');
-                            toast({
-                                title: 'Email ID Copied!',
-                                position: 'top-left',
-                                description:
-                                    'Email Address copied to clipboard. Paste it in your favorite mail client to send out an email!',
-                                status: 'success',
-                                duration: 5000,
-                                isClosable: true
-                            });
-                        }}>
-                        <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
-                    </Button>
-                    <Link href="https://twitter.com/bharathispeaks" isExternal>
+                    <GMAIL />
+                    <Link href={siteConfig.general.twitter} isExternal>
                         <SocialIcons icon={FaTwitter} hover={{ color: '#1DA1F2' }} />
                     </Link>
-                    <Link href="https://linkedin.com/in/bharathi-kannan-80968170" isExternal>
+                    <Link href={siteConfig.general.linkedIn} isExternal>
                         <SocialIcons icon={FaLinkedin} hover={{ color: '#0e76a8' }} />
                     </Link>
                 </HStack>
@@ -82,4 +100,4 @@ const SocialIcons = ({ icon, hover }: { icon: IconType; hover: CSSObject }) => (
     />
 );
 
-export { Footer };
+export default Footer;

@@ -22,7 +22,7 @@ type Props = {
 
 export default function Index({ allPosts }: Props): ReactElement {
     return (
-        <Layout>
+        <Layout headerSticky>
             <Head>
                 <title>Blogs | Bharathi Kannan</title>
             </Head>

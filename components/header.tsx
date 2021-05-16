@@ -84,21 +84,37 @@ function MobileMenuItem({ children }: MobileMenuItemProps) {
     );
 }
 
-function Header({ home }: { home: boolean }): ReactElement {
+function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }): ReactElement {
     const isLessThan768 = useMediaQuery(650);
+
+    let headerStyles;
+
+    if (home) {
+        headerStyles = {
+            position: 'inherit',
+            top: '0'
+        };
+    } else {
+        headerStyles = {
+            position: 'fixed',
+            width: '100%',
+            top: headerSticky ? '0' : '-85px',
+            transition: 'all 300ms ease-in'
+        };
+    }
 
     return (
         <Box
             as="header"
-            position={home ? 'inherit' : 'sticky'}
+            width="100%"
             background={useColorModeValue('white', 'gray.800')}
             borderBottom={home ? 'none' : '1px'}
             zIndex={10000}
-            top="0">
+            sx={headerStyles}>
             <Flex w="100%" h="80px" alignItems="center">
                 <NextLink href="/" passHref>
                     <Flex as="a" align="center" ml="5" w="220px" justify="space-between">
-                        {!home && <AuthorAvatar size={60} />}{' '}
+                        {!home && <AuthorAvatar size={55} />}{' '}
                         <Text fontSize={home ? '2xl' : 'xl'}>Bharathi Kannan</Text>
                     </Flex>
                 </NextLink>
