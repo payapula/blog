@@ -55,9 +55,6 @@ const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
     Test,
-    // CodePen,
-    // CodeSandbox,
-    // Tweet,
     h1: (props) => <Heading as="h2" apply="mdx.h1" {...props} />,
     h2: (props) => (
         <Heading
