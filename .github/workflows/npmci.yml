@@ -1,0 +1,54 @@
+# https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+# https://dev.to/dyarleniber/setting-up-a-ci-cd-workflow-on-github-actions-for-a-react-app-with-github-pages-and-codecov-4hnp
+# https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
+
+name: Node CI/CD
+
+# Runs on Push in the mentioned branches
+# and Pull Requests on branches main and develop
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestbranchestags
+on:
+    push:
+        branches:
+            - main
+            - develop
+            - feature/**
+            - bugfix/**
+    pull_request:
+        branches: [main, develop]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            # Caching the node_modules folder https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: |
+                      **/node_modules
+                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run Lint
+              run: npm run lint:ci
+
+            - name: Build
+              run: npm run build
+              # Created Till Build. Need to do test and deploy.
+              # Test should happen before BUILD

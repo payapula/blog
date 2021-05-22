@@ -1,0 +1,190 @@
+---
+title: 'Preview Mode for Static Generation'
+excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
+date: '2020-03-16T05:35:07.322Z'
+description: 'Preview Descitops'
+cover: 
+    src: '/assets/blog/hello-world/hello-world-cover.jpg'  
+    alt: 'computer keyboard'
+    author: 
+      name: 'Christian Wiediger'
+      url: https://unsplash.com/@christianw
+ogImage:
+  url: '/assets/blog/preview/cover.jpg'
+  alt: 'Preview Alt'
+---
+
+Temporary Drafts
+
+## Hooks Closure
+
+## Introduction to Closures
+
+https://codesandbox.io/s/duplicate-vb76n
+
+```javascript
+function App(count) {
+  console.log('Counter initialized with ' + count);
+  return function print() {
+    console.log(++count);
+  };
+}
+
+let print = App(1);
+print();
+print();
+print();
+
+print = App(5);
+print();
+print();
+```
+
+The above function is a simple example of **closure** in JavaScript. The console output is as below.
+
+```
+Counter initialized with 1 
+2
+3
+4
+Counter initialized with 5 
+6
+7
+```
+
+If you can get it then great! I will go ahead and explain what is happening. The `App` function returns another
+function `print`. Since our App returns another function, `App` is a higher order function in JS. 
+
+> Any function that returns another function or that takes a function as argument is called as **Higher order function** in JS. 
+
+This is possible because functions are first class citizens in JS.
+
+```javascript
+function App(count) {
+  console.log('Counter initialized with ' + count);
+  return function print() {
+    console.log(++count);
+  };
+}
+```
+
+The retuned function `print` **closes over** the variable `count` which is from its outer scope. This closing is referred
+to as **closure**. To simply put,
+
+> A closure is the combination of a function bundled together (enclosed) 
+> with references to its surrounding state (the lexical environment). In other words, 
+> a closure gives you access to an outer function’s scope from an inner function.
+> ~ [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)
+
+
+
+When we call the `App` function, we get the `print` function in return.
+
+```javascript
+let print = App(1);
+```
+
+The `App` function gets count as 1 and returns `print` which simply increases the count and logs it. So each time when we call
+`print`, the count is incremented and printed.
+
+*So, what is the purpose of the returned functions in the real applications?*
+
+## Cleanup Functions
+
+Consider the below function
+
+```javascript
+function App(name) {
+  console.log(`Welcome, ${name}!`);
+
+  return () => {
+    console.clear();
+  };
+}
+
+App("Jack"); //logs: Welcome, Jack! 
+```
+
+This prints _Welcome, Jack!_. Instead of simply calling it, lets store the function returned from `App`
+in a variable `cleanup`
+
+```javascript
+let cleanUp = App("Jack");
+```
+
+Now, after printing, if we call `cleanUp` the console would be cleared!
+
+```javascript
+let cleanUp = App("Jack"); //logs: Welcome, Jack! 
+cleanUp(); //Clears console!
+```
+
+You can't even see the logged data as it is getting cleared immediately. In a real world we would do something like this
+
+
+```javascript
+const unsubscribe =  doHeavyOperation();
+
+// Do some important logic
+
+unsubscribe();
+```
+
+
+> To know more about closure, I recommened you to read [the blog post about closure](https://whatthefork.is/closure) by Dan Abramov. 
+> To deep dive into how Javascript works, I recommened you to watch [this series on Javascript](https://youtu.be/ZvbzSrg0afE) on Youtube by Akshay Saini
+
+*Alright, what these all has to do with React ?*
+
+
+Lets modify our example slightly, 
+
+```javascript
+function App() {
+  let count = 0;
+  return function increment() {
+    console.log(++count);
+  };
+}
+
+const print = App();
+print(); // 1
+print(); // 2
+print(); // 3
+```
+
+Now the `count` can no longer be touched by outer scope or any other function thus making it as **private** to the App function. 
+
+We can only modify the count by calling the inner function `increment`. 
+
+
+
+## Enough of JS, Lets React!
+
+
+In order to conditionally execute any logic in the useEffect hook you would place the condition
+inside it.
+
+🚫 Wrong:
+
+```jsx {1,5}
+if(count > 5){ // React would throw a error
+  React.useEffect(() => {
+    console.log('Count is greater than 5!')
+  }, [count]);
+}
+```
+
+✅ Right:
+
+```jsx {2,4}
+React.useEffect(() => {
+  if(count > 5){ 
+    console.log('Count is greater than 5!')
+  }
+}, [count]);
+```
+
+Thanks
+
+- [Namaste JavaScript](https://youtu.be/pN6jk0uUrD8)

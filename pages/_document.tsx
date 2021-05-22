@@ -1,15 +1,29 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/react';
+import theme from 'styles/theme';
+import { ReactElement } from 'react';
 
 export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang="en">
-        <Head />
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
+    render(): ReactElement {
+        return (
+            <Html lang="en">
+                <Head>
+                    <link
+                        rel="preload"
+                        href="/fonts/roboto-v20-latin-regular.woff2"
+                        as="font"
+                        type="font/woff2"
+                        // https://wp-rocket.me/blog/font-preloading-best-practices/
+                        // If crossOrigin is not given then font would be loaded twice
+                        crossOrigin="anonymous"
+                    />
+                </Head>
+                <body>
+                    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        );
+    }
 }

@@ -1,12 +1,13 @@
-import { parseISO, format } from 'date-fns'
+import { parseISO, format } from 'date-fns';
+import { ReactElement } from 'react';
 
 type Props = {
-  dateString: string
-}
+    dateString: string;
+};
 
-const DateFormatter = ({ dateString }: Props) => {
-  const date = parseISO(dateString)
-  return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
-}
+const DateFormatter = ({ dateString }: Props): ReactElement => {
+    const date = parseISO(dateString);
+    return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>;
+};
 
-export default DateFormatter
+export default DateFormatter;

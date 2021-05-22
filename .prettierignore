@@ -1,0 +1,9 @@
+node_modules
+
+#boorstrapped components - should be removed
+pages/index_bootstrap.tsx
+
+#to be worked on files
+pages/posts
+
+_posts

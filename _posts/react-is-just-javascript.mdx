@@ -1,0 +1,268 @@
+---
+title: 'React is Just Javascript'
+excerpt: 'No! React components are not returning HTML & React is not magic! React is just plain Javascript Library 
+for building powerful and interactive User Interfaces. In this post we will also see where React is being used.'
+date: '2020-04-04'
+description: 'React is just a Javascript Library for building powerful and interactive User Interfaces. 
+The React code is compiled down to plain javascript which the browsers can understand. We will also see
+why React is so powerful and where it is being used with examples'
+cover: 
+    src: '/assets/blog/react-is-just-javascript/hello-world-cover.jpg'  
+    alt: 'computer keyboard'
+    author: 
+      name: 'Christian Wiediger'
+      url: https://unsplash.com/@christianw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/react-is-just-javascript/hello-world-cover.jpg'
+    alt: 'Computer Keyboard'
+---
+
+Let's start this post with a simple function in Javascript.
+
+```javascript
+function App(){
+  console.log('Hello World'); // logs 'Hello World'
+}
+
+App();
+```
+
+In the above code snippet, the function call on *line no 5* calls the `App` function
+which outputs 'Hello World' in the console. 
+
+## Let's React!
+
+React is simply Javascript. A component defined in React is just a Javascript function.
+Consider the React component below.
+
+```jsx
+function App() {
+  return (
+    <h1>
+      Hello World
+    </h1>
+  );
+}
+```
+
+This component *renders* `<h1>` with a text 'Hello World' in the Webpage. 
+
+To reiterate,
+
+> A component defined in React is just a Javascript function
+
+Just compare our plain JS code with this react code:
+
+```jsx noline
+// JS
+function App(){
+  return 'Hello World';
+}
+
+// React
+function App() {
+  return (
+    <h1>
+      Hello World
+    </h1>
+  );
+}
+```
+
+Now you would have these questions:
+
+1. This is just a function declaration. Where it is being called?? 
+2. If this is a Javascript function then, how HTML is being returned from the function? Is this even valid?
+3. Also, Why is it called *rendering*?
+
+Let's answer all these questions.
+
+## 1. Where its being called?
+
+The function `App()` would actually be rendered by `ReactDOM` from react-dom package. 
+
+```jsx {5}
+import ReactDOM from "react-dom";
+import App from "./App";
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+The Function App is called here with angle brackets like `<App />` the returned HTML is 
+rendered by _ReactDOM_ into the rootElement.
+
+> Read More about ReactDOM.render() on the [react docs](https://reactjs.org/docs/react-dom.html#render)
+
+This rootElement can be any valid HTML DOM. Usually, we prefer to go with an empty `<div>` with the id root.
+
+```html noline
+<div id="root"></div>
+```
+
+You should be careful, this should be an empty element because when the rendering occurs, 
+this div's [children](https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/children) would 
+be replaced with the tag h1 with text 'Hello World' inserted automatically by React (ReactDOM)
+
+```html {2}
+<div id="root">
+  <h1 class="App">Hello World</h1>
+</div>
+```
+
+## 2. How HTML is being returned from the function? Is this even valid?
+
+To start off, the *HTML like* thing that is returned from our `App` function is called JSX. 
+
+```jsx {3,4,5}
+function App() {
+  return (
+    <h1>
+      Hello World
+    </h1>
+  );
+}
+```
+
+Technically this JSX is just a *transpiled Javascript function call* (yes it sounds scary). This *HTML like* 
+thing is converted to Javascript by a transpiler called **babel** and, Finally the `App` would be sent to JS 
+engine like below code that is just **pure javascript**. 
+
+```jsx {3}
+function App() {
+  return (
+    React.createElement("h1", null, "Hello World")
+  );
+}
+```
+
+And this is the reason to import _React_ in the module even though we don't explicitly use it.
+
+```jsx {1}
+import React from 'react';
+
+function App() {
+  return (
+    <h1>Hello World</h1>
+  );
+}
+```
+
+[React.createElement](https://reactjs.org/docs/react-api.html#createelement) is top level API provided by react
+package to create the corresponding element in Virtual DOM. 
+
+_createElement_ returns React elements, which are plain JS objects that describe the intended structure of the UI.
+
+```jsx
+// This JSX syntax:
+return  <h1>Hello World</h1>
+
+// is converted to this call:
+return  React.createElement("h1", null, "Hello World")
+
+// and that becomes this element object:
+{type: 'h1', props: null, children: ["Hello World"]}
+```
+
+> "Babel compiles JSX down to React.createElement() calls." - [React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
+
+You can play around with Babel and its transpiled code on the [live babel repl](https://babeljs.io/repl). 
+To get to know about JSX, head-over to [JSX on react docs](https://reactjs.org/docs/introducing-jsx.html).
+
+Also, it is now worth pointing out that with React worked with Babel to introduce **new JSX transform** 
+which enables users to write [JSX without even importing React](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
+
+Starting with **React 17**, [babel now automatically imports](https://babeljs.io/blog/2020/03/16/7.9.0#a-new-jsx-transform-11154httpsgithubcombabelbabelpull11154) 
+_'react'_ when needed. After the new JSX transform, our App component would compile from this
+
+```jsx
+// No import 'React' from 'react' needed 
+
+function App() {
+  return (
+    <h1>Hello World</h1>
+  );
+}
+```
+
+to this
+
+```jsx {1,5,6,7}
+import { jsx as _jsx } from "react/jsx-runtime";
+
+function App() {
+  return (
+    _jsx("h1", {
+      children: "Hello World"
+    });
+  );
+}
+```
+
+React core team is making these [set of changes](https://github.com/reactjs/rfcs/blob/createlement-rfc/text/0000-create-element-changes.md) gradually 
+to remove the need of forwardRef in the future.
+
+And to the most important question,
+
+## 3. Why is it called Rendering ?
+
+In short, Rendering in Web refers to the appearance of something. On a broader picture, the terminology
+rendering on the web can mean a lot of things like painting, server-rendering, etc. For our understanding, Let's keep it
+short, *Render* refers to appearance of a element, or a set of elements (component) on a webpage.
+
+From the React docs it is clear that React is 
+
+> A JavaScript library for building user interfaces
+
+React helps us build user interfaces, [not only on the Web](https://reactnative.dev/). 
+It helps us *render* something on screens that can be presented to the user.
+
+A revist to the example of ReactDOM API:
+
+```jsx noline
+ReactDOM.render(<App />, rootElement);
+```
+
+The ReactDOM **renders** our `<App />` into the `<div>` that we specified.
+
+High level overview of the the rendering process: 
+
+React would create a Virtual DOM in memory which is very similar to the real DOM and renders our `<h1>` tag in the Virtual DOM,
+this virual DOM would be synced with real DOM and during this process `<h1>` tag is added to real DOM. This process is called 
+[Reconciliation](https://reactjs.org/docs/reconciliation.html)
+
+> The costliest operation on Web is DOM painting and manipulation.
+
+If you are wondering this is *too much boilerplate*, why can't we just simply write HTML files and include Javascript and CSS to make it 
+more presentable? 
+
+Yes! You are right, We can easily build a website with plain HTML, JS, and CSS and still make it cool. No one 
+can deny it.
+
+Where **our** React shines is, it will drastically simplify **how we render and rerender our elements** by
+providing set of **Declarative API**s 
+
+> **Declarative** : You just tell what you need and don't need on DOM and React would take care of that for you!
+
+With the APIs provided by react, we can create **Web Applications** which are highly 
+⚡️ **interactive**, 🔥 **performant** and 🚀 **responsive**
+
+If you want some examples, all these following websites are built with 🚀 React
+
+- [Facebook](Facebook)
+- [Airbnb](https://www.airbnb.com/)
+- [Atlassian](https://www.atlassian.com/)
+- [Netflix](https://www.netflix.com/)
+
+Also, keep in mind that,
+
+> For the end-users, it is all just HTML, CSS, and JavaScript!
+
+----
+
+Thanks go to:
+
+- [A (Mostly) Complete Guide to React Rendering Behavior](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
+- [10 Famous Websites Built with React JS](https://anyforsoft.com/blog/10-famous-websites-built-react-js/)
+- [React JS](https://reactjs.org/)
+
