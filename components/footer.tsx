@@ -8,7 +8,8 @@ import {
     useColorModeValue,
     Link,
     Button,
-    useToast
+    useToast,
+    VisuallyHidden
 } from '@chakra-ui/react';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
@@ -17,6 +18,17 @@ import { ReactElement } from 'react';
 import { SiGmail } from 'react-icons/si';
 import siteConfig from 'configs/site-configs';
 
+const IconLink = ({ href, children, isExternal = false }) => (
+    <Link
+        href={href}
+        isExternal={isExternal}
+        sx={{
+            borderRadius: '4px'
+        }}>
+        {children}
+    </Link>
+);
+
 function GMAIL() {
     const toast = useToast();
 
@@ -24,9 +36,10 @@ function GMAIL() {
     // directly to Default Mail App
     if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
         return (
-            <Link href={`mailto:${siteConfig.general.authorEmail}`}>
+            <IconLink href={`mailto:${siteConfig.general.authorEmail}`}>
+                <VisuallyHidden>Send Email to Bharathi Kannan</VisuallyHidden>
                 <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
-            </Link>
+            </IconLink>
         );
     } else {
         return (
@@ -52,6 +65,7 @@ function GMAIL() {
                         isClosable: true
                     });
                 }}>
+                <VisuallyHidden>Copy Bharathi Kannan's Email address</VisuallyHidden>
                 <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
             </Button>
         );
@@ -76,12 +90,14 @@ function Footer(): ReactElement {
                 mt="10">
                 <HStack justify="space-between" w="200px" mt="5">
                     <GMAIL />
-                    <Link href={siteConfig.general.twitter} isExternal>
+                    <IconLink href={siteConfig.general.twitter} isExternal>
+                        <VisuallyHidden>Open Twitter Profile of Bharathi Kannan</VisuallyHidden>
                         <SocialIcons icon={FaTwitter} hover={{ color: '#1DA1F2' }} />
-                    </Link>
-                    <Link href={siteConfig.general.linkedIn} isExternal>
+                    </IconLink>
+                    <IconLink href={siteConfig.general.linkedIn} isExternal>
+                        <VisuallyHidden>Open LinkedIn Profile of Bharathi Kannan</VisuallyHidden>
                         <SocialIcons icon={FaLinkedin} hover={{ color: '#0e76a8' }} />
-                    </Link>
+                    </IconLink>
                 </HStack>
                 <Text>Opensourced on Github ❤️</Text>
             </Flex>
