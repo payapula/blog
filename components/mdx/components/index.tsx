@@ -8,7 +8,6 @@ import {
     useColorModeValue
 } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
-import { CodePen, CodeSandbox, Tweet } from 'mdx-embed';
 import { ChakraLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
 
@@ -56,9 +55,9 @@ const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
     Test,
-    CodePen,
-    CodeSandbox,
-    Tweet,
+    // CodePen,
+    // CodeSandbox,
+    // Tweet,
     h1: (props) => <Heading as="h2" apply="mdx.h1" {...props} />,
     h2: (props) => (
         <Heading
