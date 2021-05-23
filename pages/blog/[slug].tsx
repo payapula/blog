@@ -51,7 +51,7 @@ const Post = ({ post, componentNames }: PostProps): ReactElement => {
 
     return (
         <Layout type="BLOG" headerSticky={sticky}>
-            <Box as="article" mt="120px">
+            <Box as="article">
                 <Head>
                     <title>{title} | Bharathi Kannan</title>
                 </Head>
