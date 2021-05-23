@@ -46,9 +46,9 @@ function HeroContent() {
                 <Text
                     fontSize={['sm', null, 'md', 'lg']}
                     align={['center', null, null, null, 'start']}>
-                    Tech enthusisast, who is interested in developing scalable and accessible web
-                    applications. Proficient in developing applications from given business
-                    requirements and efficient in maintaining existing software.
+                    Tech enthusiast who is interested in developing scalable and accessible web.
+                    Proficient in developing applications from given business requirements and
+                    efficient in maintaining existing software.
                 </Text>
                 {/*//@ts-ignore*/}
                 <Link
