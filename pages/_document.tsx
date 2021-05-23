@@ -17,6 +17,19 @@ export default class MyDocument extends Document {
                         // If crossOrigin is not given then font would be loaded twice
                         crossOrigin="anonymous"
                     />
+                    <link
+                        rel="preload"
+                        href="/fonts/roboto-v27-latin-700.woff2"
+                        as="font"
+                        type="font/woff2"
+                        // https://wp-rocket.me/blog/font-preloading-best-practices/
+                        // If crossOrigin is not given then font would be loaded twice
+                        crossOrigin="anonymous"
+                    />
+                    {/* <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+                        rel="stylesheet"></link> */}
                 </Head>
                 <body>
                     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
