@@ -76,6 +76,7 @@ function Footer(): ReactElement {
     const postsBackgroundColor = useColorModeValue('#EDF7FA', 'gray.800');
     return (
         <Box
+            as="footer"
             height="150px"
             width="100vw"
             background={postsBackgroundColor}
