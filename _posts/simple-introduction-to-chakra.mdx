@@ -16,12 +16,12 @@ ogImage:
     alt: 'Lego cubes'
 ---
 
-A lot of things needs to be taken into consideration while desiging any software application 
-in general. In order to build a website, with the component based development approach, 
+A lot of things need to be taken into consideration while designing any software application in general. 
+To build a website with the component-based development approach, 
 we would tend to approach a design as individual components.
 
 For example, consider a super simple website like a blog. It would typically have a header, post cover,
- post content, a footer, links to navigate between different posts, a search component to search the available posts and so on.
+ post content, a footer, links to navigate between different posts, a search component to search the available posts, and so on.
 
 When we are presented with a design of a website, we would start building up the small 
 individual parts of it, which we refer to as components and then fuse those components 
@@ -41,7 +41,7 @@ When building these components we should be careful that we are following same d
 architecture throughout our application. All the buttons in our application must *look and feel the same*.
 
 Next thing to be taken for consideration while developing web applications is *Web Accessibility*. 
-If we are building a dropdown/select component, it must be navigatable via keyboad, should have
+If we are building a dropdown/select component, it must be navigatable via keyboard, should have
 proper color contrast, accessible by screen readers etc. 
 
 There could be many other cases that we may not even aware of while building some complex components like 
@@ -60,9 +60,9 @@ One of such component Library is [Chakra UI](https://chakra-ui.com/).
 Think of these building blocks like set of lego blocks. We can start picking the right ones we need
 and compose them together to make our dream project!
 
-## A Re-Introduciton to CSS in React
+## A Re-Introduction to CSS in React
 
-Before we take a dive into Chakra UI, let's revisit on the ways that we can style our React components 
+Before we see about Chakra UI, let's revisit on the ways that we can style our React components 
 with css.
 
 ### External styles
@@ -76,7 +76,7 @@ components
   - mycomponent.css
 ```
 
-The challenge with this apporach is that the _css_ we are writing is *not scoped* to the component, rather it would
+The challenge with this approach is that the _css_ we are writing is *not scoped* to the component, rather it would
 be applied globally. When we are selecting the elements with _classname_ or _ID_s and writing specific styles,
 we should be careful to *not repeat the same selectors*. If we are not careful enough then wrong 
 styles would be applied to wrong element on a different page. This is because our entire css 
@@ -89,7 +89,7 @@ in our application.
 
 ### CSS In JS
 
-As the name suggests, in this approach we would be writing CSS code in Javascript! 
+As the name suggests, in this approach, we would be writing CSS code in Javascript! 
 
 This has a lot of benefits, like
 
@@ -194,7 +194,7 @@ Same element styles in Chakra would be
   objectFit='contain'
 />
 
-_Note: Please ignore the sematics here, as this is just to demonstrate comparision of styles_
+_Note: Please ignore the semantics here, as this is just to demonstrate comparison of styles_
 
 If the images aren't clear, take a look at the Sandboxes for [Plain React](https://codesandbox.io/s/sad-tesla-5zwuy) and 
 with [Chakra UI](https://codesandbox.io/s/immutable-butterfly-sfjpi) components mentioned above.
@@ -202,7 +202,7 @@ with [Chakra UI](https://codesandbox.io/s/immutable-butterfly-sfjpi) components 
 There are a lot of components we have in chakra and even specific ones like `Grid` and `Flex`
 to handle layouts exclusively like these. 
 
-The awesome part with using Chakra components, the intellisence for the styles are 
+The awesome part with using Chakra components, the intellisense for the styles are 
 so awesome that you need not worry about the casing of styles, also you will get an 
 idea of what props are allowed for a component.
 
@@ -212,7 +212,7 @@ to your requirements.
 
 In the above form example with chakra, we have seen a component `<chakra.form/>` which
 simply renders HTML `<form>` but the beauty is it can be styled with Chakra's style props.
-We can convvert any custom component to receive chakra props with the `chakra` function. 
+We can convert any custom component to receive chakra props with the `chakra` function. 
 Similar in function to `styled` in emotion.
 
 ```jsx
@@ -250,7 +250,7 @@ team for thinking about it and providing it as a component 👏🏼.
 ## Dark Mode 🌗
 
 All the chakra UI components are dark mode compatible, the themes are overridable
-easily. With the excellent community support and documentation you can build out
+easily. With the excellent community support and documentation, you can build out
 awesome components with just minimal amount of time.
 
 You would have guessed by now, still to mention, 
