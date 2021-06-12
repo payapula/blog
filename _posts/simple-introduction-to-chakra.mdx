@@ -1,0 +1,268 @@
+---
+title: 'Simple Introduction to Chakra UI'
+excerpt: 'CSS is awesome, but it is the most time taking part for the JS devs. Chakra UI simplifies CSS for React components by converting CSS to Props which 
+results in increased development time. In this post we will explore css-in-js in general and a simple introduction to chakra components'
+date: '2020-05-30'
+description: 'CSS is awesome, but it is the most time taking part for most of the JS devs. Chakra UI simplifies CSS for React components by converting CSS to Props which 
+results in increased development time. In this post we will explore css-in-js in general and a simple introduction to chakra components'
+cover: 
+    src: '/assets/blog/simple-introduction-to-chakra/simple-introduction-to-chakra.jpg'  
+    alt: 'Lego cubes'
+    author: 
+      name: 'Xavi Cabrera'
+      url: https://unsplash.com/@xavi_cabrera?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/simple-introduction-to-chakra/simple-introduction-to-chakra.jpg' 
+    alt: 'Lego cubes'
+---
+
+A lot of things need to be taken into consideration while designing any software application in general. 
+To build a website with the component-based development approach, 
+we would tend to approach a design as individual components.
+
+For example, consider a super simple website like a blog. It would typically have a header, post cover,
+ post content, a footer, links to navigate between different posts, a search component to search the available posts, and so on.
+
+When we are presented with a design of a website, we would start building up the small 
+individual parts of it, which we refer to as components and then fuse those components 
+together to complete the design for a page.
+
+Suppose, if we want to build a button then it is super simple like
+
+```html {noline}
+  <button onclick="alert('hello world');">Hello</button>
+```
+
+This is a simple HTML tag, an element, and also a component. There can be a lot of components 
+we will want to build for a real client application. Some of the examples are modals, 
+drawers, links, tabs, inputs etc.
+
+When building these components we should be careful that we are following same design
+architecture throughout our application. All the buttons in our application must *look and feel the same*.
+
+Next thing to be taken for consideration while developing web applications is *Web Accessibility*. 
+If we are building a dropdown/select component, it must be navigatable via keyboard, should have
+proper color contrast, accessible by screen readers etc. 
+
+There could be many other cases that we may not even aware of while building some complex components like 
+tabs, overlays, modals.
+
+To help us solve these problems and to easily get started with development, there are a lot 
+of **UI Component Libraries** out there. They have a lot of battle tested components, which would help the developers 
+like us to build our application quickly without sacrificing on accessibility, design architecture, meaningful
+navigation and so on.
+
+One of such component Library is [Chakra UI](https://chakra-ui.com/).
+
+> Chakra UI is a simple, modular and accessible component library that gives you 
+> the building blocks you need to build your React applications.
+
+Think of these building blocks like set of lego blocks. We can start picking the right ones we need
+and compose them together to make our dream project!
+
+## A Re-Introduction to CSS in React
+
+Before we see about Chakra UI, let's revisit on the ways that we can style our React components 
+with css.
+
+### External styles
+
+In this approach, we would write our component code in a JSX or TSX files and we would create another file 
+with css and reference them in our component file.
+
+```bash {noline}
+components
+  - mycomponent.jsx
+  - mycomponent.css
+```
+
+The challenge with this approach is that the _css_ we are writing is *not scoped* to the component, rather it would
+be applied globally. When we are selecting the elements with _classname_ or _IDs_ and writing specific styles,
+we should be careful to *not repeat the same selectors*. If we are not careful enough then wrong 
+styles would be applied to a element with same selector name on a different page. This is because our entire css 
+files are bundled together and server over the wire.
+
+Another big headache is when we are removing some components from our application,
+it is so very easy to *forget about the styles* that we wrote for that component. 
+Since the styles are not scoped to the component, we have no way to find out the dead css 
+in our application.
+
+### CSS In JS
+
+As the name suggests, in this approach, we would be writing CSS code in Javascript! 
+
+This has a lot of benefits, like
+
+1. Easy Maintenance
+2. Fast Performance 
+3. Dynamic Styling
+
+When we scope the css to a particular component, we no longer have to worry about
+our _styles messing up other components_. When we remove a component from the application,
+the _css goes away_ with that! The major benefit of it is _sending just the CSS that we need for the page_ over the 
+wire. 
+
+There are a lot of libraries to help us with the css-in-js approach. The 
+famous ones are [Styled Components](https://styled-components.com/) and [Emotion](https://emotion.sh/docs/introduction).
+
+A [simple example of CSS-In-JS with emotion](https://emotion.sh/docs/css-prop#object-styles)
+
+<Image
+  alt="CSS-In-Js with Emotion"
+  src="/assets/blog/simple-introduction-to-chakra/emotion-css-in-js-example.png"
+  width={1500}
+  height={600}
+  objectFit='contain'
+/>
+
+You can see the difference in the casing of the css properties, `backgroundColor` instead of 
+`background-color` and pseudo selectors as well. We are passing styles as a object to
+a custom prop `css` which is inferred by emotion and applies those styles _inline_ to that
+`div`.
+
+> If you want to have a deep dive on this concept, please read thorough the
+> [documentation from emotion](https://emotion.sh/docs/introduction)
+
+We can build our react application with emotion or styled components, but the Chakra UI library 
+takes this approach a one level higher and simpler.
+
+## Getting Started with Chakra UI
+
+The above example with emotion's css prop can be achieved in Chakra UI with the 
+below piece of code.
+
+```jsx
+import { Box } from "@chakra-ui/react";
+
+return (
+    <Box
+      backgroundColor="hotpink"
+      _hover={{
+        color: "lightgreen"
+      }}
+    >
+      This has a hotpink background.
+    </Box>
+);
+```
+
+Here we are passing in the styles directly to the component `<Box/>` as props. The Box
+component renders a `div` by default. 
+
+Chakra UI uses emotion under the hood, so you can also style your components in
+pure emotion way, but you won't be needing this for the most part.
+
+This is chakra component styled with emotion.
+
+```jsx
+return (
+    <Box
+      css={{
+        backgroundColor: "hotpink",
+        "&:hover": {
+          color: "lightgreen"
+        }
+      }}
+    >
+      This has a hotpink background.
+    </Box>
+);
+```
+
+Both renders the same result.
+
+Let's see another example, where we want to get username and password in a form
+with a submit button.
+
+In React with plain elements,
+
+<Image
+  alt="CSS-In-Js with Emotion"
+  src="/assets/blog/simple-introduction-to-chakra/react-example.png"
+  width={1400}
+  height={700}
+  objectFit='contain'
+/>
+
+Same element styles in Chakra would be
+
+<Image
+  alt="CSS-In-Js with Emotion"
+  src="/assets/blog/simple-introduction-to-chakra/chakra-example.png"
+  width={1400}
+  height={700}
+  objectFit='contain'
+/>
+
+_Note: Please ignore the semantics here, as this is just to demonstrate comparison of styles_
+
+If the images aren't clear, take a look at the Sandboxes for [Plain React](https://codesandbox.io/s/sad-tesla-5zwuy) and 
+with [Chakra UI](https://codesandbox.io/s/immutable-butterfly-sfjpi) components mentioned above.
+
+There are a lot of components we have in chakra and even specific ones like `Grid` and `Flex`
+to handle layouts exclusively like these. 
+
+The awesome part of using Chakra components is the _intellisense for the styles_ are 
+always available for you so that you need not worry about the casing of styles. 
+
+The point here is chakra is well documented, and you can easily peek into any
+of the components from the [chakra ui repo](https://github.com/chakra-ui/chakra-ui) 
+to learn more about them, and to customize according to your requirements.
+
+In the above form example with chakra, we have seen a component `<chakra.form/>` which
+simply renders HTML `<form>` but the beauty is, it can accept chakra's style props.
+We can convert any custom component to receive chakra props with the `chakra` function. 
+Similar in function to `styled` in emotion.
+
+```jsx
+import styled from '@emotion/styled'
+
+const Button = styled.button`
+  color: turquoise;
+`
+render(<Button>This my button component.</Button>)
+```
+
+## Accessibility ❤️
+
+Chakra components are built with accessibility in mind 🚀. For an example, if you are
+using modal from chakra, these are the keyboard and focus management you get out 
+of the box which complies with accessible standards:
+
+- When the modal opens, focus is trapped within it.
+- When the modal opens, focus is automatically set to the first enabled element.
+- When the modal closes, focus returns to the element that was focused before
+  the modal activated.
+- Clicking on the overlay closes the Modal.
+- Pressing `Esc` closes the Modal.
+- Scrolling is blocked on the elements behind the modal.
+- The modal is rendered in a portal attached to the end of `document.body` to
+  break it out of the source order and make it easy to add `aria-hidden` to its
+  siblings.
+
+There is special component `<VisuallyHidden/>` which is not visible to the normal
+user but would be accessible by screen readers. This is useful for providing 
+additional details to a icon button or image which cannot be perceived by visually 
+challenged users. Though this can be achieved with 10 lines of css, kudos to chakra
+team for thinking about it and providing it as a component 💯 
+
+## Dark Mode 🌗
+
+All the chakra UI components are dark mode compatible, the colors & default styles
+are easily overridable. 
+
+With the excellent community support and documentation, you can build out
+awesome components with just minimal amount of time.
+
+You would have guessed by now, still to mention, 
+
+> This entire blog is built with Chakra UI 
+> components and I feel very happy about it 🥳
+
+----
+
+Further Information
+
+- [CSS-in-JS — Max Stoiber](https://www.youtube.com/watch?v=ufPCITfUQnQ)
+- [Chakra UI](https://chakra-ui.com/)
+- [Chakra UI on GitHub](https://github.com/chakra-ui/chakra-ui)
