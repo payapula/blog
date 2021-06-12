@@ -34,7 +34,7 @@ const mdx = {
     },
     p: {
         mt: '1.25rem',
-        lineHeight: 2,
+        lineHeight: 1.7,
         'blockquote &': {
             mt: 0,
             lineHeight: 1.7
@@ -54,7 +54,7 @@ const mdx = {
         my: '1.5rem'
     },
     ul: {
-        mt: '1.5rem',
+        mt: '1rem',
         ml: '1.25rem',
         lineHeight: 1.6,
         'blockquote &': { mt: 0 },
