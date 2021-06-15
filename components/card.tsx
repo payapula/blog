@@ -39,7 +39,7 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
             padding="2"
             width={'95%'}
             m="0 auto"
-            className="card-container"
+            as="article"
             background={cardBg}
             borderRadius="4"
             border={cardBorder}

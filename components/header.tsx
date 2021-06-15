@@ -42,7 +42,7 @@ function NavLink({ children }: NavLinkProps) {
     const router = useRouter();
     const isActive = router.pathname === '/blog';
     return (
-        <Center w="100px">
+        <Center w="100px" as="nav">
             <Flex
                 h="32px"
                 justify="center"

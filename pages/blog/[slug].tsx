@@ -12,11 +12,10 @@ import { Box } from '@chakra-ui/react';
 
 type PostProps = {
     post: PostType;
-    morePosts: PostType[];
-    preview?: boolean;
+    componentNames: string[];
 };
 
-const Post = ({ post }: PostProps): ReactElement => {
+const Post = ({ post, componentNames }: PostProps): ReactElement => {
     const { title, description, ogImage, cover, content, slug } = post;
 
     const intersectionRef = useRef<HTMLDivElement | null>(null);
@@ -52,7 +51,7 @@ const Post = ({ post }: PostProps): ReactElement => {
 
     return (
         <Layout type="BLOG" headerSticky={sticky}>
-            <Box as="article" mt="120px">
+            <Box as="article">
                 <Head>
                     <title>{title} | Bharathi Kannan</title>
                 </Head>
@@ -73,7 +72,11 @@ const Post = ({ post }: PostProps): ReactElement => {
                 />
                 <PostHeader title={title} />
                 <PostCover cover={cover} />
-                <PostBody content={content} intersectionRef={intersectionRef} />
+                <PostBody
+                    content={content}
+                    componentNames={componentNames}
+                    intersectionRef={intersectionRef}
+                />
                 <PostFooter slug={slug} />
             </Box>
         </Layout>
@@ -96,13 +99,20 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'content'
     ]);
 
+    const componentNames = [
+        /<CodeSandbox/.test(post.content) ? 'CodeSandbox' : null,
+        /<CodePen/.test(post.content) ? 'CodePen' : null,
+        /<Tweet/.test(post.content) ? 'Tweet' : null
+    ].filter(Boolean);
+
     const mdxSource = await serialize(post.content);
     return {
         props: {
             post: {
                 ...post,
                 content: mdxSource
-            }
+            },
+            componentNames
         }
     };
 };

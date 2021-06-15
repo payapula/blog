@@ -48,6 +48,7 @@ export function getAllPosts(fields: PostKey[] = [], count: number = null) {
     const requestedFields: PostKey[] = fields.includes('date') ? [...fields] : [...fields, 'date'];
 
     let posts = slugs
+        .filter((slug) => !slug.endsWith('draft.mdx')) // Exclude draft files
         .map((slug) => getPostBySlug(slug, requestedFields))
         // sort posts by date in descending order
         .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
