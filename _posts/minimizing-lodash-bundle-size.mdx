@@ -49,7 +49,7 @@ function calculate(a, b){
 ```
 
 Lodash is a package that provides a ton of utilities to help us with manipulating the data we have. It has
-a lot of implementations like clone, deepClone, isNil, every, sum, etc. In a large application you would 
+implementations like _clone, deepClone, isNil, every, sum_ etc. In a large application you would 
 import the utilities from lodash like this and use it
 
 ```jsx
@@ -60,7 +60,7 @@ import { sum } from "lodash";
 }}> Sum of Array </Button>
 ```
 
-When we are doing this named import from lodash, we are actually imporing the whole lodash.js file and using just the
+When we are doing this _named import_ from lodash, we are actually imporing the whole lodash.js file and using just the
 sum function from it. 
 
 ```javascript
@@ -74,7 +74,7 @@ lodash.sum([1, 2, 3, 3])
 ```
 
 So, with the named exports it is not possible for the bundlers like webpack to treeshake the unwanted code, and we 
-end up shipping entire lodash utilities to the user eventhough we are not using them at all. 
+end up shipping entire lodash utilities to the user. 
 
 You can avoid this by directly imporing the utility you need from lodash like this
 
@@ -85,13 +85,13 @@ import throttle from "lodash/throttle";
 ...
 ```
 
-But this can be tough to maintain if you are using a lot of utilities from lodash in a file and you would have a bunch
+But this can be tough to maintain, if you are using a lot of utilities from lodash in a file and you would have a bunch
 of `import` statements at the top.
 
-Thankfully with babel we have a plugin called [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports)
-which if configured, can transform our named imports to default file imports.
+Thankfully with babel we have a plugin called [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports),
+which, if configured, can transform our named imports to default file imports.
 
-All you have to do for this is install babel-plugin-transform-imports
+All you have to do is install babel-plugin-transform-imports
 
 ```bash {noline}
 npm install --save-dev babel-plugin-transform-imports
@@ -138,12 +138,12 @@ Which results in smaller bundle size!
 
 The important step that we need to do while carrying out performance optimizations is to measure it. 
 
-We need to measure the cost before and what was changed after introducing a optimization. 
+We need to measure the cost before and after introducing a optimization.
 
-If we aren't measuring it, one mistake with the optimisation would end up in more additional 
-performance hit than what was before. So, the rule of the thumb is
+If we aren't measuring it, one little mistake with the optimization would cost us additional
+performance hit than what was before! So, the rule of the thumb is
 
-> Don't do performance optimisations without measuring it.
+> Don't do performance optimizations without measuring it.
 
 Let's create a react app
 
@@ -151,7 +151,7 @@ Let's create a react app
 npx create-react-app fresh-cra
 ```
 
-I am using latest version of create-react-app, with the below packages
+I am using latest version of [create-react-app](https://create-react-app.dev/docs/getting-started/), with the below packages
 
 ```javascript
 "react": "^17.0.2",
@@ -165,7 +165,7 @@ I am going to install lodash
 npm install lodash
 ```
 
-Then I am going to modify the App.js to include the `sum` function
+Then, I am going to modify the `App.js` to include the `sum` function
 
 ```jsx
 import "./App.css";
@@ -187,6 +187,9 @@ function App() {
 ```
 
 Now, let's [analyse the bundle size](https://create-react-app.dev/docs/analyzing-the-bundle-size).
+
+For this we would use the package [source-map-explorer](https://www.npmjs.com/package/source-map-explorer)
+which gives a nice visualisation of the bundles that we ship to the users.
 
 ```
 npm install --save source-map-explorer
@@ -217,13 +220,13 @@ File sizes after gzip:
   469 B     build/static/js/main.c3c1410a.chunk.js
 ```
 
-Now, I am going to run analyze
+Now, I am going to run `analyze`
 
 ```bash {noline}
 npm run analyze
 ```
 
-Running this command would open a tab in the default browser with the bundle details. It looks like this
+Running this command would open a tab in the default browser with the bundle details.
 
 <Image
   alt="Bundle size before optimization"
@@ -235,22 +238,22 @@ Running this command would open a tab in the default browser with the bundle det
 
 As you can observe, we are shipping ~70 KB of lodash package just for using a simple `sum` utility
 
-## Let's Optimise it
+## Let's optimize it
 
-I am going to install babel-plugin-transform-imports
+I am going to install [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports)
 
 ```bash {noline}
 npm install --save-dev babel-plugin-transform-imports
 ```
 
-In order to tweak with babel without [ejecting](https://create-react-app.dev/docs/available-scripts#npm-run-eject) from create-react-app, we need to add additional
-packages & minor configurations.
+In order to tweak babel configuration without [ejecting](https://create-react-app.dev/docs/available-scripts#npm-run-eject) from create-react-app, we need to add additional
+packages.
 
 ```bash {noline}
 npm install -D react-app-rewired customize-cra
 ```
 
-Then create a config-overrides.js file in your root directory with this code
+Then create a `config-overrides.js` file in your root directory with this code
 
 ```javascript
 /* config-overrides.js */
@@ -262,7 +265,7 @@ module.exports = override(
 );
 ```
 
-Then replace `react-scripts` with `react-app-rewired` in package.json
+Replace `react-scripts` with `react-app-rewired` in package.json
 
 ```javascript
 - "start": "react-scripts start",
@@ -293,7 +296,7 @@ To do that, create a .babelrc file in root directory and use the following code
 
 Now that we are all set, let's run the build
 
-```bash {noline}
+```bash {6}
 $ npm run build
 
 Compiled successfully.
@@ -323,15 +326,15 @@ Boom!
 />
 
 
-It looks like lodash is gone! Actually it's not, since the cost of `sum` function is too small, our 
-_source-map-explorer_ isn't showing it up. After the build command, you can see the reduction of chunk size by 23 KB.
+It looks like lodash is gone! Actually it's not. Since the cost of `sum` utility is so small, our 
+_source-map-explorer_ isn't showing that up. Right after the build command, you can see the reduction of chunk size by 23 KB.
 
 ## Let's explore futher
 
-If you are satisfied with the optimisation by looking at the output from _source-map-explorer_ then we are good. 
-If not, and you really want to see the babel magic  with your eyes, I will show you here.
+If you are satisfied with the optimization by looking at the output from _source-map-explorer_ then we are good. 
+If you are not, and you are really curious to see the babel magic, let's explore further.
 
-First, let's go to the state of our app before optimisation. 
+First, let's go back to the state of our application before optimization. 
 
 This is simple for us, just replace `react-app-rewired` with `react-scripts` 
 
@@ -341,7 +344,7 @@ This is simple for us, just replace `react-app-rewired` with `react-scripts`
 ```
 
 Now, to see the babel transpilation, go to `webpack.config.js` file in `node_modules` directory and look for the object `optimization`
-with the key `minimize` and make that as `false`
+with the key `minimize` then make that as `false`
 
 ```javascript
 // node_modules/react-scripts/config/webpack.config.js
@@ -374,22 +377,30 @@ File sizes after gzip:
   625 B (+51 B)         build/static/css/main.9d5b29c0.chunk.css
 ```
 
-Go into the `/build/static/js` folder and open the main chunk (main.[HASH].chunk.js).
+The first thing you can observe here is the increase in bundle size! This is because we are no 
+longer minifying our code.
 
+Go into the `/build/static/js` folder and open the main chunk (main.[HASH].chunk.js). 
 
-```javascript
+Search for `lodash`, and you will see the below code
+
+```javascript {8}
+...
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
 var lodash = __webpack_require__(4);
 
+...
+
 // sum is accessed as a property from lodash object
 ("button",{onClick:function onClick(){console.log(Object(lodash["sum"])([1,2,3,3]));},children:"Sum of Array"})
+...
 ```
 
-The second line is the transpiled JSX that we wrote. 
+The one on line number 8 is the transpiled JSX that we wrote. 
 
 > I have already explained about the JSX transpilation in the post [React is Just Javascript](https://www.bharathikannan.com/blog/react-is-just-javascript)
 
-Now, let's do the optimisation
+Now, let's do the optimization
 
 ```javascript
 - "build": "react-scripts build",
@@ -414,7 +425,7 @@ File sizes after gzip:
 
 Let's check the transpiled chunk (`/build/static/js/main.22f99645.chunk.js`)
 
-```javascript
+```javascript {1,6}
 // EXTERNAL MODULE: ./node_modules/lodash/sum.js
 var sum = __webpack_require__(4);
 var sum_default = /*#__PURE__*/__webpack_require__.n(sum);
@@ -423,5 +434,23 @@ var sum_default = /*#__PURE__*/__webpack_require__.n(sum);
 ("button",{onClick:function onClick(){console.log(sum_default()([1,2,3,3]));},children:"Sum of Array"})
 ```
 
-Did you notice the difference in the code that we shipped? Now we can be confident that the babel transform is working
-and it really improves the bundle size reduction.
+Did you notice the difference in the code that we shipped? 
+
+Instead of importing everything from lodash.js we are now importing from lodash/sum.js.
+
+Now we can be confident that the babel transform is working as expected.
+
+> The beauty of the package `babel-plugin-transform-imports` is that it can be used to optimize the imports of
+> other packages as well like Material UI, react-bootstrap etc.
+
+----
+
+References
+
+- [Lodash - Per Method Packages](https://lodash.com/per-method-packages)
+- [Material UI - Minimizing Bundle Size](https://material-ui.com/guides/minimizing-bundle-size/)
+- [react-app-rewired](https://www.npmjs.com/package/react-app-rewired) 
+- [customize-cra](https://www.npmjs.com/package/customize-cra)
+- [webpack - Optimization](https://webpack.js.org/configuration/optimization/#optimizationminimize)
+- [Analyzing the Bundle Size](https://create-react-app.dev/docs/analyzing-the-bundle-size)
+
