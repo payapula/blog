@@ -1,0 +1,427 @@
+---
+title: 'Minimizing Lodash Bundle Size in Create React App'
+excerpt: "Lodash is a utility package commonly used in Javascript development for carrying out simple to complex calculations with data structures. 
+Lodash package has a lot of helper utilities which for the most part won't be used in common application. 
+Let's see how to configure webpack to reduce the bundle size of lodash to pick only what is needed aka tree-shaking"
+date: '2020-06-27'
+description: "Lodash is a utility package commonly used in Javascript development for carrying out simple to complex calculations with data structures. 
+Lodash package has a lot of helper utilities which for the most part won't be used in common application. 
+Let's see how to configure webpack to reduce the bundle size of lodash to pick only what is needed aka tree-shaking"
+cover: 
+    src: '/assets/blog/minimizing-lodash-bundle-size/minimizing-lodash-bundle.jpg'  
+    alt: 'white and brown yarn in basket'
+    author: 
+      name: 'Kelly Sikkema'
+      url: https://unsplash.com/@kellysikkema?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/minimizing-lodash-bundle-size/minimizing-lodash-bundle.jpg'  
+    alt: 'white and brown yarn in basket'
+---
+
+When developing a application we would usually be writing some utility functions
+that can be reused throughout the application. For example
+
+```javascript
+//--------------
+// utils.js
+
+function sum(a, b){
+    return a + b;
+}
+
+function subtract(a, b){
+    return a - b;
+}
+
+export {
+    sum,
+    subtract
+}
+
+//---------------
+// component.js
+
+import {sum, subtract} from 'utils.js';
+
+function calculate(a, b){
+    return sum(a, b) + subtract(a, b);
+}
+```
+
+Lodash is a package that provides a ton of utilities to help us with manipulating the data we have. It has
+a lot of implementations like clone, deepClone, isNil, every, sum, etc. In a large application you would 
+import the utilities from lodash like this and use it
+
+```jsx
+import { sum } from "lodash";
+
+<Button onClick={() => {
+    console.log(sum([1, 2, 3, 3]));
+}}> Sum of Array </Button>
+```
+
+When we are doing this named import from lodash, we are actually imporing the whole lodash.js file and using just the
+sum function from it. 
+
+```javascript
+import { sum } from "lodash";
+
+// would be converted to
+var lodash = import('lodash');
+
+// and then accessing sum property from lodash
+lodash.sum([1, 2, 3, 3])
+```
+
+So, with the named exports it is not possible for the bundlers like webpack to treeshake the unwanted code, and we 
+end up shipping entire lodash utilities to the user eventhough we are not using them at all. 
+
+You can avoid this by directly imporing the utility you need from lodash like this
+
+```javascript
+import sum from "lodash/sum";
+import cloneDeep from "lodash/cloneDeep";
+import throttle from "lodash/throttle";
+...
+```
+
+But this can be tough to maintain if you are using a lot of utilities from lodash in a file and you would have a bunch
+of `import` statements at the top.
+
+Thankfully with babel we have a plugin called [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports)
+which if configured, can transform our named imports to default file imports.
+
+All you have to do for this is install babel-plugin-transform-imports
+
+```bash {noline}
+npm install --save-dev babel-plugin-transform-imports
+```
+
+and configure babel like this
+
+```javascript
+// pacakge.json or .babelrc file
+
+"babel": {
+    "plugins": [
+        [
+            "babel-plugin-transform-imports",
+            {
+                "lodash": {
+                    "transform": "lodash/${member}",
+                    "preventFullImport": false
+                }
+            }
+        ]
+    ]
+}
+```
+
+What this essentially does is
+
+```javascript
+import { sum } from "lodash";
+
+// would be converted by babel on build step to
+import sum from "lodash/sum";
+
+// then on the webpack chunk
+var lodash_sum = import('lodash/sum.js');
+
+// and then
+lodash_sum([1, 2, 3, 3])
+```
+
+Which results in smaller bundle size!
+
+## Let's Measure It
+
+The important step that we need to do while carrying out performance optimizations is to measure it. 
+
+We need to measure the cost before and what was changed after introducing a optimization. 
+
+If we aren't measuring it, one mistake with the optimisation would end up in more additional 
+performance hit than what was before. So, the rule of the thumb is
+
+> Don't do performance optimisations without measuring it.
+
+Let's create a react app
+
+```bash {noline}
+npx create-react-app fresh-cra
+```
+
+I am using latest version of create-react-app, with the below packages
+
+```javascript
+"react": "^17.0.2",
+"react-dom": "^17.0.2",
+"react-scripts": "4.0.3"
+```
+
+I am going to install lodash
+
+```bash {noline}
+npm install lodash
+```
+
+Then I am going to modify the App.js to include the `sum` function
+
+```jsx
+import "./App.css";
+import { sum } from "lodash";
+
+function App() {
+  return (
+    <div className="App">
+      <button
+        onClick={() => {
+          console.log(sum([1, 2, 3, 3]));
+        }}
+      >
+        Sum of Array
+      </button>
+    </div>
+  );
+}
+```
+
+Now, let's [analyse the bundle size](https://create-react-app.dev/docs/analyzing-the-bundle-size).
+
+```
+npm install --save source-map-explorer
+```
+
+Add a new script in package.json
+
+```javascript
+"scripts": {
++   "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+```
+
+I am going to build the app to create a `/build` folder
+
+```bash {noline}
+$ npm run build 
+
+Compiled successfully.
+File sizes after gzip:
+
+  65.17 KB  build/static/js/2.ab4556c4.chunk.js
+  1.63 KB   build/static/js/3.49b2ab04.chunk.js
+  1.17 KB   build/static/js/runtime-main.97cb050d.js
+  574 B     build/static/css/main.9d5b29c0.chunk.css
+  469 B     build/static/js/main.c3c1410a.chunk.js
+```
+
+Now, I am going to run analyze
+
+```bash {noline}
+npm run analyze
+```
+
+Running this command would open a tab in the default browser with the bundle details. It looks like this
+
+<Image
+  alt="Bundle size before optimization"
+  src="/assets/blog/minimizing-lodash-bundle-size/lodashbefore.png"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+As you can observe, we are shipping ~70 KB of lodash package just for using a simple `sum` utility
+
+## Let's Optimise it
+
+I am going to install babel-plugin-transform-imports
+
+```bash {noline}
+npm install --save-dev babel-plugin-transform-imports
+```
+
+In order to tweak with babel without [ejecting](https://create-react-app.dev/docs/available-scripts#npm-run-eject) from create-react-app, we need to add additional
+packages & minor configurations.
+
+```bash {noline}
+npm install -D react-app-rewired customize-cra
+```
+
+Then create a config-overrides.js file in your root directory with this code
+
+```javascript
+/* config-overrides.js */
+const { useBabelRc, override } = require("customize-cra");
+
+module.exports = override(
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useBabelRc()
+);
+```
+
+Then replace `react-scripts` with `react-app-rewired` in package.json
+
+```javascript
+- "start": "react-scripts start",
+- "build": "react-scripts build",
++ "start": "react-app-rewired start",
++ "build": "react-app-rewired build",
+```
+
+The override setup is done, now we can configure babel in create-react-app!
+
+To do that, create a .babelrc file in root directory and use the following code
+
+```javascript
+{
+  "plugins": [
+    [
+      "babel-plugin-transform-imports",
+      {
+        "lodash": {
+          "transform": "lodash/${member}",
+          "preventFullImport": true
+        }
+      }
+    ]
+  ]
+}
+```
+
+Now that we are all set, let's run the build
+
+```bash {noline}
+$ npm run build
+
+Compiled successfully.
+File sizes after gzip:
+
+  41.41 KB (-23.75 KB)  build/static/js/2.39f2f9c9.chunk.js
+  1.63 KB               build/static/js/3.49b2ab04.chunk.js
+  1.17 KB               build/static/js/runtime-main.97cb050d.js
+  574 B                 build/static/css/main.9d5b29c0.chunk.css
+  472 B (+3 B)          build/static/js/main.9d111c34.chunk.js
+```
+
+then 
+
+```bash {noline}
+npm run analyze
+```
+
+Boom! 
+
+<Image
+  alt="Bundle size after optimization"
+  src="/assets/blog/minimizing-lodash-bundle-size/lodashafter.png"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+
+It looks like lodash is gone! Actually it's not, since the cost of `sum` function is too small, our 
+_source-map-explorer_ isn't showing it up. After the build command, you can see the reduction of chunk size by 23 KB.
+
+## Let's explore futher
+
+If you are satisfied with the optimisation by looking at the output from _source-map-explorer_ then we are good. 
+If not, and you really want to see the babel magic  with your eyes, I will show you here.
+
+First, let's go to the state of our app before optimisation. 
+
+This is simple for us, just replace `react-app-rewired` with `react-scripts` 
+
+```javascript
+- "build": "react-app-rewired build",
++ "build": "react-scripts build",
+```
+
+Now, to see the babel transpilation, go to `webpack.config.js` file in `node_modules` directory and look for the object `optimization`
+with the key `minimize` and make that as `false`
+
+```javascript
+// node_modules/react-scripts/config/webpack.config.js
+
+...
+return {
+    ...
+    optimization: {
+        minimize: false, //isEnvProduction,
+        ...
+    }
+}
+```
+
+This would stop the minification of our source code by webpack, so that we can understand what is shipped to the end-user.
+
+Now, run the build command.
+
+```bash {noline}
+$ npm run build
+
+Compiled successfully.
+
+File sizes after gzip:
+
+  142.77 KB (+77.6 KB)  build/static/js/2.b2a9563e.chunk.js
+  2.48 KB (+1.31 KB)    build/static/js/runtime-main.51b24467.js
+  2.06 KB (+441 B)      build/static/js/3.8a130f73.chunk.js
+  960 B (+491 B)        build/static/js/main.1ad88ea0.chunk.js
+  625 B (+51 B)         build/static/css/main.9d5b29c0.chunk.css
+```
+
+Go into the `/build/static/js` folder and open the main chunk (main.[HASH].chunk.js).
+
+
+```javascript
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__(4);
+
+// sum is accessed as a property from lodash object
+("button",{onClick:function onClick(){console.log(Object(lodash["sum"])([1,2,3,3]));},children:"Sum of Array"})
+```
+
+The second line is the transpiled JSX that we wrote. 
+
+> I have already explained about the JSX transpilation in the post [React is Just Javascript](https://www.bharathikannan.com/blog/react-is-just-javascript)
+
+Now, let's do the optimisation
+
+```javascript
+- "build": "react-scripts build",
++ "build": "react-app-rewired build",
+```
+
+and run the build
+
+```bash {noline}
+$ npm run build
+
+Compiled successfully.
+
+File sizes after gzip:
+
+  49.64 KB (-93.13 KB)  build/static/js/2.08144287.chunk.js
+  2.48 KB               build/static/js/runtime-main.51b24467.js
+  2.06 KB               build/static/js/3.8a130f73.chunk.js
+  965 B (+5 B)          build/static/js/main.22f99645.chunk.js
+  625 B                 build/static/css/main.9d5b29c0.chunk.css
+```
+
+Let's check the transpiled chunk (`/build/static/js/main.22f99645.chunk.js`)
+
+```javascript
+// EXTERNAL MODULE: ./node_modules/lodash/sum.js
+var sum = __webpack_require__(4);
+var sum_default = /*#__PURE__*/__webpack_require__.n(sum);
+
+// default sum is called
+("button",{onClick:function onClick(){console.log(sum_default()([1,2,3,3]));},children:"Sum of Array"})
+```
+
+Did you notice the difference in the code that we shipped? Now we can be confident that the babel transform is working
+and it really improves the bundle size reduction.
