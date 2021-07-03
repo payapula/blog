@@ -46,7 +46,8 @@ module.exports = {
         ],
         'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
         'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
-        'no-console': 'warn'
+        'no-console': 'warn',
+        '@typescript-eslint/ban-ts-comment': 'off'
         // 'prettier/prettier': ['error', {}, { usePrettierrc: true }] // Use our .prettierrc file as source
     },
     overrides: [

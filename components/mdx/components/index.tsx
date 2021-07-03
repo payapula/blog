@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/display-name */
 import {
     Alert,
     Box,
@@ -10,12 +12,11 @@ import {
 import { Code, preToCodeBlock } from './code';
 import { ChakraLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
+import { ReactElement } from 'react';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
-const Test = () => <div>Hello from JSX!</div>;
-
-const InlineCode = (props: any) => (
+const InlineCode = (props: unknown): ReactElement => (
     <ChakraCode
         apply="mdx.code"
         color={useColorModeValue('code.color.light', 'code.color.dark')}
@@ -24,13 +25,13 @@ const InlineCode = (props: any) => (
     />
 );
 
-const Table = (props) => (
+const Table = (props: unknown): ReactElement => (
     <chakra.div overflowX="auto">
         <chakra.table textAlign="left" mt="32px" width="full" {...props} />
     </chakra.div>
 );
 
-const THead = (props) => (
+const THead = (props: unknown): ReactElement => (
     <chakra.th
         bg={useColorModeValue('gray.50', 'whiteAlpha.100')}
         fontWeight="semibold"
@@ -40,7 +41,7 @@ const THead = (props) => (
     />
 );
 
-const TData = (props) => (
+const TData = (props: unknown): ReactElement => (
     <chakra.td
         p={2}
         borderTopWidth="1px"
@@ -54,16 +55,15 @@ const TData = (props) => (
 const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
-    Test,
-    h1: (props) => <Heading as="h2" apply="mdx.h1" {...props} />,
-    h2: (props) => (
+    h1: (props): ReactElement => <Heading as="h2" apply="mdx.h1" {...props} />,
+    h2: (props): ReactElement => (
         <Heading
             apply="mdx.h2"
             {...props}
             color={useColorModeValue('heading.light', 'heading.dark')}
         />
     ),
-    h3: (props) => (
+    h3: (props): ReactElement => (
         <Heading
             as="h3"
             apply="mdx.h3"
@@ -71,7 +71,7 @@ const MDXComponents = {
             color={useColorModeValue('heading.light', 'heading.dark')}
         />
     ),
-    h4: (props) => (
+    h4: (props): ReactElement => (
         <Heading
             as="h4"
             apply="mdx.h4"
@@ -79,7 +79,7 @@ const MDXComponents = {
             color={useColorModeValue('heading.light', 'heading.dark')}
         />
     ),
-    strong: (props) => (
+    strong: (props): ReactElement => (
         <Box
             as="strong"
             color={useColorModeValue('strong.light', 'strong.dark')}
@@ -88,7 +88,8 @@ const MDXComponents = {
         />
     ),
     inlineCode: InlineCode,
-    pre: (preProps) => {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    pre: (preProps): ReactElement => {
         // Refer Kent C Dodds Implementation below
         const props = preToCodeBlock(preProps);
         if (props) {
@@ -104,7 +105,7 @@ const MDXComponents = {
     table: Table,
     th: THead,
     td: TData,
-    blockquote: (props) => (
+    blockquote: (props): ReactElement => (
         <Alert
             mt="4"
             role="none"
@@ -117,14 +118,14 @@ const MDXComponents = {
         />
     ),
     a: ChakraLink,
-    p: (props) => <chakra.p apply="mdx.p" {...props} />,
-    ul: (props) => <chakra.ul apply="mdx.ul" {...props} />,
-    ol: (props) => <chakra.ol apply="mdx.ul" {...props} />,
-    li: (props) => <chakra.li apply="mdx.li" {...props} />,
-    em: (props) => (
+    p: (props): ReactElement => <chakra.p apply="mdx.p" {...props} />,
+    ul: (props): ReactElement => <chakra.ul apply="mdx.ul" {...props} />,
+    ol: (props): ReactElement => <chakra.ol apply="mdx.ul" {...props} />,
+    li: (props): ReactElement => <chakra.li apply="mdx.li" {...props} />,
+    em: (props): ReactElement => (
         <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
     ),
-    Image: (props) => (
+    Image: (props): ReactElement => (
         <Center mt="5">
             <ChakraNextImage {...props} />
         </Center>
