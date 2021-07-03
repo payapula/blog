@@ -14,7 +14,7 @@ interface SiteConfig {
 
 const siteConfig: SiteConfig = {
     general: {
-        siteUrl: 'www.bharathikannan.com',
+        siteUrl: 'https://www.bharathikannan.com',
         editUrl: 'https://github.com/payapula/blog/edit/develop/_posts/',
         authorEmail: 'bharathikannanv05@gmail.com',
         twitter: 'https://twitter.com/bharathispeaks',

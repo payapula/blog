@@ -89,7 +89,7 @@ const MDXComponents = {
     ),
     inlineCode: InlineCode,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    pre: (preProps): ReactElement => {
+    pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
         const props = preToCodeBlock(preProps);
         if (props) {
