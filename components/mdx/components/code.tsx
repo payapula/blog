@@ -130,11 +130,11 @@ function Code({ codeString, language, metastring }: CodeProps): JSX.Element {
 function preToCodeBlock({ preProps }) {
     if (
         // children is code element
-        preProps.children &&
+        preProps?.children &&
         // code props
         preProps.children.props &&
         // if children is actually a <code>
-        preProps.children.props.mdxType === 'code'
+        preProps.children.props?.mdxType === 'code'
     ) {
         // we have a <pre><code> situation
         const { children: codeString, className = '', ...props } = preProps.children.props;
