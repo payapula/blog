@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable react/display-name */
+/* eslint-disable */
 import {
     Alert,
     Box,
