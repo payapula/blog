@@ -16,7 +16,16 @@ ogImage:
     alt: 'Waterfall'
 ---
 
-Take a look at the Javascript function below, which returns a string:
+It is important to understand the core concept of Hooks in React Components. 
+This will increase our confidence with usage of hooks and help us understand what is 
+actually happening inside our React components. 
+
+This post is to increase your understanding of flow of hooks in a react component 
+with exclusive focus on the most confusing `useEffect` hook.
+
+As always, let's start with *Just Javascript*
+
+Take a look at the function below, which returns a string:
 
 ```javascript {5}
 function App(){
@@ -195,8 +204,8 @@ component and toggle on the Hide/Show child button, You would get the correspond
   objectFit='contain'
 />
 
-If you have 3 useEffects in same component and all does return a cleanup function then when the component is unmounted, 
-all the cleanup functions would be called.
+If you have 3 useEffects in same component and all does return a cleanup function, then,
+when the component is unmounted, all the cleanup functions would be called.
 
 Lets see that in action below
 
