@@ -5,7 +5,7 @@
 
 module.exports = {
     parser: '@typescript-eslint/parser',
-    plugins: ['react-hooks'],
+    plugins: ['react', 'react-hooks'],
     root: true, // Make sure eslint picks up the config at the root of the directory
     parserOptions: {
         ecmaVersion: 2020, // Use the latest ecmascript standard
@@ -46,7 +46,8 @@ module.exports = {
         ],
         'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
         'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
-        'no-console': 'warn'
+        'no-console': 'warn',
+        '@typescript-eslint/ban-ts-comment': 'off'
         // 'prettier/prettier': ['error', {}, { usePrettierrc: true }] // Use our .prettierrc file as source
     },
     overrides: [

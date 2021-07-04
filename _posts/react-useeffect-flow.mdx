@@ -16,7 +16,16 @@ ogImage:
     alt: 'Waterfall'
 ---
 
-Take a look at the Javascript function below, which returns a string:
+It is important to understand the core concept of Hooks in React Components. 
+This will increase our confidence with usage of hooks and help us understand what is 
+actually happening inside our React components. 
+
+This post is to increase your understanding of flow of hooks in a react component 
+with exclusive focus on the most confusing `useEffect` hook.
+
+As always, let's start with *Just Javascript*
+
+Take a look at the function below, which returns a string:
 
 ```javascript {5}
 function App(){
@@ -102,9 +111,9 @@ the useEffect with `[count]` dependency we would think this would run when the `
 changes. 
 
 So, on the first render the count is 0 and not _changed_, when you click the button, the count
-would change calling the useEffect hook right? lets check it out! 
+would change thus calling the useEffect hook right? lets check it out! 
 
-This is what getting printed on the first Mount:
+This would be logged on the first Mount:
 
 ```bash {noline}
 Count Changed
@@ -191,12 +200,12 @@ component and toggle on the Hide/Show child button, You would get the correspond
   alt={`Clean up function in useEffect`}
   src={`/assets/blog/react-hooks-flow/use-effect-child.gif`}
   width={600}
-  height={400}
+  height={500}
   objectFit='contain'
 />
 
-If you have 3 useEffects in same component and all does return a cleanup function then when the component is unmounted, 
-all the cleanup functions would be called.
+If you have 3 useEffects in same component and all does return a cleanup function, then,
+when the component is unmounted, all the cleanup functions would be called.
 
 Lets see that in action below
 
@@ -228,7 +237,7 @@ and the output is
   alt="Multiple Return"
   src="/assets/blog/react-hooks-flow/use-effect-multiple.gif"
   width={600}
-  height={400}
+  height={500}
   objectFit='contain'
 />
 
@@ -236,7 +245,7 @@ The takeaway is
 
 > When the component is unmounted, cleanup function from all the useEffects are executed. 
 
-In comparision to class components, where we only have one _componentWillUnmount_ this is the only
+In comparison to class components, where we only have one _componentWillUnmount_ this is the only
 part that would be executed on the unmount phase of that component.
 
 ## useEffect on Update
@@ -263,7 +272,7 @@ is executed.
 🌀 App: useEffect no deps 
 ```
 
-Similary, when you click on Show Child button, before running the _no deps hook_ of App, the 
+Similarly, when you click on Show Child button, before running the _no deps hook_ of App, the 
 cleanup is executed. 
 
 ```bash {5}
@@ -308,11 +317,11 @@ The full picture of the flow of hooks can be understood from this [flow-chart by
 />
 
 
-To Summarize
+To Summarise
 
 > 1. Every hook in a component would be called on Every Render.
 > 2. When the component is unmounted, cleanup function from all the useEffects are executed. 
-> 3. React when reruning an useEffect, it executes the clean up function before executing the hook.
+> 3. React when rerunning an useEffect, it executes the clean up function before executing the hook.
 
 
 

@@ -7,25 +7,42 @@ import { SiDotNet } from 'react-icons/si';
 import { Icon, Flex, Heading, chakra, useColorModeValue } from '@chakra-ui/react';
 import { DiReact } from 'react-icons/di';
 import { FaGraduationCap } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
-const CustomIcon = ({ icon, color }) => <Icon as={icon} width="8" height="8" color={color} />;
+const CustomIcon = ({ icon, color }: { icon: IconType; color: string }) => (
+    <Icon as={icon} width="8" height="8" color={color} />
+);
 
-const Title = ({ children }) => (
+const Title = ({ children }: { children: React.ReactNode }) => (
     <Heading as="h3" fontSize={['xl', null, null, null, '3xl']}>
         {children}
     </Heading>
 );
-const Subtitle = ({ children }) => (
+const Subtitle = ({ children }: { children: React.ReactNode }) => (
     <Heading as="h4" fontSize={['lg', null, null, null, '2xl']} fontWeight="normal" mt={2}>
         {children}
     </Heading>
 );
 
-const Description = ({ children }) => <chakra.p mt={2}>{children}</chakra.p>;
+const Description = ({ children }: { children: React.ReactNode }) => (
+    <chakra.p mt={2}>{children}</chakra.p>
+);
 
 const ChakraVerticalTimeline = chakra(VerticalTimeline);
 
-const CustomVerticalTimeLine = ({ date, icon, children, head = false }) => {
+interface CustomVerticalTimeLineProps {
+    date: string;
+    icon: JSX.Element;
+    children: React.ReactNode;
+    head?: boolean;
+}
+
+const CustomVerticalTimeLine = ({
+    date,
+    icon,
+    children,
+    head = false
+}: CustomVerticalTimeLineProps) => {
     const dateColor = useColorModeValue('black', 'white');
     return (
         <VerticalTimelineElement
@@ -51,7 +68,7 @@ const CustomVerticalTimeLine = ({ date, icon, children, head = false }) => {
     );
 };
 
-function History() {
+function History(): JSX.Element {
     const lineColor = useColorModeValue('#319795', 'white');
     return (
         <Flex direction="column" align="center" mt={24}>
