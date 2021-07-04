@@ -9,6 +9,7 @@ import { NextSeo } from 'next-seo';
 import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 import { useScrollPosition } from 'utils/hooks';
 import { Box } from '@chakra-ui/react';
+import { getBasePath } from 'utils/utils';
 
 type PostProps = {
     post: PostType;
@@ -64,7 +65,7 @@ const Post = ({ post, componentNames }: PostProps): ReactElement => {
                         type: 'website',
                         images: [
                             {
-                                url: ogImage.url,
+                                url: getBasePath(ogImage.url),
                                 alt: ogImage.alt
                             }
                         ]

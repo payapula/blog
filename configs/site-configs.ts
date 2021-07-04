@@ -1,5 +1,6 @@
 // Inspired by Chakra - https://github.com/chakra-ui/chakra-ui/blob/main/website/configs/site-config.ts
 import { NextSeoProps } from 'next-seo';
+import { getBasePath } from 'utils/utils';
 
 interface SiteConfig {
     general: {
@@ -29,7 +30,17 @@ const siteConfig: SiteConfig = {
             type: 'website',
             title: 'Bharathi Kannan Blog',
             description: "Bharathi Kannan's Portfolio and Blog.",
-            site_name: 'Bharathi Kannan'
+            site_name: 'Bharathi Kannan',
+            images: [
+                {
+                    url: getBasePath('/assets/resume/bharathikannanavatar.jpg'),
+                    alt: 'Bharathi Kannan Avatar'
+                }
+            ]
+        },
+        twitter: {
+            handle: '@bharathispeaks',
+            cardType: 'summary_large_image'
         }
     }
 };
