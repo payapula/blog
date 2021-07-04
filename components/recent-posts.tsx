@@ -10,7 +10,7 @@ interface RecentPostsProps {
     recentPosts: Post[];
 }
 
-function RecentPosts({ recentPosts }: RecentPostsProps) {
+function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
     const postsBackgroundColor = useColorModeValue('#EDF7FA', 'gray.800');
     return (
         <Box

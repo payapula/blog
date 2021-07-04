@@ -1,8 +1,9 @@
 import { Link, Flex, Box, Text, Stack, useStyleConfig, useColorModeValue } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 import { AuthorAvatar } from 'components/author-avatar';
+import { ReactElement } from 'react';
 
-function HeroContent() {
+function HeroContent(): ReactElement {
     const styles = useStyleConfig('Button');
     const buttonStyles = {
         ...styles,
@@ -50,7 +51,7 @@ function HeroContent() {
                     Proficient in developing applications from given business requirements and
                     efficient in maintaining existing software.
                 </Text>
-                {/*//@ts-ignore*/}
+                {/*//@ts-ignore: Here we are showing Link as a Button*/}
                 <Link
                     {...buttonStyles}
                     _hover={{

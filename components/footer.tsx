@@ -18,7 +18,13 @@ import { ReactElement } from 'react';
 import { SiGmail } from 'react-icons/si';
 import siteConfig from 'configs/site-configs';
 
-const IconLink = ({ href, children, isExternal = false }) => (
+interface IconLinkProps {
+    href: string;
+    children: React.ReactNode;
+    isExternal?: boolean;
+}
+
+const IconLink = ({ href, children, isExternal = false }: IconLinkProps) => (
     <Link
         href={href}
         isExternal={isExternal}
@@ -65,7 +71,7 @@ function GMAIL() {
                         isClosable: true
                     });
                 }}>
-                <VisuallyHidden>Copy Bharathi Kannan's Email address</VisuallyHidden>
+                <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
                 <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
             </Button>
         );
@@ -100,7 +106,12 @@ function Footer(): ReactElement {
                         <SocialIcons icon={FaLinkedin} hover={{ color: '#0e76a8' }} />
                     </IconLink>
                 </HStack>
-                <Text>Opensourced on Github ❤️</Text>
+                <Text>
+                    Opensourced on Github{' '}
+                    <span role="img" aria-label="Heart">
+                        ❤️
+                    </span>
+                </Text>
             </Flex>
         </Box>
     );
