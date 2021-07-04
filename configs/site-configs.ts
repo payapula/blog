@@ -13,9 +13,11 @@ interface SiteConfig {
     seo: NextSeoProps;
 }
 
+const hostedURL = 'https://www.bharathikannan.com';
+
 const siteConfig: SiteConfig = {
     general: {
-        siteUrl: 'https://www.bharathikannan.com',
+        siteUrl: hostedURL,
         editUrl: 'https://github.com/payapula/blog/edit/develop/_posts/',
         authorEmail: 'bharathikannanv05@gmail.com',
         twitter: 'https://twitter.com/bharathispeaks',
@@ -31,6 +33,7 @@ const siteConfig: SiteConfig = {
             title: 'Bharathi Kannan Blog',
             description: "Bharathi Kannan's Portfolio and Blog.",
             site_name: 'Bharathi Kannan',
+            url: hostedURL,
             images: [
                 {
                     url: getBasePath('/assets/resume/bharathikannanavatar.jpg'),
@@ -39,6 +42,7 @@ const siteConfig: SiteConfig = {
             ]
         },
         twitter: {
+            site: '@bharathispeaks',
             handle: '@bharathispeaks',
             cardType: 'summary_large_image'
         }

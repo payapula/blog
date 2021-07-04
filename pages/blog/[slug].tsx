@@ -63,6 +63,7 @@ const Post = ({ post, componentNames }: PostProps): ReactElement => {
                         title: title,
                         description: description,
                         type: 'website',
+                        url: getBasePath(`/blog/${slug}`),
                         images: [
                             {
                                 url: getBasePath(ogImage.url),
