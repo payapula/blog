@@ -37,3 +37,7 @@ html,
 body {
     overflow-x: hidden;
 }
+
+#chakra-toast-manager-top-left {
+    z-index: 10000 !important;
+}

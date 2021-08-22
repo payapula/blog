@@ -9,19 +9,22 @@ interface SiteConfig {
         authorEmail: string;
         twitter: string;
         linkedIn: string;
+        github: string;
     };
     seo: NextSeoProps;
 }
 
 const hostedURL = 'https://www.bharathikannan.com';
+const githubURL = 'https://github.com/payapula/blog';
 
 const siteConfig: SiteConfig = {
     general: {
         siteUrl: hostedURL,
-        editUrl: 'https://github.com/payapula/blog/edit/develop/_posts/',
+        editUrl: `${githubURL}/edit/develop/_posts/`,
         authorEmail: 'bharathikannanv05@gmail.com',
         twitter: 'https://twitter.com/bharathispeaks',
-        linkedIn: 'https://linkedin.com/in/bharathi-kannan-80968170'
+        linkedIn: 'https://linkedin.com/in/bharathi-kannan-80968170',
+        github: githubURL
     },
     seo: {
         title: 'Bharathi Kannan Blog',

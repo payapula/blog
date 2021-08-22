@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import {
     Box,
     Flex,
-    Text,
     HStack,
     CSSObject,
     Icon,
@@ -9,14 +9,16 @@ import {
     Link,
     Button,
     useToast,
-    VisuallyHidden
+    VisuallyHidden,
+    chakra
 } from '@chakra-ui/react';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { SiGmail } from 'react-icons/si';
 import siteConfig from 'configs/site-configs';
+import { ChakraLink } from './chakra-link';
 
 interface IconLinkProps {
     href: string;
@@ -106,12 +108,15 @@ function Footer(): ReactElement {
                         <SocialIcons icon={FaLinkedin} hover={{ color: '#0e76a8' }} />
                     </IconLink>
                 </HStack>
-                <Text>
-                    Opensourced on Github{' '}
-                    <span role="img" aria-label="Heart">
+                <ChakraLink ml={3} href={siteConfig.general.github}>
+                    <chakra.span role="img" aria-label="Heart" mr="2">
                         ❤️
-                    </span>
-                </Text>
+                    </chakra.span>
+                    Open sourced on Github
+                    <chakra.span role="img" aria-label="Heart" ml="2">
+                        ❤️
+                    </chakra.span>
+                </ChakraLink>
             </Flex>
         </Box>
     );
