@@ -53,9 +53,6 @@ const Post = ({ post, componentNames }: PostProps): ReactElement => {
     return (
         <Layout type="BLOG" headerSticky={sticky}>
             <Box as="article">
-                <Head>
-                    <title>{title} | Bharathi Kannan</title>
-                </Head>
                 <NextSeo
                     title={title}
                     description={description}
