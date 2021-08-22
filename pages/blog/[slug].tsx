@@ -1,5 +1,4 @@
 import { getPostBySlug, getAllPosts } from '../../lib/api';
-import Head from 'next/head';
 import PostType from 'types/post';
 import { ReactElement, useRef, useState } from 'react';
 import { Layout } from 'components/layout';
@@ -10,13 +9,16 @@ import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 import { useScrollPosition } from 'utils/hooks';
 import { Box } from '@chakra-ui/react';
 import { getBasePath } from 'utils/utils';
+import { getPlaiceholder } from 'plaiceholder';
+import { PlaiceHolderProps } from 'types/cover';
 
 type PostProps = {
     post: PostType;
     componentNames: string[];
+    plaiceHolder: PlaiceHolderProps;
 };
 
-const Post = ({ post, componentNames }: PostProps): ReactElement => {
+const Post = ({ post, componentNames, plaiceHolder }: PostProps): ReactElement => {
     const { title, description, ogImage, cover, content, slug } = post;
 
     const intersectionRef = useRef<HTMLDivElement | null>(null);
@@ -53,9 +55,6 @@ const Post = ({ post, componentNames }: PostProps): ReactElement => {
     return (
         <Layout type="BLOG" headerSticky={sticky}>
             <Box as="article">
-                <Head>
-                    <title>{title} | Bharathi Kannan</title>
-                </Head>
                 <NextSeo
                     title={title}
                     description={description}
@@ -73,7 +72,7 @@ const Post = ({ post, componentNames }: PostProps): ReactElement => {
                     }}
                 />
                 <PostHeader title={title} />
-                <PostCover cover={cover} />
+                <PostCover cover={cover} plaiceHolder={plaiceHolder} />
                 <PostBody
                     content={content}
                     componentNames={componentNames}
@@ -101,6 +100,8 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'content'
     ]);
 
+    const { base64, img } = await getPlaiceholder(post.cover.src);
+
     const componentNames = [
         /<CodeSandbox/.test(post.content) ? 'CodeSandbox' : null,
         /<CodePen/.test(post.content) ? 'CodePen' : null,
@@ -114,7 +115,11 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
                 ...post,
                 content: mdxSource
             },
-            componentNames
+            componentNames,
+            plaiceHolder: {
+                base64,
+                img
+            }
         }
     };
 };

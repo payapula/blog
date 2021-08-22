@@ -24,6 +24,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
+  font-display: swap;
   src: url('/fonts/roboto-v27-latin-700.eot'); /* IE9 Compat Modes */
   src: local(''),
        url('/fonts/roboto-v27-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -36,4 +37,8 @@
 html,
 body {
     overflow-x: hidden;
+}
+
+#chakra-toast-manager-top-left {
+    z-index: 10000 !important;
 }
