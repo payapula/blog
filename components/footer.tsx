@@ -1,4 +1,8 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
+/* eslint-disable */
+/* Above one for jsx-a11y/accessible-emoji 
+ superlinter in CI complains about not having this definition 
+ error  Definition for rule 'jsx-a11y/accessible-emoji' was not found  jsx-a11y/accessible-emoji
+ */
 import {
     Box,
     Flex,
