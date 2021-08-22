@@ -38,46 +38,51 @@ const IconLink = ({ href, children, isExternal = false }: IconLinkProps) => (
 );
 
 function GMAIL() {
+    const [isAppleDevice, setIsAppleDevice] = React.useState(false);
     const toast = useToast();
 
-    // iOS doesn't easily let you copy to clipboard, hence navigating those users
-    // directly to Default Mail App
-    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+    React.useEffect(() => {
+        // iOS doesn't easily let you copy to clipboard, hence navigating those users
+        // directly to Default Mail App
+        setIsAppleDevice(!!navigator.userAgent.match(/ipad|ipod|iphone/i));
+    }, []);
+
+    if (isAppleDevice) {
         return (
             <IconLink href={`mailto:${siteConfig.general.authorEmail}`}>
                 <VisuallyHidden>Send Email to Bharathi Kannan</VisuallyHidden>
                 <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
             </IconLink>
         );
-    } else {
-        return (
-            <Button
-                width={0}
-                height={'auto'}
-                background="transparent"
-                _hover={{
-                    background: 'transparent'
-                }}
-                _active={{
-                    background: 'transparent'
-                }}
-                onClick={() => {
-                    navigator.clipboard.writeText(siteConfig.general.authorEmail);
-                    toast({
-                        title: 'Email ID Copied!',
-                        position: 'top-left',
-                        description:
-                            'Email Address copied to clipboard. Paste it in your favorite mail client to send out an email!',
-                        status: 'success',
-                        duration: 5000,
-                        isClosable: true
-                    });
-                }}>
-                <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
-                <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
-            </Button>
-        );
     }
+
+    return (
+        <Button
+            width={0}
+            height={'auto'}
+            background="transparent"
+            _hover={{
+                background: 'transparent'
+            }}
+            _active={{
+                background: 'transparent'
+            }}
+            onClick={() => {
+                navigator.clipboard.writeText(siteConfig.general.authorEmail);
+                toast({
+                    title: 'Email ID Copied!',
+                    position: 'top-left',
+                    description:
+                        'Email Address copied to clipboard. Paste it in your favorite mail client to send out an email!',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true
+                });
+            }}>
+            <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
+            <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
+        </Button>
+    );
 }
 
 function Footer(): ReactElement {
