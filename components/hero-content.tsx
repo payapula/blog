@@ -12,7 +12,7 @@ function HeroContent(): ReactElement {
         alignItems: 'center',
         width: '180',
         height: '12',
-        background: useColorModeValue('blue.500', 'blue.200'),
+        background: useColorModeValue('blue.600', 'blue.200'),
         color: useColorModeValue('white', 'gray.800')
     };
     return (
@@ -36,20 +36,21 @@ function HeroContent(): ReactElement {
             <Stack
                 align={['center', null, null, null, 'start']}
                 height="260"
+                maxW="850"
                 justifyContent="space-between">
                 <Heading
                     as="h1"
                     fontSize={['3xl', null, null, '30px', '35px']}
                     maxW={['23rem', null, null, '30rem']}
                     textAlign={['center', null, null, null, 'start']}>
-                    Hi, I&apos;m Bharathi Kannan, Frontend Engineer
+                    Hi, I&apos;m Bharathi Kannan, Fullstack Web Developer
                 </Heading>
                 <Text
                     fontSize={['sm', null, 'md', 'lg']}
                     align={['center', null, null, null, 'start']}>
-                    Tech enthusiast who is interested in developing scalable and accessible web.
-                    Proficient in developing applications from given business requirements and
-                    efficient in maintaining existing software.
+                    I&apos;m a Tech enthusiast, who is interested in developing <b>scalable</b> and{' '}
+                    <b>accessible</b> web applications. I like to build software that are easy to
+                    use and maintain.
                 </Text>
                 {/*//@ts-ignore: Here we are showing Link as a Button*/}
                 <Link

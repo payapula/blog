@@ -26,6 +26,7 @@ export default class MyDocument extends Document {
                         // If crossOrigin is not given then font would be loaded twice
                         crossOrigin="anonymous"
                     />
+                    <link rel="preconnect" href="https://vitals.vercel-insights.com"></link>
                     {/* <link rel="preconnect" href="https://fonts.gstatic.com"></link>
                     <link
                         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"

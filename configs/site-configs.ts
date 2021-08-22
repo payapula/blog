@@ -9,25 +9,29 @@ interface SiteConfig {
         authorEmail: string;
         twitter: string;
         linkedIn: string;
+        github: string;
     };
     seo: NextSeoProps;
 }
 
 const hostedURL = 'https://www.bharathikannan.com';
+const githubURL = 'https://github.com/payapula/blog';
 
 const siteConfig: SiteConfig = {
     general: {
         siteUrl: hostedURL,
-        editUrl: 'https://github.com/payapula/blog/edit/develop/_posts/',
+        editUrl: `${githubURL}/edit/develop/_posts/`,
         authorEmail: 'bharathikannanv05@gmail.com',
         twitter: 'https://twitter.com/bharathispeaks',
-        linkedIn: 'https://linkedin.com/in/bharathi-kannan-80968170'
+        linkedIn: 'https://linkedin.com/in/bharathi-kannan-80968170',
+        github: githubURL
     },
     seo: {
-        title: 'Bharathi Kannan Blog',
-        defaultTitle: 'Bharathi Kannan Blog',
-        titleTemplate: '%s | Bharathi Kannan Blog',
-        description: "Bharathi Kannan's Portfolio and Blog.",
+        title: 'Bharathi Kannan Website',
+        defaultTitle: 'Bharathi Kannan Website',
+        titleTemplate: '%s | Bharathi Kannan Website',
+        description:
+            "Bharathi Kannan's Portfolio and Blog. A web developer working on developing Full Stack Applications with React Js, Typescript, Apollo GraphQL, Amazon aws amplify and firebase.",
         openGraph: {
             type: 'website',
             title: 'Bharathi Kannan Blog',
