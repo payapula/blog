@@ -27,10 +27,11 @@ const siteConfig: SiteConfig = {
         github: githubURL
     },
     seo: {
-        title: 'Bharathi Kannan Blog',
-        defaultTitle: 'Bharathi Kannan Blog',
-        titleTemplate: '%s | Bharathi Kannan Blog',
-        description: "Bharathi Kannan's Portfolio and Blog.",
+        title: 'Bharathi Kannan Website',
+        defaultTitle: 'Bharathi Kannan Website',
+        titleTemplate: '%s | Bharathi Kannan Website',
+        description:
+            "Bharathi Kannan's Portfolio and Blog. A web developer working on developing Full Stack Applications with React Js, Typescript, Apollo GraphQL, Amazon aws amplify and firebase.",
         openGraph: {
             type: 'website',
             title: 'Bharathi Kannan Blog',

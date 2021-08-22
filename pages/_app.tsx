@@ -7,8 +7,9 @@ import { DefaultSeo } from 'next-seo';
 import siteConfig from 'configs/site-configs';
 import 'styles/globals.css';
 
+const { seo } = siteConfig;
+
 export default function MyApp({ Component, pageProps }: AppProps): ReactElement {
-    const { seo } = siteConfig;
     return (
         <>
             <Head>
