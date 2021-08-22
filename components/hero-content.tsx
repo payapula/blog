@@ -12,7 +12,7 @@ function HeroContent(): ReactElement {
         alignItems: 'center',
         width: '180',
         height: '12',
-        background: useColorModeValue('blue.500', 'blue.200'),
+        background: useColorModeValue('blue.600', 'blue.200'),
         color: useColorModeValue('white', 'gray.800')
     };
     return (

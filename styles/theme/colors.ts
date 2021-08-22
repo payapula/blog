@@ -14,7 +14,7 @@ const colors = {
     },
     code: {
         color: {
-            light: '#e01e5a',
+            light: '#a31641',
             dark: '#ffb256'
         },
         bg: {

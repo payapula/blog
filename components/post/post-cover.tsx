@@ -24,9 +24,11 @@ function PostCover({ cover, plaiceHolder }: PostCoverProps): ReactElement {
         <Box mt={8}>
             <Image
                 {...plaiceHolder.img}
+                alt={cover.alt}
                 blurDataURL={plaiceHolder.base64}
                 placeholder="blur"
                 objectFit="contain"
+                priority
             />
             <Text align="center">
                 Photo By

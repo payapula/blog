@@ -10,7 +10,9 @@ function AuthorAvatar({ size }: { size: number }): ReactElement {
             borderRadius="50%"
             width={size}
             height={size}
+            priority
             placeholder="blur"
+            objectFit="contain"
         />
     );
 }
