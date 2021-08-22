@@ -1,4 +1,4 @@
-import { chakra, Heading, SimpleGrid } from '@chakra-ui/react';
+import { chakra, Heading, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 import { getAllPosts } from 'lib/api';
 import { BlogCard } from 'components/card';
 import { Layout } from 'components/layout';
@@ -26,7 +26,16 @@ export default function Index({ allPosts }: Props): ReactElement {
             <Head>
                 <title>Blogs | Bharathi Kannan</title>
             </Head>
-            <Heading as="h1" width="100px" mx="auto" mt="8">
+            <Heading
+                as="h1"
+                width="100px"
+                mx="auto"
+                mt="8"
+                bgClip="text"
+                bgGradient={useColorModeValue(
+                    'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
+                    'linear(to-r, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1)'
+                )}>
                 Posts
             </Heading>
             <SimpleGrid columns={[1, null, null, null, 2, 3]} mt="10" spacing={10}>
