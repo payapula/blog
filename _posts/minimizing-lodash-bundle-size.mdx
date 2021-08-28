@@ -1,12 +1,9 @@
 ---
-title: 'Minimizing Lodash Bundle Size in Create React App'
+title: 'Minimizing Lodash Size in CRA and Next.js'
 excerpt: "Lodash is a utility package commonly used in Javascript development for carrying out simple to complex calculations with data structures. 
-Lodash package has a lot of helper utilities which for the most part won't be used in common application. 
-Let's see how to configure webpack to reduce the bundle size of lodash to pick only what is needed aka tree-shaking"
+Lodash package has a lot of helper utilities which for the most part won't be used in common application. Let's see how to configure webpack to reduce the bundle size of lodash to pick only what is needed aka tree-shaking. Lets ship less Javascript to client by minimising lodash size in create react app and next js"
 date: '2020-06-27'
-description: "Lodash is a utility package commonly used in Javascript development for carrying out simple to complex calculations with data structures. 
-Lodash package has a lot of helper utilities which for the most part won't be used in common application. 
-Let's see how to configure webpack to reduce the bundle size of lodash to pick only what is needed aka tree-shaking"
+description: "Lodash is a utility package commonly used in Javascript development for carrying out simple to complex calculations with data structures. Lodash package has a lot of helper utilities which for the most part won't be used in common application. Let's see how to configure webpack to reduce the bundle size of lodash to pick only what is needed aka tree-shaking. Lets ship less Javascript to client by minimising lodash size in create react app and next js"
 cover: 
     src: '/assets/blog/minimizing-lodash-bundle-size/minimizing-lodash-bundle.jpg'  
     alt: 'white and brown yarn in basket'
@@ -18,8 +15,9 @@ ogImage:
     alt: 'white and brown yarn in basket'
 ---
 
-When developing a application we would usually be writing some utility functions
-that can be reused throughout the application. For example
+When developing an application, we would usually write some utility functions that could be reused throughout the application. 
+
+An example
 
 ```javascript
 //--------------
@@ -48,9 +46,7 @@ function calculate(a, b){
 }
 ```
 
-Lodash is a package that provides a ton of utilities to help us with manipulating the data we have. It has
-implementations like _clone, deepClone, isNil, every, sum_ etc. In a large application you would 
-import the utilities from lodash like this and use it
+Lodash is a package that provides a ton of utilities to help us with manipulating the data we have. It has implementations like _clone, deepClone, isNil, every, sum_ etc. In a large application, you would import the utilities from lodash like this and use it
 
 ```jsx
 import { sum } from "lodash";
@@ -60,7 +56,7 @@ import { sum } from "lodash";
 }}> Sum of Array </Button>
 ```
 
-When we are doing this _named import_ from lodash, we are actually imporing the whole lodash.js file and using just the
+When we are doing this _named import_ from lodash, we are actually importing the whole lodash.js file and using just the
 sum function from it. 
 
 ```javascript
@@ -76,7 +72,7 @@ lodash.sum([1, 2, 3, 3])
 So, with the named exports it is not possible for the bundlers like webpack to treeshake the unwanted code, and we 
 end up shipping entire lodash utilities to the user. 
 
-You can avoid this by directly imporing the utility you need from lodash like this
+You can avoid this by directly importing the utility you need from lodash like this
 
 ```javascript
 import sum from "lodash/sum";
@@ -85,7 +81,7 @@ import throttle from "lodash/throttle";
 ...
 ```
 
-But this can be tough to maintain, if you are using a lot of utilities from lodash in a file and you would have a bunch
+But this can be tough to maintain if you are using a lot of utilities from lodash in a file and you would have a bunch
 of `import` statements at the top.
 
 Thankfully with babel we have a plugin called [babel-plugin-transform-imports](https://www.npmjs.com/package/babel-plugin-transform-imports),
@@ -132,16 +128,15 @@ var lodash_sum = import('lodash/sum.js');
 lodash_sum([1, 2, 3, 3])
 ```
 
-Which results in smaller bundle size!
+Which results in a smaller bundle size!
 
 ## Let's Measure It
 
-The important step that we need to do while carrying out performance optimizations is to measure it. 
+The significant step that we need to do while carrying out performance optimizations is to measure it. 
 
-We need to measure the cost before and after introducing a optimization.
+We need to measure the cost before and after introducing an optimization.
 
-If we aren't measuring it, one little mistake with the optimization would cost us additional
-performance hit than what was before! So, the rule of the thumb is
+If we aren't measuring it, one little mistake with the optimization would cost us additional performance hit than what was before! So, the rule of the thumb is
 
 > Don't do performance optimizations without measuring it.
 
@@ -188,7 +183,7 @@ function App() {
 
 Now, let's [analyse the bundle size](https://create-react-app.dev/docs/analyzing-the-bundle-size).
 
-For this we would use the package [source-map-explorer](https://www.npmjs.com/package/source-map-explorer)
+For this, we would use the package [source-map-explorer](https://www.npmjs.com/package/source-map-explorer)
 which gives a nice visualisation of the bundles that we ship to the users.
 
 ```
@@ -236,7 +231,7 @@ Running this command would open a tab in the default browser with the bundle det
   objectFit='contain'
 />
 
-As you can observe, we are shipping ~70 KB of lodash package just for using a simple `sum` utility
+If the image is too small, the box which has text underlined in red is the size of lodash we are serving to users. We are shipping ~70 KB of lodash package just for using a simple `sum` utility. Accounts for about 35% of total bundle size 🤯
 
 ## Let's optimize it
 
@@ -274,7 +269,7 @@ Replace `react-scripts` with `react-app-rewired` in package.json
 + "build": "react-app-rewired build",
 ```
 
-The override setup is done, now we can configure babel in create-react-app!
+The override setup is completed. Now, we can configure babel in create-react-app!
 
 To do that, create a .babelrc file in root directory and use the following code
 
@@ -315,7 +310,7 @@ then
 npm run analyze
 ```
 
-Boom! 
+💥 Boom! 💥
 
 <Image
   alt="Bundle size after optimization"
@@ -325,14 +320,14 @@ Boom!
   objectFit='contain'
 />
 
+_In the above image, we could not see the lodash box that we saw earlier because of optimization_
 
-It looks like lodash is gone! Actually it's not. Since the cost of `sum` utility is so small, our 
-_source-map-explorer_ isn't showing that up. Right after the build command, you can see the reduction of chunk size by 23 KB.
 
-## Let's explore futher
+It looks like lodash is gone! Actually, it's not. Since the cost of `sum` utility is so small, our _source-map-explorer_ isn't showing that up. Right after the build command, you can see the reduction of chunk size by 23 KB.
 
-If you are satisfied with the optimization by looking at the output from _source-map-explorer_ then we are good. 
-If you are not, and you are really curious to see the babel magic, let's explore further.
+## Let's explore further
+
+If you are satisfied with the optimization by looking at the output from _source-map-explorer_ then we are good. If you are not, and you are really curious to see the babel magic, let's explore further.
 
 First, let's go back to the state of our application before optimization. 
 
@@ -377,8 +372,7 @@ File sizes after gzip:
   625 B (+51 B)         build/static/css/main.9d5b29c0.chunk.css
 ```
 
-The first thing you can observe here is the increase in bundle size! This is because we are no 
-longer minifying our code.
+The first thing you can observe here is the increase in bundle size! This is because we are no longer minifying our code.
 
 Go into the `/build/static/js` folder and open the main chunk (main.[HASH].chunk.js). 
 
@@ -440,8 +434,44 @@ Instead of importing everything from lodash.js we are now importing from lodash/
 
 Now we can be confident that the babel transform is working as expected.
 
-> The beauty of the package `babel-plugin-transform-imports` is that it can be used to optimize the imports of
-> other packages as well like Material UI, react-bootstrap etc.
+## How to configure for Next.js
+
+In the demo above, we saw how to configure `babel-plugin-transform-imports` in create next app CLI. If you are using lodash package with [NextJS](https://nextjs.org/) and if you want to reduce the footprint, it is very simple to do  without doing the extra work of *rewiring* and *customizing* stuff.
+
+Next.js provides a way for us to tweak into babel and webpack configuration without any hassle. This is the thing I like about Nextjs, it sets up all the right defaults for you, and at the same time, it gives you the **root user** permissions to tweak the stuff. Enough said, let us see how to do this (in) next.
+
+First install `babel-plugin-transform-imports`
+
+```bash
+npm install --save-dev babel-plugin-transform-imports
+```
+
+Then create `.babelrc` file in the root directory and place this code. 
+
+```javascript
+{
+    "presets": ["next/babel"],
+    "plugins": [
+        [
+            "babel-plugin-transform-imports",
+            {
+                "lodash": {
+                    "transform": "lodash/${member}",
+                    "preventFullImport": true
+                }
+            }
+        ]
+    ]
+}
+```
+
+This [custom configuration file](https://nextjs.org/docs/advanced-features/customizing-babel-config) would be picked by next while building your application.
+
+That's it! Congrats 🎉 
+
+Now you have shipped just the code you need to run your application !
+
+> The beauty of the package `babel-plugin-transform-imports` is that it can be used to optimize the imports of other packages as well like Material UI, react-bootstrap etc.
 
 ----
 
@@ -453,4 +483,4 @@ References
 - [customize-cra](https://www.npmjs.com/package/customize-cra)
 - [webpack - Optimization](https://webpack.js.org/configuration/optimization/#optimizationminimize)
 - [Analyzing the Bundle Size](https://create-react-app.dev/docs/analyzing-the-bundle-size)
-
+- [Customizing Babel Config in Next.js](https://nextjs.org/docs/advanced-features/customizing-babel-config)
