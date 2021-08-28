@@ -440,7 +440,13 @@ In the demo above, we saw how to configure `babel-plugin-transform-imports` in c
 
 Next.js provides a way for us to tweak into babel and webpack configuration without any hassle. This is the thing I like about Nextjs, it sets up all the right defaults for you, and at the same time, it gives you the **root user** permissions to tweak the stuff. Enough said, let us see how to do this (in) next.
 
-Create `.babelrc` in the root directory and place this code. 
+First install `babel-plugin-transform-imports`
+
+```bash
+npm install --save-dev babel-plugin-transform-imports
+```
+
+Then create `.babelrc` file in the root directory and place this code. 
 
 ```javascript
 {
