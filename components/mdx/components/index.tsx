@@ -17,7 +17,7 @@ import { ReactElement } from 'react';
 
 const InlineCode = (props: unknown): ReactElement => (
     <ChakraCode
-        apply="mdx.code"
+        apply="general.code"
         color={useColorModeValue('code.color.light', 'code.color.dark')}
         backgroundColor={useColorModeValue('code.bg.light', 'code.bg.dark')}
         {...props}
@@ -54,38 +54,11 @@ const TData = (props: unknown): ReactElement => (
 const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
-    h1: (props): ReactElement => <Heading as="h2" apply="mdx.h1" {...props} />,
-    h2: (props): ReactElement => (
-        <Heading
-            apply="mdx.h2"
-            {...props}
-            color={useColorModeValue('heading.light', 'heading.dark')}
-        />
-    ),
-    h3: (props): ReactElement => (
-        <Heading
-            as="h3"
-            apply="mdx.h3"
-            {...props}
-            color={useColorModeValue('heading.light', 'heading.dark')}
-        />
-    ),
-    h4: (props): ReactElement => (
-        <Heading
-            as="h4"
-            apply="mdx.h4"
-            {...props}
-            color={useColorModeValue('heading.light', 'heading.dark')}
-        />
-    ),
-    strong: (props): ReactElement => (
-        <Box
-            as="strong"
-            color={useColorModeValue('strong.light', 'strong.dark')}
-            fontWeight="extrabold"
-            {...props}
-        />
-    ),
+    h1: (props): ReactElement => <Heading as="h2" {...props} />,
+    h2: (props): ReactElement => <Heading {...props} />,
+    h3: (props): ReactElement => <Heading as="h3" {...props} />,
+    h4: (props): ReactElement => <Heading as="h4" {...props} />,
+    strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
     inlineCode: InlineCode,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     pre: (preProps) => {
@@ -113,17 +86,21 @@ const MDXComponents = {
             as="blockquote"
             rounded="4px"
             my="1.5rem"
+            sx={{
+                // > p needed to override common p tag styles under mdx-styles
+                '> p': {
+                    mt: 0
+                }
+            }}
             {...props}
         />
     ),
     a: ChakraLink,
-    p: (props): ReactElement => <chakra.p apply="mdx.p" {...props} />,
-    ul: (props): ReactElement => <chakra.ul apply="mdx.ul" {...props} />,
-    ol: (props): ReactElement => <chakra.ol apply="mdx.ul" {...props} />,
-    li: (props): ReactElement => <chakra.li apply="mdx.li" {...props} />,
-    em: (props): ReactElement => (
-        <chakra.p as="em" color={useColorModeValue('em.light', 'em.dark')} mr={1} {...props} />
-    ),
+    p: (props): ReactElement => <chakra.p {...props} />,
+    ul: (props): ReactElement => <chakra.ul {...props} />,
+    ol: (props): ReactElement => <chakra.ol {...props} />,
+    li: (props): ReactElement => <chakra.li {...props} />,
+    em: (props): ReactElement => <chakra.p as="em" {...props} />,
     Image: (props): ReactElement => (
         <Center mt="5">
             <ChakraNextImage {...props} />
