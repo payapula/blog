@@ -82,6 +82,25 @@ const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleO
     em: {
         color: colorMode === 'light' ? 'em.light' : 'em.dark',
         marginRight: '0.25rem'
+    },
+    '.inlinecode': {
+        rounded: 'sm',
+        px: '1',
+        fontSize: '0.875em',
+        py: '2px',
+        whiteSpace: 'nowrap',
+        lineHeight: 'normal',
+        fontFamily: 'Monaco,Menlo,Consolas,Courier New,monospace!important',
+        border: '1px solid #1d1c1d21',
+        borderRadius: '3px',
+        color: colorMode === 'light' ? 'code.color.light' : 'code.color.dark',
+        backgroundColor: colorMode === 'light' ? 'code.bg.light' : 'code.bg.dark'
+    },
+    th: {
+        backgroundColor: colorMode === 'light' ? 'gray.50' : 'whiteAlpha.100',
+        fontWeight: 'semibold',
+        padding: '2',
+        fontSize: 'sm'
     }
 });
 

@@ -18,17 +18,6 @@ const general = {
             outline: '2px dashed teal',
             boxShadow: 'none'
         }
-    },
-    code: {
-        rounded: 'sm',
-        px: '1',
-        fontSize: '0.875em',
-        py: '2px',
-        whiteSpace: 'nowrap',
-        lineHeight: 'normal',
-        fontFamily: 'Monaco,Menlo,Consolas,Courier New,monospace!important',
-        border: '1px solid #1d1c1d21',
-        borderRadius: '3px'
     }
 };
 

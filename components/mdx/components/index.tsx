@@ -1,13 +1,5 @@
 /* eslint-disable */
-import {
-    Alert,
-    Box,
-    Heading,
-    chakra,
-    Center,
-    Code as ChakraCode,
-    useColorModeValue
-} from '@chakra-ui/react';
+import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 import { ChakraLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
@@ -16,12 +8,8 @@ import { ReactElement } from 'react';
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
 const InlineCode = (props: unknown): ReactElement => (
-    <ChakraCode
-        apply="general.code"
-        color={useColorModeValue('code.color.light', 'code.color.dark')}
-        backgroundColor={useColorModeValue('code.bg.light', 'code.bg.dark')}
-        {...props}
-    />
+    // .inlinecode is styled in mdx-styles file
+    <ChakraCode className="inlinecode" {...props} />
 );
 
 const Table = (props: unknown): ReactElement => (
@@ -30,15 +18,7 @@ const Table = (props: unknown): ReactElement => (
     </chakra.div>
 );
 
-const THead = (props: unknown): ReactElement => (
-    <chakra.th
-        bg={useColorModeValue('gray.50', 'whiteAlpha.100')}
-        fontWeight="semibold"
-        p={2}
-        fontSize="sm"
-        {...props}
-    />
-);
+const THead = (props: unknown): ReactElement => <chakra.th {...props} />;
 
 const TData = (props: unknown): ReactElement => (
     <chakra.td
