@@ -1,4 +1,4 @@
-// Inspired by https://github.com/guarmo/portfolio/blob/master/components/About.jso
+// Inspired by https://github.com/guarmo/portfolio/blob/master/components/About.js
 import { Flex, Text, useColorModeValue, Icon, SimpleGrid, Heading } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { IconType } from 'react-icons';
@@ -39,8 +39,18 @@ const iconSet: IconSet = {
 };
 
 function Technologies(): ReactElement {
+    const technologiesBgColor = useColorModeValue('#EDF7FA', 'gray.800');
+
     return (
-        <Flex direction="column" align="center" mt={10}>
+        <Flex
+            direction="column"
+            align="center"
+            mt={10}
+            width="100vw"
+            background={technologiesBgColor}
+            position="relative"
+            left="calc(-50vw + 50%)"
+            py={10}>
             <Heading>Technologies</Heading>
             <Text fontSize={['sm', null, 'md', 'lg']} mt="7" textAlign="center">
                 These are the toolstacks I have hands-on experience on
