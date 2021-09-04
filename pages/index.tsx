@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import { Layout } from '../components/layout';
 import { RecentPosts } from 'components/recent-posts';
 import { HeroContent } from 'components/hero-content';
+import { Quotes } from 'components/quotes';
 import { Technologies } from 'components/technologies';
 import Head from 'next/head';
 import { History } from 'components/history';
@@ -21,6 +22,7 @@ const Index = ({ recentPosts }: IndexProps): ReactElement => {
             </Head>
             <HeroContent />
             <RecentPosts recentPosts={recentPosts} />
+            <Quotes />
             <Technologies />
             <History />
         </Layout>

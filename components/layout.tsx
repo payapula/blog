@@ -14,7 +14,7 @@ function Layout({ type, headerSticky = false, children }: LayoutProps): ReactEle
     const isBlog = type === 'BLOG';
     const isHome = type === 'HOME';
     const containerWidth = isBlog
-        ? [null, null, '95%', '80%', '800px']
+        ? [null, null, '95%', '80%', '700px']
         : [null, null, '95%', '80%'];
 
     return (
