@@ -17,7 +17,7 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
             width="100vw"
             background={postsBackgroundColor}
             position="relative"
-            left="calc(-50vw + 49%)">
+            left="calc(-50vw + 50%)">
             <Box
                 height={['700px', null, null, null, '400px']}
                 mt={['3', null, null, null, '1']}

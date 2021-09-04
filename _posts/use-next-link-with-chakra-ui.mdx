@@ -1,0 +1,235 @@
+---
+title: 'How to use Nextjs Link with Chakra UI'
+excerpt: "One of the frequently asked questions on chakra ui library discussions is, How do I use nextjs link with chakra ui button or chakra link?. In this post let us explore some common patterns to use nextjs link in ui libraries."
+date: '2021-09-04'
+description: "One of the frequently asked questions on chakra ui library discussions is, How do I use nextjs link with chakra ui button or chakra link? In this post let us explore some common patterns to use nextjs link in ui libraries. The approach mentioned here is not specific to chakra ui library, we can make nextjs link work with any UI framework with the pattern discussed in this post. Added examples with nextjs link for javascript and typescript"
+cover: 
+    src: '/assets/blog/use-next-link-with-chakra-ui/nextjs-link-in-chakra-cover.jpg'  
+    alt: 'A closer photograph of chain connection'
+    author: 
+      name: 'Edge2Edge Media'
+      url: https://unsplash.com/@edge2edgemedia?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/use-next-link-with-chakra-ui/nextjs-link-in-chakra-cover.jpg'  
+    alt: 'A closer photograph of chain connection'
+---
+
+_One of the frequently asked questions on chakra ui library discussions is, How do I use nextjs link with chakra ui button or chakra link? In this post let us explore some common patterns to use nextjs link with chakra._
+
+NextJS provides a Link component out of the box, that can be used for Client-side transitions between different routes. This `Link` component is exported from `next/link` package. 
+
+What is so special about this component is, it **prefetches** the linked route by default to provide rapid fast 🚀 page transitions. Until the Link becomes visible to the user, it won't prefetch the route, and once the Link is visible the prefetch is done in the background.
+
+So, to use this component with our design system, we can create a custom component wrapper and make it reusable across the application. Let's see how to do that next. 
+
+## Create Chakra Button with Next Link
+
+Surround chakra `Button` with next's `Link` and provide a `passHref` prop so that it [forwards href to the rendered anchor tag](https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag) for proper semantics and SEO.
+
+```jsx {6,7}
+import Link from "next/link";
+import { Button } from "@chakra-ui/react";
+
+function ChakraNextLinkButton({ href, children, ...props }) {
+  return (
+    <Link href={href} passHref>
+      <Button as="a" {...props}>
+        {children}
+      </Button>
+    </Link>
+  );
+}
+
+function IndexPage() {
+  return (
+      <ChakraNextLinkButton href="/about" colorScheme="facebook">
+        About
+      </ChakraNextLinkButton>
+  );
+}
+```
+
+Notice the `as` prop in chakra button on line number 7. We are rendering anchor tag instead of button on DOM and applying chakra button styles to it! You can pass all the chakra button props to the component `ChakraNextLinkButton` like _onClick, padding, margin_ etc. 
+
+With this approach, we are following proper _web semantics_.
+
+We can change the `variant` prop to `'link'` to the same component to render the link styles.
+
+```jsx
+<ChakraNextLinkButton href="/about" variant="link">
+   About
+</ChakraNextLinkButton>
+```
+
+At the same time, if you want to have control over next's `Link` via props, you would need to separate the props in the custom component and pass it appropriately like below
+
+```jsx {4,6,19}
+import Link from "next/link";
+import { Button } from "@chakra-ui/react";
+
+function ChakraNextLinkButton({ href, children, prefetch = true, ...props }) {
+  return (
+    <Link href={href} passHref prefetch={prefetch}>
+      <Button as="a" {...props}>
+        {children}
+      </Button>
+    </Link>
+  );
+}
+
+function IndexPage() {
+  return (
+      <ChakraNextLinkButton
+            href="/about"
+            colorScheme="facebook"
+            prefetch={false}>
+            About without prefetch
+       </ChakraNextLinkButton>
+  );
+}
+```
+
+See more about Next's Link props in [next's documentation about Link component](https://nextjs.org/docs/api-reference/next/link)
+
+## Create Chakra Link with Next Link
+
+If we want to use Chakra's Link with Next's Link, we can do that easily by this method.
+
+```jsx {2,7,14}
+import Link from "next/link";
+import { Link as ChakraLink } from "@chakra-ui/react";
+
+function ChakraNextLink({ href, children, ...props }) {
+  return (
+    <Link href={href} passHref>
+      <ChakraLink {...props}>{children}</ChakraLink>
+    </Link>
+  );
+}
+
+function IndexPage() {
+  return (
+      <ChakraNextLink href="https://bharathikannan.com" isExternal color="red">
+        Visit my homepage
+      </ChakraNextLink>
+  )
+}
+```
+
+Notice that we can pass `isExternal` prop to the custom component, and that would forward the prop to Chakra's Link component to add the `target="_blank"` and `rel="noopener noreferrer"` attributes to rendered HTML automatically.
+
+## Usage with Typescript
+
+If you are using next js with typescript and if you want to make use of typescript intellisense, code completion and static type checking for our custom chakra components, you can create a new prop type by _merging Chakra's Props and Next's Props_ and provide it to our component like below
+
+```tsx {7,14}
+import Link, { LinkProps } from "next/link";
+import {
+  Button,
+  ButtonProps,
+} from "@chakra-ui/react";
+
+type ChakraAndNextProps = ButtonProps & LinkProps;
+
+function ChakraNextLinkButton({
+  href,
+  children,
+  prefetch = true,
+  ...props
+}: ChakraAndNextProps) {
+  return (
+    <Link href={href} passHref prefetch={prefetch}>
+      <Button as="a" {...props}>
+        {children}
+      </Button>
+    </Link>
+  );
+}
+
+function IndexPage() {
+  return (
+      <ChakraNextLinkButton href="/about" colorScheme="facebook">
+        About
+      </ChakraNextLinkButton>
+  );
+}
+```
+
+Wow! Now we got code completion with static props checking! 
+
+And for the Chakra Link,
+
+```tsx {7,9}
+import Link, { LinkProps } from "next/link";
+import {
+  Link as ChakraLink,
+  LinkProps as ChakraLinkProps,
+} from "@chakra-ui/react";
+
+type ChakraLinkAndNextProps = ChakraLinkProps & LinkProps;
+
+function ChakraNextLink({ href, children, ...props }: ChakraLinkAndNextProps) {
+  return (
+    <Link href={href} passHref>
+      <ChakraLink {...props}>{children}</ChakraLink>
+    </Link>
+  );
+}
+
+
+function IndexPage() {
+  return (
+    <ChakraNextLink href="https://bharathikannan.com" isExternal color="red">
+      Visit my homepage
+    </ChakraNextLink>
+  );
+}
+```
+
+Great! Now we won't be missing Chakra's prop intellisense! 
+
+> Note: In the above examples, you are responsible for separating chakra props and next props and passing it to the corresponding components!
+
+## Bonus Tip
+
+You can shorten the prop spreading on components without mentioning `children`
+
+```jsx {5,6,7,13,16}
+// BEFORE
+function ChakraNextLinkButton({ href, children, prefetch = true, ...props }) {
+  return (
+    <Link href={href} passHref prefetch={prefetch}>
+      <Button as="a" {...props}>
+        {children}
+      </Button>
+    </Link>
+  );
+}
+
+// AFTER
+function ChakraNextLinkButton({ href, prefetch = true, ...props }) {
+  return (
+    <Link href={href} passHref prefetch={prefetch}>
+      <Button as="a" {...props} />
+    </Link>
+  );
+}
+```
+
+## Sandbox Links
+
+Here is the sandbox link for all the above examples to see it live ✅
+
+- [Javascript Sandbox with Chakra next Link Components](https://codesandbox.io/s/determined-napier-esk6e?file=/pages/index.js)
+- [Typescript Sandbox with Chakra next Link Components](https://codesandbox.io/s/vigilant-pare-ci138?file=/pages/index.tsx)
+
+> Do you think anything else to be added? Did you notice any issues in the post? Let me know at my Twitter handle, or please feel free to submit a PR to edit this post! There should be an Edit this Post link below 😀
+
+----
+
+References
+
+- [Chakra Button Docs](https://chakra-ui.com/docs/form/button)
+- [Chakra Link Docs](https://chakra-ui.com/docs/navigation/link)
+- [Next Link Docs](https://nextjs.org/docs/api-reference/next/link)
+

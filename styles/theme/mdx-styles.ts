@@ -1,14 +1,24 @@
-const mdx = {
-    h1: {
-        mt: '2rem',
-        mb: '.25rem',
-        lineHeight: 1.2,
-        fontWeight: 'bold',
-        fontSize: '1.875rem',
-        letterSpacing: '-.025em'
-    },
+import { ChakraTheme } from '@chakra-ui/react';
+import { SystemStyleObject } from '@chakra-ui/styled-system';
+
+const listStyles = {
+    mt: '1rem',
+    ml: '1.25rem',
+    lineHeight: 1.6,
+    'blockquote &': { mt: 0 },
+    '& > * + *': {
+        mt: '0.25rem'
+    }
+};
+
+type ColorMode = 'light' | 'dark';
+
+const headingColor = (colorMode: ColorMode) =>
+    colorMode === 'light' ? 'heading.light' : 'heading.dark';
+
+const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleObject => ({
     h2: {
-        mt: '3rem',
+        mt: '2rem',
         mb: '0.5rem',
         lineHeight: 1.3,
         fontWeight: 'semibold',
@@ -16,21 +26,30 @@ const mdx = {
         letterSpacing: '-.025em',
         '& + h3': {
             mt: '1.5rem'
+        },
+        color: headingColor(colorMode),
+        [`@media (min-width: ${theme.breakpoints.lg})`]: {
+            mt: '3rem',
+            fontSize: '4xl'
         }
     },
     h3: {
         mt: '3rem',
-        // mb: "0.5rem",
         lineHeight: 1.25,
         fontWeight: 'semibold',
-        fontSize: '1.25rem',
-        letterSpacing: '-.025em'
+        fontSize: '1.15rem',
+        letterSpacing: '-.025em',
+        color: headingColor(colorMode),
+        [`@media (min-width: ${theme.breakpoints.lg})`]: {
+            fontSize: '1.25rem'
+        }
     },
     h4: {
         mt: '3rem',
         lineHeight: 1.375,
         fontWeight: 'semibold',
-        fontSize: '1.125rem'
+        fontSize: '1.125rem',
+        color: headingColor(colorMode)
     },
     p: {
         mt: '1.25rem',
@@ -39,34 +58,32 @@ const mdx = {
             mt: 0,
             lineHeight: 1.7
         },
-        fontSize: '1.125rem'
-    },
-    hr: {
-        my: '4rem'
-    },
-    blockquote: {
-        bg: 'orange.100',
-        borderWidth: '1px',
-        borderColor: 'orange.200',
-        rounded: 'lg',
-        px: '1.25rem',
-        py: '1rem',
-        my: '1.5rem'
-    },
-    ul: {
-        mt: '1rem',
-        ml: '1.25rem',
-        lineHeight: 1.6,
-        'blockquote &': { mt: 0 },
-        '& > * + *': {
-            mt: '0.25rem'
+        fontSize: '1rem',
+        [`@media (min-width: ${theme.breakpoints.lg})`]: {
+            fontSize: '1.125rem'
         }
     },
-    li: {
-        fontSize: '1.15rem',
-        paddingBottom: '4px'
+    ul: {
+        ...listStyles
     },
-    code: {
+    ol: {
+        ...listStyles
+    },
+    li: {
+        fontSize: '1rem',
+        paddingBottom: '4px',
+        [`@media (min-width: ${theme.breakpoints.lg})`]: {
+            fontSize: '1.15rem'
+        }
+    },
+    strong: {
+        color: colorMode === 'light' ? 'strong.light' : 'strong.dark'
+    },
+    em: {
+        color: colorMode === 'light' ? 'em.light' : 'em.dark',
+        marginRight: '0.25rem'
+    },
+    '.inlinecode': {
         rounded: 'sm',
         px: '1',
         fontSize: '0.875em',
@@ -75,8 +92,16 @@ const mdx = {
         lineHeight: 'normal',
         fontFamily: 'Monaco,Menlo,Consolas,Courier New,monospace!important',
         border: '1px solid #1d1c1d21',
-        borderRadius: '3px'
+        borderRadius: '3px',
+        color: colorMode === 'light' ? 'code.color.light' : 'code.color.dark',
+        backgroundColor: colorMode === 'light' ? 'code.bg.light' : 'code.bg.dark'
+    },
+    th: {
+        backgroundColor: colorMode === 'light' ? 'gray.50' : 'whiteAlpha.100',
+        fontWeight: 'semibold',
+        padding: '2',
+        fontSize: 'sm'
     }
-};
+});
 
-export { mdx };
+export { injectColorMode };

@@ -1,3 +1,7 @@
+import { Styles } from '@chakra-ui/theme-tools';
+import { injectColorMode as mdxStylesWithColorInjected } from './mdx-styles';
+import { ChakraTheme } from '@chakra-ui/react';
+
 // general can include any number of custom keys
 const general = {
     link: {
@@ -22,4 +26,17 @@ const fonts = {
     heading: 'Roboto, sans-serif, system-ui'
 };
 
-export { general, fonts };
+/**
+ * All the elements under the class `mdx-global-styles` would be styled as specified
+ *
+ * Idea from Chakra Docs - https://chakra-ui.com/docs/features/global-styles#styling-non-chakra-elements-globally
+ */
+const styles: Styles = {
+    global: ({ colorMode, theme }) => ({
+        '.mdx-global-styles': {
+            ...mdxStylesWithColorInjected(colorMode, theme as ChakraTheme)
+        }
+    })
+};
+
+export { general, fonts, styles };

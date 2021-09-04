@@ -56,7 +56,7 @@ function HeroContent(): ReactElement {
                 <Link
                     {...buttonStyles}
                     _hover={{
-                        background: useColorModeValue('blue.600', 'blue.300')
+                        background: useColorModeValue('blue.800', 'blue.300')
                     }}
                     _focus={{
                         background: useColorModeValue('blue.600', 'blue.300'),

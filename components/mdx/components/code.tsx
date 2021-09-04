@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
 import theme from 'styles/theme/dracula-soft';
-import { bpDesktopOnly } from 'styles/theme/breakpoints';
+import { bpDesktopOnly, bpTabletsOnly } from 'styles/theme/breakpoints';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import { useColorModeValue } from '@chakra-ui/react';
 
@@ -18,8 +18,8 @@ const wrapperStyles = css`
     margin-left: -20px;
     margin-right: -20px;
     ${bpDesktopOnly} {
-        margin-left: -80px;
-        margin-right: -80px;
+        margin-left: -60px;
+        margin-right: -60px;
     }
 `;
 
@@ -28,9 +28,15 @@ const preStyles = css`
     min-width: 100%;
     overflow: initial;
     line-height: 1.6;
+    font-size: 12px;
     border-radius: 4px;
-    font-size: 16px;
     padding: 10px;
+    ${bpTabletsOnly} {
+        font-size: 14px;
+    }
+    ${bpDesktopOnly} {
+        font-size: 16px;
+    }
 `;
 
 function calculateLinesToHighlight(meta) {
