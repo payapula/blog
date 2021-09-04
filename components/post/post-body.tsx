@@ -27,7 +27,7 @@ function PostBody({ content, intersectionRef, componentNames }: PostBodyProps): 
     };
 
     return (
-        <Box mt={10} ref={intersectionRef}>
+        <Box mt={10} ref={intersectionRef} className="mdx-global-styles">
             <MDXRemote {...content} components={usedComponents} />
         </Box>
     );

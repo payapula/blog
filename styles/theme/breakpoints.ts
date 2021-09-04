@@ -1,7 +1,5 @@
 import { createBreakpoints } from '@chakra-ui/theme-tools';
 
-const bpDesktopOnly = `@media (min-width: ${1200 + 1}px)`;
-
 const baseBreakpoints = {
     xs: '350px',
     sm: '450px',
@@ -11,6 +9,12 @@ const baseBreakpoints = {
     '2xl': '1440px'
 };
 
+// Should align with baseBreakpoints above
+const bpTabletsOnly = `@media (min-width: ${960 + 1}px)`;
+
+// Should align with baseBreakpoints above
+const bpDesktopOnly = `@media (min-width: ${1200 + 1}px)`;
+
 const breakpoints = createBreakpoints(baseBreakpoints);
 
-export { breakpoints, bpDesktopOnly };
+export { breakpoints, bpDesktopOnly, bpTabletsOnly };
