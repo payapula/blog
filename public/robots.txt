@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://bharathikannan.com/api/posts-sitemap
+Sitemap: https://bharathikannan.com/sitemap.xml
