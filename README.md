@@ -1,25 +1,26 @@
-# Blog
+# Website
 
 Portfolio Website & tech blog of Payapula
+Live at https://www.bharathikannan.com/
 
 ---
 
 ## Tech Stack
 
--   Next JS
--   Chakra UI
--   Next MDX Remote
+-   [Next JS](https://nextjs.org/)
+-   [Chakra UI](https://chakra-ui.com/)
+-   [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote)
 
 ---
 
 ## Resources
 
 -   [MDX Embed](https://www.mdx-embed.com/?path=/docs/mdx-embed--page)
--   [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote)
+-   [Blog Example with next mdx remote](https://github.com/vercel/next.js/tree/canary/examples/with-mdx-remote)
 
 ---
 
-## Inspirations and Code references
+## Inspirations
 
 -   [Kent C Dodds Blog](https://github.com/kentcdodds/kentcdodds.com)
 -   [Leerob Blog](https://github.com/leerob/leerob.io)
