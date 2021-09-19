@@ -146,7 +146,7 @@ React.useEffect(() => {
 
 So the takeaway from this section is
 
-> Every hook in a component would be called on every Render.
+> Every hook in a component would be called on the mount phase (with or without the dependencies specified).
 
 ## useEffect on Unmount
 
@@ -319,9 +319,9 @@ The full picture of the flow of hooks can be understood from this [flow-chart by
 
 To Summarise
 
-> 1. Every hook in a component would be called on Every Render.
+> 1. Every hook in a component would be called on the mount phase (with or without the dependencies specified).
 > 2. When the component is unmounted, cleanup function from all the useEffects are executed. 
-> 3. React when rerunning an useEffect, it executes the clean up function before executing the hook.
+> 3. React, when re-running an useEffect, it executes the clean up function before executing the hook.
 
 
 
