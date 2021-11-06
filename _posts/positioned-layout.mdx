@@ -1,0 +1,204 @@
+---
+title: 'Positioned Layout in CSS'
+excerpt: "Positioned layout differs from the OG Flow layout in CSS in the way that items can overlap with each other. It is set using the `position` property of CSS. The possible values for position are `relative`, `absolute`, `fixed`, and `sticky`."
+date: '2021-11-02'
+description: "This post acts as notes for Module 2 of Josh Comeau's Course CSS for JavaScript Developers. its an excellent course if you want to understand CSS. As a way of Learning in Public, I wanted to write out things, I learned from that course, it would help me stay in focus and actually learn."
+cover: 
+    src: '/assets/blog/positioned-layout/positioned-layout.jpg'  
+    alt: 'A water droplet.'
+    author: 
+      name: 'Aaron Burden'
+      url: https://unsplash.com/@aaronburden?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/positioned-layout/positioned-layout.jpg'  
+    alt: 'A water droplet.'
+---
+
+_This post acts as notes for Module 2 of Josh Comeau's Course [CSS for JavaScript Developers](https://courses.joshwcomeau.com/CSS-for-js). its an excellent course if you want to understand CSS. As a way of Learning in Public, I wanted to write out things, I learned from that course, it would help me stay in focus and actually learn._
+
+Positioned layout differs from the OG Flow layout in CSS in the way that items can overlap with each other. It is set using the `position` property of CSS. The possible values for position are `relative`, `absolute`, `fixed`, and `sticky`.
+
+## Relative
+
+With this property on an element, along with the directional properties like top, right, bottom or left the element would be positioned relative to its original position.
+
+For example, `left: 50px` would shift an element 50px from the left. 
+
+The crucial difference between shifting an element from its natural position by having position set as `relative` rather than using `margin` properties is that the neighboring elements won't be impacted by the shift in the case of relative. 
+
+The neighboring elements behave as if the relative positioned element is still in its original position. The shift is just **cosmetic**.
+
+This property can be applied to _inline elements_ to shift them from natural position.
+
+## Absolute
+
+Absolute positioned elements takes the same properties of relatively positioned elements, which is top, right, bottom and left. The difference is absolutely positioned elements would be placed based on its container rather than its in-flow position.
+
+- If there is no anchor properties specified on absolute element, it would be laid out in its in-flow position.
+- `position: absolute` would take the element out of the flow.
+- `display: inline` or `display: block` has no effect on absolutely positioned elements.
+- The default behavior of absolute elements is to try to fit the content's width. 
+
+### Centering Trick
+
+To center an absolutely positioned elements relative to its parent we would make use of _hungry margin_'s trick which sets the element's margin to auto. 
+
+This effectively adjusts the margin's vertically and horizontally which forces the element to be in the center of the container.
+
+In case of flow layout, the margin tricks would be applied only on the inline direction (horizontally), however with absolute positioning, margin applies on block direction as well (vertical).
+
+There are four important ingredients for this trick to work:
+
+- absolute positioning (position: `absolute`)
+- Equal distances from each edge (ideally `0px`)
+- A fixed size (defined `width` and `height` properties)
+- Hungry margins (margin: `auto`)
+
+### Containing Blocks
+
+Absolutely positioned elements would be placed based on its containing block. 
+
+- Absolute element can only be contained by other elements which uses positioned layout. 
+- When deciding where to place an absolutely-positioned element, it crawls up through the tree, looking for a Positioned ancestor. The first one it finds will provide the containing block.
+- The other element doesn't necessarily be relative, `absolute`, `fixed`, and `sticky` will also work.
+- Absolute element's doesn't care about properties like `padding`, as it is taken out of flow.
+
+## Stacking Contexts
+
+When two or more elements overlap, the browser decides to show one element on top of another element. We will see in this section how the overlapping behavior is calculated by the browser.
+
+- Positioned elements will always render on top of non-positioned ones.
+- On the first iteration to layout elements, the browser would paint all the non-positioned elements (Flex, Grid, Flow etc.), then it would render positioned ones on top of them.
+- If both the elements use positioned layouts then DOM order wins.
+
+_These are some declarations that create a new stacking context_:
+
+- Setting `opacity` to a value less than 1
+- Setting position to `fixed` or `sticky` (No z-index needed for these values!)
+- Applying a `mix-blend-mode` other than normal
+- Adding a z-index to a child inside a `display: flex` or `display: grid` container
+- Using `transform`, `filter`, `clip-path`, or `perspective`
+- Explicitly creating a context with `isolation: isolate`
+
+
+### Z-Index
+
+- Z-Index is used to override default browser behavior as explained in the above section.
+- Z-Index **works only on the positioned elements**, it will have no effect on Flow elements.
+- Z-Index values are **not global**, they are not compared against the entire application.
+- When we create a stacking context, **any children on that element would only be compared with children within that element**.
+- The isolation property trick can be used to separate different sections from not taking part in stacking context wars. 
+- The `isolation: isolate` on an element creates a stacking context without setting a z-index!
+- The isolation property is not supported in Internet Explorer.
+
+### Portals
+
+- In an application with lot of components like dropdowns, modals, drawers, and tooltips, etc. managing the stacking contexts can be **difficult**.
+- Portals are special type of utility to **place a DOM element outside its parent and all the way at the bottom** of the DOM structure.
+- This is helpful to place any overlay contents like dropdown options, modals, drawers etc. to be on top of the application elements just by **using the DOM order strategy** avoiding z-index wars.!
+- In a React application, setting `isolation: isolate` on the `<div id="root">` element would create a stacking context which won't interfere with Portals rendered by library utilities like reach UI.
+
+## Fixed Positioning
+
+- Exactly similar to absolute but it doesn't care about containing blocks and **always be constrained by viewport**. 
+- We can think of Fixed position as **spicy absolute** 🔥
+- The centering trick from absolute position can be applied to Fixed elements as well and works great for **Modals that needs to be displayed at the center of screen irrespective of scroll position**.
+- If anchor properties were removed, it would be placed in its in-flow position.
+- If any of the parent or grandparents use `transform` or `will-transform` property, the **fixed element would become absolutely positioned element** in the sense, it would be constrained by the containing block instead of the viewport.
+
+## Overflow
+
+Overflow situation occurs with block elements with fixed height, in which the content overflows. To solve overflows, we have `overflow` property.
+
+- Default value for `overflow` is `visible`, which displays overflown content beyond the parent.
+- `scroll` value displays a scroll area for the container which would be displayed all the time, even if the container does not have overflowing content.
+- `auto` is a smart value that adds a scrollbar when one is required.
+- `hidden` which hides the overflown content. Its good practice to add a comment when we specify this value to help other developers.
+
+Overflow comprises two values, one for x-axis and other for y-axis
+
+- It is not possible in CSS to clip the overflow **just in one axis and not affect the other**.
+- When we make `overflow:hidden` we are actually making a scrollable container without the ability to scroll.
+
+Handling horizontal overflows are a bit tricky. If we have images next to each other and want to create a horizontal scroll bar, just specifying overflow: auto wouldn't help. We need to specify `white-space: nowrap` instructing browsers that don't line wrap the images. 
+
+> `img` elements are inline elements hence line-wrapping them is common in browsers.
+
+### Overflow with Positioned Layout
+
+Consider the below example
+
+```html {noline}
+<style>
+.wrapper {
+  overflow: auto;
+  width: 150px;
+  height: 150px;
+  border: 3px solid;
+}
+.box {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: deeppink;
+  width: 150px;
+  height: 200px;
+}
+</style>
+
+<div class="wrapper">
+  <div class="box">
+  </div>
+</div>
+```
+
+The box is an absolute element wrapped inside wrapper. In general `box` element should be scrollable inside wrapper as it has `overflow: auto`. But, it's not!
+
+- Absolute positioned _box_ is actually not constrained by _wrapper_ because it does not use positioned layout (anything other than `static`). 
+- If the _wrapper_ has `position: relative`, it would turn into a scrollable container for _box_.
+- Similarly, for a `fixed` element, the overflow is not possible as it can only be contained by the viewport (its initial containing block).
+
+## Sticky 
+
+- The idea is that these would be `relative`ly positioned until it sticks to the container, after it touches the container it would be turned to `fixed`.
+- Sticky elements **only stick while their container is in view**.
+- Sticky elements are **not incorporeal**, meaning they won't act as holograms, the **space it occupies would remain taken**, and its siblings knows that the element is still preset.
+- Sticky elements are considered "in-flow", while fixed elements aren’t.
+- Sticky elements can stick to either on vertical or horizontal flows.
+
+The anchor values are read differently based on the element's positioning layout mode.
+
+- In `relative` positioning, the element is shifted from its natural, in-flow position.
+- In `absolute` positioning, the element is distanced from its containing block's edge.
+- In `fixed` positioning, the element is adjusted based on the viewport.
+- In `sticky` positioning, the value controls the **minimum gap between the element and the edge of the viewport** while the container is in-frame.
+
+### Sticky in Context
+
+- Sticky elements can stick in one context.
+- Either it sticks to the **main viewport scroll**, or it sticks to an **ancestor that manages overflow**.
+
+## Hidden Content
+
+- Element with style `display: none` would be hidden, it cannot be clicked or focused.
+- This display trick is often used to show or hide certain elements with **media queries** in desktop and mobile.
+- Element that is hidden with `display: none` still hogs memory.
+- `visibility: hidden` differs from display: none in the way that the hidden element still present and takes space, but just not shown to the user.
+- `visibility: hidden` can be selectively undone by children. Usually, when a parent is hidden, all of its children will also be hidden, and there's no way around it except with this `visibility: visible`.
+
+### Accessibility with hidden content
+
+- If we have a button with an icon in our application with no text or label, a user who sees that icon would be able to guess what that icon would do. For example, gear for settings and question mark for help, etc.
+- For people who depend on Screen readers to read web, a helpful text to read out in screen readers would be nice.
+- Visually hidden CSS trick would hide the text from the page but make it readable for screen readers.
+- Sometimes we would want to hide some text from screen reader, like when we use it for just cosmetic purposes, in those cases, `aria-hidden="true"` property can be used to hide that element from screen readers.
+
+> This website is built with accessibility in mind, to check out the visually hidden texts, use screen readers to navigate through the buttons in the footer. 😄
+
+## Example Playground
+
+Below is the playground with some positioned layouts examples.
+
+<div style={{height: "40px"}}></div>
+<CodeSandbox codeSandboxId="positioned-layout-fs4bs"/>
+
