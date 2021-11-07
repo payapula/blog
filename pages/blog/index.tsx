@@ -47,7 +47,11 @@ export default function Index({ allPosts }: Props): ReactElement {
                             href="/blog/[slug]"
                             passHref>
                             <chakra.a _hover={{ textDecoration: 'none' }}>
-                                <BlogCard title={post.title} excerpt={post.excerpt} />
+                                <BlogCard
+                                    title={post.title}
+                                    excerpt={post.excerpt}
+                                    keywords={post.keywords}
+                                />
                             </chakra.a>
                         </NextLink>
                     );
@@ -58,7 +62,7 @@ export default function Index({ allPosts }: Props): ReactElement {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const allPosts = getAllPosts(['title', 'slug', 'excerpt']);
+    const allPosts = getAllPosts(['title', 'slug', 'excerpt', 'keywords']);
 
     return {
         props: { allPosts }

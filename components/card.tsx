@@ -18,14 +18,16 @@ interface CardProps {
     excerpt?: string;
     override?: ChakraProps;
     blogCard?: boolean;
+    keywords: string;
 }
 
 const MotionFlex = motion(Flex);
 
-function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
+function Card({ title, excerpt, override, blogCard, keywords }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
     const { colorMode } = useColorMode();
+    const keywordsArray = keywords.split(',');
 
     const hoverShadow =
         colorMode === 'light'
@@ -67,7 +69,11 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
                 {title ? title : `How to use React Context effectively`}
             </Heading>
             <HStack mt={5}>
-                <Text>#React #Javascript</Text>
+                <Text>
+                    {keywordsArray.map((keyword) => {
+                        return `#${keyword} `;
+                    })}
+                </Text>
             </HStack>
             <Text mt={7} fontSize={['md', null, 'lg', 'xl']} noOfLines={blogCard ? 5 : 4}>
                 {excerpt
@@ -83,9 +89,10 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
 interface BlogCardProps {
     title: string;
     excerpt: string;
+    keywords: string;
 }
 
-function BlogCard({ title, excerpt }: BlogCardProps): ReactElement {
+function BlogCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
     return (
         <Card
             override={{
@@ -95,6 +102,7 @@ function BlogCard({ title, excerpt }: BlogCardProps): ReactElement {
             }}
             title={title}
             excerpt={excerpt}
+            keywords={keywords}
             blogCard
         />
     );
