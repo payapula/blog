@@ -8,6 +8,7 @@ import {
     useColorModeValue,
     useColorMode,
     Heading,
+    chakra,
     ChakraProps
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
@@ -71,7 +72,24 @@ function Card({ title, excerpt, override, blogCard, keywords }: CardProps): Reac
             <HStack mt={5}>
                 <Text>
                     {keywordsArray.map((keyword) => {
-                        return `#${keyword} `;
+                        return (
+                            <chakra.span
+                                key={keyword}
+                                // eslint-disable-next-line react-hooks/rules-of-hooks
+                                background={useColorModeValue(
+                                    'hsl(324deg 86% 80% / 40%)',
+                                    'hsl(324deg 52% 35% / 35%)'
+                                )}
+                                ml={1}
+                                // eslint-disable-next-line react-hooks/rules-of-hooks
+                                color={useColorModeValue('black', 'white')}
+                                borderRadius="4px"
+                                padding="2px"
+                                mr={1}
+                                fontSize="md">
+                                #{keyword}
+                            </chakra.span>
+                        );
                     })}
                 </Text>
             </HStack>
