@@ -8,7 +8,7 @@ import { NextSeo } from 'next-seo';
 import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 import { useScrollPosition } from 'utils/hooks';
 import { Box } from '@chakra-ui/react';
-import { getBasePath } from 'utils/utils';
+import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';
 
@@ -70,6 +70,12 @@ const Post = ({ post, componentNames, plaiceHolder }: PostProps): ReactElement =
                             }
                         ]
                     }}
+                    additionalMetaTags={[
+                        {
+                            name: 'twitter:image',
+                            content: `${getBasePath(ogImage.url)}?${getRandom5digit()}`
+                        }
+                    ]}
                 />
                 <PostHeader title={title} />
                 <PostCover cover={cover} plaiceHolder={plaiceHolder} />
