@@ -55,7 +55,11 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                                 <chakra.a
                                     _hover={{ textDecoration: 'none' }}
                                     width={{ xs: '100%', xl: '50%' }}>
-                                    <Card title={post.title} excerpt={post.excerpt} />
+                                    <Card
+                                        title={post.title}
+                                        excerpt={post.excerpt}
+                                        keywords={post.keywords}
+                                    />
                                 </chakra.a>
                             </NextLink>
                         );

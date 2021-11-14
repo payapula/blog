@@ -15,6 +15,7 @@ type PostType = {
     // These are fetched separately
     slug: string; // From File Name
     content: MDXRemoteSerializeResult; // From hydrated by next-mdx-remote
+    keywords: string;
 };
 
 export default PostType;

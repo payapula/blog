@@ -30,7 +30,7 @@ const Index = ({ recentPosts }: IndexProps): ReactElement => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const recentPosts = getAllPosts(['title', 'slug', 'excerpt'], 2);
+    const recentPosts = getAllPosts(['title', 'slug', 'excerpt', 'keywords'], 2);
     return {
         props: { recentPosts }
     };

@@ -8,6 +8,7 @@ import {
     useColorModeValue,
     useColorMode,
     Heading,
+    chakra,
     ChakraProps
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
@@ -18,14 +19,16 @@ interface CardProps {
     excerpt?: string;
     override?: ChakraProps;
     blogCard?: boolean;
+    keywords: string;
 }
 
 const MotionFlex = motion(Flex);
 
-function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
+function Card({ title, excerpt, override, blogCard, keywords }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
     const { colorMode } = useColorMode();
+    const keywordsArray = keywords.split(',');
 
     const hoverShadow =
         colorMode === 'light'
@@ -67,7 +70,28 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
                 {title ? title : `How to use React Context effectively`}
             </Heading>
             <HStack mt={5}>
-                <Text>#React #Javascript</Text>
+                <Text>
+                    {keywordsArray.map((keyword) => {
+                        return (
+                            <chakra.span
+                                key={keyword}
+                                // eslint-disable-next-line
+                                background={useColorModeValue(
+                                    'hsl(324deg 86% 80% / 40%)',
+                                    'hsl(324deg 52% 35% / 35%)'
+                                )}
+                                ml={1}
+                                // eslint-disable-next-line
+                                color={useColorModeValue('black', 'white')}
+                                borderRadius="4px"
+                                padding="2px"
+                                mr={1}
+                                fontSize="md">
+                                #{keyword}
+                            </chakra.span>
+                        );
+                    })}
+                </Text>
             </HStack>
             <Text mt={7} fontSize={['md', null, 'lg', 'xl']} noOfLines={blogCard ? 5 : 4}>
                 {excerpt
@@ -83,9 +107,10 @@ function Card({ title, excerpt, override, blogCard }: CardProps): ReactElement {
 interface BlogCardProps {
     title: string;
     excerpt: string;
+    keywords: string;
 }
 
-function BlogCard({ title, excerpt }: BlogCardProps): ReactElement {
+function BlogCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
     return (
         <Card
             override={{
@@ -95,6 +120,7 @@ function BlogCard({ title, excerpt }: BlogCardProps): ReactElement {
             }}
             title={title}
             excerpt={excerpt}
+            keywords={keywords}
             blogCard
         />
     );
