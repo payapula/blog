@@ -3,6 +3,6 @@ const getBasePath = (url: string): string =>
         ? `${window.location.protocol}//${window.location.host}${url}`
         : url;
 
-const getRandom5digit = () => Math.floor(Math.random() * 90000) + 10000;
+const getRandom5digit = (): number => Math.floor(Math.random() * 90000) + 10000;
 
 export { getBasePath, getRandom5digit };
