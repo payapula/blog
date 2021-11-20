@@ -1,0 +1,438 @@
+---
+title: 'What is this? Javascript?'
+excerpt: "This post summarizes the `this` binding principles explained in the book this & Object Prototypes, by Kyle Simpson. It's one of the book in the series You Don't Know JS. If you want to learn more about javascript from the roots, I highly recommend you reading it."
+date: '2021-11-20'
+description: "This post summarizes the `this` binding principles explained in the book **this & Object Prototypes, by Kyle Simpson**. It's one of the book in the series _You Don't Know JS_"
+cover: 
+    src: '/assets/blog/what-is-this-javascript/what-is-this-cover.jpg'  
+    alt: 'You got this text on a road.'
+    author: 
+      name: 'sydney Rae'
+      url: https://unsplash.com/s/photos/this?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+ogImage:
+    url: '/assets/blog/what-is-this-javascript/what-is-this-cover.jpg'  
+    alt: 'You got this text on a road.'
+keywords: 'Javascript,Fundamentals'
+---
+
+This post summarizes the `this` binding principles explained in the book **this & Object Prototypes, by Kyle Simpson**. It's one of the book in the series _You Don't Know JS_. If you want to learn more about JavaScript from the roots, I highly recommend you reading it.
+
+## Call-Stack and Call-Site
+
+To understand what `this` holds, we first need to understand about call-stack and call-site. 
+
+```javascript
+function parent() {
+    // call-stack is: `parent`
+    // so, our call-site is in the global scope
+
+    console.log( "parent" );
+    child(); // <-- call-site for `child`
+}
+
+function child() {
+    // call-stack is: `parent` -> `child`
+    // so, our call-site is in `parent`
+
+    console.log( "child" );
+    grandchild(); // <-- call-site for `grandchild`
+}
+
+function grandchild() {
+    // call-stack is: `parent` -> `child` -> `grandchild`
+    // so, our call-site is in `child`
+
+    console.log( "grandchild" );
+}
+
+parent(); // <-- call-site for `parent`
+```
+
+As we see in the above code, each function has a call-site, that refers to the _site_ it is being called from. `parent()` is called from global scope, and `child()` is called from `parent` scope and so on.
+
+Similarly, call-stack holds the _stack_ of scopes from which the current function is being executed. For, e.g. grandchild has stack `parent` → `child` → `grandchild`
+
+## The Four Rules
+
+The Mystery, 'what `this` refers to?' could be cracked by checking if `this` falls on one of these four rules.
+
+### Default Binding
+
+This is the default rule, which would be applied if none of the other rules seem to apply. 
+
+```javascript
+function foo() {
+	console.log(this.a);
+}
+
+var a = 2;
+
+foo(); // 2
+```
+
+In the above snippet, the call-site of `foo()` is in global scope, hence `this` would check for *global object property* with the key `a`. The variables declared in global scope, are same as global object properties. Hence, `a` refers to the global `a`.
+
+> If our `this` execution is in strict mode, this rule would still apply, but global object would return `undefined` instead of `2`.
+
+
+### Implicit Binding
+
+This rule checks for context object which has `this` execution. In other words, the `this` here refers to the containing object. It's easy to see this in example rather than explaining it with words.
+
+```javascript {2,7}
+function foo() {
+	console.log(this.a);
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+obj.foo(); // 2
+```
+
+The above snippet has `this` reference, when line number 2 is executed, it's containing object is checked, if it is present, then `this` refers to that object. It can be visualized as below:
+
+```javascript
+var obj = {
+	a: 2,
+	foo: function foo() {
+	    console.log(this.a); // this refers to obj
+    }
+};
+
+obj.foo(); // 2
+```
+
+The important thing about this binding is, only the top/last level of the object is considered for `this` binding. 
+
+```javascript
+function foo() {
+	console.log(this.a);
+}
+
+var last = {
+	a: 42,
+	foo: foo
+};
+
+var first = {
+	a: 2,
+	last: last
+};
+
+first.last.foo(); // 42
+```
+
+As seen in above snippet, when `this` is encountered in `foo()` the last level object which has `a` is taken as 42 and not the `a` from `first` object.
+
+### Explicit Binding
+
+As the name suggests, JavaScript engine provides us option to explicitly specify an object to be used for `this` reference. `call()` and `apply()` functions are examples for explicitly binding an object to be used for `this` reference.
+
+```javascript
+function foo() {
+	console.log(this.a);
+}
+
+var obj = {
+	a: 2
+};
+
+foo.call(obj); // 2
+
+var obj2 = {
+	a: 55
+};
+
+foo.call(obj2); // 55
+```
+
+`apply()` function does exactly similar to `call()`, it just differs in the way the additional parameters were passed to that function.
+
+```javascript
+// CALL
+function foo(arg1, arg2) {
+	console.log(this.a + arg1 + arg2);
+}
+
+var obj = {
+	a: 2
+};
+
+foo.call(obj, 2, 2); // 6
+
+
+// APPLY
+function foo(...arr) {
+	console.log(this.a + arr[0] + arr[1]);
+}
+
+var obj = {
+	a: 2
+};
+
+foo.apply(obj, [2, 2]); // 6
+```
+
+So, structurally, these two executions are equivalent.
+
+```javascript
+func.call(thisContext, ...args);
+func.apply(thisContext, args);
+```
+
+### The `new` Binding
+
+After so many years, ES6 bundled with `class`es out of the box, with which we can create relationships between entities in an _object-oriented_ way. However, strictly speaking, when compared with class-oriented languages like C# or Java, there are **no real classes in JavaScript**.
+
+Okay why are we into class discussion now? What this has to do with `this` in JavaScript?
+
+To understand the fourth rule, we must understand classes, or at least to some extent. We will start with a simple class.
+
+```javascript
+class NameBuilder {
+    constructor(name){
+      this.name = name;
+    }
+
+    tellName(){
+      console.log('Your name is ' + this.name);
+    }
+}
+
+const obj = new NameBuilder('Bharathi');
+
+obj.tellName(); // "Your name is Bharathi"
+```
+
+When you go through the above example, the following is what you would assume.
+
+When `new` keyword is encountered, JS would call the constructor of our class `NameBuilder`, which sets `this.name` to the value we pass in. Then in the object created, we will have the class method `tellName()` attached to it, and when we execute it, it would print the name set by the constructor. 
+
+Though this is a valid assumption and a valid mental modal, on the interior of JavaScript, it's not how the class instances would be executed. First, there are no constructors in JavaScript. In other words, **constructors are just plain JS functions**.
+
+We will see the same class example with simple function for our understanding.
+
+```javascript
+function NameBuilder(name) {
+  this.name = name;
+  this.tellName = function tellName(){
+     console.log('Your name is ' + this.name)
+  }
+}
+
+const obj = new NameBuilder('Bharathi');
+
+obj.tellName(); // "Your name is Bharathi"
+```
+
+There is no **constructor** involved here, but the execution works similar to classes. What exactly is happening here?
+
+When a **function** is invoked with `new` in front of it, the following things happen automatically.
+
+1. A Brand **new object** is created (aka, constructed) out of thin air
+2. the newly constructed object is **[[Prototype]]-linked**
+3. the newly constructed object is set as the `this` binding for that function call
+4. unless the function returns its own alternate object, the new-invoked function call will **automatically return the newly constructed object**.
+
+Don't worry, let's follow the steps one by one,
+
+```javascript
+const obj = new NameBuilder('Bharathi');
+
+// 1. A Brand **new object** is created (aka, constructed) out of thin air
+// creates new object {}
+
+// Lets skip #2 for now
+
+// 3. the newly constructed object is set as the `this` binding
+// for that function call
+// When the below function is called, `this` points to {}
+// Since {} has no `name` or `tellName` properties, they would be set
+
+function NameBuilder(name) {
+  this.name = name;
+  this.tellName = function tellName(){
+     console.log('Your name is ' + this.name)
+  }
+}
+
+
+// 4. unless the function returns its own alternate object, 
+// the new-invoked function call will automatically return the 
+// newly constructed object.
+// Our function does not return anything, hence, the newly
+// created object with two properties, is returned
+
+const obj = new NameBuilder('Bharathi');
+
+// Becomes:
+
+const obj = {
+    name: 'Bharathi',
+    tellName : tellName() {
+        console.log('Your name is ' + this.name)
+    }
+}
+
+// So, now when we execute `obj.tellName()` which has `this.name` 
+//would point to obj.name,
+
+"Your name is Bharathi"
+```
+
+
+Just to make sure it is working as we think, let's tweak that function to return a different object and check.
+
+```javascript
+function NameBuilder(name){
+  this.name = name;
+  this.tellName = function (){
+     console.log('Your name is ' + this.name)
+  }
+  
+  return {
+     name: "Rajaraam",
+     tellName: function tellName() {
+       console.log("Your name is " + this.name)
+    }
+  }
+}
+
+
+const obj = new NameBuilder('Bharathi');
+
+obj.tellName(); // "Your name is Rajaraam"
+```
+
+As seen above, as per the point number 4, since the function returns a different object, `this.name` points to `Rajaraam`. The newly created object **{}** is discarded.
+
+Coming back to `new` binding, since `new` is responsible for creating a new object and setting that object as `this` context, this rule is called **new Binding**. 
+
+## Recap
+
+Let's recap the four rules that we saw about `this` binding.
+
+1. Is the function is called with `new` then `this` would be newly constructed object.
+
+```javascript {noline}
+ var bar = new foo();
+```
+
+2. Is the function is called with explicit bind functions like call or apply? Then, `this` would be the context passed to those functions.
+
+```javascript {noline}
+ var bar = foo.call(obj1);
+```
+
+3. Is the function executed with containing object? Then `this` would be that object.
+
+```javascript {noline}
+ var bar = obj1.foo();
+```
+
+4. Otherwise, default binding applies which returns global property, if present in 'non-strict' mode and `undefined` in 'strict' mode.
+
+```javascript {noline}
+ var bar = foo();
+```
+
+## Arrow Functions
+
+When we read through JavaScript articles on Internet, I'm pretty sure we have gone through the concept of `this`'s behavior with arrow functions. The question to be asked now is, 'How does it play along with the rules mentioned above?' 
+
+The answer is, it **does not**.
+
+The `this` inside an arrow function adopts `this` binding from the enclosing function or global scope. That's it. No other gotchas!
+
+Let's see this with an example.
+
+```javascript {17}
+function HOCFunction() {
+	// return an arrow function
+	return () => {
+		// `this` here is lexically adopted from `foo()`
+		console.log(this.a);
+	};
+}
+
+var obj1 = {
+	a: 2
+};
+
+var obj2 = {
+	a: 3
+};
+
+var anotherFunction = HOCFunction.call(obj1);
+
+anotherFunction.call(obj2); // 2, not 3
+```
+
+We are binding `HOCFunction` to obj1 and saving it in `anotherFunction`.
+
+Now, when we call `anotherFunction` with explicit binding of `obj2`, we expect it to take `this.a` from `obj2`, but it's not. Since this is arrow function, which does not have its own `this`, it would be lexically referenced, in our case from `HOCFunction` and hence it is printed as **2**.
+
+So, instead of returning arrow function, if we have returned normal function, 3 would be printed!
+
+```javascript
+function HOCFunction() {
+	return function ReturnedFunction(){
+		console.log(this.a);
+	};
+}
+
+var obj1 = {
+	a: 2
+};
+
+var obj2 = {
+	a: 3
+};
+
+var anotherFunction = HOCFunction.call(obj1);
+
+anotherFunction.call(obj2); // 3
+```
+
+In this case, the `ReturnedFunction` function is a non-arrow function, which has `this` reference.
+
+Let's dig some more to explore `this` in arrow functions, the following example is taken from [arrow function explanation in MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#arrow_functions_used_as_methods)
+
+```javascript
+'use strict';
+
+var obj = { // does not create a new scope
+  i: 10,
+  b: () => console.log(this.i),
+  c: function() {
+    console.log(this.i);
+  }
+}
+
+obj.b(); // prints undefined
+obj.c(); // prints 10
+```
+
+As we can see, `obj.c` has implicit binding rule applied, which points to containing object's `i`, whereas `this` in `obj.b` does not have `this` binding applied, and since there are no enclosing function scope, global scope is applied.
+
+And that is why my friends, we often see the below line in most of the articles written about arrow functions in JavaScript.
+
+> Arrow functions does not have its own `this`
+
+## Closing Notes
+
+I hope, you got to know some rules to apply when you encounter `this` in your project codebases. There are a lot more about `this` to explain in JavaScript, which we skipped in this post just to set the basic foundation. 
+
+Just learning about `this` is not enough, we need to learn to use it, and use it in right sense! We need to explore some real world use cases and patterns that make use of `this` in JavaScript soon! 
+
+Until then, Feel free to explore the book I have attached below to take a deep dive into `this` JavaScript World!
+
+----
+
+References
+
+- [this & Object Prototypes, By Kyle Simpson](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/this%20%26%20object%20prototypes)
+- [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
