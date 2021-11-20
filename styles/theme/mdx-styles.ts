@@ -101,6 +101,9 @@ const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleO
         fontWeight: 'semibold',
         padding: '2',
         fontSize: 'sm'
+    },
+    hr: {
+        marginTop: 10
     }
 });
 
