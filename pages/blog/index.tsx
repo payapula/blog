@@ -101,10 +101,14 @@ function SearchPosts(props: SearchPostsProps) {
     const handleChange = (event) => setValue(event.target.value);
 
     React.useEffect(() => {
+        const searchValueInLowercase = value.toLowerCase();
         const filterPosts = allPosts.filter(function searchPost(post) {
             return (
-                post.title.toLowerCase().includes(value.toLowerCase()) ||
-                post.excerpt.toLowerCase().includes(value.toLowerCase())
+                post.title.toLowerCase().includes(searchValueInLowercase) ||
+                post.excerpt.toLowerCase().includes(searchValueInLowercase) ||
+                post.keywords
+                    .split(',')
+                    .some((keyword) => keyword.toLowerCase().includes(searchValueInLowercase))
             );
         });
         setFilteredPosts(filterPosts);
