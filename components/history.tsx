@@ -3,7 +3,7 @@
 import { jsx, css } from '@emotion/react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import { SiDotNet } from 'react-icons/si';
+import { SiDotnet } from 'react-icons/si';
 import { Icon, Flex, Heading, chakra, useColorModeValue } from '@chakra-ui/react';
 import { DiReact } from 'react-icons/di';
 import { FaGraduationCap } from 'react-icons/fa';
@@ -99,7 +99,7 @@ function History(): JSX.Element {
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2016 - 2019"
-                    icon={<CustomIcon icon={SiDotNet} color="#fff" />}>
+                    icon={<CustomIcon icon={SiDotnet} color="#fff" />}>
                     <Title>Programmer Analyst</Title>
                     <Subtitle>Cognizant, Coimbatore</Subtitle>
                     <Description>
