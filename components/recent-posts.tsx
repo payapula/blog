@@ -41,6 +41,8 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                 </Flex>
                 <Flex
                     height={['600px', null, null, null, '350px']}
+                    // Card styles are based on this className "posts-container"
+                    // Refer: styles.ts file
                     className="posts-container"
                     direction={['column', null, null, null, 'row']}
                     justifyContent={['space-around']}

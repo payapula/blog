@@ -1,12 +1,8 @@
-/** @jsxRuntime classic /
-/** @jsx jsx */
-import { jsx, css } from '@emotion/react';
 import {
     Flex,
     Text,
     HStack,
     useColorModeValue,
-    useColorMode,
     Heading,
     chakra,
     ChakraProps
@@ -27,13 +23,7 @@ const MotionFlex = motion(Flex);
 function Card({ title, excerpt, override, blogCard, keywords }: CardProps): ReactElement {
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
-    const { colorMode } = useColorMode();
     const keywordsArray = keywords.split(',');
-
-    const hoverShadow =
-        colorMode === 'light'
-            ? 'box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);'
-            : 'box-shadow: 0 14px 28px rgba(255, 130, 47, 0.25), 0 10px 10px rgba(95, 83, 76, 0.22);';
     return (
         <MotionFlex
             direction="column"
@@ -47,14 +37,6 @@ function Card({ title, excerpt, override, blogCard, keywords }: CardProps): Reac
             borderRadius="4"
             border={cardBorder}
             cursor="pointer"
-            // https://codepen.io/sdthornton/pen/wBZdXq
-            css={css`
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-                transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                &:hover {
-                    ${hoverShadow}
-                }
-            `}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             {...override}>

@@ -1,10 +1,6 @@
-/** @jsxRuntime classic /
-/** @jsx jsx */
-import { jsx, css } from '@emotion/react';
 import theme from 'styles/theme/dracula-soft';
-import { bpDesktopOnly, bpTabletsOnly } from 'styles/theme/breakpoints';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
-import { useColorModeValue } from '@chakra-ui/react';
+import { useColorModeValue, Box } from '@chakra-ui/react';
 
 // Code is Provided by Kent.C.Dodds https://github.com/kentcdodds/kentcdodds.com/blob/main/src/components/mdx/code.js
 // Same is used in chakra UI - https://github.com/chakra-ui/chakra-ui/blob/97b6b0111f21af8bfce675e34d7c32f3ff2cadf0/website/src/components/codeblock/highlight.tsx
@@ -12,32 +8,6 @@ import { useColorModeValue } from '@chakra-ui/react';
 const RX_LINE_NUMS = /{([\d,-]+)}/;
 
 const RX_NO_LINE = /noline/;
-
-const wrapperStyles = css`
-    overflow: auto;
-    margin-left: -20px;
-    margin-right: -20px;
-    ${bpDesktopOnly} {
-        margin-left: -60px;
-        margin-right: -60px;
-    }
-`;
-
-const preStyles = css`
-    float: left;
-    min-width: 100%;
-    overflow: initial;
-    line-height: 1.6;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 10px;
-    ${bpTabletsOnly} {
-        font-size: 14px;
-    }
-    ${bpDesktopOnly} {
-        font-size: 16px;
-    }
-`;
 
 function calculateLinesToHighlight(meta) {
     if (RX_LINE_NUMS.test(meta)) {
@@ -78,48 +48,69 @@ function Code({ codeString, language, metastring }: CodeProps): JSX.Element {
                     backgroundColor: color
                 };
                 return (
-                    <div css={wrapperStyles}>
-                        <pre className={className} style={customStyles} css={preStyles}>
-                            {tokens.map((line, i) => (
-                                <div
-                                    key={i}
-                                    {...getLineProps({
-                                        line,
-                                        key: i
-                                    })}
-                                    css={css`
-                                        ${shouldHighlightLine(i) &&
-                                        `
-                                        background-color: rgb(167 185 255 / 20%);
-                                        margin: 0;
-                                        margin-left: -10px;
-                                        padding: 0px 5px;
-                                        border-left: 5px solid rgb(130 230 217);
-                                        `}
-                                    `}>
-                                    {shouldHideLineNums ? (
-                                        <span
-                                            css={css`
-                                                padding-left: 2em;
-                                            `}></span>
-                                    ) : (
-                                        <span
-                                            css={css`
-                                                display: inline-block;
-                                                width: 2em;
-                                                user-select: none;
-                                                color: rgb(246 246 244 / 50%);
-                                            `}>
-                                            {i + 1}
-                                        </span>
-                                    )}
-                                    {line.map((token, key) => (
-                                        <span key={key} {...getTokenProps({ token, key })} />
-                                    ))}
-                                </div>
-                            ))}
-                        </pre>
-                    </div>
+                    <Box
+                        overflow="auto"
+                        ml="-20px"
+                        mr="-20px"
+                        sx={{
+                            '@media (min-width: 1201px)': {
+                                marginLeft: '-60px',
+                                marginRight: '-60px'
+                            }
+                        }}>
+                        <Box
+                            as="pre"
+                            className={className}
+                            style={customStyles}
+                            float="left"
+                            minW="100%"
+                            overflow="initial"
+                            lineHeight="1.6"
+                            borderRadius="4px"
+                            fontSize={{
+                                base: '12px',
+                                lg: '14px',
+                                xl: '16px'
+                            }}
+                            p="10px">
+                            {tokens.map((line, i) => {
+                                const objProps = shouldHighlightLine(i)
+                                    ? {
+                                          backgroundColor: 'rgb(167 185 255 / 20%)',
+                                          m: '0',
+                                          ml: '-10px',
+                                          padding: '0px 5px',
+                                          borderLeft: '5px solid rgb(130 230 217)'
+                                      }
+                                    : {};
+                                return (
+                                    <Box
+                                        key={i}
+                                        {...getLineProps({
+                                            line,
+                                            key: i
+                                        })}
+                                        {...objProps}>
+                                        {shouldHideLineNums ? (
+                                            <Box as="span" pl="2em"></Box>
+                                        ) : (
+                                            <Box
+                                                as="span"
+                                                display="inline-block"
+                                                width="2em"
+                                                userSelect="none"
+                                                color="rgb(246 246 244 / 50%)">
+                                                {i + 1}
+                                            </Box>
+                                        )}
+                                        {line.map((token, key) => (
+                                            <span key={key} {...getTokenProps({ token, key })} />
+                                        ))}
+                                    </Box>
+                                );
+                            })}
+                        </Box>
+                    </Box>
                 );
             }}
         </Highlight>
