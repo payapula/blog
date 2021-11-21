@@ -115,7 +115,16 @@ function SearchPosts(props: SearchPostsProps) {
             <InputLeftElement>
                 <Search2Icon w={5} h={5} color="gray.300" />
             </InputLeftElement>
-            <Input placeholder="Search Posts" value={value} onChange={handleChange} />
+            <Input
+                placeholder="Search Posts"
+                value={value}
+                onChange={handleChange}
+                borderColor="teal"
+                border="1px"
+                _hover={{
+                    borderColor: 'rgb(255 130 47 / 50%)'
+                }}
+            />
             {!!value && (
                 <InputRightElement>
                     <IconButton
