@@ -126,7 +126,7 @@ function SearchPosts(props: SearchPostsProps) {
                 borderColor="teal"
                 border="1px"
                 _hover={{
-                    borderColor: 'rgb(255 130 47 / 50%)'
+                    borderColor: useColorModeValue('black', 'rgb(255 130 47 / 50%)')
                 }}
             />
             {!!value && (

@@ -48,6 +48,9 @@ const styles: Styles = {
                             : '0 14px 28px rgba(255, 130, 47, 0.25), 0 10px 10px rgba(95, 83, 76, 0.22)'
                 }
             }
+        },
+        svg: {
+            verticalAlign: 'middle'
         }
     })
 };
