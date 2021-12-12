@@ -33,7 +33,10 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                         Recent Posts
                     </Heading>
                     <NextLink href="/blog" passHref>
-                        <ChakraLink display={['none', null, null, null, 'block']} fontSize="xl">
+                        <ChakraLink
+                            display={['none', null, null, null, 'flex']}
+                            alignItems="center"
+                            fontSize="xl">
                             View All
                             <Icon as={FaLongArrowAltRight} w="8" h="6" ml="1" />
                         </ChakraLink>
@@ -41,6 +44,8 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                 </Flex>
                 <Flex
                     height={['600px', null, null, null, '350px']}
+                    // Card styles are based on this className "posts-container"
+                    // Refer: styles.ts file
                     className="posts-container"
                     direction={['column', null, null, null, 'row']}
                     justifyContent={['space-around']}

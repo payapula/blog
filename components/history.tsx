@@ -1,6 +1,3 @@
-/** @jsxRuntime classic /
-/** @jsx jsx */
-import { jsx, css } from '@emotion/react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { SiDotnet } from 'react-icons/si';
@@ -29,6 +26,7 @@ const Description = ({ children }: { children: React.ReactNode }) => (
 );
 
 const ChakraVerticalTimeline = chakra(VerticalTimeline);
+const ChakraVerticalTimelineElement = chakra(VerticalTimelineElement);
 
 interface CustomVerticalTimeLineProps {
     date: string;
@@ -45,18 +43,15 @@ const CustomVerticalTimeLine = ({
 }: CustomVerticalTimeLineProps) => {
     const dateColor = useColorModeValue('black', 'white');
     return (
-        <VerticalTimelineElement
-            // as="section"
-            css={css`
-                .vertical-timeline-element-date {
-                    font-weight: bold;
-                }
-                @media only screen and (min-width: 1170px) {
-                    .vertical-timeline-element-date {
-                        color: ${dateColor};
+        <ChakraVerticalTimelineElement
+            sx={{
+                '.vertical-timeline-element-date': { fontWeight: 'bold' },
+                '@media only screen and (min-width: 1170px)': {
+                    '.vertical-timeline-element-date': {
+                        color: dateColor
                     }
                 }
-            `}
+            }}
             className="vertical-timeline-element"
             date={date}
             iconStyle={{ background: '#000000', color: '#fff' }}
@@ -64,7 +59,7 @@ const CustomVerticalTimeLine = ({
             contentArrowStyle={{ borderRight: `9px solid  ${head ? '#0f2075' : '#015561'}` }}
             icon={icon}>
             {children}
-        </VerticalTimelineElement>
+        </ChakraVerticalTimelineElement>
     );
 };
 
