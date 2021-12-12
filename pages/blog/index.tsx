@@ -60,7 +60,13 @@ export default function Index({ allPosts }: Props): ReactElement {
                     🤷🏾‍♂️ No posts available with this search. 🛠
                 </Text>
             )}
-            <SimpleGrid columns={[1, null, null, null, 2, 3]} mt="10" spacing={10}>
+            <SimpleGrid
+                columns={[1, null, null, null, 2, 3]}
+                mt="10"
+                spacing={10}
+                // Card styles are based on this className "posts-container"
+                // Refer: styles.ts file
+                className="posts-container">
                 {postsDisplay.map((post) => {
                     return (
                         <NextLink
@@ -95,10 +101,14 @@ function SearchPosts(props: SearchPostsProps) {
     const handleChange = (event) => setValue(event.target.value);
 
     React.useEffect(() => {
+        const searchValueInLowercase = value.toLowerCase();
         const filterPosts = allPosts.filter(function searchPost(post) {
             return (
-                post.title.toLowerCase().includes(value.toLowerCase()) ||
-                post.excerpt.toLowerCase().includes(value.toLowerCase())
+                post.title.toLowerCase().includes(searchValueInLowercase) ||
+                post.excerpt.toLowerCase().includes(searchValueInLowercase) ||
+                post.keywords
+                    .split(',')
+                    .some((keyword) => keyword.toLowerCase().includes(searchValueInLowercase))
             );
         });
         setFilteredPosts(filterPosts);
@@ -109,7 +119,16 @@ function SearchPosts(props: SearchPostsProps) {
             <InputLeftElement>
                 <Search2Icon w={5} h={5} color="gray.300" />
             </InputLeftElement>
-            <Input placeholder="Search Posts" value={value} onChange={handleChange} />
+            <Input
+                placeholder="Search Posts"
+                value={value}
+                onChange={handleChange}
+                borderColor="teal"
+                border="1px"
+                _hover={{
+                    borderColor: useColorModeValue('black', 'rgb(255 130 47 / 50%)')
+                }}
+            />
             {!!value && (
                 <InputRightElement>
                     <IconButton

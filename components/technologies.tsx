@@ -2,16 +2,15 @@
 import { Flex, Text, useColorModeValue, Icon, SimpleGrid, Heading } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { IconType } from 'react-icons';
+import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3, DiAndroid } from 'react-icons/di';
 import {
-    DiReact,
-    DiJsBadge,
-    DiNodejs,
-    DiHtml5,
-    DiCss3,
-    DiAndroid,
-    DiMsqlServer
-} from 'react-icons/di';
-import { SiNextDotJs, SiDotNet, SiTypescript, SiCsharp, SiOracle } from 'react-icons/si';
+    SiNextdotjs,
+    SiTypescript,
+    SiCsharp,
+    SiOracle,
+    SiFirebase,
+    SiAwsamplify
+} from 'react-icons/si';
 
 type IconMeta = {
     color: string;
@@ -26,14 +25,14 @@ type IconSet = {
 const iconSet: IconSet = {
     ts: { color: '#3178c6', text: 'TypeScript', icon: SiTypescript },
     react: { color: '#61dafb', text: 'React', icon: DiReact },
-    next: { color: '', text: 'Next', icon: SiNextDotJs },
+    next: { color: '', text: 'NextJS', icon: SiNextdotjs },
     node: { color: '#026e00', text: 'NodeJS', icon: DiNodejs },
     js: { color: '#fcdc00', text: 'Javascript', icon: DiJsBadge },
+    firebase: { color: '#FFCA28', text: 'Firebase', icon: SiFirebase },
+    amplify: { color: '#FF9900', text: 'AWS Amplify', icon: SiAwsamplify },
     html: { color: '#e54c21', text: 'HTML', icon: DiHtml5 },
     css: { color: '#1672b6', text: 'CSS', icon: DiCss3 },
-    net: { color: '#5127d5', text: 'ASP.NET', icon: SiDotNet },
     csharp: { color: '#189f20', text: 'C Sharp', icon: SiCsharp },
-    sqlserver: { color: '#c9152d', text: 'Sql Server', icon: DiMsqlServer },
     oracle: { color: '#ff141d', text: 'Oracle SQL', icon: SiOracle },
     android: { color: '#a5c736', text: 'Android', icon: DiAndroid }
 };

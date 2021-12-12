@@ -9,12 +9,12 @@ const general = {
         transition: 'color 0.15s',
         transitionTimingFunction: 'ease-out',
         borderBottom: '1px dashed',
-        _hover: {
+        '&:hover': {
             borderBottom: '1px solid'
         }
     },
     focus: {
-        _focus: {
+        '&:focus': {
             outline: '2px dashed teal',
             boxShadow: 'none'
         }
@@ -35,6 +35,22 @@ const styles: Styles = {
     global: ({ colorMode, theme }) => ({
         '.mdx-global-styles': {
             ...mdxStylesWithColorInjected(colorMode, theme as ChakraTheme)
+        },
+        '.posts-container': {
+            // Article Hover styles - https://codepen.io/sdthornton/pen/wBZdXq
+            article: {
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
+                transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                '&:hover': {
+                    boxShadow:
+                        colorMode === 'light'
+                            ? '0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)'
+                            : '0 14px 28px rgba(255, 130, 47, 0.25), 0 10px 10px rgba(95, 83, 76, 0.22)'
+                }
+            }
+        },
+        svg: {
+            verticalAlign: 'middle'
         }
     })
 };
