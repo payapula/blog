@@ -79,7 +79,7 @@ function History(): JSX.Element {
                     date="2020 - Present"
                     icon={<CustomIcon icon={DiReact} color="#61dafb" />}
                     head={true}>
-                    <Title>Senior Software Engineer II</Title>
+                    <Title>Technical Lead IV</Title>
                     <Subtitle>Photon, Chennai</Subtitle>
                     <Description>
                         React | Typescript | SCSS | RXjs | GraphQL | S3 | Material UI | NodeJS
