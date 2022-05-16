@@ -23,7 +23,7 @@ jobs:
 
             # Runs the Super-Linter action
             - name: Run Super-Linter
-              uses: github/super-linter@v3
+              uses: github/super-linter@v4
               env:
                   DEFAULT_BRANCH: develop
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,3 +34,4 @@ jobs:
                   VALIDATE_JAVASCRIPT_STANDARD: false
                   VALIDATE_CSS: false
                   FILTER_REGEX_EXCLUDE: .*/_posts/.*
+                  VALIDATE_NATURAL_LANGUAGE: false
