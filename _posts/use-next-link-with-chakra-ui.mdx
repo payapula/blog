@@ -123,7 +123,7 @@ Notice that we can pass `isExternal` prop to the custom component, and that woul
 
 If you are using next js with typescript and if you want to make use of typescript intellisense, code completion and static type checking for our custom chakra components, you can create a new prop type by _merging Chakra's Props and Next's Props_ and provide it to our component like below
 
-```tsx {7,14}
+```tsx highlight={[7,14]}
 import Link, { LinkProps } from "next/link";
 import {
   Button,
@@ -160,7 +160,7 @@ Wow! Now we got code completion with static props checking!
 
 And for the Chakra Link,
 
-```tsx {7,9}
+```tsx highlight={[7,9]}
 import Link, { LinkProps } from "next/link";
 import {
   Link as ChakraLink,

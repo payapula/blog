@@ -266,7 +266,7 @@ On the first mount, we see both the useEffects of `App` running, and when you cl
 on the Increment count button, before running the _no deps hook_, the cleanup function
 is executed.
 
-```bash {3}
+```bash highlight={[3]}
 ▶️ App Render Start 
 🛑 App Render End 
  App: useEffect no deps Cleanup 🧹
@@ -276,7 +276,7 @@ is executed.
 Similarly, when you click on Show Child button, before running the _no deps hook_ of App, the 
 cleanup is executed. 
 
-```bash {5}
+```bash highlight={[5]}
 ▶️ App Render Start 
 🛑 App Render End 
        ▶️ Child Render Start 
