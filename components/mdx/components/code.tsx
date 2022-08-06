@@ -129,11 +129,8 @@ function preToCodeBlock(preProps) {
         // children is code element
         preProps.children &&
         // code props
-        preProps.children.props &&
-        // if children is actually a <code>
-        preProps.children.props.mdxType === 'code'
+        preProps.children.props
     ) {
-        // we have a <pre><code> situation
         const { children: codeString, className = '', ...props } = preProps.children.props;
 
         const matches = className.match(/language-(?<lang>.*)/);
