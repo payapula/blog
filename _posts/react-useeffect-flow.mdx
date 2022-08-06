@@ -28,7 +28,7 @@ As always, let's start with *Just Javascript*
 
 Take a look at the function below, which returns a string:
 
-```javascript {5}
+```javascript highlight={[5]}
 function App(){
   return 'Hello World';
 }
@@ -81,7 +81,7 @@ When you scan through this code and find the useEffect with empty `[]` dependenc
 have guessed that this hook runs only on mount (exactly like componentdidmount). Yes, you are right, it runs
 just on the mount. so you would get this in console
 
-```bash {noline}
+```bash noline
 useEffect Ran! 
 ```
 
@@ -116,7 +116,7 @@ would change thus calling the useEffect hook right? lets check it out!
 
 This would be logged on the first Mount:
 
-```bash {noline}
+```bash noline
 Count Changed
 ```
 
@@ -153,7 +153,7 @@ So the takeaway from this section is
 
 Now let's look at another example below with the Unmount behaviour.
 
-```jsx {5,6,7}
+```jsx highlight={[5,6,7]}
 function Child() {
   React.useEffect(() => {
     console.log("Child useEffect Ran!");

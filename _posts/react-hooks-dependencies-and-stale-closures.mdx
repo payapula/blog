@@ -57,7 +57,7 @@ a higher order function.
 > Any function that returns another function or that takes a function as argument 
 > is called as Higher order function. 
 
-```javascript {3,4,5}
+```javascript highlight={[3,4,5]}
 function App(count) {
   console.log('Counter initialized with ' + count);
   return function print() {
@@ -72,7 +72,7 @@ This closing is referred to as **closure**.
 Please don't get confused with the name of the functions. Names need not 
 necessarily be identical, as for an example
 
-```javascript {3,8}
+```javascript highlight={[3,8]}
 function App(count) {
   console.log('Counter initialized with ' + count);
   return function increment() {
@@ -159,7 +159,7 @@ Warning! 🚨 Spoilers 🚨 ahead
 
 The output is
 
-```bash {noline}
+```bash noline
 Count is 0
 ```
 
@@ -167,7 +167,7 @@ Oh, did we fail to increment the count?
 
 Let's find out by placing console log inside our `increment` function 
 
-```javascript {7}
+```javascript highlight={[7]}
 function App() {
 
   let count = 0;
@@ -195,7 +195,7 @@ log();
 
 And this time, the output will be 
 
-```bash {noline}
+```bash noline
 1
 2
 3
@@ -211,7 +211,7 @@ message "Count is 0".
 
 To fix this stale closure, we can move the message inside of `log`
 
-```javascript {11}
+```javascript highlight={[11]}
 function App() {
 
   let count = 0;
@@ -293,7 +293,7 @@ just failed to capture the updated message.
 To fix this stale closure problem, we need to specify both `count` and `message` 
 as our dependency array.
 
-```jsx {10}
+```jsx highlight={[10]}
 function App() {
   const [count, setCount] = React.useState(0);
 
