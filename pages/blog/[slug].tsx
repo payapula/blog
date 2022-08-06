@@ -11,6 +11,7 @@ import { Box } from '@chakra-ui/react';
 import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';
+import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 type PostProps = {
     post: PostType;
@@ -103,7 +104,12 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
 
     const { base64, img } = await getPlaiceholder(post.cover.src);
 
-    const mdxSource = await serialize(post.content);
+    const mdxSource = await serialize(post.content, {
+        mdxOptions: {
+            remarkPlugins: [remarkMdxCodeMeta]
+        }
+    });
+
     return {
         props: {
             post: {

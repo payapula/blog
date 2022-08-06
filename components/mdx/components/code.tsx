@@ -5,15 +5,9 @@ import { useColorModeValue, Box } from '@chakra-ui/react';
 // Code is Provided by Kent.C.Dodds https://github.com/kentcdodds/kentcdodds.com/blob/main/src/components/mdx/code.js
 // Same is used in chakra UI - https://github.com/chakra-ui/chakra-ui/blob/97b6b0111f21af8bfce675e34d7c32f3ff2cadf0/website/src/components/codeblock/highlight.tsx
 
-const RX_LINE_NUMS = /{([\d,-]+)}/;
-
-const RX_NO_LINE = /noline/;
-
-function calculateLinesToHighlight(meta) {
-    if (RX_LINE_NUMS.test(meta)) {
-        const lineNumbers = RX_LINE_NUMS.exec(meta)[1]
-            .split(',')
-            .map((v) => v.split('-').map((y) => parseInt(y, 10)));
+function calculateLinesToHighlight(highlight: number[]) {
+    if (highlight?.length) {
+        const lineNumbers = highlight.map((v) => [v]);
         return (index) => {
             const lineNumber = index + 1;
             const inRange = lineNumbers.some(([start, end]) =>
@@ -26,19 +20,20 @@ function calculateLinesToHighlight(meta) {
     }
 }
 
-function checkToHideLineNums(meta) {
-    return RX_NO_LINE.test(meta);
+function checkToHideLineNums(noline) {
+    return !!noline;
 }
 
 interface CodeProps {
     codeString: string;
     language: Language;
-    metastring: unknown;
+    highlight: number[];
+    noline: boolean;
 }
 
-function Code({ codeString, language, metastring }: CodeProps): JSX.Element {
-    const shouldHighlightLine = calculateLinesToHighlight(metastring);
-    const shouldHideLineNums = checkToHideLineNums(metastring);
+function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Element {
+    const shouldHighlightLine = calculateLinesToHighlight(highlight);
+    const shouldHideLineNums = checkToHideLineNums(noline);
     const color = useColorModeValue('#0a1126', '#0a0707');
     return (
         <Highlight {...defaultProps} code={codeString} language={language} theme={theme}>
@@ -131,6 +126,7 @@ function preToCodeBlock(preProps) {
         // code props
         preProps.children.props
     ) {
+        const { highlight, noline } = preProps;
         const { children: codeString, className = '', ...props } = preProps.children.props;
 
         const matches = className.match(/language-(?<lang>.*)/);
@@ -139,6 +135,8 @@ function preToCodeBlock(preProps) {
             codeString: codeString.trim(),
             className,
             language: matches && matches.groups && matches.groups.lang ? matches.groups.lang : '',
+            highlight,
+            noline,
             ...props
         };
     }
