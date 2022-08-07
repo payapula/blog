@@ -39,7 +39,6 @@ const MDXComponents = {
     h3: (props): ReactElement => <Heading as="h3" {...props} />,
     h4: (props): ReactElement => <Heading as="h4" {...props} />,
     strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
-    inlineCode: InlineCode,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
@@ -54,6 +53,7 @@ const MDXComponents = {
             return <Pre {...preProps} />;
         }
     },
+    code: InlineCode,
     table: Table,
     th: THead,
     td: TData,
