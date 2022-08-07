@@ -1,5 +1,4 @@
-import { Heading } from '@chakra-ui/layout';
-import { Box, Button, Flex, Icon, VisuallyHidden } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, VisuallyHidden, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
 
