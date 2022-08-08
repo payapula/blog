@@ -11,14 +11,14 @@ import { Box } from '@chakra-ui/react';
 import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';
+import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 
 type PostProps = {
     post: PostType;
-    componentNames: string[];
     plaiceHolder: PlaiceHolderProps;
 };
 
-const Post = ({ post, componentNames, plaiceHolder }: PostProps): ReactElement => {
+const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
     const { title, description, ogImage, cover, content, slug } = post;
 
     const intersectionRef = useRef<HTMLDivElement | null>(null);
@@ -79,11 +79,7 @@ const Post = ({ post, componentNames, plaiceHolder }: PostProps): ReactElement =
                 />
                 <PostHeader title={title} />
                 <PostCover cover={cover} plaiceHolder={plaiceHolder} />
-                <PostBody
-                    content={content}
-                    componentNames={componentNames}
-                    intersectionRef={intersectionRef}
-                />
+                <PostBody content={content} intersectionRef={intersectionRef} />
                 <PostFooter slug={slug} />
             </Box>
         </Layout>
@@ -108,20 +104,18 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
 
     const { base64, img } = await getPlaiceholder(post.cover.src);
 
-    const componentNames = [
-        /<CodeSandbox/.test(post.content) ? 'CodeSandbox' : null,
-        /<CodePen/.test(post.content) ? 'CodePen' : null,
-        /<Tweet/.test(post.content) ? 'Tweet' : null
-    ].filter(Boolean);
+    const mdxSource = await serialize(post.content, {
+        mdxOptions: {
+            remarkPlugins: [remarkMdxCodeMeta]
+        }
+    });
 
-    const mdxSource = await serialize(post.content);
     return {
         props: {
             post: {
                 ...post,
                 content: mdxSource
             },
-            componentNames,
             plaiceHolder: {
                 base64,
                 img
