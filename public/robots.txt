@@ -1,2 +1,9 @@
+# *
 User-agent: *
-Sitemap: https://bharathikannan.com/sitemap.xml
+Allow: /
+
+# Host
+Host: https://www.bharathikannan.com
+
+# Sitemaps
+Sitemap: https://www.bharathikannan.com/sitemap.xml
