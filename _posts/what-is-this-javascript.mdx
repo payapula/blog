@@ -79,7 +79,7 @@ In the above snippet, the call-site of `foo()` is in global scope, hence `this` 
 
 This rule checks for context object which has `this` execution. In other words, the `this` here refers to the containing object. It's easy to see this in example rather than explaining it with words.
 
-```javascript {2,7}
+```javascript highlight={[2,7]}
 function foo() {
 	console.log(this.a);
 }
@@ -317,25 +317,25 @@ Let's recap the four rules that we saw about `this` binding.
 
 1. Is the function is called with `new` then `this` would be newly constructed object.
 
-```javascript {noline}
+```javascript noline
  var bar = new foo();
 ```
 
 2. Is the function is called with explicit bind functions like call or apply? Then, `this` would be the context passed to those functions.
 
-```javascript {noline}
+```javascript noline
  var bar = foo.call(obj1);
 ```
 
 3. Is the function executed with containing object? Then `this` would be that object.
 
-```javascript {noline}
+```javascript noline
  var bar = obj1.foo();
 ```
 
 4. Otherwise, default binding applies which returns global property, if present in 'non-strict' mode and `undefined` in 'strict' mode.
 
-```javascript {noline}
+```javascript noline
  var bar = foo();
 ```
 
@@ -349,7 +349,7 @@ The `this` inside an arrow function adopts `this` binding from the enclosing fun
 
 Let's see this with an example.
 
-```javascript {17}
+```javascript highlight={[17]}
 function HOCFunction() {
 	// return an arrow function
 	return () => {

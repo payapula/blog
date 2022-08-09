@@ -28,7 +28,7 @@ As always, let's start with *Just Javascript*
 
 Take a look at the function below, which returns a string:
 
-```javascript {5}
+```javascript highlight={[5]}
 function App(){
   return 'Hello World';
 }
@@ -81,7 +81,7 @@ When you scan through this code and find the useEffect with empty `[]` dependenc
 have guessed that this hook runs only on mount (exactly like componentdidmount). Yes, you are right, it runs
 just on the mount. so you would get this in console
 
-```bash {noline}
+```bash noline
 useEffect Ran! 
 ```
 
@@ -116,7 +116,7 @@ would change thus calling the useEffect hook right? lets check it out!
 
 This would be logged on the first Mount:
 
-```bash {noline}
+```bash noline
 Count Changed
 ```
 
@@ -153,7 +153,7 @@ So the takeaway from this section is
 
 Now let's look at another example below with the Unmount behaviour.
 
-```jsx {5,6,7}
+```jsx highlight={[5,6,7]}
 function Child() {
   React.useEffect(() => {
     console.log("Child useEffect Ran!");
@@ -257,7 +257,7 @@ executing the hook.
 
 Let's see this behaviour with an example. Open up the console section, and play around with the buttons.
 
-<CodeSandbox codeSandboxId="react-useeffect-hooks-flow-zokln"/>
+[Play around with example in codesandbox](https://codesandbox.io/s/react-useeffect-hooks-flow-zokln)
 
 > You can play around with the [useEffect flow sandbox](https://codesandbox.io/s/react-useeffect-hooks-flow-zokln) 
 > to see when each effect is getting called and its order.
@@ -266,7 +266,7 @@ On the first mount, we see both the useEffects of `App` running, and when you cl
 on the Increment count button, before running the _no deps hook_, the cleanup function
 is executed.
 
-```bash {3}
+```bash highlight={[3]}
 ▶️ App Render Start 
 🛑 App Render End 
  App: useEffect no deps Cleanup 🧹
@@ -276,7 +276,7 @@ is executed.
 Similarly, when you click on Show Child button, before running the _no deps hook_ of App, the 
 cleanup is executed. 
 
-```bash {5}
+```bash highlight={[5]}
 ▶️ App Render Start 
 🛑 App Render End 
        ▶️ Child Render Start 

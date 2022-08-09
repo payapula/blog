@@ -27,7 +27,7 @@ So, to use this component with our design system, we can create a custom compone
 
 Surround chakra `Button` with next's `Link` and provide a `passHref` prop so that it [forwards href to the rendered anchor tag](https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag) for proper semantics and SEO.
 
-```jsx {6,7}
+```jsx highlight={[6,7]}
 import Link from "next/link";
 import { Button } from "@chakra-ui/react";
 
@@ -64,7 +64,7 @@ We can change the `variant` prop to `'link'` to the same component to render the
 
 At the same time, if you want to have control over next's `Link` via props, you would need to separate the props in the custom component and pass it appropriately like below
 
-```jsx {4,6,19}
+```jsx highlight={[4,6,19]}
 import Link from "next/link";
 import { Button } from "@chakra-ui/react";
 
@@ -96,7 +96,7 @@ See more about Next's Link props in [next's documentation about Link component](
 
 If we want to use Chakra's Link with Next's Link, we can do that easily by this method.
 
-```jsx {2,7,14}
+```jsx highlight={[2,7,14]}
 import Link from "next/link";
 import { Link as ChakraLink } from "@chakra-ui/react";
 
@@ -123,7 +123,7 @@ Notice that we can pass `isExternal` prop to the custom component, and that woul
 
 If you are using next js with typescript and if you want to make use of typescript intellisense, code completion and static type checking for our custom chakra components, you can create a new prop type by _merging Chakra's Props and Next's Props_ and provide it to our component like below
 
-```tsx {7,14}
+```tsx highlight={[7,14]}
 import Link, { LinkProps } from "next/link";
 import {
   Button,
@@ -160,7 +160,7 @@ Wow! Now we got code completion with static props checking!
 
 And for the Chakra Link,
 
-```tsx {7,9}
+```tsx highlight={[7,9]}
 import Link, { LinkProps } from "next/link";
 import {
   Link as ChakraLink,
@@ -195,7 +195,7 @@ Great! Now we won't be missing Chakra's prop intellisense!
 
 You can shorten the prop spreading on components without mentioning `children`
 
-```jsx {5,6,7,13,16}
+```jsx highlight={[5,6,7,13,16]}
 // BEFORE
 function ChakraNextLinkButton({ href, children, prefetch = true, ...props }) {
   return (

@@ -1,5 +1,4 @@
-import { Heading } from '@chakra-ui/layout';
-import { Box, Button, Flex, Icon, VisuallyHidden } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, VisuallyHidden, Heading } from '@chakra-ui/react';
 import React from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
 
@@ -31,8 +30,7 @@ const quoteData: QuoteData = [
         author: 'Bertram Gilfoyle'
     },
     {
-        text:
-            'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+        text: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
         author: 'Martin Fowler'
     },
     {
@@ -40,8 +38,7 @@ const quoteData: QuoteData = [
         author: 'Steve Jobs'
     },
     {
-        text:
-            'Whether you want to uncover the secrets of the universe, or you just want to pursue a career in the 21st century, basic computer programming is an essential skill to learn.',
+        text: 'Whether you want to uncover the secrets of the universe, or you just want to pursue a career in the 21st century, basic computer programming is an essential skill to learn.',
         author: 'Stephen Hawking'
     },
     {
@@ -50,21 +47,8 @@ const quoteData: QuoteData = [
     }
 ];
 
-/**
- * Returns a random integer between min (inclusive) and max (inclusive).
- * Excellent explanation - https://stackoverflow.com/a/1527820
- * @param min
- * @param max
- * @returns random number
- */
-function getRandomInt(min = 0, max = quoteData.length - 1): number {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 export const Quotes = (): JSX.Element => {
-    const [quoteNo, setQuoteNo] = React.useState(getRandomInt());
+    const [quoteNo, setQuoteNo] = React.useState(1);
 
     const toggleQuotes = (request) => {
         let nextQuote;

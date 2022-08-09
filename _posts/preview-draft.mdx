@@ -167,7 +167,7 @@ inside it.
 
 🚫 Wrong:
 
-```jsx {1,5}
+```jsx highlight={[1,5]}
 if(count > 5){ // React would throw a error
   React.useEffect(() => {
     console.log('Count is greater than 5!')
@@ -177,7 +177,7 @@ if(count > 5){ // React would throw a error
 
 ✅ Right:
 
-```jsx {2,4}
+```jsx highlight={[2,4]}
 React.useEffect(() => {
   if(count > 5){ 
     console.log('Count is greater than 5!')

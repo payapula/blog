@@ -55,7 +55,6 @@ export default function Index({ allPosts }: Props): ReactElement {
             </Heading>
             <SearchPosts allPosts={allPosts} setFilteredPosts={setFilteredPosts} />
             {filteredPosts?.length === 0 && (
-                // eslint-disable-next-line
                 <Text fontSize={['md', null, 'lg', 'xl']} mt={2} textAlign="center">
                     🤷🏾‍♂️ No posts available with this search. 🛠
                 </Text>

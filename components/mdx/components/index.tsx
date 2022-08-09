@@ -1,26 +1,26 @@
 /* eslint-disable */
 import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
-import { ChakraLink } from 'components/chakra-link';
+import { ChakraLink, ChakraMDXLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
 import { ReactElement } from 'react';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
-const InlineCode = (props: unknown): ReactElement => (
+const InlineCode = (props: object): ReactElement => (
     // .inlinecode is styled in mdx-styles file
     <ChakraCode className="inlinecode" {...props} />
 );
 
-const Table = (props: unknown): ReactElement => (
+const Table = (props: object): ReactElement => (
     <chakra.div overflowX="auto">
         <chakra.table textAlign="left" mt="32px" width="full" {...props} />
     </chakra.div>
 );
 
-const THead = (props: unknown): ReactElement => <chakra.th {...props} />;
+const THead = (props: object): ReactElement => <chakra.th {...props} />;
 
-const TData = (props: unknown): ReactElement => (
+const TData = (props: object): ReactElement => (
     <chakra.td
         p={2}
         borderTopWidth="1px"
@@ -39,7 +39,6 @@ const MDXComponents = {
     h3: (props): ReactElement => <Heading as="h3" {...props} />,
     h4: (props): ReactElement => <Heading as="h4" {...props} />,
     strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
-    inlineCode: InlineCode,
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
@@ -54,6 +53,7 @@ const MDXComponents = {
             return <Pre {...preProps} />;
         }
     },
+    code: InlineCode,
     table: Table,
     th: THead,
     td: TData,
@@ -75,7 +75,7 @@ const MDXComponents = {
             {...props}
         />
     ),
-    a: ChakraLink,
+    a: ChakraMDXLink,
     p: (props): ReactElement => <chakra.p {...props} />,
     ul: (props): ReactElement => <chakra.ul {...props} />,
     ol: (props): ReactElement => <chakra.ol {...props} />,
