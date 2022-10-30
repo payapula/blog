@@ -76,9 +76,16 @@ function History(): JSX.Element {
                     }
                 }}>
                 <CustomVerticalTimeLine
-                    date="2020 - Present"
+                    date="2022 - Present"
                     icon={<CustomIcon icon={DiReact} color="#61dafb" />}
                     head={true}>
+                    <Title>Software Engineer</Title>
+                    <Subtitle>Twilio, Bangalore</Subtitle>
+                    <Description>React | Typescript | SCSS | NodeJS</Description>
+                </CustomVerticalTimeLine>
+                <CustomVerticalTimeLine
+                    date="2020 - 2022"
+                    icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
                     <Title>Technical Lead IV</Title>
                     <Subtitle>Photon, Chennai</Subtitle>
                     <Description>
