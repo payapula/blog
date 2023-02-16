@@ -10,10 +10,12 @@
 -   Point 1
 -   Point 2
 
-## If this is a new post, Have you updated sitemap ?
+## Checklist
 
-[] Yes
-[] No
+[] Make sure sitemaps are up-to-date. (View README).
+[] Make sure Lighthouse score isn't impacted.
+[] Do a smoke test on other pages.
+[] Make sure resume is up-to-date.
 
 ## Packages
 
