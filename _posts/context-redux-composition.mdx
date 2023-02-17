@@ -1,0 +1,312 @@
+---
+title: 'Context, Redux or Composition?'
+excerpt: "Which is the better way to solve prop drilling? Let us talk about it in this post by solving the same problem 
+in three different ways."
+date: '2023-02-16'
+description: "Sharing my experience on the recent react interview question and the feedback I received."
+cover: 
+    src: '/assets/blog/context-redux-composition/drilling-cover.jpg'  
+    alt: 'Pump-jack mining crude oil with the sunset'
+    author: 
+      name: 'Zbynek Burival'
+      url: https://unsplash.com/@zburival?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/context-redux-composition/drilling-cover.jpg'  
+    alt: 'Pump-jack mining crude oil with the sunset'
+keywords: 'React,Context'
+---
+
+I was one of the developer who got impacted by the recent layoffs from tech 
+companies. So, I started giving interviews for frontend positions with react.
+
+In one of the companies I was given a classic prop drilling problem in react, 
+and was asked to solve it. To keep things simple, the problem given was like
+this:
+
+```jsx noline
+export default function App() {
+  const [user, setUser] = React.useState(null);
+
+  const handleLogin = () => setUser(userDetails);
+
+  return (
+    <div className="App">
+      Company Logo
+      <div>
+        {user ? (
+          <Dashboard user={user} />
+        ) : (
+          <button onClick={handleLogin}>Login</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Dashboard({ user }) {
+  return (
+    <div>
+      <DashboardNav user={user} />
+    </div>
+  );
+}
+
+function DashboardNav({ user }) {
+  return (
+    <div>
+      <WelcomeUser user={user} />
+      <UserRole user={user} />
+    </div>
+  );
+}
+
+function WelcomeUser({ user }) {
+  return <div>Welcome {user.name}</div>;
+}
+
+function UserRole({ user }) {
+  return <div>Role {user.role}</div>;
+}
+
+```
+
+As you can observe, we are passing the `user` prop from `App` component to the 
+child components `WelcomeUser` and `UserRole`. The intermediate components `Dashboard` 
+and `DashboardNav` are just forwarding the props and not really using it.
+
+<Image
+  alt="Components using user property"
+  src="/assets/blog/context-redux-composition/before.png"
+  width={1500}
+  height={600}
+  objectFit='contain'
+/>
+
+This is a classic **prop drilling** issue in react. 
+
+Interestingly, the interviewer asked to solve the problem by either React Context API
+or by using Redux.
+
+
+## Solving by React Context
+
+Using context API to solve this problem would look like the code below.
+
+```jsx highlight={[1,13,15,42,47]}
+const UserContext = React.createContext(undefined);
+
+export default function App() {
+  const [user, setUser] = React.useState(null);
+
+  const handleLogin = () => setUser(userDetails);
+
+  return (
+    <div className="App">
+      Company Logo: Context
+      <div>
+        {user ? (
+          <UserContext.Provider value={user}>
+            <Dashboard />
+          </UserContext.Provider>
+        ) : (
+          <button onClick={handleLogin}>Login</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Dashboard() {
+  return (
+    <div>
+      <DashboardNav />
+    </div>
+  );
+}
+
+function DashboardNav() {
+  return (
+    <div>
+      <WelcomeUser />
+      <UserRole />
+    </div>
+  );
+}
+
+function WelcomeUser() {
+  const user = React.useContext(UserContext);
+  return <div>Welcome {user.name}</div>;
+}
+
+function UserRole() {
+  const user = React.useContext(UserContext);
+  return <div>Role {user.role}</div>;
+}
+```
+
+We are creating `UserContext` and wrapping the Dashboard with Provider, so that
+we can pass the props we want to a deeply nested child component. This solution 
+works.
+
+<Image
+  alt="Components using user property with React Context"
+  src="/assets/blog/context-redux-composition/after.png"
+  width={1500}
+  height={600}
+  objectFit='contain'
+/>
+
+## Solving by Redux
+
+So, if we are going on the classical redux route, we need to create a similar 
+structure and wrap everything with a single global store, which contains the `user` 
+object. 
+
+The solution code would contain a ton of boilerplate, as we are using `redux` for 
+solving a simple problem.
+
+I just gave the gist of the code below, but if you really want to explore the full
+code, here you go: [solving with redux](https://codesandbox.io/s/falling-wave-e5mhrq?file=/src/ReduxWay.js).
+
+```jsx highlight={[3,5,44,45,51,52]}
+export default function App() {
+  return (
+    <Provider store={store}>
+      <ReduxConnectedApp />
+    </Provider>
+  );
+}
+
+function ReduxApp({ user, setUser }) {
+  const handleLogin = () => setUser(userDetails);
+
+  return (
+    <div className="App">
+      Company Logo: Redux
+      <div>
+        {user ? <Dashboard /> : <button onClick={handleLogin}>Login</button>}
+      </div>
+    </div>
+  );
+}
+
+
+function Dashboard() {
+  return (
+    <div>
+      <DashboardNav />
+    </div>
+  );
+}
+
+function DashboardNav() {
+  return (
+    <div>
+      <ConnectedWelcomeUser />
+      <ConnectedUserRole />
+    </div>
+  );
+}
+
+function WelcomeUser({ user }) {
+  return <div>Welcome {user.name}</div>;
+}
+
+const mapStateToPropsWelcomeUser = (state) => ({ user: state });
+const ConnectedWelcomeUser = connect(mapStateToPropsWelcomeUser)(WelcomeUser);
+
+function UserRole({ user }) {
+  return <div>Role {user.role}</div>;
+}
+
+const mapStateToPropsUserRole = (state) => ({ user: state });
+const ConnectedUserRole = connect(mapStateToPropsUserRole)(UserRole);
+```
+
+We have connected the components that needs access to global state
+stored in redux. 
+
+## How I solved it
+
+Having read about react composition, I solved the problem by making
+use of `children` prop, which looked like this
+
+```jsx highlight={[11,12,13,14,15,16]}
+export default function AppSolution() {
+  const [user, setUser] = React.useState(null);
+
+  const handleLogin = () => setUser(userDetails);
+
+  return (
+    <div className="App">
+      Company Logo
+      <div>
+        {user ? (
+          <Dashboard>
+            <DashboardNav>
+              <WelcomeUser user={user} />
+              <UserRole user={user} />
+            </DashboardNav>
+          </Dashboard>
+        ) : (
+          <button onClick={handleLogin}>Login</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Dashboard({ children }) {
+  return <div>{children}</div>;
+}
+
+function DashboardNav({ children }) {
+  return <div>{children}</div>;
+}
+
+function WelcomeUser({ user }) {
+  return <div>Welcome {user.name}</div>;
+}
+
+function UserRole({ user }) {
+  return <div>Role {user.role}</div>;
+}
+```
+
+If you think about it, this is the easy way to solve this problem without introducing
+any complexity like `createContext` or `react-redux`. We also get other benefits such
+as
+
+- In the future, if we introduce any state inside Dashboard and manipulate it, our 
+`DashboardNav` never gets re-rendered.
+- By supplying the props **only to the required components**, we have a good visibility 
+of all the consumers of `user`, without having to navigate between components (files) to 
+look for them.
+
+This pattern is not new, and it's already been talked about in react community. One such
+good walkthrough is [Using Composition in React to Avoid "Prop Drilling"](https://www.youtube.com/watch?v=3XaXKiXtNjw&ab_channel=ReactTraining)
+
+## Conclusion
+
+However, I got the feedback from the interviewer, and it goes like this
+
+> The interviewee did not understand the problem correctly, and was unable to provide
+> the expected solution.
+
+I guess the reason being either the interviewer was not aware of this pattern or I chose
+to solve the problem in a way that was not asked for.
+
+Having said that, I am now motivated to write more about interesting patterns in react, hoping
+it reaches the wider audience.
+
+Let me know what you think by sharing this article.
+
+----
+
+References
+
+- [Codesandbox Solution](https://codesandbox.io/s/falling-wave-e5mhrq?file=/src/index.js)
+- [Before you use context - React Docs](https://beta.reactjs.org/learn/passing-data-deeply-with-context#before-you-use-context)
+- [Using Composition in React to Avoid "Prop Drilling"](https://www.youtube.com/watch?v=3XaXKiXtNjw&ab_channel=ReactTraining)
+- [Blogged Answers: A (Mostly) Complete Guide to React Rendering Behavior](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior/)
+- [Blogged Answers: Why React Context is Not a "State Management" Tool (and Why It Doesn't Replace Redux)](https://blog.isquaredsoftware.com/2021/01/context-redux-differences/)

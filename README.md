@@ -71,6 +71,15 @@ Make sure you have installed source-map-explorer:
 
 `npm install -g source-map-explorer`
 
+## Sitemap
+
+Sitemap file gets updated automatically by this awesome package - [next-sitemap](https://github.com/iamvishnusankar/next-sitemap)
+
+### How?
+
+-   `npm run build` would be executed during deployment.
+-   After build `postbuild` script would be executed, which updates sitemaps.
+
 ## Notes
 
 Eslint, Prettier Configs provided by [Arpit Bharti](https://dev.to/onygami/eslint-and-prettier-for-react-apps-bonus-next-js-and-typescript-3e46)
