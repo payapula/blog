@@ -1,5 +1,6 @@
 import { Styles } from '@chakra-ui/theme-tools';
-import { injectColorMode as mdxStylesWithColorInjected } from './mdx-styles';
+import { getMDXPostStyles } from './mdx-post-styles';
+import { getMDXQuizStyles } from './mdx-quiz-styles';
 import { ChakraTheme } from '@chakra-ui/react';
 
 // general can include any number of custom keys
@@ -34,7 +35,10 @@ const fonts = {
 const styles: Styles = {
     global: ({ colorMode, theme }) => ({
         '.mdx-global-styles': {
-            ...mdxStylesWithColorInjected(colorMode, theme as ChakraTheme)
+            ...getMDXPostStyles(colorMode, theme as ChakraTheme)
+        },
+        '.quiz-global-styles': {
+            ...getMDXQuizStyles(colorMode, theme as ChakraTheme)
         },
         '.posts-container': {
             // Article Hover styles - https://codepen.io/sdthornton/pen/wBZdXq

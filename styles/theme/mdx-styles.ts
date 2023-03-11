@@ -1,4 +1,4 @@
-import { ChakraTheme } from '@chakra-ui/react';
+import { ChakraTheme, ColorMode } from '@chakra-ui/react';
 import { SystemStyleObject } from '@chakra-ui/styled-system';
 
 const listStyles = {
@@ -10,8 +10,6 @@ const listStyles = {
         mt: '0.25rem'
     }
 };
-
-type ColorMode = 'light' | 'dark';
 
 const headingColor = (colorMode: ColorMode) =>
     colorMode === 'light' ? 'heading.light' : 'heading.dark';

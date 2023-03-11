@@ -21,7 +21,7 @@ export default function Quiz({ slug, content }: QuizProps) {
     }
 
     return (
-        <Box mt={10} className="mdx-global-styles">
+        <Box mt={10} className="quiz-global-styles">
             <MDXRemote {...content} components={MDXQuizComponents} />
         </Box>
     );
@@ -36,7 +36,6 @@ type Params = {
 export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
     const post = getQuizBySlug(params.slug, ['content']);
 
-    console.log('post.content', post.content);
     const mdxSource = await serialize(post.content, {
         mdxOptions: {
             remarkPlugins: [remarkMdxCodeMeta]

@@ -1,15 +1,30 @@
 import * as React from 'react';
 import { MDXComponents } from './index';
 import { Children } from 'react';
-import { Box, Radio, RadioGroup, Container, Flex, Button } from '@chakra-ui/react';
+import { Box, Radio, RadioGroup, Container, Flex, Button, chakra } from '@chakra-ui/react';
 
-function Question({ children }) {
-    return <div>{children}</div>;
+interface ComponentWithChildren {
+    children: React.ReactNode;
+}
+
+function Question({ children }: ComponentWithChildren) {
+    return <>{children}</>;
+}
+
+interface QuestionSetProps {
+    children: React.ReactNode;
+    incrementValidAnswer: () => void;
+    answerSubmitted: boolean;
+    setAnswerSubmitted: (value: boolean) => void;
 }
 
 // Should manage individual question / answer state
-function QuestionSet({ children, incrementValidAnswer }) {
-    const [answerSubmitted, setAnswerSubmitted] = React.useState(false);
+function QuestionSet({
+    children,
+    incrementValidAnswer,
+    answerSubmitted,
+    setAnswerSubmitted
+}: QuestionSetProps) {
     const [value, setValue] = React.useState('');
     const validAnswer = React.useRef<string>();
 
@@ -21,11 +36,7 @@ function QuestionSet({ children, incrementValidAnswer }) {
             validAnswer.current = index.toString();
         }
         return (
-            <Radio
-                size="md"
-                value={index.toString()}
-                isDisabled={answerSubmitted}
-                alignItems="baseline">
+            <Radio size="md" value={index.toString()} isDisabled={answerSubmitted} minH={14}>
                 {child.props.children}
             </Radio>
         );
@@ -69,23 +80,40 @@ function QuestionSet({ children, incrementValidAnswer }) {
     );
 }
 
-function Choise({ children }) {
-    return <div>{children}</div>;
+function Choise({ children }: ComponentWithChildren) {
+    return <>{children}</>;
 }
 
-function Choises({ children, value, setValue, choiseElements }) {
+interface ChoisesProps {
+    value: string;
+    setValue: (value: string) => void;
+    choiseElements: Array<typeof Radio>;
+}
+
+function Choises({ value, setValue, choiseElements }: ChoisesProps) {
     const totalChoises = Children.count(choiseElements);
 
     const choiseWithSeparator = [];
     Children.forEach(choiseElements, (child, index) => {
         choiseWithSeparator.push(child);
         if (totalChoises - 1 !== index) {
-            choiseWithSeparator.push(<hr key={index} />);
+            choiseWithSeparator.push(
+                <Box key={index} mt={2} mb={2} borderTopWidth={'1px'} borderStyle={'outset'} />
+            );
         }
     });
 
     return (
-        <RadioGroup name="form-name" onChange={setValue} value={value}>
+        <RadioGroup
+            name="form-name"
+            onChange={setValue}
+            value={value}
+            mt="4"
+            sx={{
+                '.chakra-radio:hover': {
+                    backgroundColor: 'gray.100'
+                }
+            }}>
             <Flex direction={'column'}>{choiseWithSeparator}</Flex>
         </RadioGroup>
     );
@@ -100,6 +128,7 @@ function Card({ children }: { children: React.ReactNode }) {
     const [quizState, setQuizState] = React.useState<QuizState>('idle');
     const [questionNo, setQuestionNo] = React.useState(1);
     const [totalValidAnswer, setTotalValidAnswer] = React.useState(0);
+    const [answerSubmitted, setAnswerSubmitted] = React.useState(false);
 
     const totalQuestions = Children.count(children);
 
@@ -109,6 +138,8 @@ function Card({ children }: { children: React.ReactNode }) {
 
     const QuestionSetWithAddedProps = React.cloneElement(children[questionNo - 1], {
         incrementValidAnswer,
+        answerSubmitted,
+        setAnswerSubmitted,
         /** key prop is neccessary to tell react that this is brand new instance */
         key: questionNo - 1
     });
@@ -132,11 +163,12 @@ function Card({ children }: { children: React.ReactNode }) {
             Question {questionNo}
             {QuestionSetWithAddedProps}
             <Button
+                disabled={!answerSubmitted}
                 onClick={() => {
                     if (isFinalQuestion) {
                         return setQuizState('over');
                     }
-
+                    setAnswerSubmitted(false);
                     setQuestionNo((n) => n + 1);
                 }}>
                 {isFinalQuestion ? 'Submit' : 'Next'}
