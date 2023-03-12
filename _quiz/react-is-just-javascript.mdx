@@ -29,7 +29,7 @@
   <Answer>
     Because of this
 
-      ```jsx
+      ```js
       // JS
       function App(){
         return 'Hello World';
@@ -48,38 +48,79 @@
 </QuestionSet>
 <QuestionSet>
   <Question>
-  Second question
+  What will be the output of the following code?
 
-  ```javascript
-  function secondQuestion() {
-    return 2 + 2;
-  }
+  ```javascript noline
+  var salary = "1000$";
+
+  (function () {
+    console.log("Original salary was " + salary);
+
+    var salary = "5000$";
+
+    console.log("My New Salary " + salary);
+  })();
   ```
 
   </Question>
   <Choises>
     <Choise>
-      One
+      "Error"
     </Choise>
     <Choise >
-      Two
+      1000$, 5000$
+    </Choise>
+    <Choise isAnswer>
+      undefined, 5000$
     </Choise>
     <Choise>
-      Three
-    </Choise>
-    <Choise isAnswer={true}>
-      Four
+      undefined, undefined
     </Choise>
   </Choises>
   <Answer>
-    Because of this
+    The code above will output: `undefined, 5000$` because of hoisting. In the code presented above, you might be expecting salary to retain it values from outer scope until the point that salary was re-declared in the inner scope. But due to hoisting salary value was undefined instead. 
+    
+    To understand it better have a look of the following code, here salary variable is hoisted and declared at the top in function scope. When we print its value using console.log the result is undefined. Afterwards the variable is redeclared and the new value "5000$" is assigned to it.
 
-      ```jsx
-      // JS
-      function SecondAnswer(){
-        return 'Hello World';
-      }
+      ```javascript highlight={[4]}
+     var salary = "1000$";
+
+    (function () {
+      var salary = undefined;
+      console.log("Original salary was " + salary);
+
+      salary = "5000$";
+
+      console.log("My New Salary " + salary);
+    })();
       ```
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+  What will be the output of the following code after compilation?
+
+  ```jsx noline
+  <h1>Hello World</h1>
+  ```
+
+  </Question>
+  <Choises>
+    <Choise isAnswer>
+     `React.createElement("h1", null, "Hello World")`
+    </Choise>
+    <Choise >
+     `React.createElement("h1", null, ["Hello World"])`
+    </Choise>
+    <Choise>
+     `React.createElement("<h1/>", null, {"Hello World"})`
+    </Choise>
+    <Choise>
+     `React.createElement("jsx.h1", null, {jsx:"Hello World"})`
+    </Choise>
+  </Choises>
+  <Answer>
+    `React.createElement("h1", null, "Hello World")`
   </Answer>
 </QuestionSet>
 </Card>

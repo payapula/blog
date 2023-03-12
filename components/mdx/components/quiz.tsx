@@ -74,7 +74,7 @@ function QuestionSet({
                     Submit
                 </Button>
             </Flex>
-            {answerSubmitted ? isCorrect ? <div>Correct</div> : <p>Incorrect!</p> : null}
+            {answerSubmitted ? isCorrect ? <p>Correct</p> : <p>Incorrect!</p> : null}
             {answerSubmitted ? Answer : null}
         </Flex>
     );
@@ -112,6 +112,9 @@ function Choises({ value, setValue, choiseElements }: ChoisesProps) {
             sx={{
                 '.chakra-radio:hover': {
                     backgroundColor: 'gray.100'
+                },
+                '.chakra-radio p': {
+                    mt: 0
                 }
             }}>
             <Flex direction={'column'}>{choiseWithSeparator}</Flex>
@@ -124,7 +127,7 @@ const Dummy = (props): React.ReactElement => <div {...props} />;
 type QuizState = 'idle' | 'playing' | 'over';
 
 // Should manage all question and answer state: Should be giving final results
-function Card({ children }: { children: React.ReactNode }) {
+function Card({ children }: ComponentWithChildren) {
     const [quizState, setQuizState] = React.useState<QuizState>('idle');
     const [questionNo, setQuestionNo] = React.useState(1);
     const [totalValidAnswer, setTotalValidAnswer] = React.useState(0);
@@ -171,7 +174,7 @@ function Card({ children }: { children: React.ReactNode }) {
                     setAnswerSubmitted(false);
                     setQuestionNo((n) => n + 1);
                 }}>
-                {isFinalQuestion ? 'Submit' : 'Next'}
+                {isFinalQuestion ? 'Show Results' : 'Next'}
             </Button>
         </Container>
     );
