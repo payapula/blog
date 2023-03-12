@@ -76,9 +76,16 @@ function History(): JSX.Element {
                     }
                 }}>
                 <CustomVerticalTimeLine
-                    date="2022 - Present"
+                    date="2023 - Present"
                     icon={<CustomIcon icon={DiReact} color="#61dafb" />}
                     head={true}>
+                    <Title>Senior Associate, Experience Technology</Title>
+                    <Subtitle>Publicis Sapient</Subtitle>
+                    <Description>React | Typescript | SCSS | HTML | CSS</Description>
+                </CustomVerticalTimeLine>
+                <CustomVerticalTimeLine
+                    date="2022 - 2023"
+                    icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
                     <Title>Software Engineer</Title>
                     <Subtitle>Twilio, Bangalore</Subtitle>
                     <Description>React | Typescript | SCSS | NodeJS</Description>
@@ -87,7 +94,7 @@ function History(): JSX.Element {
                     date="2020 - 2022"
                     icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
                     <Title>Technical Lead IV</Title>
-                    <Subtitle>Photon, Chennai</Subtitle>
+                    <Subtitle>Photon Interactive, Chennai</Subtitle>
                     <Description>
                         React | Typescript | SCSS | RXjs | GraphQL | S3 | Material UI | NodeJS
                     </Description>
