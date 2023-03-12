@@ -7,6 +7,7 @@ import { Box } from '@chakra-ui/react';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkMdxCodeMeta from 'remark-mdx-code-meta';
 import { getQuizBySlug } from 'lib/quiz.api';
+import { Layout } from 'components/layout';
 
 interface QuizProps {
     slug: string;
@@ -21,9 +22,11 @@ export default function Quiz({ slug, content }: QuizProps) {
     }
 
     return (
-        <Box mt={10} className="quiz-global-styles">
-            <MDXRemote {...content} components={MDXQuizComponents} />
-        </Box>
+        <Layout>
+            <Box mt={10} className="quiz-global-styles">
+                <MDXRemote {...content} components={MDXQuizComponents} />
+            </Box>
+        </Layout>
     );
 }
 
