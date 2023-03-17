@@ -8,7 +8,8 @@ const listStyles = {
     'blockquote &': { mt: 0 },
     '& > * + *': {
         mt: '0.25rem'
-    }
+    },
+    listStyleType: 'initial'
 };
 
 type ColorMode = 'light' | 'dark';
