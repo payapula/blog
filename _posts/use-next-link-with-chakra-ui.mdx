@@ -23,6 +23,8 @@ What is so special about this component is, it **prefetches** the linked route b
 
 So, to use this component with our design system, we can create a custom component wrapper and make it reusable across the application. Let's see how to do that next. 
 
+> 🚨 From next v13 update, [Link component behavior has been updated](https://nextjs.org/blog/next-13#breaking-changes). Please check the last section of this post for workaround. In short, you would need to pass `legacyBehavior` prop to make the following tricks work with Chakra UI.
+
 ## Create Chakra Button with Next Link
 
 Surround chakra `Button` with next's `Link` and provide a `passHref` prop so that it [forwards href to the rendered anchor tag](https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag) for proper semantics and SEO.
@@ -217,6 +219,36 @@ function ChakraNextLinkButton({ href, prefetch = true, ...props }) {
 }
 ```
 
+## Next 13 Update
+
+In the new version of next v13, Link component behaviour has been updated, now it doesn't allow the child to be `a` tag. In order to make the above tricks work, you would need to pass additional prop `legacyBehavior` to the Link component.
+
+```jsx highlight={[6]}
+import Link from "next/link";
+import { Button } from "@chakra-ui/react";
+
+function ChakraNextLinkButton({ href, children, ...props }) {
+  return (
+    <Link href={href} passHref legacyBehavior>
+      <Button as="a" {...props}>
+        {children}
+      </Button>
+    </Link>
+  );
+}
+
+function IndexPage() {
+  return (
+      <ChakraNextLinkButton href="/about" colorScheme="facebook">
+        About
+      </ChakraNextLinkButton>
+  );
+}
+```
+
+At the time of writing this post, Chakra has just included their own next integration for Link component to support Next v13 updates. View their documentatiom on
+using the same: [Chakra UI with Next.js Link](https://chakra-ui.com/getting-started/nextjs-guide#chakra-ui-with-nextjs-link). To note this new component integration has some open issues, so please read carefuly before using it. View the issue [ESM Import Error in chakra next link](https://github.com/chakra-ui/chakra-ui/issues/7363)
+
 ## Sandbox Links
 
 Here is the sandbox link for all the above examples to see it live ✅
@@ -233,4 +265,6 @@ References
 - [Chakra Button Docs](https://chakra-ui.com/docs/form/button)
 - [Chakra Link Docs](https://chakra-ui.com/docs/navigation/link)
 - [Next Link Docs](https://nextjs.org/docs/api-reference/next/link)
+- [Next v13 Link PR](https://github.com/vercel/next.js/pull/41459)
+- [Next v13 Breaking Changes](https://nextjs.org/blog/next-13#breaking-changes)
 
