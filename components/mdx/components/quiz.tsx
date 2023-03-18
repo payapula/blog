@@ -8,7 +8,8 @@ import {
     Container,
     Flex,
     Button,
-    useColorModeValue
+    useColorModeValue,
+    Text
 } from '@chakra-ui/react';
 
 interface ComponentWithChildren {
@@ -219,7 +220,9 @@ function Card({ children }: ComponentWithChildren) {
 
     return (
         <Container maxW={'700px'}>
-            Question {questionNo} / {totalQuestions}
+            <Text align={'center'} mb={2}>
+                Question {questionNo} of {totalQuestions}
+            </Text>
             {QuestionSetWithAddedProps}
             <Button
                 disabled={!answerSubmitted}

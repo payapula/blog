@@ -1,8 +1,8 @@
 import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
-import PostType from 'types/post';
 import { OverrideProps } from 'types/utils';
+import QuizType from 'types/quiz';
 
 const quizesDirectory = join(process.cwd(), '_quiz');
 
@@ -11,18 +11,18 @@ export function getQuizSlugs() {
 }
 
 // Content is MDXRemote.source, so overriding it to string
-type RawPostType = OverrideProps<PostType, { content: string }>;
+type RawQuizType = OverrideProps<QuizType, { content: string }>;
 
-type PostKey = keyof PostType;
+type QuizKey = keyof QuizType;
 
-export function getQuizBySlug(slug: string, fields: PostKey[] = []): Partial<RawPostType> {
+export function getQuizBySlug(slug: string, fields: QuizKey[] = []): Partial<RawQuizType> {
     const realSlug = slug.replace(/\.mdx$/, '');
     const fullPath = join(quizesDirectory, `${realSlug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
     // We are just sending requested fields, hence Parital<> is used
-    const items: Partial<RawPostType> = {};
+    const items: Partial<RawQuizType> = {};
 
     // Ensure only the minimal needed data is exposed
     fields.forEach((field) => {
@@ -41,11 +41,11 @@ export function getQuizBySlug(slug: string, fields: PostKey[] = []): Partial<Raw
     return items;
 }
 
-export function getAllQuizes(fields: PostKey[] = [], count: number = null) {
+export function getAllQuizes(fields: QuizKey[] = [], count: number = null) {
     const slugs = getQuizSlugs();
 
     // We need 'date' field for ordering recent posts in homepage and blogpage
-    const requestedFields: PostKey[] = fields.includes('date') ? [...fields] : [...fields, 'date'];
+    const requestedFields: QuizKey[] = fields.includes('date') ? [...fields] : [...fields, 'date'];
 
     let posts = slugs
         .filter((slug) => !slug.endsWith('draft.mdx')) // Exclude draft files
