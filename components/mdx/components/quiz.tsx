@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { MDXComponents } from './index';
 import { Children } from 'react';
-import { Box, Radio, RadioGroup, Container, Flex, Button, chakra } from '@chakra-ui/react';
+import {
+    Box,
+    Radio,
+    RadioGroup,
+    Container,
+    Flex,
+    Button,
+    useColorModeValue
+} from '@chakra-ui/react';
 
 interface ComponentWithChildren {
     children: React.ReactNode;
@@ -36,8 +44,13 @@ function QuestionSet({
             validAnswer.current = index.toString();
         }
         return (
-            <Radio size="md" value={index.toString()} isDisabled={answerSubmitted} minH={14}>
-                {child.props.children}
+            <Radio
+                size="md"
+                value={index.toString()}
+                isDisabled={answerSubmitted}
+                minH={14}
+                padding={2}>
+                <Flex alignItems={'baseline'}>{child.props.children}</Flex>
             </Radio>
         );
     });
@@ -57,12 +70,7 @@ function QuestionSet({
     const isCorrect = validAnswer.current === value;
 
     return (
-        <Flex
-            direction={'column'}
-            justifyContent="flex-start"
-            padding={'2'}
-            borderRadius="4"
-            border={'1px'}>
+        <CardWrapper>
             {Question}
             <Flex as="form" onSubmit={submitAnswer} direction="column">
                 {ChoisesWithAdditionalProps}
@@ -76,6 +84,27 @@ function QuestionSet({
             </Flex>
             {answerSubmitted ? isCorrect ? <p>Correct</p> : <p>Incorrect!</p> : null}
             {answerSubmitted ? Answer : null}
+        </CardWrapper>
+    );
+}
+
+const getShadowForCard = (color1, color2) => `1px 1px 6px 4px ${color1}, 0 1px 1px 1px ${color2}`;
+
+function CardWrapper({ children }: ComponentWithChildren) {
+    const lightShadow = getShadowForCard('rgba(0, 0, 0, 0.12)', 'rgba(0, 0, 0, 0.24)');
+    const darkShadow = getShadowForCard('rgba(255, 130, 47, 0.25)', 'rgba(95, 83, 76, 0.22)');
+    const colorBoxShadow = useColorModeValue(lightShadow, darkShadow);
+
+    const borderColor = useColorModeValue('1px solid black', '1px solid teal');
+    return (
+        <Flex
+            direction={'column'}
+            justifyContent="flex-start"
+            padding={8}
+            borderRadius="4"
+            border={borderColor}
+            boxShadow={colorBoxShadow}>
+            {children}
         </Flex>
     );
 }
@@ -90,6 +119,8 @@ interface ChoisesProps {
     choiseElements: Array<typeof Radio>;
 }
 
+const getShadowForChoise = (color1, color2) => `0px 1px 0px 2px ${color1}, 0 1px 2px 0px ${color2}`;
+
 function Choises({ value, setValue, choiseElements }: ChoisesProps) {
     const totalChoises = Children.count(choiseElements);
 
@@ -103,6 +134,14 @@ function Choises({ value, setValue, choiseElements }: ChoisesProps) {
         }
     });
 
+    const lightShadow = getShadowForChoise('rgba(0, 0, 0, 0.12)', 'rgba(0, 0, 0, 0.24)');
+    const darkShadow = getShadowForChoise('rgba(255, 130, 47, 0.25)', 'rgba(95, 83, 76, 0.22)');
+    const colorBoxShadow = useColorModeValue(lightShadow, darkShadow);
+
+    const bgForChoise = useColorModeValue('teal.100', 'orange.700');
+    const borderForCircle = useColorModeValue('teal.700', 'orange.100');
+
+    const bgChecked = useColorModeValue('teal.300', 'orange.500');
     return (
         <RadioGroup
             name="form-name"
@@ -110,8 +149,25 @@ function Choises({ value, setValue, choiseElements }: ChoisesProps) {
             value={value}
             mt="4"
             sx={{
+                '.chakra-radio': {
+                    borderRadius: '5px',
+                    boxShadow: colorBoxShadow
+                },
                 '.chakra-radio:hover': {
-                    backgroundColor: 'gray.100'
+                    backgroundColor: bgForChoise
+                },
+                '.chakra-radio:hover .chakra-radio__control': {
+                    transform: 'scale(1.5)',
+                    borderColor: borderForCircle
+                },
+                '.chakra-radio[data-checked]': {
+                    backgroundColor: bgChecked
+                },
+                '.chakra-radio[data-checked] .chakra-radio__control': {
+                    transform: 'scale(1.5)',
+                    borderColor: borderForCircle,
+                    color: useColorModeValue('revert', 'initial'),
+                    background: useColorModeValue('revert', 'initial')
                 },
                 '.chakra-radio p': {
                     mt: 0
@@ -163,7 +219,7 @@ function Card({ children }: ComponentWithChildren) {
 
     return (
         <Container maxW={'700px'}>
-            Question {questionNo}
+            Question {questionNo} / {totalQuestions}
             {QuestionSetWithAddedProps}
             <Button
                 disabled={!answerSubmitted}
