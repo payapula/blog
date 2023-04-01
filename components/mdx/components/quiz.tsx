@@ -11,6 +11,7 @@ import {
     useColorModeValue,
     Text,
     Table,
+    Icon,
     Thead,
     Tbody,
     Tr,
@@ -20,8 +21,10 @@ import {
     TableContainer,
     Stat,
     StatLabel,
-    StatNumber
+    StatNumber,
+    ButtonProps
 } from '@chakra-ui/react';
+import { FaLongArrowAltRight } from 'react-icons/fa';
 
 interface ComponentWithChildren {
     children: React.ReactNode;
@@ -86,13 +89,13 @@ function QuestionSet({
             {Question}
             <Flex as="form" onSubmit={submitAnswer} direction="column">
                 {ChoisesWithAdditionalProps}
-                <Button
+                <QuizNavigationButton
                     mt="20px"
                     onClick={submitAnswer}
                     disabled={!value || answerSubmitted}
                     type="submit">
                     Submit
-                </Button>
+                </QuizNavigationButton>
             </Flex>
             {answerSubmitted ? isCorrect ? <p>Correct</p> : <p>Incorrect!</p> : null}
             {answerSubmitted ? Answer : null}
@@ -222,23 +225,53 @@ function Card({ children }: ComponentWithChildren) {
     }
 
     return (
-        <Container maxW={'700px'}>
+        <Container maxW={'700px'} display="flex" flexDirection="column" justifyContent="center">
             <Text align={'center'} mb={2}>
                 Question {questionNo} of {totalQuestions}
             </Text>
             {QuestionSetWithAddedProps}
-            <Button
-                disabled={!answerSubmitted}
-                onClick={() => {
-                    if (isFinalQuestion) {
-                        return setQuizState('over');
-                    }
-                    setAnswerSubmitted(false);
-                    setQuestionNo((n) => n + 1);
-                }}>
-                {isFinalQuestion ? 'Show Results' : 'Next'}
-            </Button>
+            {answerSubmitted && (
+                <QuizNavigationButton
+                    disabled={!answerSubmitted}
+                    onClick={() => {
+                        if (isFinalQuestion) {
+                            return setQuizState('over');
+                        }
+                        setAnswerSubmitted(false);
+                        setQuestionNo((n) => n + 1);
+                    }}
+                    mt={4}
+                    w={isFinalQuestion ? 40 : 24}
+                    alignSelf="center">
+                    {isFinalQuestion ? 'Show Results' : 'Next'}
+                    <Icon as={FaLongArrowAltRight} w="8" h="6" ml="2" />
+                </QuizNavigationButton>
+            )}
         </Container>
+    );
+}
+
+type QuizButtonProps = ComponentWithChildren & ButtonProps;
+
+function QuizNavigationButton({ children, ...props }: QuizButtonProps) {
+    const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800');
+    const bgHover = useColorModeValue('blackAlpha.900', 'whiteAlpha.900');
+    const fg = useColorModeValue('white', 'black');
+
+    return (
+        <Button
+            backgroundColor={bg}
+            color={fg}
+            _hover={{
+                backgroundColor: bgHover
+            }}
+            _focus={{
+                outline: '2px dashed teal',
+                boxShadow: 'none'
+            }}
+            {...props}>
+            {children}
+        </Button>
     );
 }
 
@@ -253,7 +286,7 @@ function ResultsTable({ totalQuestions, correctAnswers }: ResultsTableProps) {
 
     return (
         <>
-            <TableContainer>
+            <TableContainer maxWidth="700px" margin="auto">
                 <Table variant="simple">
                     <TableCaption placement="top">Quiz Results</TableCaption>
                     <Thead>
