@@ -9,6 +9,7 @@ const baseBreakpoints = {
     '2xl': '1440px'
 };
 
+// TODO: Remove createBreakpoints
 const breakpoints = createBreakpoints(baseBreakpoints);
 
 export { breakpoints };

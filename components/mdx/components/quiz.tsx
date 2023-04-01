@@ -9,7 +9,18 @@ import {
     Flex,
     Button,
     useColorModeValue,
-    Text
+    Text,
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+    Td,
+    TableCaption,
+    TableContainer,
+    Stat,
+    StatLabel,
+    StatNumber
 } from '@chakra-ui/react';
 
 interface ComponentWithChildren {
@@ -207,15 +218,7 @@ function Card({ children }: ComponentWithChildren) {
     const isFinalQuestion = totalQuestions === questionNo;
 
     if (quizState === 'over') {
-        const score = Math.round((totalValidAnswer / totalQuestions) * 100);
-
-        return (
-            <Container maxW={'700px'}>
-                Total Questions: {totalQuestions}
-                Correct Answers: {totalValidAnswer}
-                Score: {score}
-            </Container>
-        );
+        return <ResultsTable totalQuestions={totalQuestions} correctAnswers={totalValidAnswer} />;
     }
 
     return (
@@ -236,6 +239,52 @@ function Card({ children }: ComponentWithChildren) {
                 {isFinalQuestion ? 'Show Results' : 'Next'}
             </Button>
         </Container>
+    );
+}
+
+interface ResultsTableProps {
+    totalQuestions: number;
+    correctAnswers: number;
+}
+
+function ResultsTable({ totalQuestions, correctAnswers }: ResultsTableProps) {
+    const score = correctAnswers > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+    const bgTotal = useColorModeValue('gray.50', 'whiteAlpha.100');
+
+    return (
+        <>
+            <TableContainer>
+                <Table variant="simple">
+                    <TableCaption placement="top">Quiz Results</TableCaption>
+                    <Thead>
+                        <Tr>
+                            <Th padding={4}>Data</Th>
+                            <Th isNumeric>Number</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        <Tr>
+                            <Td>Number of Questions</Td>
+                            <Td isNumeric>{totalQuestions}</Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Number of Correct Answers</Td>
+                            <Td isNumeric>{correctAnswers}</Td>
+                        </Tr>
+                        <Tr fontWeight="bold" backgroundColor={bgTotal}>
+                            <Td>Percentage</Td>
+                            <Td isNumeric>{score} %</Td>
+                        </Tr>
+                    </Tbody>
+                </Table>
+            </TableContainer>
+            <Stat display="flex" justifyContent="center" marginTop={12}>
+                <Flex flexDir="column" alignItems="center">
+                    <StatLabel>Your score</StatLabel>
+                    <StatNumber>{score} %</StatNumber>
+                </Flex>
+            </Stat>
+        </>
     );
 }
 
