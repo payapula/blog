@@ -24,6 +24,7 @@ export default function Quiz({ quiz }: QuizProps) {
 
     return (
         <Layout>
+            {/* <Example /> */}
             <QuizHeader title={title} />
             <QuizBody content={content} />
         </Layout>

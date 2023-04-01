@@ -154,10 +154,10 @@ function Choises({ value, setValue, choiseElements }: ChoisesProps) {
                     borderRadius: '5px',
                     boxShadow: colorBoxShadow
                 },
-                '.chakra-radio:hover': {
+                '.chakra-radio:not([data-disabled]):hover': {
                     backgroundColor: bgForChoise
                 },
-                '.chakra-radio:hover .chakra-radio__control': {
+                '.chakra-radio:not([data-disabled]):hover .chakra-radio__control': {
                     transform: 'scale(1.5)',
                     borderColor: borderForCircle
                 },
