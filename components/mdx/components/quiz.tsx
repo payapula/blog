@@ -175,6 +175,13 @@ function Choises({ value, setValue, choiseElements }: ChoisesProps) {
                     transform: 'scale(1.5)',
                     borderColor: borderForCircle
                 },
+                /**
+                 * For initial selection
+                 */
+                '.chakra-radio__control[data-focus-visible]': {
+                    transform: 'scale(1.5)',
+                    borderColor: borderForCircle
+                },
                 '.chakra-radio[data-checked]': {
                     backgroundColor: bgChecked
                 },
