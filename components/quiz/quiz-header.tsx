@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react';
+import { GradientHeader } from 'components/gradient-header';
 import React from 'react';
 
 type Props = {
@@ -7,9 +7,12 @@ type Props = {
 
 function QuizHeader({ title }: Props) {
     return (
-        <Heading as="h1" textAlign="center" mt={5}>
+        <GradientHeader
+            overrides={{
+                fontSize: ['2xl', null, null, '5xl']
+            }}>
             {title}
-        </Heading>
+        </GradientHeader>
     );
 }
 

@@ -9,7 +9,7 @@ type Props = {
 
 function QuizBody({ content }: Props) {
     return (
-        <Box mt={10} className="quiz-global-styles">
+        <Box mt={[2, null, null, 7]} className="quiz-global-styles">
             <MDXRemote {...content} components={MDXQuizComponents} />
         </Box>
     );
