@@ -10,7 +10,7 @@ type QuizState = 'idle' | 'playing' | 'over';
 
 // Should manage all question and answer state: Should be giving final results
 export function Playground({ children }: ComponentWithChildren) {
-    const [quizState, setQuizState] = React.useState<QuizState>('playing');
+    const [quizState, setQuizState] = React.useState<QuizState>('over');
     const [questionNo, setQuestionNo] = React.useState(1);
     const [totalValidAnswer, setTotalValidAnswer] = React.useState(0);
     const [answerSubmitted, setAnswerSubmitted] = React.useState(false);
@@ -19,6 +19,13 @@ export function Playground({ children }: ComponentWithChildren) {
 
     function incrementValidAnswer() {
         setTotalValidAnswer((number) => number + 1);
+    }
+
+    function resetQuiz() {
+        setQuizState('playing');
+        setQuestionNo(1);
+        setTotalValidAnswer(0);
+        setAnswerSubmitted(false);
     }
 
     const QuestionSetWithAddedProps = React.cloneElement(children[questionNo - 1], {
@@ -32,7 +39,13 @@ export function Playground({ children }: ComponentWithChildren) {
     const isFinalQuestion = totalQuestions === questionNo;
 
     if (quizState === 'over') {
-        return <ResultsTable totalQuestions={totalQuestions} correctAnswers={totalValidAnswer} />;
+        return (
+            <ResultsTable
+                totalQuestions={totalQuestions}
+                correctAnswers={totalValidAnswer}
+                resetQuiz={resetQuiz}
+            />
+        );
     }
 
     return (

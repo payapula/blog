@@ -131,6 +131,7 @@ function Footer(): ReactElement {
     );
 }
 
+// TODO: Replace CSSObject
 const SocialIcons = ({ icon, hover }: { icon: IconType; hover: CSSObject }) => (
     <Icon
         as={icon}

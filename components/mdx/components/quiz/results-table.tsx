@@ -14,18 +14,21 @@ import {
     StatLabel,
     StatNumber
 } from '@chakra-ui/react';
+import { QuizNavigationButton } from './quiz-navigation-button';
+import { RepeatIcon } from '@chakra-ui/icons';
 
 interface ResultsTableProps {
     totalQuestions: number;
     correctAnswers: number;
+    resetQuiz: () => void;
 }
 
-export function ResultsTable({ totalQuestions, correctAnswers }: ResultsTableProps) {
+export function ResultsTable({ totalQuestions, correctAnswers, resetQuiz }: ResultsTableProps) {
     const score = correctAnswers > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
     const bgTotal = useColorModeValue('gray.50', 'whiteAlpha.100');
 
     return (
-        <Flex flexDir="column">
+        <Flex flexDir="column" alignItems="center">
             <TableContainer maxWidth="700px" margin="auto" width="100%">
                 <Table variant="simple">
                     <TableCaption placement="top">Quiz Results</TableCaption>
@@ -57,6 +60,9 @@ export function ResultsTable({ totalQuestions, correctAnswers }: ResultsTablePro
                     <StatNumber>{score} %</StatNumber>
                 </Flex>
             </Stat>
+            <QuizNavigationButton w="38%" onClick={resetQuiz} mt={12}>
+                <RepeatIcon w={8} /> Restart Quiz
+            </QuizNavigationButton>
         </Flex>
     );
 }
