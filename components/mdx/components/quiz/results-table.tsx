@@ -25,8 +25,8 @@ export function ResultsTable({ totalQuestions, correctAnswers }: ResultsTablePro
     const bgTotal = useColorModeValue('gray.50', 'whiteAlpha.100');
 
     return (
-        <>
-            <TableContainer maxWidth="700px" margin="auto">
+        <Flex flexDir="column">
+            <TableContainer maxWidth="700px" margin="auto" width="100%">
                 <Table variant="simple">
                     <TableCaption placement="top">Quiz Results</TableCaption>
                     <Thead>
@@ -57,6 +57,6 @@ export function ResultsTable({ totalQuestions, correctAnswers }: ResultsTablePro
                     <StatNumber>{score} %</StatNumber>
                 </Flex>
             </Stat>
-        </>
+        </Flex>
     );
 }
