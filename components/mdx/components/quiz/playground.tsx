@@ -9,8 +9,8 @@ import { ResultsTable } from './results-table';
 type QuizState = 'idle' | 'playing' | 'over';
 
 // Should manage all question and answer state: Should be giving final results
-export function Card({ children }: ComponentWithChildren) {
-    const [quizState, setQuizState] = React.useState<QuizState>('idle');
+export function Playground({ children }: ComponentWithChildren) {
+    const [quizState, setQuizState] = React.useState<QuizState>('playing');
     const [questionNo, setQuestionNo] = React.useState(1);
     const [totalValidAnswer, setTotalValidAnswer] = React.useState(0);
     const [answerSubmitted, setAnswerSubmitted] = React.useState(false);

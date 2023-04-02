@@ -1,13 +1,13 @@
 import { MDXComponents } from '../index';
 
-import { Card } from './card';
+import { Playground } from './playground';
 import { Slot } from './slot';
 import { QuestionSet } from './question-set';
 import { Choises } from './choises';
 
 export const MDXQuizComponents = {
     ...MDXComponents,
-    Card,
+    Playground,
     Question: Slot,
     QuestionSet,
     Choises,
