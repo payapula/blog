@@ -8,6 +8,8 @@ import { Layout } from 'components/layout';
 import QuizType from 'types/quiz';
 import { QuizBody } from 'components/quiz/quiz-body';
 import QuizHeader from 'components/quiz/quiz-header';
+import { NextSeo } from 'next-seo';
+import { getBasePath } from 'utils/utils';
 
 interface QuizProps {
     quiz: QuizType;
@@ -20,10 +22,20 @@ export default function Quiz({ quiz }: QuizProps) {
         return <div>Loading...</div>;
     }
 
-    const { content, title } = quiz;
+    const { content, title, description, slug } = quiz;
 
     return (
         <Layout>
+            <NextSeo
+                title={title}
+                description={description}
+                openGraph={{
+                    title: title,
+                    description: description,
+                    type: 'website',
+                    url: getBasePath(`/quiz/${slug}`)
+                }}
+            />
             <QuizHeader title={title} />
             <QuizBody content={content} />
         </Layout>

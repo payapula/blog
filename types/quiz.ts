@@ -4,6 +4,7 @@ type QuizType = {
     //These are from YAML in each MDX page
     title: string;
     date: string;
+    description: string;
     keywords: string;
     // These are fetched separately
     slug: string; // From File Name

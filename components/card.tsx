@@ -5,7 +5,7 @@ import {
     useColorModeValue,
     Heading,
     chakra,
-    ChakraProps
+    FlexProps
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 interface CardProps {
     title?: string;
     excerpt?: string;
-    override?: ChakraProps;
+    override?: FlexProps;
     blogCard?: boolean;
     keywords: string;
 }
@@ -108,4 +108,20 @@ function BlogCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
     );
 }
 
-export { Card, BlogCard };
+function QuizCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
+    return (
+        <Card
+            override={{
+                width: '100%',
+                border: '1px solid teal',
+                height: { xs: 'auto', lg: '300px' },
+                as: 'div'
+            }}
+            title={title}
+            excerpt={excerpt}
+            keywords={keywords}
+        />
+    );
+}
+
+export { Card, BlogCard, QuizCard };
