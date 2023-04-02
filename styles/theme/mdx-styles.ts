@@ -9,8 +9,7 @@ const listStyles = {
     listStyleType: 'inherit',
     '& > * + *': {
         mt: '0.25rem'
-    },
-    listStyleType: 'initial'
+    }
 };
 
 const headingColor = (colorMode: ColorMode) =>
