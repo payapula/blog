@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Children } from 'react';
-import { Radio, Flex } from '@chakra-ui/react';
+import { Radio, Flex, Text } from '@chakra-ui/react';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { CardWrapper } from './card-wrapper';
 
@@ -67,8 +67,16 @@ export function QuestionSet({
                     Submit
                 </QuizNavigationButton>
             </Flex>
-            {answerSubmitted ? isCorrect ? <p>Correct</p> : <p>Incorrect!</p> : null}
+            {answerSubmitted && <AnswerStatus isCorrect={isCorrect} />}
             {answerSubmitted ? Answer : null}
         </CardWrapper>
+    );
+}
+
+function AnswerStatus({ isCorrect }: { isCorrect: boolean }) {
+    return (
+        <Text textAlign="center" fontWeight="700">
+            {isCorrect ? '🎉 Correct 🎉' : '❌ Incorrect ❌'}
+        </Text>
     );
 }
