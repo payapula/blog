@@ -3,16 +3,16 @@ import NextLink from 'next/link';
 import * as React from 'react';
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
-import { getAllQuizes } from 'lib/quiz.api';
+import { getAllQuizzes } from 'lib/quiz.api';
 import QuizType from 'types/quiz';
 import { chakra, Heading, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 import { QuizCard } from 'components/card';
 
 type Props = {
-    allQuizes: QuizType[];
+    allQuizzes: QuizType[];
 };
 
-export default function QuizIndex({ allQuizes }: Props) {
+export default function QuizIndex({ allQuizzes: allQuizzes }: Props) {
     return (
         <Layout headerSticky>
             <Head>
@@ -28,7 +28,7 @@ export default function QuizIndex({ allQuizes }: Props) {
                     'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
                     'linear(to-r, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1)'
                 )}>
-                Quizes
+                Quizzes
             </Heading>
             <SimpleGrid
                 columns={[1, null, null, null, 2, 3]}
@@ -37,7 +37,7 @@ export default function QuizIndex({ allQuizes }: Props) {
                 // Card styles are based on this className "posts-container"
                 // Refer: styles.ts file
                 className="posts-container">
-                {allQuizes.map((quiz) => {
+                {allQuizzes.map((quiz) => {
                     return (
                         <NextLink
                             as={`/quiz/${quiz.slug}`}
@@ -60,9 +60,9 @@ export default function QuizIndex({ allQuizes }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const allQuizes = getAllQuizes(['title', 'slug', 'description', 'keywords']);
+    const allQuizzes = getAllQuizzes(['title', 'slug', 'description', 'keywords']);
 
     return {
-        props: { allQuizes }
+        props: { allQuizzes }
     };
 };

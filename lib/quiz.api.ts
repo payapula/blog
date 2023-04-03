@@ -4,10 +4,10 @@ import matter from 'gray-matter';
 import { OverrideProps } from 'types/utils';
 import QuizType from 'types/quiz';
 
-const quizesDirectory = join(process.cwd(), '_quiz');
+const quizzesDirectory = join(process.cwd(), '_quiz');
 
 export function getQuizSlugs() {
-    return fs.readdirSync(quizesDirectory);
+    return fs.readdirSync(quizzesDirectory);
 }
 
 // Content is MDXRemote.source, so overriding it to string
@@ -17,7 +17,7 @@ type QuizKey = keyof QuizType;
 
 export function getQuizBySlug(slug: string, fields: QuizKey[] = []): Partial<RawQuizType> {
     const realSlug = slug.replace(/\.mdx$/, '');
-    const fullPath = join(quizesDirectory, `${realSlug}.mdx`);
+    const fullPath = join(quizzesDirectory, `${realSlug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
@@ -41,7 +41,7 @@ export function getQuizBySlug(slug: string, fields: QuizKey[] = []): Partial<Raw
     return items;
 }
 
-export function getAllQuizes(fields: QuizKey[] = [], count: number = null) {
+export function getAllQuizzes(fields: QuizKey[] = [], count: number = null) {
     const slugs = getQuizSlugs();
 
     // We need 'date' field for ordering recent posts in homepage and blogpage
