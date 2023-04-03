@@ -21,86 +21,53 @@ keywords: 'React,Javascript,Beginner'
   </Question>
   <Choises>
     <Choise>
-      One
+      Hello React
     </Choise>
-    <Choise >
-      Two
+    <Choise isAnswer>
+      Hello World
     </Choise>
     <Choise>
-      Three
+      Hello
     </Choise>
-    <Choise isAnswer={true}>
-      Four
+    <Choise>
+      undefined
     </Choise>
   </Choises>
   <Answer>
-    Because of this
-
-      ```js
-      // JS
-      function App(){
-        return 'Hello World';
-      }
-
-      // React
-      function App() {
-        return (
-          <h1>
-            Hello World
-          </h1>
-        );
-      }
-      ```
+      There are no magic here. 
   </Answer>
 </QuestionSet>
 <QuestionSet>
   <Question>
   What will be the output of the following code?
 
-  ```javascript noline
-  var salary = "1000$";
-
-  (function () {
-    console.log("Original salary was " + salary);
-
-    var salary = "5000$";
-
-    console.log("My New Salary " + salary);
-  })();
+  ```jsx
+  function App() {
+    return (
+      <div>
+        Hello World
+      </div>
+    );
+  }
   ```
 
   </Question>
   <Choises>
     <Choise>
-      "Error"
+      `<p> Hello World </p>`
     </Choise>
     <Choise >
-      1000$, 5000$
+      `<> Hello World </>`
     </Choise>
     <Choise isAnswer>
-      undefined, 5000$
+      `<div> Hello World </div>`
     </Choise>
     <Choise>
-      undefined, undefined
+       `<div> [Object object] </div>`
     </Choise>
   </Choises>
   <Answer>
-    The code above will output: `undefined, 5000$` because of hoisting. In the code presented above, you might be expecting salary to retain it values from outer scope until the point that salary was re-declared in the inner scope. But due to hoisting salary value was undefined instead. 
-    
-    To understand it better have a look of the following code, here salary variable is hoisted and declared at the top in function scope. When we print its value using console.log the result is undefined. Afterwards the variable is redeclared and the new value "5000$" is assigned to it.
-
-      ```javascript highlight={[4]}
-     var salary = "1000$";
-
-    (function () {
-      var salary = undefined;
-      console.log("Original salary was " + salary);
-
-      salary = "5000$";
-
-      console.log("My New Salary " + salary);
-    })();
-      ```
+    Again, No magic. React would render a `div` with the children "Hello World".
   </Answer>
 </QuestionSet>
 <QuestionSet>
@@ -127,6 +94,8 @@ keywords: 'React,Javascript,Beginner'
     </Choise>
   </Choises>
   <Answer>
+    
+
     `React.createElement("h1", null, "Hello World")`
   </Answer>
 </QuestionSet>
