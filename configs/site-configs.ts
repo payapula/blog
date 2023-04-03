@@ -23,7 +23,7 @@ const siteConfig: SiteConfig = {
         editUrl: `${githubURL}/edit/develop/_posts/`,
         authorEmail: 'bharathikannanv05@gmail.com',
         twitter: 'https://twitter.com/bharathispeaks',
-        linkedIn: 'https://linkedin.com/in/bharathi-kannan-80968170',
+        linkedIn: 'https://linkedin.com/in/bharathikannanv',
         github: githubURL
     },
     seo: {
