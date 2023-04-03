@@ -29,7 +29,7 @@ const ChakraLink = forwardRef(function StyledChakraLink(
     );
 });
 
-const ChakraMDXLink = ({ href, ...rest }: { href: string }): ReturnType<typeof Link> => {
+const ChakraMDXLink = ({ href, ...rest }: LinkProps): ReturnType<typeof Link> => {
     return (
         <Link
             aria-current={undefined}

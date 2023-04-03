@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { RepeatIcon } from '@chakra-ui/icons';
+import { QuizFeedback } from './quiz-feeback';
 
 interface ResultsTableProps {
     totalQuestions: number;
@@ -63,6 +64,7 @@ export function ResultsTable({ totalQuestions, correctAnswers, resetQuiz }: Resu
             <QuizNavigationButton w="38%" onClick={resetQuiz} mt={12}>
                 <RepeatIcon w={8} /> Restart Quiz
             </QuizNavigationButton>
+            <QuizFeedback />
         </Flex>
     );
 }
