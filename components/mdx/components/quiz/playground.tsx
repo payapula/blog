@@ -28,7 +28,13 @@ export function Playground({ children }: ComponentWithChildren) {
         setAnswerSubmitted(false);
     }
 
-    const QuestionSetWithAddedProps = React.cloneElement(children[questionNo - 1], {
+    /**
+     * If there is only one questionset, then `children` is of type `Object`.
+     * If there are more than one quesionset, then `children` is of type `Array`
+     */
+    const questionSet = totalQuestions === 1 ? children : children[questionNo - 1];
+
+    const QuestionSetWithAddedProps = React.cloneElement(questionSet, {
         incrementValidAnswer,
         answerSubmitted,
         setAnswerSubmitted,
