@@ -17,7 +17,10 @@ export function QuizFeedback() {
         <Accordion
             allowToggle
             mt={8}
-            alignSelf="stretch"
+            marginLeft="auto"
+            marginRight="auto"
+            maxWidth="700px"
+            width="100%"
             sx={{
                 '& h2': {
                     marginTop: 2,
