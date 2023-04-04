@@ -96,7 +96,7 @@ ReactDOM.render(<App />, rootElement);
 The Function App is called here with angle brackets like `<App />` the returned HTML is 
 rendered by _ReactDOM_ into the rootElement.
 
-From React version 18, this has been updated with `createRoot`
+From **React 18**, this has been updated with `createRoot`
 
 ```jsx highlight={[5]}
 import { createRoot } from 'react-dom/client';
@@ -175,7 +175,7 @@ return  <h1>Hello World</h1>
 return  React.createElement("h1", null, "Hello World")
 
 // and that becomes this element object:
-{type: 'h1', props: null, children: ["Hello World"]}
+{type: 'h1', props: { children: "Hello World" }}
 ```
 
 > "Babel compiles JSX down to React.createElement() calls." - [Old React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
@@ -226,7 +226,7 @@ short, *Render* refers to appearance of a element, or a set of elements (compone
 
 From the React docs it is clear that React is 
 
-> A JavaScript library for building user interfaces
+> The library for web and native user interfaces
 
 React helps us build user interfaces, [not only on the Web](https://reactnative.dev/). 
 It helps us *render* something on screens that can be presented to the user.
@@ -234,7 +234,10 @@ It helps us *render* something on screens that can be presented to the user.
 A revisit to the example of ReactDOM API:
 
 ```jsx noline
-ReactDOM.render(<App />, rootElement);
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
 ```
 
 The ReactDOM **renders** our `<App />` into the `<div>` that we specified.

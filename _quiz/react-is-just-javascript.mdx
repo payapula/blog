@@ -12,7 +12,7 @@ keywords: 'React,Javascript,Beginner'
 
   ```javascript
   function App() {
-      console.log('Hello World'); // logs 'Hello World'
+      console.log('Hello World');
   }
 
   App();
@@ -54,16 +54,16 @@ keywords: 'React,Javascript,Beginner'
   </Question>
   <Choises>
     <Choise>
-      `<p> Hello World </p>`
+      `<p>Hello World</p>`
     </Choise>
     <Choise >
-      `<> Hello World </>`
+      `<>Hello World</>`
     </Choise>
     <Choise isAnswer>
-      `<div> Hello World </div>`
+      `<div>Hello World</div>`
     </Choise>
     <Choise>
-       `<div> [Object object] </div>`
+       `<div>[Object object]</div>`
     </Choise>
   </Choises>
   <Answer>
@@ -94,9 +94,99 @@ keywords: 'React,Javascript,Beginner'
     </Choise>
   </Choises>
   <Answer>
-    
-
     `React.createElement("h1", null, "Hello World")`
+
+    Since we have `Hello World` string, the third argument of createElement would
+    be a simple "string".
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+    Is this valid React JSX?
+
+    ```jsx
+    function App() {
+        return "Hello World"
+    }
+    ```
+
+  </Question>
+  <Choises>
+    <Choise isAnswer>
+     Valid
+    </Choise>
+    <Choise >
+     Invalid
+    </Choise>
+  </Choises>
+  <Answer>
+    It's valid because react renders a string from the component. 
+
+    On the HTML, it would look like this
+
+    ```html
+      <div id="root">Hello world</div>
+    ```
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+    Is this valid React JSX?
+
+    ```jsx
+    function App() {
+        return [1, 2, 3]
+    }
+    ```
+
+  </Question>
+  <Choises>
+    <Choise isAnswer>
+     Valid
+    </Choise>
+    <Choise >
+     Invalid
+    </Choise>
+  </Choises>
+  <Answer>
+    It's valid because react treats each number as child element and renders like below:
+
+    ```html
+     <div id="root">123</div>
+    ```
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+    Is this valid React JSX?
+
+    ```jsx
+    function App() {
+        return {}
+    }
+    ```
+
+  </Question>
+  <Choises>
+    <Choise>
+     Valid
+    </Choise>
+    <Choise isAnswer>
+     Invalid
+    </Choise>
+  </Choises>
+  <Answer>
+    If you try that, you'll see a error message on the console,
+
+    > Error: Objects are not valid as a React child (found: object with keys {}). If you meant to render a collection of children, use an array instead.
+
+    This is because, React expects components to return either a single React element, an array of elements, or a string (or number) representing a single element.
+    
+    When you return an array `[1, 2, 3]` from a component, React treats each element of the array as a separate child component and renders them accordingly. In contrast, when you return an object `{}` from a component, React doesn't know how to render it because it's not a valid React element.
+
+    😄 Answer provided by [ChatGPT](https://chat.openai.com/)
+
+    👉 [Read more details about React Node vs React elements](https://react.dev/reference/react/isValidElement#react-elements-vs-react-nodes)
   </Answer>
 </QuestionSet>
 </Playground>
