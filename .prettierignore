@@ -9,3 +9,6 @@ pages/posts
 _posts
 
 _quiz
+
+*.md
+*.mdx

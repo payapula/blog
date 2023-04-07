@@ -12,10 +12,10 @@
 
 ## Checklist
 
-[] Make sure sitemaps are up-to-date. (View README).
-[] Make sure Lighthouse score isn't impacted.
-[] Do a smoke test on other pages.
-[] Make sure resume is up-to-date.
+- [ ] Make sure sitemaps are up-to-date. (View README).
+- [ ] Make sure Lighthouse score isn't impacted.
+- [ ] Do a smoke test on other pages.
+- [ ] Make sure resume is up-to-date.
 
 ## Packages
 
