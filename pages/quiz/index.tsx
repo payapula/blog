@@ -20,7 +20,7 @@ export default function QuizIndex({ allQuizzes: allQuizzes }: Props) {
             </Head>
             <Heading
                 as="h1"
-                width="120px"
+                width="130px"
                 mx="auto"
                 mt="8"
                 bgClip="text"
