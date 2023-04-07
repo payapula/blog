@@ -7,7 +7,7 @@ import {
     Box,
     Flex,
     HStack,
-    CSSObject,
+    SystemStyleObject,
     Icon,
     useColorModeValue,
     Link,
@@ -131,8 +131,7 @@ function Footer(): ReactElement {
     );
 }
 
-// TODO: Replace CSSObject
-const SocialIcons = ({ icon, hover }: { icon: IconType; hover: CSSObject }) => (
+const SocialIcons = ({ icon, hover }: { icon: IconType; hover: SystemStyleObject }) => (
     <Icon
         as={icon}
         w="8"
