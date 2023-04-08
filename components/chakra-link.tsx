@@ -7,8 +7,7 @@ import { Link, LinkProps, useColorModeValue } from '@chakra-ui/react';
  */
 const ChakraLink = forwardRef(function StyledChakraLink(
     props: LinkProps & { isActive?: boolean },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ref: Ref<any>
+    ref: Ref<HTMLAnchorElement>
 ) {
     const { isActive, href, rel, target, ...rest } = props;
     const isInternal = href.startsWith('/') || href.startsWith('#');

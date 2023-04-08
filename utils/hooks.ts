@@ -45,8 +45,7 @@ const useMediaQuery = (width: number): boolean => {
 const isBrowser = typeof window !== `undefined`;
 
 interface getScrollPositionProp {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    element?: React.MutableRefObject<any>;
+    element?: React.MutableRefObject<HTMLElement>;
     useWindow?: boolean;
 }
 
@@ -75,8 +74,7 @@ type PositionObject = {
 
 type useScrollPositionFunction = (
     effect: ({ prevPos, currPos }: PositionObject) => void,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    deps?: Array<any>,
+    deps?: Array<unknown>,
     element?: React.MutableRefObject<HTMLDivElement>,
     useWindow?: boolean,
     wait?: number
@@ -114,7 +112,6 @@ const useScrollPosition: useScrollPositionFunction = (
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll);
-        // eslint-disable-next-line
     }, [effect, element, useWindow, wait, deps]);
 };
 
