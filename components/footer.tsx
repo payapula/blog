@@ -1,13 +1,8 @@
-/* eslint-disable */
-/* Above one for jsx-a11y/accessible-emoji 
- superlinter in CI complains about not having this definition 
- error  Definition for rule 'jsx-a11y/accessible-emoji' was not found  jsx-a11y/accessible-emoji
- */
 import {
     Box,
     Flex,
     HStack,
-    CSSObject,
+    SystemStyleObject,
     Icon,
     useColorModeValue,
     Link,
@@ -131,8 +126,7 @@ function Footer(): ReactElement {
     );
 }
 
-// TODO: Replace CSSObject
-const SocialIcons = ({ icon, hover }: { icon: IconType; hover: CSSObject }) => (
+const SocialIcons = ({ icon, hover }: { icon: IconType; hover: SystemStyleObject }) => (
     <Icon
         as={icon}
         w="8"

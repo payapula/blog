@@ -1,10 +1,16 @@
 node_modules
 
-#boorstrapped components - should be removed
-pages/index_bootstrap.tsx
-
 #waitlisted files from bootstrapped repo
 lib
 
 *.mdx
 *.md
+
+# Added `parserOptions.project` property in eslint to include
+# type information, which does linting on typescript files only.
+# since the below is a `js` file, eslint warns us not including it.
+# to overcome, removed `.js` files from linting.
+# Refer to comments of this answer = https://stackoverflow.com/a/66260842/5155530
+.eslintrc.js
+next-sitemap.config.js
+next.config.js
