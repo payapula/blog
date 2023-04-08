@@ -16,14 +16,24 @@ const useMediaQuery = (width: number): boolean => {
 
     useIsomorphicLayoutEffect(() => {
         const media = window.matchMedia(`(max-width: ${width}px)`);
-        media.addListener(updateTarget);
+
+        // If addListener is supported, use it, else fallback
+        // Ref: https://github.com/chakra-ui/chakra-ui/pull/6167/files
+        // eslint-disable-next-line deprecation/deprecation
+        if (typeof media.addListener === 'function') media.addListener(updateTarget);
+        else media.addEventListener('change', updateTarget);
 
         // Check on mount (callback is not called until a change occurs)
         if (media.matches) {
             setTargetReached(true);
         }
 
-        return () => media.removeListener(updateTarget);
+        return () => {
+            // If removeListener is supported use it, else fallback
+            // eslint-disable-next-line deprecation/deprecation
+            if (typeof media.removeListener === 'function') media.removeListener(updateTarget);
+            else media.removeEventListener('change', updateTarget);
+        };
     }, []);
 
     return targetReached;
