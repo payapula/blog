@@ -1,11 +1,16 @@
+# /////////////////////////////////////////////////////////
+# SUPER LINTER HAS BEEN REMOVED IN OUR PROJECT
+# DUE TO NUMBER OF ISSUES
+# THIS IS OLD CONFIG
+# /////////////////////////////////////////////////////////
 name: Super-Linter
 
 # Run this workflow every time PR is created for develop or main branch
-on:
-    push:
-        branches: [main, develop]
-    pull_request:
-        branches: [main, develop]
+#on:
+#    push:
+#        branches: [main, develop]
+#    pull_request:
+#        branches: [main, develop]
 
 jobs:
     # Set the job key. The key is displayed as the job name
@@ -28,10 +33,11 @@ jobs:
                   DEFAULT_BRANCH: develop
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+                  JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.js
                   IGNORE_GITIGNORED_FILES: true
                   VALIDATE_MARKDOWN: false
                   VALIDATE_TYPESCRIPT_STANDARD: false
                   VALIDATE_JAVASCRIPT_STANDARD: false
                   VALIDATE_CSS: false
-                  FILTER_REGEX_EXCLUDE: .*/_posts/.*
+                  FILTER_REGEX_EXCLUDE: .*/_posts/.*,.*/_quiz/.*
                   VALIDATE_NATURAL_LANGUAGE: false

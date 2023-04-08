@@ -1,9 +1,9 @@
-/* eslint-disable */
 import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
-import { ChakraLink, ChakraMDXLink } from 'components/chakra-link';
+import { ChakraMDXLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
 import { ReactElement } from 'react';
+import { QuizHighlight } from './quiz-highlight';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
@@ -39,7 +39,6 @@ const MDXComponents = {
     h3: (props): ReactElement => <Heading as="h3" {...props} />,
     h4: (props): ReactElement => <Heading as="h4" {...props} />,
     strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
         const props = preToCodeBlock(preProps);
@@ -85,7 +84,8 @@ const MDXComponents = {
         <Center mt="5">
             <ChakraNextImage {...props} />
         </Center>
-    )
+    ),
+    QuizHighlight: QuizHighlight
 };
 
 export { MDXComponents };

@@ -1,0 +1,191 @@
+---
+title: 'React is Just Javascript Quiz'
+date: '2023-04-02'
+description: "Test your basic understanding of react with this quiz. Topics include: JSX, Hooks, Rendering, API Design."
+keywords: 'React,Javascript,Beginner'
+---
+
+<Playground>
+<QuestionSet>
+  <Question>
+  What is the output of the below code?
+
+  ```javascript
+  function App() {
+      console.log('Hello World');
+  }
+
+  App();
+  ```
+
+  </Question>
+  <Choises>
+    <Choise>
+      Hello React
+    </Choise>
+    <Choise isAnswer>
+      Hello World
+    </Choise>
+    <Choise>
+      Hello
+    </Choise>
+    <Choise>
+      undefined
+    </Choise>
+  </Choises>
+  <Answer>
+      There are no magic here. 
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+  What will be the output of the following code?
+
+  ```jsx
+  function App() {
+    return (
+      <div>
+        Hello World
+      </div>
+    );
+  }
+  ```
+
+  </Question>
+  <Choises>
+    <Choise>
+      `<p>Hello World</p>`
+    </Choise>
+    <Choise >
+      `<>Hello World</>`
+    </Choise>
+    <Choise isAnswer>
+      `<div>Hello World</div>`
+    </Choise>
+    <Choise>
+       `<div>[Object object]</div>`
+    </Choise>
+  </Choises>
+  <Answer>
+    Again, No magic. React would render a `div` with the children "Hello World".
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+  What will be the output of the following code after compilation?
+
+  ```jsx noline
+  <h1>Hello World</h1>
+  ```
+
+  </Question>
+  <Choises>
+    <Choise isAnswer>
+     `React.createElement("h1", null, "Hello World")`
+    </Choise>
+    <Choise >
+     `React.createElement("h1", null, ["Hello World"])`
+    </Choise>
+    <Choise>
+     `React.createElement("<h1/>", null, {"Hello World"})`
+    </Choise>
+    <Choise>
+     `React.createElement("jsx.h1", null, {jsx:"Hello World"})`
+    </Choise>
+  </Choises>
+  <Answer>
+    `React.createElement("h1", null, "Hello World")`
+
+    Since we have `Hello World` string, the third argument of createElement would be a simple "string".
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+    Is this valid React JSX?
+
+    ```jsx
+    function App() {
+        return "Hello World"
+    }
+    ```
+
+  </Question>
+  <Choises>
+    <Choise isAnswer>
+     Valid
+    </Choise>
+    <Choise >
+     Invalid
+    </Choise>
+  </Choises>
+  <Answer>
+    It's valid because react renders a string from the component. 
+
+    On the HTML, it would look like this
+
+    ```html
+      <div id="root">Hello world</div>
+    ```
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+    Is this valid React JSX?
+
+    ```jsx
+    function App() {
+        return [1, 2, 3]
+    }
+    ```
+
+  </Question>
+  <Choises>
+    <Choise isAnswer>
+     Valid
+    </Choise>
+    <Choise >
+     Invalid
+    </Choise>
+  </Choises>
+  <Answer>
+    It's valid because react treats each number as child element and renders like below:
+
+    ```html
+     <div id="root">123</div>
+    ```
+  </Answer>
+</QuestionSet>
+<QuestionSet>
+  <Question>
+    Is this valid React JSX?
+
+    ```jsx
+    function App() {
+        return {}
+    }
+    ```
+
+  </Question>
+  <Choises>
+    <Choise>
+     Valid
+    </Choise>
+    <Choise isAnswer>
+     Invalid
+    </Choise>
+  </Choises>
+  <Answer>
+    If you try that, you'll see a error message on the console,
+
+    > Error: Objects are not valid as a React child (found: object with keys {}). If you meant to render a collection of children, use an array instead.
+
+    This is because, React expects components to return either a single React element, an array of elements, or a string (or number) representing a single element.
+    
+    When you return an array `[1, 2, 3]` from a component, React treats each element of the array as a separate child component and renders them accordingly. In contrast, when you return an object `{}` from a component, React doesn't know how to render it because it's not a valid React element.
+
+    😄 Answer provided by [ChatGPT](https://chat.openai.com/)
+
+    👉 [Read more details about React Node vs React elements](https://react.dev/reference/react/isValidElement#react-elements-vs-react-nodes)
+  </Answer>
+</QuestionSet>
+</Playground>

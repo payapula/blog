@@ -5,14 +5,22 @@
 
 module.exports = {
     parser: '@typescript-eslint/parser',
-    plugins: ['react', 'react-hooks'],
+    plugins: ['react', 'react-hooks', 'deprecation'],
     root: true, // Make sure eslint picks up the config at the root of the directory
     parserOptions: {
         ecmaVersion: 2020, // Use the latest ecmascript standard
         sourceType: 'module', // Allows using import/export statements
         ecmaFeatures: {
             jsx: true // Enable JSX since we're using React
-        }
+        },
+        /**
+         * The below is required for `eslint-plugin-deprecation` rule, which checks
+         * for deprecated methods and provides warnings in lint.
+         *
+         * This also introduces a state, in which we can only lint `typescript` files,
+         * so excluded the `js` config files via `.eslintignore` file.
+         */
+        project: './tsconfig.json'
     },
     settings: {
         react: {
@@ -31,7 +39,8 @@ module.exports = {
         'plugin:jsx-a11y/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:mdx/recommended'
+        'plugin:mdx/recommended',
+        'plugin:@next/next/recommended' // https://nextjs.org/docs/basic-features/eslint#recommended-plugin-ruleset
         // 'plugin:prettier/recommended' // Make this the last element so prettier config overrides other formatting rules
     ],
     rules: {
@@ -47,7 +56,8 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
         'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
         'no-console': 'warn',
-        '@typescript-eslint/ban-ts-comment': 'off'
+        '@typescript-eslint/ban-ts-comment': 'off',
+        'deprecation/deprecation': 'warn'
         // 'prettier/prettier': ['error', {}, { usePrettierrc: true }] // Use our .prettierrc file as source
     },
     overrides: [

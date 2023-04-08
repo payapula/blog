@@ -36,11 +36,12 @@ function ToggleIconButton() {
 
 interface NavLinkProps {
     children: ReactNode;
+    href: string;
 }
 
-function NavLink({ children }: NavLinkProps) {
+function NavLink({ children, href }: NavLinkProps) {
     const router = useRouter();
-    const isActive = router.pathname === '/blog';
+    const isActive = router.pathname === href;
     return (
         <Center w="100px" as="nav">
             <Flex
@@ -56,7 +57,7 @@ function NavLink({ children }: NavLinkProps) {
                     isActive ? 'teal.50' : 'initial',
                     isActive ? 'link.active' : 'initial'
                 )}>
-                <NextLink href="/blog" passHref>
+                <NextLink href={href} passHref>
                     <ChakraLink fontSize="xl" fontWeight="bold" isActive={isActive}>
                         {children}
                     </ChakraLink>
@@ -68,11 +69,12 @@ function NavLink({ children }: NavLinkProps) {
 
 interface MobileMenuItemProps {
     children: ReactNode;
+    href: string;
 }
 
-function MobileMenuItem({ children }: MobileMenuItemProps) {
+function MobileMenuItem({ children, href }: MobileMenuItemProps) {
     return (
-        <NextLink href="/blog" passHref>
+        <NextLink href={href} passHref>
             <ChakraLink isActive>
                 <MenuItem h="50px">
                     <Text fontSize="lg" fontWeight="bold">
@@ -134,9 +136,8 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                                             isOpen ? <CloseIcon /> : <HamburgerIcon />
                                         }></MenuButton>
                                     <MenuList>
-                                        {/* <MobileMenuItem>Works</MobileMenuItem> */}
-                                        <MobileMenuItem>Blog</MobileMenuItem>
-                                        {/* <MobileMenuItem>Contact</MobileMenuItem> */}
+                                        <MobileMenuItem href="/blog">Blog</MobileMenuItem>
+                                        <MobileMenuItem href="/quiz">Quiz</MobileMenuItem>
                                     </MenuList>
                                 </>
                             )}
@@ -144,9 +145,8 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                     </Box>
                 ) : (
                     <>
-                        {/* <NavLink>Works</NavLink> */}
-                        <NavLink>Blog</NavLink>
-                        {/* <NavLink>Contact</NavLink> */}
+                        <NavLink href="/blog">Blog</NavLink>
+                        <NavLink href="/quiz">Quiz</NavLink>
                     </>
                 )}
             </Flex>

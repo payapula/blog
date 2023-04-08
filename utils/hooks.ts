@@ -16,14 +16,24 @@ const useMediaQuery = (width: number): boolean => {
 
     useIsomorphicLayoutEffect(() => {
         const media = window.matchMedia(`(max-width: ${width}px)`);
-        media.addListener(updateTarget);
+
+        // If addListener is supported, use it, else fallback
+        // Ref: https://github.com/chakra-ui/chakra-ui/pull/6167/files
+        // eslint-disable-next-line deprecation/deprecation
+        if (typeof media.addListener === 'function') media.addListener(updateTarget);
+        else media.addEventListener('change', updateTarget);
 
         // Check on mount (callback is not called until a change occurs)
         if (media.matches) {
             setTargetReached(true);
         }
 
-        return () => media.removeListener(updateTarget);
+        return () => {
+            // If removeListener is supported use it, else fallback
+            // eslint-disable-next-line deprecation/deprecation
+            if (typeof media.removeListener === 'function') media.removeListener(updateTarget);
+            else media.removeEventListener('change', updateTarget);
+        };
     }, []);
 
     return targetReached;
@@ -35,8 +45,7 @@ const useMediaQuery = (width: number): boolean => {
 const isBrowser = typeof window !== `undefined`;
 
 interface getScrollPositionProp {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    element?: React.MutableRefObject<any>;
+    element?: React.MutableRefObject<HTMLElement>;
     useWindow?: boolean;
 }
 
@@ -65,8 +74,7 @@ type PositionObject = {
 
 type useScrollPositionFunction = (
     effect: ({ prevPos, currPos }: PositionObject) => void,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    deps?: Array<any>,
+    deps?: Array<unknown>,
     element?: React.MutableRefObject<HTMLDivElement>,
     useWindow?: boolean,
     wait?: number
@@ -104,7 +112,6 @@ const useScrollPosition: useScrollPositionFunction = (
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll);
-        // eslint-disable-next-line
     }, [effect, element, useWindow, wait, deps]);
 };
 

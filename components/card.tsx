@@ -5,7 +5,7 @@ import {
     useColorModeValue,
     Heading,
     chakra,
-    ChakraProps
+    FlexProps
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { motion } from 'framer-motion';
@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 interface CardProps {
     title?: string;
     excerpt?: string;
-    override?: ChakraProps;
+    override?: FlexProps;
     blogCard?: boolean;
     keywords: string;
 }
@@ -24,6 +24,8 @@ function Card({ title, excerpt, override, blogCard, keywords }: CardProps): Reac
     const cardBg = useColorModeValue('white', 'gray.800');
     const cardBorder = useColorModeValue('none', '1px');
     const keywordsArray = keywords.split(',');
+    const bgColor = useColorModeValue('hsl(324deg 86% 80% / 40%)', 'hsl(324deg 52% 35% / 35%)');
+    const color = useColorModeValue('black', 'white');
     return (
         <MotionFlex
             direction="column"
@@ -57,14 +59,9 @@ function Card({ title, excerpt, override, blogCard, keywords }: CardProps): Reac
                         return (
                             <chakra.span
                                 key={keyword}
-                                // eslint-disable-next-line
-                                background={useColorModeValue(
-                                    'hsl(324deg 86% 80% / 40%)',
-                                    'hsl(324deg 52% 35% / 35%)'
-                                )}
+                                background={bgColor}
                                 ml={1}
-                                // eslint-disable-next-line
-                                color={useColorModeValue('black', 'white')}
+                                color={color}
                                 borderRadius="4px"
                                 padding="2px"
                                 mr={1}
@@ -108,4 +105,20 @@ function BlogCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
     );
 }
 
-export { Card, BlogCard };
+function QuizCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
+    return (
+        <Card
+            override={{
+                width: '100%',
+                border: '1px solid teal',
+                height: { xs: 'auto', lg: '300px' },
+                as: 'div'
+            }}
+            title={title}
+            excerpt={excerpt}
+            keywords={keywords}
+        />
+    );
+}
+
+export { Card, BlogCard, QuizCard };

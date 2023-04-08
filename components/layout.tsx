@@ -12,7 +12,6 @@ interface LayoutProps {
 
 function Layout({ type, headerSticky = false, children }: LayoutProps): ReactElement {
     const isBlog = type === 'BLOG';
-    const isHome = type === 'HOME';
     const containerWidth = isBlog
         ? [null, null, '95%', '80%', '700px']
         : [null, null, '95%', '80%'];
@@ -20,8 +19,8 @@ function Layout({ type, headerSticky = false, children }: LayoutProps): ReactEle
     return (
         <Box>
             <Meta />
-            <Header home={isHome} headerSticky={headerSticky} />
-            <Container as="main" maxW={containerWidth} minH="80vh" mt={!isHome ? '120px' : null}>
+            <Header home={!isBlog} headerSticky={headerSticky} />
+            <Container as="main" maxW={containerWidth} minH="80vh" mt={isBlog ? '120px' : null}>
                 {children}
             </Container>
             <Footer />
