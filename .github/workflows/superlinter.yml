@@ -28,10 +28,11 @@ jobs:
                   DEFAULT_BRANCH: develop
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+                  JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.js
                   IGNORE_GITIGNORED_FILES: true
                   VALIDATE_MARKDOWN: false
                   VALIDATE_TYPESCRIPT_STANDARD: false
                   VALIDATE_JAVASCRIPT_STANDARD: false
                   VALIDATE_CSS: false
-                  FILTER_REGEX_EXCLUDE: .*/_posts/.*
+                  FILTER_REGEX_EXCLUDE: .*/_posts/.*,.*/_quiz/.*
                   VALIDATE_NATURAL_LANGUAGE: false
