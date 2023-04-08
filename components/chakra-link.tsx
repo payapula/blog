@@ -29,12 +29,13 @@ const ChakraLink = forwardRef(function StyledChakraLink(
     );
 });
 
-const ChakraMDXLink = ({ href, ...rest }: { href: string }): ReturnType<typeof Link> => {
+const ChakraMDXLink = ({ href, ...rest }: LinkProps): ReturnType<typeof Link> => {
+    const isInternal = href.startsWith('/') || href.startsWith('#');
     return (
         <Link
             aria-current={undefined}
-            rel={'noopener noreferrer'}
-            target={'_blank'}
+            rel={isInternal ? undefined : 'noopener noreferrer'}
+            target={isInternal ? undefined : '_blank'}
             href={href}
             apply="general.link"
             color={useColorModeValue('link.color.light', 'link.color.dark')}

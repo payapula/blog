@@ -71,7 +71,7 @@ interface RenderIconProps {
     iconData: IconMeta;
 }
 
-// Refer to Sizes here  https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/foundations/sizes.ts
+// Refer to Sizes here  https://github.com/chakra-ui/chakra-ui/blob/c2f0d1bb2a07fe6af5e53a1f216d80c9a7d6df72/packages/components/theme/src/foundations/sizes.ts
 const responsiveSize = { xs: 12, md: 16, lg: 20 };
 
 function RenderIcon({ iconData }: RenderIconProps): ReactElement {

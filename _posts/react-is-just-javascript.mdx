@@ -18,6 +18,9 @@ ogImage:
 keywords: 'React,Javascript'
 ---
 
+> There is a quiz at the end to test your knowledge. Feel free to skip to the quiz if you
+> think you already know about basic react!
+
 Let's start this post with a simple function in Javascript.
 
 ```javascript
@@ -93,7 +96,17 @@ ReactDOM.render(<App />, rootElement);
 The Function App is called here with angle brackets like `<App />` the returned HTML is 
 rendered by _ReactDOM_ into the rootElement.
 
-> Read More about ReactDOM.render() on the [react docs](https://reactjs.org/docs/react-dom.html#render)
+From **React 18**, this has been updated with `createRoot`
+
+```jsx highlight={[5]}
+import { createRoot } from 'react-dom/client';
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);
+```
+
+> Read More about `createRoot` on the [react docs](https://react.dev/reference/react-dom/client/createRoot)
 
 This rootElement can be any valid HTML DOM. Usually, we prefer to go with an empty `<div>` with the id root.
 
@@ -149,7 +162,7 @@ function App() {
 }
 ```
 
-[React.createElement](https://reactjs.org/docs/react-api.html#createelement) is top level API provided by react
+[React.createElement](https://react.dev/reference/react/createElement) is top level API provided by react
 package to create the corresponding element in Virtual DOM. 
 
 _createElement_ returns React elements, which are plain JS objects that describe the intended structure of the UI.
@@ -162,13 +175,13 @@ return  <h1>Hello World</h1>
 return  React.createElement("h1", null, "Hello World")
 
 // and that becomes this element object:
-{type: 'h1', props: null, children: ["Hello World"]}
+{type: 'h1', props: { children: "Hello World" }}
 ```
 
-> "Babel compiles JSX down to React.createElement() calls." - [React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
+> "Babel compiles JSX down to React.createElement() calls." - [Old React Docs](https://reactjs.org/docs/introducing-jsx.html#jsx-represents-objects)
 
 You can play around with Babel and its transpiled code on the [live babel repl](https://babeljs.io/repl). 
-To get to know about JSX, head-over to [JSX on react docs](https://reactjs.org/docs/introducing-jsx.html).
+To get to know about JSX, head-over to [JSX on react docs](https://react.dev/learn/writing-markup-with-jsx).
 
 Also, it is now worth pointing out that with React worked with Babel to introduce **new JSX transform** 
 which enables users to write [JSX without even importing React](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
@@ -213,7 +226,7 @@ short, *Render* refers to appearance of a element, or a set of elements (compone
 
 From the React docs it is clear that React is 
 
-> A JavaScript library for building user interfaces
+> The library for web and native user interfaces
 
 React helps us build user interfaces, [not only on the Web](https://reactnative.dev/). 
 It helps us *render* something on screens that can be presented to the user.
@@ -221,7 +234,10 @@ It helps us *render* something on screens that can be presented to the user.
 A revisit to the example of ReactDOM API:
 
 ```jsx noline
-ReactDOM.render(<App />, rootElement);
+import { createRoot } from 'react-dom/client';
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
 ```
 
 The ReactDOM **renders** our `<App />` into the `<div>` that we specified.
@@ -229,8 +245,8 @@ The ReactDOM **renders** our `<App />` into the `<div>` that we specified.
 High level overview of the the rendering process: 
 
 React would create a Virtual DOM in memory which is very similar to the real DOM and renders our `<h1>` tag in the Virtual DOM,
-this virtual DOM would be synced with real DOM and during this process `<h1>` tag is added to real DOM. This process is called 
-[Reconciliation](https://reactjs.org/docs/reconciliation.html)
+this virtual DOM would be synced with real DOM and during this process `<h1>` tag is added to real DOM. Learn more about how this works on the 
+[preserving and resetting state section](https://react.dev/learn/preserving-and-resetting-state).
 
 > The costliest operation on Web is DOM painting and manipulation.
 
@@ -250,7 +266,7 @@ With the APIs provided by react, we can create **Web Applications** which are hi
 
 If you want some examples, all these following websites are built with 🚀 React
 
-- [Facebook](Facebook)
+- [Facebook](https://www.facebook.com/)
 - [Airbnb](https://www.airbnb.com/)
 - [Atlassian](https://www.atlassian.com/)
 - [Netflix](https://www.netflix.com/)
@@ -259,11 +275,17 @@ Also, keep in mind that,
 
 > For the end-users, it is all just HTML, CSS, and JavaScript!
 
+## Quiz
+
+<QuizHighlight>
+[React is Just Javascript Quiz](/quiz/react-is-just-javascript)
+</QuizHighlight>
+
 ----
 
 Thanks go to:
 
 - [A (Mostly) Complete Guide to React Rendering Behavior](https://blog.isquaredsoftware.com/2020/05/blogged-answers-a-mostly-complete-guide-to-react-rendering-behavior)
 - [10 Famous Websites Built with React JS](https://anyforsoft.com/blog/10-famous-websites-built-react-js/)
-- [React JS](https://reactjs.org/)
+- [React JS](https://react.dev/)
 

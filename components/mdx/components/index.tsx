@@ -1,9 +1,10 @@
 /* eslint-disable */
 import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
-import { ChakraLink, ChakraMDXLink } from 'components/chakra-link';
+import { ChakraMDXLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
 import { ReactElement } from 'react';
+import { QuizHighlight } from './quiz-highlight';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 
@@ -85,7 +86,8 @@ const MDXComponents = {
         <Center mt="5">
             <ChakraNextImage {...props} />
         </Center>
-    )
+    ),
+    QuizHighlight: QuizHighlight
 };
 
 export { MDXComponents };
