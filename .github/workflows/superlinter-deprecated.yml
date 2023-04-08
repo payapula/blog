@@ -1,11 +1,16 @@
+# /////////////////////////////////////////////////////////
+# SUPER LINTER HAS BEEN REMOVED IN OUR PROJECT
+# DUE TO NUMBER OF ISSUES
+# THIS IS OLD CONFIG
+# /////////////////////////////////////////////////////////
 name: Super-Linter
 
 # Run this workflow every time PR is created for develop or main branch
-on:
-    push:
-        branches: [main, develop]
-    pull_request:
-        branches: [main, develop]
+#on:
+#    push:
+#        branches: [main, develop]
+#    pull_request:
+#        branches: [main, develop]
 
 jobs:
     # Set the job key. The key is displayed as the job name
