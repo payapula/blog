@@ -25,7 +25,9 @@ const Description = ({ children }: { children: React.ReactNode }) => (
     <chakra.p mt={2}>{children}</chakra.p>
 );
 
-const ChakraVerticalTimeline = chakra(VerticalTimeline);
+const ChakraVerticalTimeline = chakra(VerticalTimeline, {
+    shouldForwardProp: () => true
+});
 const ChakraVerticalTimelineElement = chakra(VerticalTimelineElement);
 
 interface CustomVerticalTimeLineProps {
