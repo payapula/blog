@@ -7,6 +7,8 @@ import siteConfig from 'configs/site-configs';
  */
 // require('dotenv').config();
 
+const IS_DEV_MODE = false;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -21,23 +23,19 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: 'html',
-    /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-    // webServer: {
-    //     command: 'npm run start',
-    //     port: 3000,
-    //     timeout: 120 * 1000,
-    //     reuseExistingServer: !process.env.CI
-    // },
+    reporter: process.env.CI ? 'github' : IS_DEV_MODE ? 'html' : 'list',
+    ...(IS_DEV_MODE
+        ? {
+              webServer: {
+                  command: 'npm run dev',
+                  port: 3001
+              }
+          }
+        : {}),
     use: {
         // headless: false,
-        baseURL: siteConfig.general.siteUrl,
-        // baseURL: process.env.CI ? siteConfig.general.siteUrl : 'http://localhost:3001/',
-        /* Base URL to use in actions like `await page.goto('/')`. */
-        // baseURL: 'http://127.0.0.1:3000',
-
-        /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'on-first-retry'
+        baseURL: IS_DEV_MODE ? 'http://localhost:3001/' : siteConfig.general.siteUrl,
+        trace: IS_DEV_MODE ? 'on' : 'on-first-retry'
     },
 
     /* Configure projects for major browsers */
@@ -45,46 +43,31 @@ export default defineConfig({
         {
             name: 'chromium',
             use: { ...devices['Desktop Chrome'] },
-            testMatch: '*spec.ts'
+            testIgnore: /mobile.*(test|spec)\.(js|ts|mjs)/
         },
 
         {
             name: 'firefox',
             use: { ...devices['Desktop Firefox'] },
-            testIgnore: '*chrome-only.spec.ts*'
+            testIgnore: /(mobile|chrome).*(test|spec)\.(js|ts|mjs)/
         },
 
         {
             name: 'webkit',
             use: { ...devices['Desktop Safari'] },
-            testIgnore: '*chrome-only.spec.ts*'
-        }
+            testIgnore: /(mobile|chrome).*(test|spec)\.(js|ts|mjs)/
+        },
 
         /* Test against mobile viewports. */
-        // {
-        //   name: 'Mobile Chrome',
-        //   use: { ...devices['Pixel 5'] },
-        // },
-        // {
-        //   name: 'Mobile Safari',
-        //   use: { ...devices['iPhone 12'] },
-        // },
-
-        /* Test against branded browsers. */
-        // {
-        //   name: 'Microsoft Edge',
-        //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-        // },
-        // {
-        //   name: 'Google Chrome',
-        //   use: { ..devices['Desktop Chrome'], channel: 'chrome' },
-        // },
+        {
+            name: 'Mobile Chrome',
+            use: { ...devices['Pixel 5'] },
+            testMatch: /mobile.*(test|spec)\.(js|ts|mjs)/
+        },
+        {
+            name: 'Mobile Safari',
+            use: { ...devices['iPhone 12'] },
+            testMatch: /mobile.*(test|spec)\.(js|ts|mjs)/
+        }
     ]
-
-    /* Run your local dev server before starting the tests */
-    // webServer: {
-    //   command: 'npm run start',
-    //   url: 'http://127.0.0.1:3000',
-    //   reuseExistingServer: !process.env.CI,
-    // },
 });

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('All Desktop Browsers', () => {
+test.describe('Mobile Browsers Only', () => {
     test('Elements Visible on Page', async ({ page }) => {
         await page.goto('/');
 
@@ -18,6 +18,16 @@ test.describe('All Desktop Browsers', () => {
         await expect(page.getByRole('link', { name: 'Download Resume' })).toBeInViewport();
 
         await expect(page.getByRole('button', { name: 'Toggle Dark Mode' })).toBeInViewport();
+
+        /**
+         * Menu is collapsed in Mobile devices and appears
+         * when clicking Menu button
+         */
+        await expect(page.getByRole('link', { name: 'Blog' })).not.toBeInViewport();
+        await expect(page.getByRole('link', { name: 'Quiz' })).not.toBeInViewport();
+
+        await page.getByRole('button', { name: 'Menu Button' }).click();
+
         await expect(page.getByRole('link', { name: 'Blog' })).toBeInViewport();
         await expect(page.getByRole('link', { name: 'Quiz' })).toBeInViewport();
 
@@ -36,10 +46,24 @@ test.describe('All Desktop Browsers', () => {
             page.getByRole('heading', { name: 'Work Experience and Education' })
         ).toBeVisible();
 
-        // Footer
-        await expect(
-            page.getByRole('button', { name: "Copy Bharathi Kannan's Email address" })
-        ).toBeVisible();
+        /**
+         * Checking either one of the icons is visible
+         *
+         * Reason:
+         * On ios, we are showing a link to open email client
+         * On android, we are showing a button to copy email
+         */
+        const androidMailIcon = page.getByRole('button', {
+            name: "Copy Bharathi Kannan's Email address"
+        });
+        const iOSMailIcon = page.getByRole('link', { name: 'Send Email to Bharathi Kannan' });
+
+        const androidIcon = (await androidMailIcon.count()) > 0;
+        const iosIcon = (await iOSMailIcon.count()) > 0;
+
+        expect(!!androidIcon || !!iosIcon).toBeTruthy();
+        expect(!!androidIcon && !!iosIcon).toBeFalsy();
+
         await expect(
             page.getByRole('link', { name: 'Open Twitter Profile of Bharathi Kannan' })
         ).toBeVisible();
@@ -49,31 +73,5 @@ test.describe('All Desktop Browsers', () => {
         await expect(
             page.getByRole('link', { name: 'HeartOpen sourced on GithubHeart' })
         ).toBeVisible();
-    });
-
-    test('Dark Mode Testing', async ({ page }) => {
-        await page.goto('/');
-
-        const darkModeButton = page.getByRole('button', { name: 'Toggle Dark Mode' });
-        await expect(darkModeButton).toBeInViewport();
-
-        /**
-         * Chakra toggles `body` element' CSS which are inherited so
-         * selecting this by XPath.
-         *
-         * https://playwright.dev/docs/other-locators#xpath-locator
-         */
-        const body = page.locator('xpath=/html/body');
-
-        const dark = 'rgb(26, 32, 44)';
-
-        // color
-        await expect(body).toHaveCSS('color', dark);
-        await expect(body).toHaveCSS('background-color', 'rgb(255, 255, 255)');
-
-        await darkModeButton.click();
-
-        await expect(body).toHaveCSS('color', 'rgba(255, 255, 255, 0.92)');
-        await expect(body).toHaveCSS('background-color', dark);
     });
 });

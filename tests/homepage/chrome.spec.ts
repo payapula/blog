@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 const checkIfElementVisible = async (element) => await expect(element).toBeVisible();
 
-test.describe('chromium Only', () => {
+test.describe('Chrome Desktop Only', () => {
     test.use({
         viewport: { width: 1200, height: 900 }
     });
