@@ -2,16 +2,10 @@ import { test, expect } from '@playwright/test';
 
 const checkIfElementVisible = async (element) => await expect(element).toBeVisible();
 
-test.use({
-    viewport: { width: 1200, height: 900 },
-    /**
-     * scroll API works only in chrome and webkit for now, so we are
-     * running this test only in chrome
-     */
-    browserName: 'chromium'
-});
-
 test.describe('chromium Only', () => {
+    test.use({
+        viewport: { width: 1200, height: 900 }
+    });
     test('Timeline component loads after user scrolls down', async ({ page }) => {
         await page.goto('/');
 
