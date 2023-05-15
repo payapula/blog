@@ -1,0 +1,86 @@
+---
+title: 'Almost Perfect Timeout Modal'
+excerpt: "Which is the better way to solve prop drilling? Let us talk about it in this post by solving the same problem 
+in three different ways."
+date: '2023-02-16'
+description: "Sharing my experience on the recent react interview question and the feedback I received."
+cover: 
+    src: '/assets/blog/context-redux-composition/drilling-cover.jpg'  
+    alt: 'Pump-jack mining crude oil with the sunset'
+    author: 
+      name: 'Zbynek Burival'
+      url: https://unsplash.com/@zburival?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText
+ogImage:
+    url: '/assets/blog/context-redux-composition/drilling-cover.jpg'  
+    alt: 'Pump-jack mining crude oil with the sunset'
+keywords: 'React,Context'
+
+---
+
+Timer are generally a tricky item for me. The main reason is because of the async nature of it.
+
+A simple interview question we may have come across is to guess the output of some code that plays with `setTimeout` APIs.
+
+```javascript noline
+console.log("a");
+
+setTimeout(() => {
+  console.log("c")
+}, 3000);
+
+console.log("b");
+```
+
+The above code will print a, b and c in order. It prints `c` a little later after printing `a` and `b`. Its due to the timeout API we have used. 
+
+In order to build a simple timer in React, we will follow the following approach.
+
+```jsx
+function App() {
+  useEffect(() => {
+    console.log('a');
+    const timer = setTimeout(() => {
+      console.log('c');
+    }, 3000);
+    console.log('b');
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return <h1>React Timer</h1>;
+}
+```
+
+The output you get from the above code would be exactly similar to the one we saw with javascript version we saw above, unless you have enabled [strict mode](TODO LINK).
+
+I am skipping the part why we need a `clearTimeout` and how `strictMode` can help you identify the issues early on development builds. You can read about them on the articles I have mentioned in the references section.
+
+## Timeout Modals
+
+Timeout Modals are very common in a web application that does any of the following tasks
+
+- To let the user know their session is about to expire in "N" seconds.
+- To check whether we still have a user in our web application after receiving no response from the users like mousemove, keyboard press etc. This is typically useful in banking applications.
+- To let the user know about a redirection to another page.
+
+On all of the above use cases, one thing is common, which is presenting a modal to the user and asking them to take an action before a set time expires. The time coule be 5, 10 or 30 seconds depending on the use case.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+References
+
+-   [Codesandbox Solution](https://codesandbox.io/s/falling-wave-e5mhrq?file=/src/index.js)
+
