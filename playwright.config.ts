@@ -34,8 +34,9 @@ export default defineConfig({
         : {}),
     use: {
         // headless: false,
-        // baseURL: IS_DEV_MODE ? 'http://localhost:3001/' : siteConfig.general.siteUrl,
-        baseURL: siteConfig.general.siteUrl,
+        baseURL: IS_DEV_MODE ? 'http://localhost:3001/' : siteConfig.general.siteUrl,
+        // baseURL: 'http://localhost:3001/',
+        // baseURL: siteConfig.general.siteUrl,
         trace: IS_DEV_MODE ? 'on' : 'on-first-retry'
     },
 

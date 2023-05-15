@@ -47,8 +47,6 @@ test.describe('All Desktop Browsers', () => {
     test('Search Functionality', async ({ page }) => {
         test.slow();
         await page.goto('/blog');
-
-        await page.goto('https://www.bharathikannan.com/blog');
         await page.getByPlaceholder('Search Posts').click();
         await page.getByPlaceholder('Search Posts').fill('just');
         await expect(
@@ -68,6 +66,52 @@ test.describe('All Desktop Browsers', () => {
         );
 
         await page.getByPlaceholder('Search Posts').fill('');
+        await expect(page.getByRole('link').filter({ has: page.getByRole('heading') })).toHaveCount(
+            TOTAL_BLOG_POSTS
+        );
+
+        await page.getByPlaceholder('Search Posts').fill('posi');
+        await expect(page.getByRole('link').filter({ has: page.getByRole('heading') })).toHaveCount(
+            2
+        );
+        await page.getByRole('button', { name: 'Clear Search' }).click();
+        await expect(page.getByRole('link').filter({ has: page.getByRole('heading') })).toHaveCount(
+            TOTAL_BLOG_POSTS
+        );
+
+        /**
+         * Invalid Search or Post not found case
+         */
+        await page.getByPlaceholder('Search Posts').fill('OOOOOOOOOO');
+        await expect(page.getByRole('link').filter({ has: page.getByRole('heading') })).toHaveCount(
+            TOTAL_BLOG_POSTS
+        );
+        await expect(
+            page.getByText('🤷🏾‍♂️ No posts available with this search. Showing all posts... 🛠')
+        ).toBeInViewport();
+
+        // Clearning search via button do not show the error message
+        await page.getByRole('button', { name: 'Clear Search' }).click();
+        await expect(
+            page.getByText('🤷🏾‍♂️ No posts available with this search. Showing all posts... 🛠')
+        ).not.toBeInViewport();
+
+        /**
+         * Invalid Search or Post not found case
+         */
+        await page.getByPlaceholder('Search Posts').fill('OOOOOOOOOO');
+        await expect(page.getByRole('link').filter({ has: page.getByRole('heading') })).toHaveCount(
+            TOTAL_BLOG_POSTS
+        );
+        await expect(
+            page.getByText('🤷🏾‍♂️ No posts available with this search. Showing all posts... 🛠')
+        ).toBeInViewport();
+
+        // Clearning search by user deleting the input do not show the error message
+        await page.getByPlaceholder('Search Posts').fill('');
+        await expect(
+            page.getByText('🤷🏾‍♂️ No posts available with this search. Showing all posts... 🛠')
+        ).not.toBeInViewport();
         await expect(page.getByRole('link').filter({ has: page.getByRole('heading') })).toHaveCount(
             TOTAL_BLOG_POSTS
         );

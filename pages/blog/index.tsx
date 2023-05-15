@@ -33,9 +33,17 @@ type Props = {
  */
 
 export default function Index({ allPosts }: Props): ReactElement {
+    const [searchText, setSearchText] = React.useState('');
     const [filteredPosts, setFilteredPosts] = React.useState(allPosts);
 
-    const postsDisplay = filteredPosts.length !== 0 ? filteredPosts : allPosts;
+    let postsDisplay = allPosts;
+
+    if (searchText) {
+        if (filteredPosts.length !== 0) {
+            postsDisplay = filteredPosts;
+        }
+    }
+
     return (
         <Layout headerSticky>
             <Head>
@@ -53,10 +61,15 @@ export default function Index({ allPosts }: Props): ReactElement {
                 )}>
                 Posts
             </Heading>
-            <SearchPosts allPosts={allPosts} setFilteredPosts={setFilteredPosts} />
-            {filteredPosts?.length === 0 && (
+            <SearchPosts
+                allPosts={allPosts}
+                setFilteredPosts={setFilteredPosts}
+                searchText={searchText}
+                setSearchText={setSearchText}
+            />
+            {!!searchText && filteredPosts?.length === 0 && (
                 <Text fontSize={['md', null, 'lg', 'xl']} mt={2} textAlign="center">
-                    🤷🏾‍♂️ No posts available with this search. 🛠
+                    🤷🏾‍♂️ No posts available with this search. Showing all posts... 🛠
                 </Text>
             )}
             <SimpleGrid
@@ -91,11 +104,12 @@ export default function Index({ allPosts }: Props): ReactElement {
 interface SearchPostsProps {
     allPosts: Post[];
     setFilteredPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+    searchText: string;
+    setSearchText: (text: string) => void;
 }
 
 function SearchPosts(props: SearchPostsProps) {
-    const [value, setValue] = React.useState('');
-    const { allPosts, setFilteredPosts } = props;
+    const { allPosts, setFilteredPosts, searchText, setSearchText } = props;
 
     const handleChange = (event) => {
         const searchText = event.target.value;
@@ -109,7 +123,7 @@ function SearchPosts(props: SearchPostsProps) {
                     .some((keyword) => keyword.toLowerCase().includes(searchValueInLowercase))
             );
         });
-        setValue(event.target.value);
+        setSearchText(event.target.value);
         setFilteredPosts(filterPosts);
     };
 
@@ -120,7 +134,7 @@ function SearchPosts(props: SearchPostsProps) {
             </InputLeftElement>
             <Input
                 placeholder="Search Posts"
-                value={value}
+                value={searchText}
                 onChange={handleChange}
                 borderColor="teal"
                 border="1px"
@@ -128,7 +142,7 @@ function SearchPosts(props: SearchPostsProps) {
                     borderColor: useColorModeValue('black', 'rgb(255 130 47 / 50%)')
                 }}
             />
-            {!!value && (
+            {!!searchText && (
                 <InputRightElement>
                     <IconButton
                         aria-label="Clear Search"
@@ -136,7 +150,7 @@ function SearchPosts(props: SearchPostsProps) {
                         w={8}
                         h={8}
                         mr={2}
-                        onClick={() => setValue('')}
+                        onClick={() => setSearchText('')}
                     />
                 </InputRightElement>
             )}
