@@ -24,7 +24,7 @@ export default defineConfig({
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
     reporter: process.env.CI ? 'github' : IS_DEV_MODE ? 'html' : 'list',
-    ...(IS_DEV_MODE
+    ...(process.env.CI
         ? {
               webServer: {
                   command: 'npm run dev',
