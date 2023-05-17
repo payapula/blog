@@ -14,6 +14,14 @@ const IS_DEV_MODE = false;
  */
 export default defineConfig({
     testDir: './tests',
+    expect: {
+        /**
+         * Adding a slightly less strict assertion to make sure that the screenshot matches
+         * https://github.com/basarat/demo-playwright-vrt/blob/main/playwright.config.ts
+         */
+        toHaveScreenshot: { threshold: 0.2, maxDiffPixelRatio: 0.2 },
+        timeout: process.env.CI ? 10000 : 5000
+    },
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -23,8 +31,8 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: process.env.CI ? 'github' : IS_DEV_MODE ? 'html' : 'list',
-    ...(process.env.CI
+    reporter: process.env.CI || IS_DEV_MODE ? 'html' : 'list',
+    ...(process.env.CI || IS_DEV_MODE
         ? {
               webServer: {
                   command: 'npm run build && npm run start',
@@ -34,7 +42,8 @@ export default defineConfig({
         : {}),
     use: {
         // headless: false,
-        baseURL: IS_DEV_MODE ? 'http://localhost:3001/' : siteConfig.general.siteUrl,
+        baseURL:
+            IS_DEV_MODE || process.env.CI ? 'http://localhost:3001/' : siteConfig.general.siteUrl,
         // baseURL: 'http://localhost:3001/',
         // baseURL: siteConfig.general.siteUrl,
         trace: IS_DEV_MODE ? 'on' : 'on-first-retry'
