@@ -20,7 +20,7 @@ export default defineConfig({
          * https://github.com/basarat/demo-playwright-vrt/blob/main/playwright.config.ts
          */
         toHaveScreenshot: { threshold: 0.2, maxDiffPixelRatio: 0.2 },
-        timeout: 10000
+        timeout: process.env.CI ? 10000 : 5000
     },
     /* Run tests in files in parallel */
     fullyParallel: true,
@@ -31,7 +31,7 @@ export default defineConfig({
     /* Opt out of parallel tests on CI. */
     workers: process.env.CI ? 1 : undefined,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: process.env.CI ? 'github' : IS_DEV_MODE ? 'html' : 'list',
+    reporter: process.env.CI ? 'html' : IS_DEV_MODE ? 'html' : 'list',
     ...(process.env.CI || IS_DEV_MODE
         ? {
               webServer: {
