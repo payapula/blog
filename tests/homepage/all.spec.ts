@@ -17,7 +17,7 @@ test.describe('All Desktop Browsers', () => {
         ).toBeInViewport();
         await expect(page.getByRole('link', { name: 'Download Resume' })).toBeInViewport();
 
-        await expect(page.getByRole('button', { name: 'Toggle Dark Mode' })).not.toBeInViewport();
+        await expect(page.getByRole('button', { name: 'Toggle Dark Mode' })).toBeInViewport();
         await expect(page.getByRole('link', { name: 'Blog' })).toBeInViewport();
         await expect(page.getByRole('link', { name: 'Quiz' })).toBeInViewport();
 
