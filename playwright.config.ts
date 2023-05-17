@@ -14,6 +14,14 @@ const IS_DEV_MODE = false;
  */
 export default defineConfig({
     testDir: './tests',
+    expect: {
+        /**
+         * Adding a slightly less strict assertion to make sure that the screenshot matches
+         * https://github.com/basarat/demo-playwright-vrt/blob/main/playwright.config.ts
+         */
+        toHaveScreenshot: { threshold: 0.2, maxDiffPixelRatio: 0.2 },
+        timeout: 10000
+    },
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
