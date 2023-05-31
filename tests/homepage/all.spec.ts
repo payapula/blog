@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 test.describe('All Desktop Browsers', () => {
     test('Elements Visible on Page', async ({ page }) => {
@@ -26,9 +27,7 @@ test.describe('All Desktop Browsers', () => {
          */
         await expect(page.getByRole('heading', { name: 'Recent Posts' })).toBeVisible();
         await expect(page.getByRole('link', { name: 'View All' })).toBeVisible();
-        await expect(
-            page.getByRole('heading', { name: 'Previous Quote Favourite Quotes Next Quote' })
-        ).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'Favourite Quotes' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Technologies' })).toBeVisible();
         await expect(page.getByText('AWS Amplify')).toBeVisible();
 
@@ -75,5 +74,24 @@ test.describe('All Desktop Browsers', () => {
 
         await expect(body).toHaveCSS('color', 'rgba(255, 255, 255, 0.92)');
         await expect(body).toHaveCSS('background-color', dark);
+    });
+});
+
+test.describe('Accessibility', () => {
+    test('should not have any automatically detectable accessibility issues', async ({ page }) => {
+        await page.goto('/');
+
+        const accessibilityScanResults = await new AxeBuilder({ page })
+            /**
+             * chakra portal has accesibility issues with role="region".
+             *
+             * ARIA role region is not allowed for given element
+             *
+             * Found by: `Accessibility Insights for Web` Chrome extension
+             */
+            .exclude('.chakra-portal')
+            .analyze();
+
+        expect(accessibilityScanResults.violations).toHaveLength(0);
     });
 });

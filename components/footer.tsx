@@ -50,7 +50,11 @@ function GMAIL() {
         return (
             <IconLink href={`mailto:${siteConfig.general.authorEmail}`}>
                 <VisuallyHidden>Send Email to Bharathi Kannan</VisuallyHidden>
-                <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
+                <SocialIcons
+                    icon={SiGmail}
+                    hover={{ color: '#ea4335' }}
+                    ariaLabel="Logo of Gmail"
+                />
             </IconLink>
         );
     }
@@ -79,7 +83,7 @@ function GMAIL() {
                 });
             }}>
             <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
-            <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} />
+            <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} ariaLabel="Logo of Gmail" />
         </Button>
     );
 }
@@ -94,22 +98,24 @@ function Footer(): ReactElement {
             background={postsBackgroundColor}
             position="relative"
             left="calc(-50vw + 49%)">
-            <Flex
-                as="footer"
-                height="140px"
-                justify="space-around"
-                align="center"
-                direction="column"
-                mt="10">
+            <Flex height="140px" justify="space-around" align="center" direction="column" mt="10">
                 <HStack justify="space-between" w="200px" mt="5">
                     <GMAIL />
                     <IconLink href={siteConfig.general.twitter} isExternal>
                         <VisuallyHidden>Open Twitter Profile of Bharathi Kannan</VisuallyHidden>
-                        <SocialIcons icon={FaTwitter} hover={{ color: '#1DA1F2' }} />
+                        <SocialIcons
+                            icon={FaTwitter}
+                            hover={{ color: '#1DA1F2' }}
+                            ariaLabel="Logo of Twitter"
+                        />
                     </IconLink>
                     <IconLink href={siteConfig.general.linkedIn} isExternal>
                         <VisuallyHidden>Open LinkedIn Profile of Bharathi Kannan</VisuallyHidden>
-                        <SocialIcons icon={FaLinkedin} hover={{ color: '#0e76a8' }} />
+                        <SocialIcons
+                            icon={FaLinkedin}
+                            hover={{ color: '#0e76a8' }}
+                            ariaLabel="Logo of LinkedIn"
+                        />
                     </IconLink>
                 </HStack>
                 <ChakraLink ml={3} href={siteConfig.general.github}>
@@ -126,7 +132,13 @@ function Footer(): ReactElement {
     );
 }
 
-const SocialIcons = ({ icon, hover }: { icon: IconType; hover: SystemStyleObject }) => (
+interface SocialIconsProps {
+    icon: IconType;
+    hover: SystemStyleObject;
+    ariaLabel: string;
+}
+
+const SocialIcons = ({ icon, hover, ariaLabel }: SocialIconsProps) => (
     <Icon
         as={icon}
         w="8"
@@ -134,6 +146,7 @@ const SocialIcons = ({ icon, hover }: { icon: IconType; hover: SystemStyleObject
         cursor="pointer"
         _hover={hover}
         color={useColorModeValue(hover.color as string, 'currentColor')}
+        aria-label={ariaLabel}
     />
 );
 
