@@ -37,13 +37,14 @@ function ToggleIconButton() {
 interface NavLinkProps {
     children: ReactNode;
     href: string;
+    ariaLabel: string;
 }
 
-function NavLink({ children, href }: NavLinkProps) {
+function NavLink({ children, ariaLabel, href }: NavLinkProps) {
     const router = useRouter();
     const isActive = router.pathname === href;
     return (
-        <Center w="100px" as="nav">
+        <Center w="100px" as="nav" aria-label={ariaLabel}>
             <Flex
                 h="32px"
                 justify="center"
@@ -145,8 +146,12 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                     </Box>
                 ) : (
                     <>
-                        <NavLink href="/blog">Blog</NavLink>
-                        <NavLink href="/quiz">Quiz</NavLink>
+                        <NavLink href="/blog" ariaLabel="Blog">
+                            Blog
+                        </NavLink>
+                        <NavLink href="/quiz" ariaLabel="Quiz">
+                            Quiz
+                        </NavLink>
                     </>
                 )}
             </Flex>

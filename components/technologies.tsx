@@ -85,8 +85,14 @@ function RenderIcon({ iconData }: RenderIconProps): ReactElement {
                 _hover={{ transform: 'scale(1.2)', color }}
                 transition="all .2s ease-in-out"
                 color={useColorModeValue(color, 'currentColor')}
+                aria-label={`Logo of ${text}`}
             />
-            <Text fontWeight="bold" fontSize={{ xs: 'md', md: 'lg' }} mt="2" textAlign="center">
+            <Text
+                fontWeight="bold"
+                fontSize={{ xs: 'md', md: 'lg' }}
+                mt="2"
+                textAlign="center"
+                aria-hidden="true">
                 {text}
             </Text>
         </Flex>

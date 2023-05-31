@@ -36,9 +36,7 @@ test.describe('Mobile Browsers Only', () => {
          */
         await expect(page.getByRole('heading', { name: 'Recent Posts' })).toBeVisible();
         await expect(page.getByRole('link', { name: 'View All' })).toBeVisible();
-        await expect(
-            page.getByRole('heading', { name: 'Previous Quote Favourite Quotes Next Quote' })
-        ).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'Favourite Quotes' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Technologies' })).toBeVisible();
         await expect(page.getByText('AWS Amplify')).toBeVisible();
 

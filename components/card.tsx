@@ -50,7 +50,8 @@ function Card({ title, excerpt, override, blogCard, keywords }: CardProps): Reac
                 bgGradient={useColorModeValue(
                     'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
                     'linear(to-r, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1)'
-                )}>
+                )}
+                as="h3">
                 {title ? title : `How to use React Context effectively`}
             </Heading>
             <HStack mt={5}>
