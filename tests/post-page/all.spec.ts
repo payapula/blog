@@ -1,10 +1,7 @@
-import { test, expect, Locator } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { testVisible } from 'tests/utils/helpers';
 
 test.describe('All Desktop Browsers', () => {
-    async function testVisible(locator: Locator) {
-        await expect(locator).toBeVisible();
-    }
-
     test('Elements Visible on Page', async ({ page }) => {
         await page.goto('/blog/react-useeffect-flow');
 
