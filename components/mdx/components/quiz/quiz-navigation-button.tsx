@@ -20,7 +20,8 @@ export function QuizNavigationButton({ children, ...props }: Props) {
                 outline: '2px dashed teal',
                 boxShadow: 'none'
             }}
-            {...props}>
+            {...props}
+            type="button">
             {children}
         </Button>
     );

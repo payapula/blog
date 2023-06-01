@@ -63,9 +63,9 @@ function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Eleme
                             lineHeight="1.6"
                             borderRadius="4px"
                             fontSize={{
-                                base: '12px',
-                                lg: '14px',
-                                xl: '16px'
+                                base: '0.75rem',
+                                lg: '0.875rem',
+                                xl: '1rem'
                             }}
                             p="10px">
                             {tokens.map((line, i) => {

@@ -69,7 +69,7 @@ export const Quotes = (): JSX.Element => {
                 md: '320px'
             }}
             mt={10}>
-            <Heading display="flex" flexBasis="60px" alignItems="center" textAlign="center">
+            <Flex display="flex" flexBasis="60px" alignItems="center" textAlign="center">
                 <Button
                     onClick={() => toggleQuotes('previous')}
                     mr={2}
@@ -79,7 +79,7 @@ export const Quotes = (): JSX.Element => {
                     <VisuallyHidden>Previous Quote</VisuallyHidden>
                     <Icon as={FaArrowAltCircleLeft} width={5} height={5} />
                 </Button>
-                Favourite Quotes
+                <Heading>Favourite Quotes</Heading>
                 <Button
                     onClick={() => toggleQuotes('next')}
                     ml={2}
@@ -89,7 +89,7 @@ export const Quotes = (): JSX.Element => {
                     <VisuallyHidden>Next Quote</VisuallyHidden>
                     <Icon as={FaArrowAltCircleRight} width={5} height={5} />{' '}
                 </Button>
-            </Heading>
+            </Flex>
             <Flex
                 as="figure"
                 direction="column"
