@@ -53,7 +53,6 @@ function App() {
 
 The output you get from the above code would be exactly similar to the one we saw with javascript version we saw above, unless you have enabled [strict mode](TODO LINK).
 
-I am skipping the part why we need a `clearTimeout` and how `strictMode` can help you identify the issues early on development builds. You can read about them on the articles I have mentioned in the references section.
 
 ## Timeout Modals
 
@@ -63,7 +62,48 @@ Timeout Modals are very common in a web application that does any of the followi
 - To check whether we still have a user in our web application after receiving no response from the users like mousemove, keyboard press etc. This is typically useful in banking applications.
 - To let the user know about a redirection to another page.
 
-On all of the above use cases, one thing is common, which is presenting a modal to the user and asking them to take an action before a set time expires. The time coule be 5, 10 or 30 seconds depending on the use case.
+On all of the above use cases, one thing is common, which is presenting a modal to the user and asking them to take an action before a set time expires. The time could be 5, 10 or 30 seconds depending on the use case.
+
+In this post let us just concentrate on first requirement, which is to let user know about expiration.
+
+
+## Requirements
+
+- After 'x' seconds, we need to present the user with a Modal, which has timer running to indicate about the expiration of session.
+
+Example: If the session is active only for 10 minutes, then at the end of 8th minute user should get a popup which indictates that in 2 minutes the session is going to expire. 
+
+- User should be able to continue with current session by clicking a reset button, thereby resetting the running timer.
+
+## Implementation
+
+Let's build this in the following steps
+
+1. Build the Timer (with a hook)
+2. Build the Modal (Skeleton)
+3. Add Logic as needed```
+
+1. Build the Timer hook
+
+Let's imagine how our API should look like
+
+```jsx
+const { remainingSeconds } = useTimer({
+  seconds,
+  onTimerEnds
+});
+```
+
+- `seconds` the number of seconds that this timer should start counting down from. (Passing 5000 should start a 5 second timer).
+- `onTimerEnds` the callback to invoke once the timer expires
+
+
+
+
+
+
+
+- `onRestart` the callback to invoke when user wishes to restart the timer.
 
 
 
