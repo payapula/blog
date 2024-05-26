@@ -7,9 +7,9 @@ import {
     SiNextdotjs,
     SiTypescript,
     SiCsharp,
-    SiOracle,
     SiFirebase,
-    SiAwsamplify
+    SiAwsamplify,
+    SiRemix
 } from 'react-icons/si';
 
 type IconMeta = {
@@ -26,6 +26,7 @@ const iconSet: IconSet = {
     ts: { color: '#3178c6', text: 'TypeScript', icon: SiTypescript },
     react: { color: '#61dafb', text: 'React', icon: DiReact },
     next: { color: '', text: 'NextJS', icon: SiNextdotjs },
+    remix: { color: '', text: 'Remix', icon: SiRemix },
     node: { color: '#026e00', text: 'NodeJS', icon: DiNodejs },
     js: { color: '#fcdc00', text: 'Javascript', icon: DiJsBadge },
     firebase: { color: '#FFCA28', text: 'Firebase', icon: SiFirebase },
@@ -33,7 +34,6 @@ const iconSet: IconSet = {
     html: { color: '#e54c21', text: 'HTML', icon: DiHtml5 },
     css: { color: '#1672b6', text: 'CSS', icon: DiCss3 },
     csharp: { color: '#189f20', text: 'C Sharp', icon: SiCsharp },
-    oracle: { color: '#ff141d', text: 'Oracle SQL', icon: SiOracle },
     android: { color: '#a5c736', text: 'Android', icon: DiAndroid }
 };
 
