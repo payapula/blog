@@ -1,50 +1,42 @@
 ---
 title: 'Things I look for during the Code Review'
-excerpt: "While reviewing the code from my team, there are some items that I always look for and would suggest some changes. In the projects that I have worked, I always try to create
-a documentation for coding standards, which I enforce throughout the codebase. As I move from project to project, it's difficult to take the copy documentation
-from one place to another. So, creating the set of coding standard that I enforce here to be accessed at anytime. Feel free to provide your comments."
-date: '2021-11-20'
-description: "This post summarizes the `this` binding principles explained in the book **this & Object Prototypes, by Kyle Simpson**. It's one of the book in the series _You Don't Know JS_"
+excerpt: "While reviewing the code from my team, I always look for certain items and suggest changes. In the projects I have worked on, I have created documentation for coding standards, which I enforce throughout the codebase."
+date: '2024-05-27'
+description: "While reviewing the code from my team, I always look for certain items and suggest changes. In the projects I have worked on, I have created documentation for coding standards, which I enforce throughout the codebase."
 cover: 
-    src: '/assets/blog/what-is-this-javascript/what-is-this-cover.jpg'  
+    src: '/assets/blog/code-review-practices/cover.jpg'  
     alt: 'You got this text on a road.'
     author: 
-      name: 'sydney Rae'
-      url: https://unsplash.com/s/photos/this?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+      name: 'John Schnobrich'
+      url: https://unsplash.com/photos/person-using-laptop-FlPc9_VocJ4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
 ogImage:
-    url: '/assets/blog/what-is-this-javascript/what-is-this-cover.jpg'  
+    url: '/assets/blog/code-review-practices/cover.jpg'  
     alt: 'You got this text on a road.'
-keywords: 'Javascript,React,Fundamentals'
+keywords: 'Javascript,React'
 ---
 
-While reviewing the code from my team, there are some items that I always look for and would suggest some changes. In the projects that I have worked, I always try to create
-a documentation for coding standards, which I enforce throughout the codebase. As I move from project to project, it's difficult to take the **copy** the documentation
-from one place to another. So, creating the set of coding standard that I enforce here to be accessed at anytime. Feel free to provide your comments.
+While reviewing the code from my team, I always look for certain items and suggest changes. In the projects I have worked on, I have created documentation for coding standards, which I enforce throughout the codebase. However, it can be challenging to copy the documentation from one place to another. Therefore, I writing this post and it will serve as a base set of coding standards that I enforce on most of the code bases. Please feel free to provide your comments.
 
 ## Before We Begin
 
-There are some basic items to that we need to put up in our repository to make the code review process smoother.
+There are some basic items that we need to put in place in our repository to make the code review process smoother. These include:
 
-- We should not be worrying about indendations, "quotes", formatting during the code review. Because these need to be enforced
-by the tools like **Prettier**.
+- We should not worry about indentation, quotes, and formatting during the code review. These tasks can be handled by tools like **Prettier**.
 
-- We should not be worrying about suggesting basic things like 'missing deps in useEffect, useCallback', unused variables, etc, as
-this is the job of **ESlint**.
+- We should not worry about suggesting basic things like missing dependencies in useEffect and useCallback, or unused variables. These checks are the responsibility of **ESLint**.
 
-- We need to make sure to set these tools in the repository and make sure everyone in the project configures on their system. 
+- It is important to set up these tools in the repository and ensure that everyone in the project configures them on their local system. 
 
-I will try to cover most of the items, and may not be able to cover them all. So, will keep updating this post as and when I find
-new things to add.
+I will continue to update this post as I discover new items to add to the list.
 
 ## Basics
 
 In all the projects I have worked in, all of them followed Agile practices, they typically use software like JIRA to manage the
 [Scrum](https://aws.amazon.com/what-is/scrum/). There will be user stories, epics, technical stories etc. 
 
-- The first rule of thumb is to make sure the stories (a unit of work) should have **Acceptance Criteria** defined. This influences
-the code review process. If it's not defined or if it lacks clarity check with the Product owner and get it addressed.
+- It is important to ensure that each story has clear and **well-defined acceptance criteria**. This helps guide the code review process and ensures that the changes being made meet the requirements. If acceptance criteria are not defined or lack clarity, it is recommended to check with the product owner and address them.
 
-- The Pull request should be tagged to a story.
+- It is beneficial to **tag each pull request to a specific story**. This helps track the progress and link the code changes to the corresponding user story.
 
 - Try to keep the Pull requests as **small** as possible. If a story requires a huge change on the codebase, then it means the story
 is not properly broken into individual sub tasks. Keeping PRs as short as possible will make sure the code review is done as
@@ -64,7 +56,7 @@ Ticket-421 Part 3
 will help the product to understand the feature updates and PR descriptions will help the reviewers (and your future self) to understand the 
 code changes.
 
-- When raising PRs for bugfix, it should definetly have these items
+- When raising PRs for bugfix, it should definitely have these items
 
 ```bash noline
 
@@ -105,6 +97,8 @@ function Component({ role, manager }) {
 }
 ```
 
+Instead of the above, this can be simplified as below
+
 ```jsx noline
 function Component({ role, manager }) {
   if(role === "admin") {
@@ -119,15 +113,86 @@ function Component({ role, manager }) {
 
 - Prefer [Early returns / Guard Classes](https://medium.com/@timothydan/javascript-guard-clauses-64b999e3240) 
 
+- Set up [absolute imports](https://medium.com/geekculture/making-life-easier-with-absolute-imports-react-in-javascript-and-typescript-bbdab8a8a3a1) in codebase instead of relative URLs. It's easy to move the files without having to update the 
+imports.
+
+```jsx noline
+import { Button } from "../../../components/button" // ❌ Avoid
+import { Button } from "@components/button" // ✅ Good
+```
+
+- Do not put hard restrictions on number of lines in a file. Instead prefer to have a general guideline
+on **number of lines per component**. Though this is debatable, having less number of code for a component makes
+it easy to read and maintain.
+
+- Follow proper **file name patterns**, the name of the component and the filename should match, so that it's easy to search and work.
+
+I have seen codebases where everything is a default export with `index.jsx`, and at one point when you are working in multiple files, your
+code editor will look not so nice. So, prefer this pattern if it suits your codebase.
+
+```jsx noline
+// FILE: src/components/button/button.jsx
+function Button() {
+  //...
+}
+
+export { Button }
+
+// FILE: src/components/button/index.js
+export * from "./button"; // re-export everything from button
+
+// FILE: src/pages/login
+import { Button } from "@components/button" // Will go to index.js file
+
+```
+
+We can use [new-component utility](https://github.com/joshwcomeau/new-component) to create components file structure like this easily.
+
+- Try to create as much custom hooks as you can, and reuse them throughout the code base. If you are spotting a `useEffect` in a PR, then
+it probably could be put into an `use`CustomHook. 
+
+## Providing Feedbacks
+
+Be polite while providing feedback. 
+
+> Remember, we are reviewing the code and not the person.
+
+Check _[Exactly what to say in code reviews](https://read.highgrowthengineer.com/p/exactly-what-to-say-in-code-reviews)_ article on how
+to provide feedback during code reviews.
+
+Just posting the excerpt from the above article:
+
+- **“I wonder…”** - Use it to suggest lightly while opening it up for discussion
+  - Example: “I wonder if we could use a switch statement here instead of multiple if-else blocks.”
+
+- **“I’m curious…”** - Use it to call out something that may not be great about the current approach
+  - Example: “I'm curious about the accessibility of these custom UI components. Do we have something in place to give us guarantees around that?”
+
+- **“What do you think about…”** - Use it to make a direct suggestion while still leaving room for the other person to give their thoughts
+  - Example: “What do you think about using `map` here instead of mutating the array for safety?”
+
+- **“What would happen if…”** - Use it when you are pretty sure an edge case is not handled, but you still want to allow the other person to tell you something you’re not aware of.
+  - Example: “What would happen if the API returns an error here?”
+
+- **“I noticed… What are your thoughts?”** - Use it if you notice something about the approach that could be better but want to invite feedback on your suggestion
+  - Example: “I noticed the other files in this folder have x convention. Should we match that here?”
+
+- **“What > why”** - Use “what” instead of “why” wherever possible. It softens the language to avoid defensiveness.
+  - Example: “What’s the reason for adding custom logic here instead of using a library?” is better than “Why did you decide to add custom logic here instead of using a library?”
+  
+- **Empathizing words > prescriptive words**
+  - Check how certain you appear in your statement.
+  - Use words like “consider”, “might”, and “could” instead of words like “must”, “have to”, and “should”
 
 ## Conclusion
 
-Remember all these are suggestions, and **it's okay to be not strict** about something unless you think it will creates some serious issues 
+All these are suggestions, and **it's okay to be not strict** about something unless you think it will creates some serious issues 
 down the line.
+
+Happy Reviewing ! ❤️
 
 ----
 
 References
 
-- [this & Object Prototypes, By Kyle Simpson](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/this%20%26%20object%20prototypes)
-- [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Exactly what to say in code reviews](https://read.highgrowthengineer.com/p/exactly-what-to-say-in-code-reviews)
