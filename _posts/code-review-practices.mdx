@@ -1,0 +1,133 @@
+---
+title: 'Things I look for during the Code Review'
+excerpt: "While reviewing the code from my team, there are some items that I always look for and would suggest some changes. In the projects that I have worked, I always try to create
+a documentation for coding standards, which I enforce throughout the codebase. As I move from project to project, it's difficult to take the copy documentation
+from one place to another. So, creating the set of coding standard that I enforce here to be accessed at anytime. Feel free to provide your comments."
+date: '2021-11-20'
+description: "This post summarizes the `this` binding principles explained in the book **this & Object Prototypes, by Kyle Simpson**. It's one of the book in the series _You Don't Know JS_"
+cover: 
+    src: '/assets/blog/what-is-this-javascript/what-is-this-cover.jpg'  
+    alt: 'You got this text on a road.'
+    author: 
+      name: 'sydney Rae'
+      url: https://unsplash.com/s/photos/this?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+ogImage:
+    url: '/assets/blog/what-is-this-javascript/what-is-this-cover.jpg'  
+    alt: 'You got this text on a road.'
+keywords: 'Javascript,React,Fundamentals'
+---
+
+While reviewing the code from my team, there are some items that I always look for and would suggest some changes. In the projects that I have worked, I always try to create
+a documentation for coding standards, which I enforce throughout the codebase. As I move from project to project, it's difficult to take the **copy** the documentation
+from one place to another. So, creating the set of coding standard that I enforce here to be accessed at anytime. Feel free to provide your comments.
+
+## Before We Begin
+
+There are some basic items to that we need to put up in our repository to make the code review process smoother.
+
+- We should not be worrying about indendations, "quotes", formatting during the code review. Because these need to be enforced
+by the tools like **Prettier**.
+
+- We should not be worrying about suggesting basic things like 'missing deps in useEffect, useCallback', unused variables, etc, as
+this is the job of **ESlint**.
+
+- We need to make sure to set these tools in the repository and make sure everyone in the project configures on their system. 
+
+I will try to cover most of the items, and may not be able to cover them all. So, will keep updating this post as and when I find
+new things to add.
+
+## Basics
+
+In all the projects I have worked in, all of them followed Agile practices, they typically use software like JIRA to manage the
+[Scrum](https://aws.amazon.com/what-is/scrum/). There will be user stories, epics, technical stories etc. 
+
+- The first rule of thumb is to make sure the stories (a unit of work) should have **Acceptance Criteria** defined. This influences
+the code review process. If it's not defined or if it lacks clarity check with the Product owner and get it addressed.
+
+- The Pull request should be tagged to a story.
+
+- Try to keep the Pull requests as **small** as possible. If a story requires a huge change on the codebase, then it means the story
+is not properly broken into individual sub tasks. Keeping PRs as short as possible will make sure the code review is done as
+quick as possible.
+
+- If you couldn't avoid a huge change for ticket, then you can follow the practice of raising the **PRs in parts**. For example, if you
+are making a change that affects 3 pages/sections of your application. You can raise PR for each section and tag the same story number
+to all the PRs. 
+
+```bash noline
+Ticket-421 Part 1
+Ticket-421 Part 2
+Ticket-421 Part 3
+```
+
+- Add proper **description** to the Pull Requests. Do not solely rely on the ticket to provide the context for reviewers. Remember, Ticket
+will help the product to understand the feature updates and PR descriptions will help the reviewers (and your future self) to understand the 
+code changes.
+
+- When raising PRs for bugfix, it should definetly have these items
+
+```bash noline
+
+Issue: <Describe the issue>
+
+Reason: <Root cause of the issue>
+
+Fix Made: <What fix is applied>
+
+Screenshot/Video: <Proof>
+
+Tests Added: Yes / No <If No, then add proper reason of why this fix can't be tested>
+
+```
+
+
+All these can be enforced by having a [Pull request templates](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository)
+
+## Code Review
+
+- I typically encourage the team to checkout the source branch of the PR and run locally to **test the changes**.
+
+- Use tools like [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) to compare the file changes
+right from your code editor. It's easy to spot issues if you are making changes and reviewing changes in the same environment.
+
+- Adding to the above point, the diff that we see in Github/Bitbucket etc doesn't give you a **full picture of what's happening**. To
+add more context, you need to open the file in new window to check the changes, instead of that I prefer to review the code in the same
+editor that I use to write the code.
+
+- Add a link to commonly followed best practices or coding guidelines and build project specific standards on top of it. I recommend
+[Airbnb Style Guide](https://github.com/airbnb/javascript) as base. This has some good rules to start with. 
+
+- Avoid nested ternaries as much as possible. Ternaries make code hard to read.
+
+```jsx noline
+function Component({ role, manager }) {
+  return role === "admin" ? manager === true ? "Welcome, Boss!" : "Welcome, Admin!" : "Welcome, User!"
+}
+```
+
+```jsx noline
+function Component({ role, manager }) {
+  if(role === "admin") {
+    if(manager) {
+      return "Welcome, Boss!"
+    }
+    return "Welcome, Admin!"
+  }
+  return "Welcome, User!"
+}
+```
+
+- Prefer [Early returns / Guard Classes](https://medium.com/@timothydan/javascript-guard-clauses-64b999e3240) 
+
+
+## Conclusion
+
+Remember all these are suggestions, and **it's okay to be not strict** about something unless you think it will creates some serious issues 
+down the line.
+
+----
+
+References
+
+- [this & Object Prototypes, By Kyle Simpson](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed/this%20%26%20object%20prototypes)
+- [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
