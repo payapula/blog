@@ -38,11 +38,11 @@ In all the projects I have worked in, all of them followed Agile practices, they
 
 - It is beneficial to **tag each pull request to a specific story**. This helps track the progress and link the code changes to the corresponding user story.
 
-- Try to keep the Pull requests as **small** as possible. If a story requires a huge change on the codebase, then it means the story
-is not properly broken into individual sub tasks. Keeping PRs as short as possible will make sure the code review is done as
-quick as possible.
+- Try to keep the Pull requests as **small** as possible. If a story requires a huge change in the codebase, then it means the story
+is not properly broken into individual sub-tasks. Keeping PRs as short as possible will make sure the code review is done as
+quickly as possible.
 
-- If you couldn't avoid a huge change for ticket, then you can follow the practice of raising the **PRs in parts**. For example, if you
+- If you couldn't avoid a huge change for a ticket, then you can follow the practice of raising the **PRs in parts**. For example, if you
 are making a change that affects 3 pages/sections of your application. You can raise PR for each section and tag the same story number
 to all the PRs. 
 
@@ -56,7 +56,7 @@ Ticket-421 Part 3
 will help the product to understand the feature updates and PR descriptions will help the reviewers (and your future self) to understand the 
 code changes.
 
-- When raising PRs for bugfix, it should definitely have these items
+- When raising PRs for bugfix, it should have these items
 
 ```bash noline
 
@@ -77,17 +77,16 @@ All these can be enforced by having a [Pull request templates](https://docs.gith
 
 ## Code Review
 
-- I typically encourage the team to checkout the source branch of the PR and run locally to **test the changes**.
+- I typically encourage the team to check out the source branch of the PR and run locally to **test the changes**.
 
 - Use tools like [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) to compare the file changes
 right from your code editor. It's easy to spot issues if you are making changes and reviewing changes in the same environment.
 
-- Adding to the above point, the diff that we see in Github/Bitbucket etc doesn't give you a **full picture of what's happening**. To
-add more context, you need to open the file in new window to check the changes, instead of that I prefer to review the code in the same
+- Adding to the above point, the diff that we see in Github/Bitbucket, etc doesn't give you a **full picture of what's happening**. To add more context, you need to open the file in new window to check the changes, instead of that I prefer to review the code in the same
 editor that I use to write the code.
 
-- Add a link to commonly followed best practices or coding guidelines and build project specific standards on top of it. I recommend
-[Airbnb Style Guide](https://github.com/airbnb/javascript) as base. This has some good rules to start with. 
+- Add a link to commonly followed best practices or coding guidelines and build project-specific standards on top of it. I recommend
+[Airbnb Style Guide](https://github.com/airbnb/javascript) as a base. This has some good rules to start with. 
 
 - Avoid nested ternaries as much as possible. Ternaries make code hard to read.
 
@@ -121,7 +120,7 @@ import { Button } from "../../../components/button" // ❌ Avoid
 import { Button } from "@components/button" // ✅ Good
 ```
 
-- Do not put hard restrictions on number of lines in a file. Instead prefer to have a general guideline
+- Do not put hard restrictions on a number of lines in a file. Instead prefer to have a general guideline
 on **number of lines per component**. Though this is debatable, having less number of code for a component makes
 it easy to read and maintain.
 
@@ -146,9 +145,9 @@ import { Button } from "@components/button" // Will go to index.js file
 
 ```
 
-We can use [new-component utility](https://github.com/joshwcomeau/new-component) to create components file structure like this easily.
+We can use [new-component utility](https://github.com/joshwcomeau/new-component) to create component file structures like this easily.
 
-- Try to create as much custom hooks as you can, and reuse them throughout the code base. If you are spotting a `useEffect` in a PR, then
+- Try to create as many custom hooks as you can, and reuse them throughout the code base. If you are spotting a `useEffect` in a PR, then
 it probably could be put into an `use`CustomHook. 
 
 ## Providing Feedbacks
