@@ -15,7 +15,7 @@ ogImage:
 keywords: 'Javascript,React'
 ---
 
-While reviewing the code from my team, I always look for certain items and suggest changes. In the projects I have worked on, I have created documentation for coding standards, which I enforce throughout the codebase. However, it can be challenging to copy the documentation from one place to another. Therefore, I writing this post and it will serve as a base set of coding standards that I enforce on most of the code bases. Please feel free to provide your comments.
+While reviewing the code from my team, I always look for certain items and suggest changes. In the projects I have worked on, I have created documentation for coding standards, which I enforce throughout the codebase. However, it can be challenging to copy the documentation from one place to another. Therefore, I'm writing this post, and it will serve as a base set of coding standards that I enforce on most of the code bases. Please feel free to provide your comments.
 
 ## Before We Begin
 
@@ -56,7 +56,7 @@ Ticket-421 Part 3
 will help the product to understand the feature updates and PR descriptions will help the reviewers (and your future self) to understand the 
 code changes.
 
-- When raising PRs for bugfix, it should have these items
+- When raising PRs for bug fix, it should have these items
 
 ```bash noline
 
@@ -82,7 +82,7 @@ All these can be enforced by having a [Pull request templates](https://docs.gith
 - Use tools like [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) to compare the file changes
 right from your code editor. It's easy to spot issues if you are making changes and reviewing changes in the same environment.
 
-- Adding to the above point, the diff that we see in Github/Bitbucket, etc doesn't give you a **full picture of what's happening**. To add more context, you need to open the file in new window to check the changes, instead of that I prefer to review the code in the same
+- Adding to the above point, the diff that we see in GitHub/Bitbucket, etc. doesn't give you a **full picture of what's happening**. To add more context, you need to open the file in new window to check the changes, instead of that I prefer to review the code in the same
 editor that I use to write the code.
 
 - Add a link to commonly followed best practices or coding guidelines and build project-specific standards on top of it. I recommend
@@ -120,7 +120,7 @@ import { Button } from "../../../components/button" // ❌ Avoid
 import { Button } from "@components/button" // ✅ Good
 ```
 
-- Do not put hard restrictions on a number of lines in a file. Instead prefer to have a general guideline
+- Do not put hard restrictions on a number of lines in a file. Instead, prefer to have a general guideline
 on **number of lines per component**. Though this is debatable, having less number of code for a component makes
 it easy to read and maintain.
 
@@ -185,7 +185,7 @@ Just posting the excerpt from the above article:
 
 ## Conclusion
 
-All these are suggestions, and **it's okay to be not strict** about something unless you think it will creates some serious issues 
+All these are suggestions, and **it's okay to be not strict** about something unless you think it will create some serious issues 
 down the line.
 
 Happy Reviewing ! ❤️
