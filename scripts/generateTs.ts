@@ -12,3 +12,5 @@ gitDateExtractor.getStamps(
         console.log('stamps', stamps);
     }
 );
+
+export {};
