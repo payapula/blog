@@ -1,6 +1,6 @@
 import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
-import { ChakraMDXLink } from 'components/chakra-link';
+import { ChakraHeadingLink, ChakraMDXLink } from 'components/chakra-link';
 import { ChakraNextImage } from 'components/chakra-next-image';
 import { ReactElement } from 'react';
 import { QuizHighlight } from './quiz-highlight';
@@ -34,10 +34,10 @@ const TData = (props: object): ReactElement => (
 const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
-    h1: (props): ReactElement => <Heading as="h2" {...props} />,
-    h2: (props): ReactElement => <Heading {...props} />,
-    h3: (props): ReactElement => <Heading as="h3" {...props} />,
-    h4: (props): ReactElement => <Heading as="h4" {...props} />,
+    h1: (props): ReactElement => <Heading {...props} />,
+    h2: (props) => <ChakraHeadingLink {...props} />,
+    h3: (props) => <ChakraHeadingLink as="h3" {...props} />,
+    h4: (props) => <ChakraHeadingLink as="h4" {...props} />,
     strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below

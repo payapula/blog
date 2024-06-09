@@ -36,6 +36,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
     "react-vertical-timeline-component": "^3.3.3",
+    "rehype-slug": "^6.0.0",
     "remark": "11.0.2",
     "remark-html": "10.0.0",
     "remark-mdx-code-meta": "^2.0.0",

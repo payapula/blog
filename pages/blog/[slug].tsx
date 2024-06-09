@@ -12,6 +12,7 @@ import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';
 import remarkMdxCodeMeta from 'remark-mdx-code-meta';
+import rehypeSlug from 'rehype-slug';
 
 type PostProps = {
     post: PostType;
@@ -106,7 +107,8 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
 
     const mdxSource = await serialize(post.content, {
         mdxOptions: {
-            remarkPlugins: [remarkMdxCodeMeta]
+            remarkPlugins: [remarkMdxCodeMeta],
+            rehypePlugins: [rehypeSlug]
         }
     });
 
