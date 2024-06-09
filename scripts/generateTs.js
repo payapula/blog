@@ -10,7 +10,8 @@ gitDateExtractor.getStamps(
          *
          * https://www.npmjs.com/package/git-date-extractor#automating-the-check-in-of-the-timestamp-file-into-version-control-git-add
          */
-        outputFileGitAdd: true
+        outputFileGitAdd: true,
+        gitCommitHook: 'pre'
     },
     (stamps) => {
         console.log('Generating Timestamps', stamps);
