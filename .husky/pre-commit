@@ -1,0 +1,9 @@
+# Check if there are any changes in the "_posts" directory.
+if git diff --cached --name-only | grep -q "_posts/"
+then
+  # Run generateTs if changes are detected.
+  echo "Changes detected in _posts directory. Running the script..."
+  npm run generateTs
+else
+  echo "No changes in _posts directory. Skipping the script..."
+fi
