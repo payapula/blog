@@ -25,6 +25,7 @@
     "cross-env": "^7.0.3",
     "date-fns": "2.10.0",
     "framer-motion": "^7.0.0",
+    "git-date-extractor": "^4.0.1",
     "gray-matter": "4.0.2",
     "next": "^12.2.3",
     "next-mdx-remote": "^4.1.0",

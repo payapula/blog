@@ -93,7 +93,7 @@ type Params = {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
-    const post = getPostBySlug(params.slug, [
+    const post = await getPostBySlug(params.slug, [
         'title',
         'description',
         'ogImage',
@@ -125,7 +125,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const posts = getAllPosts(['slug']);
+    const posts = await getAllPosts(['slug']);
 
     return {
         paths: posts.map((posts) => {
