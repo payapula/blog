@@ -12,6 +12,7 @@ import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';
 import remarkMdxCodeMeta from 'remark-mdx-code-meta';
+import rehypeSlug from 'rehype-slug';
 
 type PostProps = {
     post: PostType;
@@ -19,7 +20,7 @@ type PostProps = {
 };
 
 const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
-    const { title, description, ogImage, cover, content, slug } = post;
+    const { title, description, ogImage, cover, content, slug, createdDate, modifiedDate } = post;
 
     const intersectionRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,7 +81,9 @@ const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
                 <PostHeader title={title} />
                 <PostCover cover={cover} plaiceHolder={plaiceHolder} />
                 <PostBody content={content} intersectionRef={intersectionRef} />
-                <PostFooter slug={slug} />
+                <Box mt={5} />
+                <hr />
+                <PostFooter slug={slug} dates={{ createdDate, modifiedDate }} />
             </Box>
         </Layout>
     );
@@ -99,14 +102,17 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
         'ogImage',
         'cover',
         'slug',
-        'content'
+        'content',
+        'createdDate',
+        'modifiedDate'
     ]);
 
     const { base64, img } = await getPlaiceholder(post.cover.src);
 
     const mdxSource = await serialize(post.content, {
         mdxOptions: {
-            remarkPlugins: [remarkMdxCodeMeta]
+            remarkPlugins: [remarkMdxCodeMeta],
+            rehypePlugins: [rehypeSlug]
         }
     });
 

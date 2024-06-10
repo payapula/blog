@@ -1,5 +1,5 @@
 import { forwardRef, Ref } from 'react';
-import { Link, LinkProps, useColorModeValue } from '@chakra-ui/react';
+import { Heading, HeadingProps, Link, LinkProps, useColorModeValue } from '@chakra-ui/react';
 
 /**
  * Refer to sidebar-link.tsx of chakra-ui
@@ -46,4 +46,28 @@ const ChakraMDXLink = ({ href, ...rest }: LinkProps): ReturnType<typeof Link> =>
     );
 };
 
-export { ChakraLink, ChakraMDXLink };
+type ChakraHeadingLinkProps = {
+    id: string;
+    children: React.ReactNode;
+} & HeadingProps;
+
+const ChakraHeadingLink = ({ id, as = 'h2', children, ...props }: ChakraHeadingLinkProps) => {
+    return (
+        <>
+            <Heading {...props} id={id} role="group" as={as}>
+                {children}
+                <ChakraMDXLink
+                    ml={2}
+                    href={`#${id}`}
+                    aria-current={undefined}
+                    opacity={0}
+                    _focus={{ opacity: 1, boxShadow: 'outline' }}
+                    _groupHover={{ opacity: 1 }}>
+                    #
+                </ChakraMDXLink>
+            </Heading>
+        </>
+    );
+};
+
+export { ChakraLink, ChakraMDXLink, ChakraHeadingLink };

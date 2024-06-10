@@ -70,7 +70,7 @@ var lodash = import('lodash');
 lodash.sum([1, 2, 3, 3])
 ```
 
-So, with the named exports it is not possible for the bundlers like webpack to treeshake the unwanted code, and we 
+So, with the named exports it is not possible for the bundlers like webpack to tree shake the unwanted code, and we 
 end up shipping entire lodash utilities to the user. 
 
 You can avoid this by directly importing the utility you need from lodash like this
