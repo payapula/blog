@@ -16,6 +16,9 @@ type PostType = {
     // These are fetched separately
     slug: string; // From File Name
     content: MDXRemoteSerializeResult; // From hydrated by next-mdx-remote
+    // These are unix timestamps from git-date-extractor
+    createdDate: string;
+    modifiedDate: string;
 };
 
 export default PostType;
