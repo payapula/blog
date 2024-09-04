@@ -22,6 +22,11 @@ const general = {
     }
 };
 
+/**
+ * Update to taiwind font setting at last
+ *
+ * https://tailwindcss.com/docs/font-family#customizing-your-theme
+ */
 const fonts = {
     body: 'Roboto, sans-serif, system-ui',
     heading: 'Roboto, sans-serif, system-ui'
