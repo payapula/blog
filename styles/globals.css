@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* https://kirazhang.com/posts/nextjs-custom-fonts 
    Make sure to preload the font for better performance 
    https://wp-rocket.me/blog/font-preloading-best-practices/ 

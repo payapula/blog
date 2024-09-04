@@ -17,6 +17,7 @@ interface IndexProps {
 const Index = ({ recentPosts }: IndexProps): ReactElement => {
     return (
         <Layout type="HOME">
+            <h1 className="text-3xl font-bold underline">Hello world!</h1>
             <Head>
                 <title>Bharathi Kannan</title>
             </Head>
