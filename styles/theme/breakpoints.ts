@@ -8,6 +8,7 @@ export const breakpoints = {
      *
      * [0,    1,    2,      3,     4,     5,     6   ]
      * [0, 350px, 450px, 650px, 960px, 1200px, 1440px]
+     * [base, xs,   sm,    md,    lg,    xl,    2xl]
      */
     base: '0em',
     xs: '350px',

@@ -3,6 +3,8 @@ import { ChakraNextImage } from './chakra-next-image';
 import profilePic from 'public/assets/resume/bharathikannanavatar.jpg';
 
 /**
+ * tw-TODO
+ *
  * * When updating images
  *
  * 1. Make sure to resize them to reduce the file size.
