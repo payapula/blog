@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { Layout } from '../components/layout';
-import { RecentPosts } from 'components/recent-posts';
+// import { RecentPosts } from 'components/recent-posts';
+import { RecentPosts } from 'components/tailwind/recent-posts';
 // import { HeroContent } from 'components/hero-content';
 import { HeroContent } from 'components/tailwind/hero-content';
 import { Quotes } from 'components/quotes';

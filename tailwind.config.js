@@ -29,7 +29,8 @@ module.exports = {
             gray: {
                 chakra: '#1A202C', //chakra's gray-800
                 ...colors.gray
-            }
+            },
+            sky: colors.sky
         }
     },
     plugins: []
