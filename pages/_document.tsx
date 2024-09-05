@@ -33,6 +33,7 @@ export default class MyDocument extends Document {
                         rel="stylesheet"></link> */}
                 </Head>
                 <body className="bg-white text-gray-chakra dark:bg-gray-chakra dark:text-white">
+                    {/* <body> */}
                     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
                     <Main />
                     <NextScript />

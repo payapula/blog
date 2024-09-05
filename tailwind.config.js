@@ -23,6 +23,9 @@ module.exports = {
                 dark: '#2b6cb0',
                 ...colors.blue
             },
+            teal: {
+                ...colors.teal
+            },
             gray: {
                 chakra: '#1A202C', //chakra's gray-800
                 ...colors.gray
