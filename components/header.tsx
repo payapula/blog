@@ -15,26 +15,26 @@ import {
 } from '@chakra-ui/react';
 import { ChakraLink } from 'components/chakra-link';
 import NextLink from 'next/link';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from 'utils/hooks';
 import { AuthorAvatar } from './author-avatar';
 import { useRouter } from 'next/router';
 import { ToggleThemeButton } from './toggle-theme-button';
 
 // tw-TODO
-// function ToggleIconButton() {
-//     const { colorMode, toggleColorMode } = useColorMode();
-//     return (
-//         <IconButton
-//             colorScheme="teal"
-//             aria-label="Toggle Dark Mode"
-//             onClick={toggleColorMode}
-//             mr="5"
-//             icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-//             apply="general.focus"
-//         />
-//     );
-// }
+function ToggleIconButton() {
+    const { colorMode, toggleColorMode } = useColorMode();
+    return (
+        <IconButton
+            colorScheme="teal"
+            aria-label="Toggle Dark Mode"
+            onClick={toggleColorMode}
+            mr="5"
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            apply="general.focus"
+        />
+    );
+}
 
 interface NavLinkProps {
     children: ReactNode;
@@ -124,7 +124,7 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                     </Flex>
                 </NextLink>
                 <Spacer />
-                {/* <ToggleIconButton /> */}
+                <ToggleIconButton />
                 <ToggleThemeButton />
                 {isLessThan768 ? (
                     <Box mr="5" ml="auto">
