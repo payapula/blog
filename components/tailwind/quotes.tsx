@@ -77,7 +77,7 @@ export const Quotes = (): JSX.Element => {
             <figure className="m-auto flex flex-col p-2 sm:p-3 md:p-4">
                 <blockquote
                     className="text-xl  italic before:font-serif before:text-[1.7rem]
-                        before:font-bold
+                    before:font-bold
                         before:content-[open-quote]
                         after:ml-[3px]
                         after:font-serif
@@ -86,6 +86,7 @@ export const Quotes = (): JSX.Element => {
                         after:content-[close-quote]
                         sm:text-2xl
                         md:text-3xl
+                        md:leading-normal
                         before:md:text-[2rem]
                         after:md:text-[2rem]
                         before:lg:text-[3rem]
