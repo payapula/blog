@@ -46,3 +46,28 @@ body {
 #chakra-toast-manager-top-left {
     z-index: 10000 !important;
 }
+
+/**
+* Vertical Timeline overrides
+*/
+.vertical-timeline::before {
+    background-color: #319795 !important;
+}
+
+.dark .vertical-timeline::before {
+    background-color: white !important;
+}
+
+.vertical-timeline-element-date {
+    font-weight: bold !important;
+}
+
+@media only screen and (min-width: 1170px) {
+    .vertical-timeline-element-date {
+        color: black;
+    }
+
+    .dark .vertical-timeline-element-date {
+        color: white;
+    }
+}

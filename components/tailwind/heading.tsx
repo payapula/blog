@@ -1,6 +1,12 @@
 /**
  * Tailwind equivalent of Chakra Heading component
  */
-export function Heading({ children }: { children: React.ReactNode }) {
-    return <h2 className="text-3xl font-bold md:text-4xl">{children}</h2>;
+interface HeadingProps {
+    children: React.ReactNode;
+}
+
+export const defaultHeadingStyles = 'text-3xl font-bold md:text-4xl';
+
+export function Heading({ children }: HeadingProps) {
+    return <h2 className={defaultHeadingStyles}>{children}</h2>;
 }
