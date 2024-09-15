@@ -1,7 +1,8 @@
-import { Button, Icon, VisuallyHidden } from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react';
 import { Heading } from './heading';
 import React from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import VisuallyHidden from './visuallyHidden';
 
 type Quotes = {
     text: string;
