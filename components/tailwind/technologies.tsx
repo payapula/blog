@@ -1,5 +1,4 @@
 // Inspired by https://github.com/guarmo/portfolio/blob/master/components/About.js
-import { useColorModeValue, Icon } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 import { IconType } from 'react-icons';
 import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3, DiAndroid } from 'react-icons/di';
@@ -14,7 +13,7 @@ import {
 import { Heading } from './heading';
 
 type IconMeta = {
-    color: string;
+    colorClasses: string;
     text: string;
     icon: IconType;
 };
@@ -24,18 +23,42 @@ type IconSet = {
 };
 
 const iconSet: IconSet = {
-    ts: { color: '#3178c6', text: 'TypeScript', icon: SiTypescript },
-    react: { color: '#61dafb', text: 'React', icon: DiReact },
-    next: { color: '', text: 'NextJS', icon: SiNextdotjs },
-    remix: { color: '', text: 'Remix', icon: SiRemix },
-    node: { color: '#026e00', text: 'NodeJS', icon: DiNodejs },
-    js: { color: '#fcdc00', text: 'Javascript', icon: DiJsBadge },
-    firebase: { color: '#FFCA28', text: 'Firebase', icon: SiFirebase },
-    amplify: { color: '#FF9900', text: 'AWS Amplify', icon: SiAwsamplify },
-    html: { color: '#e54c21', text: 'HTML', icon: DiHtml5 },
-    css: { color: '#1672b6', text: 'CSS', icon: DiCss3 },
-    csharp: { color: '#189f20', text: 'C Sharp', icon: SiCsharp },
-    android: { color: '#a5c736', text: 'Android', icon: DiAndroid }
+    ts: {
+        colorClasses: 'hover:text-[#3178c6] text-[#3178c6]',
+        text: 'TypeScript',
+        icon: SiTypescript
+    },
+    react: { colorClasses: 'hover:text-[#61dafb] text-[#61dafb]', text: 'React', icon: DiReact },
+    next: { colorClasses: '', text: 'NextJS', icon: SiNextdotjs },
+    remix: { colorClasses: '', text: 'Remix', icon: SiRemix },
+    node: { colorClasses: 'hover:text-[#026e00] text-[#026e00]', text: 'NodeJS', icon: DiNodejs },
+    js: {
+        colorClasses: 'hover:text-[#fcdc00] text-[#fcdc00]',
+        text: 'Javascript',
+        icon: DiJsBadge
+    },
+    firebase: {
+        colorClasses: 'hover:text-[#FFCA28] text-[#FFCA28]',
+        text: 'Firebase',
+        icon: SiFirebase
+    },
+    amplify: {
+        colorClasses: 'hover:text-[#FF9900] text-[#FF9900]',
+        text: 'AWS Amplify',
+        icon: SiAwsamplify
+    },
+    html: { colorClasses: 'hover:text-[#e54c21] text-[#e54c21]', text: 'HTML', icon: DiHtml5 },
+    css: { colorClasses: 'hover:text-[#1672b6] text-[#1672b6]', text: 'CSS', icon: DiCss3 },
+    csharp: {
+        colorClasses: 'hover:text-[#189f20] text-[#189f20]',
+        text: 'C Sharp',
+        icon: SiCsharp
+    },
+    android: {
+        colorClasses: 'hover:text-[#a5c736] text-[#a5c736]',
+        text: 'Android',
+        icon: DiAndroid
+    }
 };
 
 function Technologies(): ReactElement {
@@ -58,22 +81,25 @@ interface RenderIconProps {
     iconData: IconMeta;
 }
 
-// Refer to Sizes here  https://github.com/chakra-ui/chakra-ui/blob/c2f0d1bb2a07fe6af5e53a1f216d80c9a7d6df72/packages/components/theme/src/foundations/sizes.ts
-const responsiveSize = { xs: 12, md: 16, lg: 20 };
-
-//tw-TODO
+// @deprecated Refer to chakra responsive Sizes here  https://github.com/chakra-ui/chakra-ui/blob/c2f0d1bb2a07fe6af5e53a1f216d80c9a7d6df72/packages/components/theme/src/foundations/sizes.ts
 function RenderIcon({ iconData }: RenderIconProps): ReactElement {
-    const { color, icon, text } = iconData;
+    const { colorClasses, icon, text } = iconData;
+    const IconComponent = icon;
     return (
         <div className="flex flex-col items-center">
-            <Icon
-                as={icon}
-                width={responsiveSize}
-                height={responsiveSize}
-                _hover={{ transform: 'scale(1.2)', color }}
-                transition="all .2s ease-in-out"
-                color={useColorModeValue(color, 'currentColor')}
-                aria-label={`Logo of ${text}`}
+            <IconComponent
+                //@prettier-ignore
+                className={`
+                    transition-all duration-200 ease-in-out
+                    hover:scale-125 xs:h-12 xs:w-12
+                    md:h-16
+                    md:w-16
+                    lg:h-20
+                    lg:w-20
+                    dark:text-current
+                    ${colorClasses}
+                `}
+                title={`Logo of ${text}`}
             />
             <p className="text-md mt-2 text-center font-bold md:text-lg" aria-hidden="true">
                 {text}

@@ -1,4 +1,4 @@
-import { Button, Icon } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import { Heading } from './heading';
 import React from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
@@ -62,7 +62,7 @@ export const Quotes = (): JSX.Element => {
                         outline: '2px dashed teal'
                     }}>
                     <VisuallyHidden>Previous Quote</VisuallyHidden>
-                    <Icon as={FaArrowAltCircleLeft} width={5} height={5} />
+                    <FaArrowAltCircleLeft className="h-5 w-5" />
                 </Button>
                 <Heading>Favourite Quotes</Heading>
                 <Button
@@ -72,7 +72,7 @@ export const Quotes = (): JSX.Element => {
                         outline: '2px dashed teal'
                     }}>
                     <VisuallyHidden>Next Quote</VisuallyHidden>
-                    <Icon as={FaArrowAltCircleRight} width={5} height={5} />{' '}
+                    <FaArrowAltCircleRight className="h-5 w-5" />
                 </Button>
             </div>
             <figure className="m-auto flex flex-col p-2 sm:p-3 md:p-4">

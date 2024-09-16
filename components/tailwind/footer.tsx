@@ -1,4 +1,4 @@
-import { SystemStyleObject, Icon, useColorModeValue, Link, useToast } from '@chakra-ui/react';
+import { Link, useToast } from '@chakra-ui/react';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
@@ -39,11 +39,7 @@ function GMAIL() {
         return (
             <IconLink href={`mailto:${siteConfig.general.authorEmail}`}>
                 <VisuallyHidden>Send Email to Bharathi Kannan</VisuallyHidden>
-                <SocialIcons
-                    icon={SiGmail}
-                    hover={{ color: '#ea4335' }}
-                    ariaLabel="Logo of Gmail"
-                />
+                <SocialIcons icon={SiGmail} hoverClass="text-[#ea4335]" ariaLabel="Logo of Gmail" />
             </IconLink>
         );
     }
@@ -64,7 +60,7 @@ function GMAIL() {
                 });
             }}>
             <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
-            <SocialIcons icon={SiGmail} hover={{ color: '#ea4335' }} ariaLabel="Logo of Gmail" />
+            <SocialIcons icon={SiGmail} hoverClass="text-[#ea4335]" ariaLabel="Logo of Gmail" />
         </button>
     );
 }
@@ -79,7 +75,7 @@ function Footer(): ReactElement {
                         <VisuallyHidden>Open Twitter Profile of Bharathi Kannan</VisuallyHidden>
                         <SocialIcons
                             icon={FaTwitter}
-                            hover={{ color: '#1DA1F2' }}
+                            hoverClass="text-[#1DA1F2]"
                             ariaLabel="Logo of Twitter"
                         />
                     </IconLink>
@@ -87,7 +83,7 @@ function Footer(): ReactElement {
                         <VisuallyHidden>Open LinkedIn Profile of Bharathi Kannan</VisuallyHidden>
                         <SocialIcons
                             icon={FaLinkedin}
-                            hover={{ color: '#0e76a8' }}
+                            hoverClass="text-[#0e76a8]"
                             ariaLabel="Logo of LinkedIn"
                         />
                     </IconLink>
@@ -108,20 +104,15 @@ function Footer(): ReactElement {
 
 interface SocialIconsProps {
     icon: IconType;
-    hover: SystemStyleObject;
+    hoverClass: string;
     ariaLabel: string;
 }
 
-const SocialIcons = ({ icon, hover, ariaLabel }: SocialIconsProps) => (
-    <Icon
-        as={icon}
-        w="8"
-        h="8"
-        cursor="pointer"
-        _hover={hover}
-        color={useColorModeValue(hover.color as string, 'currentColor')}
-        aria-label={ariaLabel}
-    />
-);
+const SocialIcons = ({ icon, hoverClass, ariaLabel }: SocialIconsProps) => {
+    const IconComponent = icon;
+    return (
+        <IconComponent className={`h-8 w-8 cursor-pointer ${hoverClass}`} aria-label={ariaLabel} />
+    );
+};
 
 export default Footer;

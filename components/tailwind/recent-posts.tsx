@@ -1,4 +1,3 @@
-import { Icon } from '@chakra-ui/react';
 import { Card } from 'components/card';
 import NextLink from 'next/link';
 import { ChakraLink } from 'components/chakra-link';
@@ -21,7 +20,7 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                             alignItems="center"
                             fontSize="xl">
                             View All
-                            <Icon as={FaLongArrowAltRight} w="8" h="6" ml="1" />
+                            <FaLongArrowAltRight className="ml-2" />
                         </ChakraLink>
                     </NextLink>
                 </div>
@@ -49,7 +48,7 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                         <ChakraLink display={['block', null, null, null, 'none']} fontSize="xl">
                             <div className="flex items-center justify-center">
                                 <p>View All</p>
-                                <Icon as={FaLongArrowAltRight} w="10" h="8" ml="1" />
+                                <FaLongArrowAltRight className="ml-2" />
                             </div>
                         </ChakraLink>
                     </NextLink>

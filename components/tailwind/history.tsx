@@ -1,16 +1,15 @@
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { SiDotnet } from 'react-icons/si';
-import { Icon } from '@chakra-ui/react';
 import { DiReact } from 'react-icons/di';
 import { FaGraduationCap } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import { defaultHeadingStyles } from './heading';
 
-// tw-TODO
-const CustomIcon = ({ icon, color }: { icon: IconType; color: string }) => (
-    <Icon as={icon} width="8" height="8" color={color} />
-);
+const CustomIcon = ({ icon, colorClass }: { icon: IconType; colorClass: string }) => {
+    const IconComponent = icon;
+    return <IconComponent className={`h-8 w-8 ${colorClass}`} />;
+};
 
 const Title = ({ children }: { children: React.ReactNode }) => (
     <h3 className="text-xl font-bold lg:text-3xl">{children}</h3>
@@ -57,7 +56,7 @@ function History(): JSX.Element {
             <VerticalTimeline className="!mt-10">
                 <CustomVerticalTimeLine
                     date="2023 - Present"
-                    icon={<CustomIcon icon={DiReact} color="#61dafb" />}
+                    icon={<CustomIcon icon={DiReact} colorClass="text-[#61dafb]" />}
                     head={true}>
                     <Title>Lead Experience Engineer</Title>
                     <Subtitle>Publicis Sapient</Subtitle>
@@ -65,14 +64,14 @@ function History(): JSX.Element {
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2022 - 2023"
-                    icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
+                    icon={<CustomIcon icon={DiReact} colorClass="text-[#61dafb]" />}>
                     <Title>Software Engineer</Title>
                     <Subtitle>Twilio, Bangalore</Subtitle>
                     <Description>React | Typescript | SCSS | NodeJS</Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2020 - 2022"
-                    icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
+                    icon={<CustomIcon icon={DiReact} colorClass="text-[#61dafb]" />}>
                     <Title>Technical Lead IV</Title>
                     <Subtitle>Photon Interactive, Chennai</Subtitle>
                     <Description>
@@ -81,14 +80,14 @@ function History(): JSX.Element {
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2019 - 2020"
-                    icon={<CustomIcon icon={DiReact} color="#61dafb" />}>
+                    icon={<CustomIcon icon={DiReact} colorClass="text-[#61dafb]" />}>
                     <Title>Software Development Senior Analyst</Title>
                     <Subtitle>NTT Data, Chennai</Subtitle>
                     <Description>React | Javascript | CSS | Material UI</Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2016 - 2019"
-                    icon={<CustomIcon icon={SiDotnet} color="#fff" />}>
+                    icon={<CustomIcon icon={SiDotnet} colorClass="text-[#fff]" />}>
                     <Title>Programmer Analyst</Title>
                     <Subtitle>Cognizant, Coimbatore</Subtitle>
                     <Description>
@@ -97,7 +96,7 @@ function History(): JSX.Element {
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2012 - 2016"
-                    icon={<CustomIcon icon={FaGraduationCap} color="#81e6d9" />}>
+                    icon={<CustomIcon icon={FaGraduationCap} colorClass="text-[#81e6d9]" />}>
                     <Title>B.E Computer Science and Engineering</Title>
                     <Subtitle>Sri Ramakrishna Engineering College, Coimbatore</Subtitle>
                     <Description>Android | Java | Material UI | Php</Description>
