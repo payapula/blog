@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
+import { FaSun } from 'react-icons/fa';
+import { FaMoon } from 'react-icons/fa';
 
 /**
  * tw-TODO
@@ -17,12 +19,14 @@ export const ToggleThemeButton = () => {
         return null;
     }
 
+    const isDark = theme === 'dark';
+
     return (
         <>
             <button
-                className="rounded bg-blue-500 px-2 py-1 dark:bg-blue-200"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-                {theme}
+                className="flex h-10 w-10 items-center justify-center rounded bg-teal-700 px-2 py-1 text-white dark:bg-teal-300 dark:text-gray-800"
+                onClick={() => setTheme(isDark ? 'light' : 'dark')}>
+                {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
             </button>
             {/* <select value={theme} onChange={(e) => setTheme(e.target.value)}>
                 <option value="system">System</option>
