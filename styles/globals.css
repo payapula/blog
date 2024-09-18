@@ -71,3 +71,11 @@ body {
         color: white;
     }
 }
+
+@layer utilities {
+    .focus-outline {
+        outline: 2px dashed theme('colors.teal.500');
+        box-shadow: none;
+        outline-offset: 2px;
+    }
+}

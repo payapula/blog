@@ -1,8 +1,8 @@
-import { Button } from '@chakra-ui/react';
 import { Heading } from './heading';
 import React from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
 import VisuallyHidden from './visuallyHidden';
+import { Button } from './button';
 
 type Quotes = {
     text: string;
@@ -55,22 +55,12 @@ export const Quotes = (): JSX.Element => {
     return (
         <div className="mt-10 flex min-h-[300px] flex-col items-center md:min-h-[320px]">
             <div className="flex basis-[60px] items-center text-center">
-                <Button
-                    onClick={() => toggleQuotes('previous')}
-                    mr={2}
-                    _focus={{
-                        outline: '2px dashed teal'
-                    }}>
+                <Button onClick={() => toggleQuotes('previous')} className="mr-2">
                     <VisuallyHidden>Previous Quote</VisuallyHidden>
                     <FaArrowAltCircleLeft className="h-5 w-5" />
                 </Button>
                 <Heading>Favourite Quotes</Heading>
-                <Button
-                    onClick={() => toggleQuotes('next')}
-                    ml={2}
-                    _focus={{
-                        outline: '2px dashed teal'
-                    }}>
+                <Button onClick={() => toggleQuotes('next')} className="ml-2">
                     <VisuallyHidden>Next Quote</VisuallyHidden>
                     <FaArrowAltCircleRight className="h-5 w-5" />
                 </Button>

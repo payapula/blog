@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { FaSun } from 'react-icons/fa';
-import { FaMoon } from 'react-icons/fa';
+// import { FaSun } from 'react-icons/fa';
+// import { FaMoon } from 'react-icons/fa';
+import { IoSunny } from 'react-icons/io5';
+import { IoMdMoon } from 'react-icons/io';
 
 /**
  * tw-TODO
@@ -24,9 +26,10 @@ export const ToggleThemeButton = () => {
     return (
         <>
             <button
-                className="flex h-10 w-10 items-center justify-center rounded bg-teal-700 px-2 py-1 text-white dark:bg-teal-300 dark:text-gray-800"
+                className="focus:focus-outline flex h-10 w-10 items-center justify-center rounded bg-teal-700 px-2 py-1 text-white dark:bg-teal-300 dark:text-gray-800"
                 onClick={() => setTheme(isDark ? 'light' : 'dark')}>
-                {isDark ? <FaSun size={20} /> : <FaMoon size={20} />}
+                {/* {isDark ? <FaSun size={20} /> : <FaMoon size={20} />} */}
+                {isDark ? <IoSunny size={20} /> : <IoMdMoon size={20} />}
             </button>
             {/* <select value={theme} onChange={(e) => setTheme(e.target.value)}>
                 <option value="system">System</option>
