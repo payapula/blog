@@ -1,4 +1,5 @@
-import { Card } from 'components/card';
+// import { Card } from 'components/card';
+import { Card } from 'components/tailwind/card';
 import NextLink from 'next/link';
 // import { ChakraLink } from 'components/chakra-link';
 import { TWLink } from 'components/tailwind/link';
@@ -14,7 +15,7 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
         <div className="relative left-[calc(-50vw+50%)] w-[100vw] bg-sky-50 dark:bg-gray-chakra">
             <div className="mx-auto mt-3 h-[700px] px-4 sm:max-w-[95%] md:max-w-[80%] lg:mt-1 lg:h-[400px]">
                 <div className="flex h-[52px] justify-center px-7 pt-5 lg:justify-between">
-                    <h2 className="text-left text-xl">Recent Posts</h2>
+                    <h2 className="text-left text-xl font-bold">Recent Posts</h2>
                     <NextLink href="/blog" passHref>
                         <TWLink display="hidden lg:flex" flex="items-center" textSize="text-xl">
                             View All

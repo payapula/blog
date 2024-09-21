@@ -78,4 +78,36 @@ body {
         box-shadow: none;
         outline-offset: 2px;
     }
+
+    .title-gradient-light {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(to right, #d26472, #c73d75, #b10a82, #8b0095, #3e02ab);
+    }
+    .title-gradient-dark {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(193, 150, 133),
+            rgb(184, 161, 120),
+            rgb(158, 175, 123),
+            rgb(118, 188, 149),
+            rgb(62, 196, 193)
+        );
+    }
+
+    .tag-light {
+        color: black;
+        background-color: hsl(324deg 86% 80% / 40%);
+    }
+
+    .tag-dark {
+        color: white;
+        background-color: hsl(324deg 52% 35% / 35%);
+    }
+
+    .border-teal {
+        border: 1px solid theme('colors.teal.600');
+    }
 }
