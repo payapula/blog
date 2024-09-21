@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { IconButton, useColorMode, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
-import { ChakraLink } from 'components/chakra-link';
+// import { ChakraLink } from 'components/chakra-link';
+import { TWLink } from 'components/tailwind/link';
 import NextLink from 'next/link';
 import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
@@ -39,9 +40,9 @@ function NavLink({ children, ariaLabel, href }: NavLinkProps) {
                     isActive ? 'bg-teal-50 text-teal-700 dark:bg-teal-800 dark:text-teal-200' : ''
                 }`}>
                 <NextLink href={href} passHref>
-                    <ChakraLink fontSize="xl" fontWeight="bold" isActive={isActive}>
+                    <TWLink textSize="text-xl" fontWeight="font-bold" isActive={isActive}>
                         {children}
-                    </ChakraLink>
+                    </TWLink>
                 </NextLink>
             </div>
         </nav>
@@ -56,11 +57,11 @@ interface MobileMenuItemProps {
 function MobileMenuItem({ children, href }: MobileMenuItemProps) {
     return (
         <NextLink href={href} passHref>
-            <ChakraLink isActive>
+            <TWLink isActive>
                 <MenuItem h="50px">
                     <p className="text-lg font-bold ">{children}</p>
                 </MenuItem>
-            </ChakraLink>
+            </TWLink>
         </NextLink>
     );
 }

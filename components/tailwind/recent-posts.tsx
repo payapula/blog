@@ -1,6 +1,7 @@
 import { Card } from 'components/card';
 import NextLink from 'next/link';
-import { ChakraLink } from 'components/chakra-link';
+// import { ChakraLink } from 'components/chakra-link';
+import { TWLink } from 'components/tailwind/link';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import Post from 'types/post';
 
@@ -15,13 +16,10 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                 <div className="flex h-[52px] justify-center px-7 pt-5 lg:justify-between">
                     <h2 className="text-left text-xl">Recent Posts</h2>
                     <NextLink href="/blog" passHref>
-                        <ChakraLink
-                            display={['none', null, null, null, 'flex']}
-                            alignItems="center"
-                            fontSize="xl">
+                        <TWLink display="hidden lg:flex" flex="items-center" textSize="text-xl">
                             View All
                             <FaLongArrowAltRight className="ml-2" />
-                        </ChakraLink>
+                        </TWLink>
                     </NextLink>
                 </div>
                 <div className="posts-container flex h-[600px] flex-col items-center justify-around lg:h-[350px] lg:flex-row">
@@ -45,12 +43,12 @@ function RecentPosts({ recentPosts }: RecentPostsProps): JSX.Element {
                 </div>
                 <div className="flex justify-center">
                     <NextLink href="/blog" passHref>
-                        <ChakraLink display={['block', null, null, null, 'none']} fontSize="xl">
+                        <TWLink textSize="text-xl" display="block lg:hidden">
                             <div className="flex items-center justify-center">
                                 <p>View All</p>
                                 <FaLongArrowAltRight className="ml-2" />
                             </div>
-                        </ChakraLink>
+                        </TWLink>
                     </NextLink>
                 </div>
             </div>

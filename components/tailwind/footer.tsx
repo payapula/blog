@@ -5,7 +5,8 @@ import { IconType } from 'react-icons';
 import React, { ReactElement } from 'react';
 import { SiGmail } from 'react-icons/si';
 import siteConfig from 'configs/site-configs';
-import { ChakraLink } from '../chakra-link';
+// import { ChakraLink } from '../chakra-link';
+import { TWLink } from './link';
 import VisuallyHidden from './visuallyHidden';
 
 interface IconLinkProps {
@@ -88,7 +89,7 @@ function Footer(): ReactElement {
                         />
                     </IconLink>
                 </div>
-                <ChakraLink ml={3} href={siteConfig.general.github}>
+                <TWLink href={siteConfig.general.github}>
                     <span role="img" aria-label="Heart" className="mr-2">
                         ❤️
                     </span>
@@ -96,7 +97,7 @@ function Footer(): ReactElement {
                     <span role="img" aria-label="Heart" className="ml-2">
                         ❤️
                     </span>
-                </ChakraLink>
+                </TWLink>
             </div>
         </footer>
     );
