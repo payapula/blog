@@ -11,7 +11,8 @@ import {
     Text
 } from '@chakra-ui/react';
 import { getAllPosts } from 'lib/api';
-import { BlogCard } from 'components/card';
+// import { BlogCard } from 'components/card';
+import { BlogCard } from 'components/tailwind/card';
 import { Layout } from 'components/layout';
 import { GetStaticProps } from 'next';
 import React, { ReactElement } from 'react';

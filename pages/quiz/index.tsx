@@ -6,7 +6,8 @@ import { GetStaticProps } from 'next';
 import { getAllQuizzes } from 'lib/quiz.api';
 import QuizType from 'types/quiz';
 import { chakra, Heading, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
-import { QuizCard } from 'components/card';
+// import { QuizCard } from 'components/card';
+import { QuizCard } from 'components/tailwind/card';
 
 type Props = {
     allQuizzes: QuizType[];

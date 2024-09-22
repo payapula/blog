@@ -1,29 +1,43 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable jsx-a11y/anchor-has-content */
 import { forwardRef, Ref } from 'react';
 import { Heading, HeadingProps, Link, LinkProps, useColorModeValue } from '@chakra-ui/react';
 
 /**
- * tw-TODO
  * Refer to sidebar-link.tsx of chakra-ui
  * https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/sidebar/sidebar-link.tsx
  */
-const ChakraLink = forwardRef(function StyledChakraLink(
-    props: LinkProps & { isActive?: boolean },
-    ref: Ref<HTMLAnchorElement>
-) {
-    const { isActive, href, rel, target, ...rest } = props;
+interface TWLinkProps {
+    href?: string;
+    isActive?: boolean;
+    rel?: string;
+    target?: string;
+    children?: React.ReactNode;
+    textSize?: string;
+    fontWeight?: string;
+    display?: string;
+    flex?: string;
+}
+
+const TWLink = forwardRef(function StyledTWLink(props: TWLinkProps, ref: Ref<HTMLAnchorElement>) {
+    const { isActive, href, rel, target, textSize, fontWeight, display, flex, ...rest } = props;
     const isInternal = href.startsWith('/') || href.startsWith('#');
+    const textClasses = textSize ?? '';
+    const fontClasses = fontWeight ?? 'font-semibold';
+    const displayClasses = display ?? 'inline';
+    const flexClasses = flex ?? '';
     return (
-        <Link
+        <a
             aria-current={isActive ? 'page' : undefined}
             ref={ref}
             rel={isInternal ? rel : 'noopener noreferrer'}
             target={isInternal ? target : '_blank'}
             href={href}
-            apply="general.link"
-            color={useColorModeValue('link.color.light', 'link.color.dark')}
-            _hover={{
-                color: useColorModeValue('link.hover.light', 'link.hover.dark')
-            }}
+            className={`border-b border-dashed border-current
+                text-teal-800 hover:border-solid
+                dark:text-teal-300 ${textClasses} ${fontClasses}
+                ${displayClasses} ${flexClasses}
+                `}
             {...rest}
         />
     );
@@ -71,4 +85,4 @@ const ChakraHeadingLink = ({ id, as = 'h2', children, ...props }: ChakraHeadingL
     );
 };
 
-export { ChakraLink, ChakraMDXLink, ChakraHeadingLink };
+export { TWLink, ChakraMDXLink, ChakraHeadingLink };

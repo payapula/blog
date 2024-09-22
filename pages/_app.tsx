@@ -6,6 +6,7 @@ import { ReactElement } from 'react';
 import { DefaultSeo } from 'next-seo';
 import siteConfig from 'configs/site-configs';
 import 'styles/globals.css';
+import { ThemeProvider } from 'next-themes';
 
 const { seo } = siteConfig;
 
@@ -17,7 +18,9 @@ export default function MyApp({ Component, pageProps }: AppProps): ReactElement 
             </Head>
             <DefaultSeo {...seo} />
             <ChakraProvider theme={theme}>
-                <Component {...pageProps} />
+                <ThemeProvider attribute="class">
+                    <Component {...pageProps} />
+                </ThemeProvider>
             </ChakraProvider>
         </>
     );

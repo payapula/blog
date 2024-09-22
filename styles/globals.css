@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* https://kirazhang.com/posts/nextjs-custom-fonts 
    Make sure to preload the font for better performance 
    https://wp-rocket.me/blog/font-preloading-best-practices/ 
@@ -41,4 +45,75 @@ body {
 
 #chakra-toast-manager-top-left {
     z-index: 10000 !important;
+}
+
+/**
+* Vertical Timeline overrides
+*/
+.vertical-timeline::before {
+    background-color: #319795 !important;
+}
+
+.dark .vertical-timeline::before {
+    background-color: white !important;
+}
+
+.vertical-timeline-element-date {
+    font-weight: bold !important;
+}
+
+@media only screen and (min-width: 1170px) {
+    .vertical-timeline-element-date {
+        color: black;
+    }
+
+    .dark .vertical-timeline-element-date {
+        color: white;
+    }
+}
+
+@layer utilities {
+    .focus-outline {
+        outline: 2px dashed theme('colors.teal.500');
+        box-shadow: none;
+        outline-offset: 2px;
+    }
+
+    .title-gradient-light {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(to right, #d26472, #c73d75, #b10a82, #8b0095, #3e02ab);
+    }
+    .title-gradient-dark {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(193, 150, 133),
+            rgb(184, 161, 120),
+            rgb(158, 175, 123),
+            rgb(118, 188, 149),
+            rgb(62, 196, 193)
+        );
+    }
+
+    .tag-light {
+        color: black;
+        background-color: hsl(324deg 86% 80% / 40%);
+    }
+
+    .tag-dark {
+        color: white;
+        background-color: hsl(324deg 52% 35% / 35%);
+    }
+
+    .border-teal {
+        border: 1px solid theme('colors.teal.600');
+    }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }

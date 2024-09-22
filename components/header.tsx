@@ -19,7 +19,9 @@ import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from 'utils/hooks';
 import { AuthorAvatar } from './author-avatar';
 import { useRouter } from 'next/router';
+import { ToggleThemeButton } from './toggle-theme-button';
 
+// tw-TODO
 function ToggleIconButton() {
     const { colorMode, toggleColorMode } = useColorMode();
     return (
@@ -123,6 +125,7 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                 </NextLink>
                 <Spacer />
                 <ToggleIconButton />
+                <ToggleThemeButton />
                 {isLessThan768 ? (
                     <Box mr="5" ml="auto">
                         <Menu>
