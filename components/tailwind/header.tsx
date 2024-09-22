@@ -1,34 +1,20 @@
 import { ReactElement, ReactNode } from 'react';
-import { IconButton, useColorMode, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 // import { ChakraLink } from 'components/chakra-link';
 import { TWLink } from 'components/tailwind/link';
 import NextLink from 'next/link';
-import { SunIcon, MoonIcon, HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useRouter } from 'next/router';
 import { ToggleThemeButton } from '../toggle-theme-button';
 import { AuthorAvatar } from 'components/author-avatar';
 import { Spacer } from './spacer';
-
-// tw-TODO
-function ToggleIconButton() {
-    const { colorMode, toggleColorMode } = useColorMode();
-    return (
-        <IconButton
-            colorScheme="teal"
-            aria-label="Toggle Dark Mode"
-            onClick={toggleColorMode}
-            mr="5"
-            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            apply="general.focus"
-        />
-    );
-}
+import { MobileMenu } from './mobile-menu';
 
 interface NavLinkProps {
     children: ReactNode;
     href: string;
     ariaLabel: string;
 }
+
+export const activeLinkBgClasses = 'bg-teal-50 text-teal-700 dark:bg-teal-800 dark:text-teal-200';
 
 function NavLink({ children, ariaLabel, href }: NavLinkProps) {
     const router = useRouter();
@@ -37,7 +23,7 @@ function NavLink({ children, ariaLabel, href }: NavLinkProps) {
         <nav className="flex w-[100px] items-center justify-center" aria-label={ariaLabel}>
             <div
                 className={`flex h-[32px] w-[80px] justify-center rounded-[4px] ${
-                    isActive ? 'bg-teal-50 text-teal-700 dark:bg-teal-800 dark:text-teal-200' : ''
+                    isActive ? activeLinkBgClasses : ''
                 }`}>
                 <NextLink href={href} passHref>
                     <TWLink textSize="text-xl" fontWeight="font-bold" isActive={isActive}>
@@ -46,47 +32,6 @@ function NavLink({ children, ariaLabel, href }: NavLinkProps) {
                 </NextLink>
             </div>
         </nav>
-    );
-}
-
-interface MobileMenuItemProps {
-    children: ReactNode;
-    href: string;
-}
-
-function MobileMenuItem({ children, href }: MobileMenuItemProps) {
-    return (
-        <NextLink href={href} passHref>
-            <TWLink isActive>
-                <MenuItem h="50px">
-                    <p className="text-lg font-bold ">{children}</p>
-                </MenuItem>
-            </TWLink>
-        </NextLink>
-    );
-}
-
-// tw-TODO
-function MobileMenu() {
-    return (
-        <div className="ml-auto mr-5 md:hidden">
-            <Menu>
-                {({ isOpen }) => (
-                    <>
-                        <MenuButton
-                            isActive={isOpen}
-                            as={IconButton}
-                            colorScheme="teal"
-                            aria-label="Menu Button"
-                            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}></MenuButton>
-                        <MenuList>
-                            <MobileMenuItem href="/blog">Blog</MobileMenuItem>
-                            <MobileMenuItem href="/quiz">Quiz</MobileMenuItem>
-                        </MenuList>
-                    </>
-                )}
-            </Menu>
-        </div>
     );
 }
 
@@ -123,7 +68,6 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                     </a>
                 </NextLink>
                 <Spacer />
-                {/* <ToggleIconButton /> */}
                 <ToggleThemeButton />
                 <MobileMenu />
                 <DesktopMenu />
