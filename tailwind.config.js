@@ -13,25 +13,22 @@ module.exports = {
             xl: '1200px',
             '2xl': '1440px'
         },
-        colors: {
-            transparent: 'transparent',
-            current: 'currentColor',
-            black: colors.black,
-            white: colors.white,
-            blue: {
-                light: '#90cdf4',
-                dark: '#2b6cb0',
-                ...colors.blue
+        extend: {
+            borderRadius: {
+                lg: 'var(--radius)',
+                md: 'calc(var(--radius) - 2px)',
+                sm: 'calc(var(--radius) - 4px)'
             },
-            teal: {
-                ...colors.teal
-            },
-            gray: {
-                chakra: '#1A202C', //chakra's gray-800
-                ...colors.gray
-            },
-            sky: colors.sky
+            colors: {
+                blue: {
+                    light: '#90cdf4',
+                    dark: '#2b6cb0'
+                },
+                gray: {
+                    chakra: '#1A202C' //chakra's gray-800
+                }
+            }
         }
     },
-    plugins: []
+    plugins: [require('tailwindcss-animate')]
 };

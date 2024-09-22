@@ -111,3 +111,9 @@ body {
         border: 1px solid theme('colors.teal.600');
     }
 }
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
