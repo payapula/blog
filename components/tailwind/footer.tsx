@@ -1,4 +1,4 @@
-import { Link, useToast } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
@@ -8,6 +8,7 @@ import siteConfig from 'configs/site-configs';
 // import { ChakraLink } from '../chakra-link';
 import { TWLink } from './link';
 import VisuallyHidden from './visuallyHidden';
+import { toast as SonnerToast } from 'sonner';
 
 interface IconLinkProps {
     href: string;
@@ -28,7 +29,6 @@ const IconLink = ({ href, children, isExternal = false }: IconLinkProps) => (
 
 function GMAIL() {
     const [isAppleDevice, setIsAppleDevice] = React.useState(false);
-    const toast = useToast();
 
     React.useEffect(() => {
         // iOS doesn't easily let you copy to clipboard, hence navigating those users
@@ -50,14 +50,15 @@ function GMAIL() {
             className="h-auto bg-transparent hover:bg-transparent active:bg-transparent"
             onClick={() => {
                 navigator.clipboard.writeText(siteConfig.general.authorEmail);
-                toast({
-                    title: 'Email ID Copied!',
-                    position: 'top-left',
+                SonnerToast('Email ID Copied!', {
                     description:
                         'Email Address copied to clipboard. Paste it in your favorite mail client to send out an email!',
-                    status: 'success',
-                    duration: 5000,
-                    isClosable: true
+                    duration: Infinity,
+                    classNames: {
+                        toast: 'p-4',
+                        title: 'text-base font-bold',
+                        description: 'text-sm mt-2'
+                    }
                 });
             }}>
             <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
