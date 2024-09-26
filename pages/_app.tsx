@@ -7,6 +7,7 @@ import { DefaultSeo } from 'next-seo';
 import siteConfig from 'configs/site-configs';
 import 'styles/globals.css';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from '@/components/shadcn/sonner';
 
 const { seo } = siteConfig;
 
@@ -20,6 +21,7 @@ export default function MyApp({ Component, pageProps }: AppProps): ReactElement 
             <ChakraProvider theme={theme}>
                 <ThemeProvider attribute="class">
                     <Component {...pageProps} />
+                    <Toaster />
                 </ThemeProvider>
             </ChakraProvider>
         </>
