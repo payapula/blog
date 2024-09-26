@@ -53,7 +53,7 @@ function GMAIL() {
                 SonnerToast('Email ID Copied!', {
                     description:
                         'Email Address copied to clipboard. Paste it in your favorite mail client to send out an email!',
-                    duration: Infinity,
+                    duration: 5000,
                     classNames: {
                         toast: 'p-4',
                         title: 'text-base font-bold',
