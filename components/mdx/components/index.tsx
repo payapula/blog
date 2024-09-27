@@ -1,7 +1,8 @@
 import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 import { ChakraHeadingLink, ChakraMDXLink } from 'components/chakra-link';
-import { ChakraNextImage } from 'components/chakra-next-image';
+// import { ChakraNextImage } from 'components/chakra-next-image';
+import NextImage from 'next/image';
 import { ReactElement } from 'react';
 import { QuizHighlight } from './quiz-highlight';
 
@@ -82,7 +83,7 @@ const MDXComponents = {
     em: (props): ReactElement => <chakra.p as="em" {...props} />,
     Image: (props): ReactElement => (
         <Center mt="5">
-            <ChakraNextImage {...props} />
+            <NextImage {...props} />
         </Center>
     ),
     QuizHighlight: QuizHighlight
