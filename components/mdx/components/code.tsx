@@ -45,23 +45,19 @@ function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Eleme
                         xl:mr-[-60px]">
                         <pre
                             className={cn(
-                                `!dark:bg-[#0a0707] min-w-full rounded-sm
-                                !bg-[#0a1126] p-[10px] text-xs leading-relaxed
-                                lg:text-sm xl:text-base xl:leading-relaxed
+                                `min-w-full rounded-sm !bg-[#0a1126]
+                                p-[10px] text-xs leading-relaxed lg:text-sm
+                                xl:text-base xl:leading-relaxed dark:!bg-[#0a0707]
                             `,
                                 className
                             )}
                             style={style}>
                             {tokens.map((line, i) => {
-                                const objProps = shouldHighlightLine(i)
-                                    ? {
-                                          backgroundColor: 'rgb(167 185 255 / 20%)',
-                                          m: '0',
-                                          ml: '-10px',
-                                          padding: '0px 5px',
-                                          borderLeft: '5px solid rgb(130 230 217)'
-                                      }
-                                    : {};
+                                const highlightClasses =
+                                    'm-0 ml-[-10px] py-0 px-1 border-s-4 border-solid border-[#82e6d9] bg-[#a7b9ff33]';
+                                const highlightClassName = shouldHighlightLine(i)
+                                    ? highlightClasses
+                                    : '';
                                 return (
                                     <div
                                         key={i}
@@ -69,7 +65,7 @@ function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Eleme
                                             line,
                                             key: i
                                         })}
-                                        {...objProps}>
+                                        className={highlightClassName}>
                                         {shouldHideLineNums ? (
                                             <span className="pl-[2em]"></span>
                                         ) : (

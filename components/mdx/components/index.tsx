@@ -66,7 +66,7 @@ const MDXComponents = {
         />
     ),
     a: TWMDXLink,
-    p: (props): ReactElement => <p className="mt-5 lg:text-lg" {...props} />,
+    p: (props): ReactElement => <p className="mt-5 lg:text-lg lg:leading-[1.7]" {...props} />,
     ul: (props): ReactElement => <ul className="ml-5 mt-4 list-disc leading-relaxed" {...props} />,
     ol: (props): ReactElement => <ol className="ml-5 mt-4 list-disc leading-relaxed" {...props} />,
     li: (props): ReactElement => <li className="pb-1 lg:text-lg" {...props} />,
