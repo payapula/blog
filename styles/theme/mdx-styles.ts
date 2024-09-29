@@ -1,19 +1,19 @@
 import { ChakraTheme, ColorMode } from '@chakra-ui/react';
 import { SystemStyleObject } from '@chakra-ui/styled-system';
 
-const listStyles = {
-    mt: '1rem',
-    ml: '1.25rem',
-    lineHeight: 1.6,
-    'blockquote &': { mt: 0 },
-    listStyleType: 'inherit',
-    '& > * + *': {
-        mt: '0.25rem'
-    }
-};
+// const listStyles = {
+//     mt: '1rem',
+//     ml: '1.25rem',
+//     lineHeight: 1.6,
+//     'blockquote &': { mt: 0 },
+//     listStyleType: 'inherit',
+//     '& > * + *': {
+//         mt: '0.25rem'
+//     }
+// };
 
-const headingColor = (colorMode: ColorMode) =>
-    colorMode === 'light' ? 'heading.light' : 'heading.dark';
+// const headingColor = (colorMode: ColorMode) =>
+//     colorMode === 'light' ? 'heading.light' : 'heading.dark';
 
 const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleObject => ({
     // h2: {
@@ -50,18 +50,18 @@ const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleO
     //     fontSize: '1.125rem',
     //     color: headingColor(colorMode)
     // },
-    p: {
-        mt: '1.25rem',
-        lineHeight: 1.7,
-        'blockquote &': {
-            mt: 0,
-            lineHeight: 1.7
-        },
-        fontSize: '1rem',
-        [`@media (min-width: ${theme.breakpoints.lg})`]: {
-            fontSize: '1.125rem'
-        }
-    },
+    // p: {
+    //     mt: '1.25rem',
+    //     lineHeight: 1.7,
+    //     'blockquote &': {
+    //         mt: 0,
+    //         lineHeight: 1.7
+    //     },
+    //     fontSize: '1rem',
+    //     [`@media (min-width: ${theme.breakpoints.lg})`]: {
+    //         fontSize: '1.125rem'
+    //     }
+    // },
     // ul: {
     //     ...listStyles
     // },
@@ -82,28 +82,28 @@ const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleO
     //     color: colorMode === 'light' ? 'em.light' : 'em.dark',
     //     marginRight: '0.25rem'
     // },
-    '.inlinecode': {
-        rounded: 'sm',
-        px: '1',
-        fontSize: '0.875em',
-        py: '2px',
-        whiteSpace: 'nowrap',
-        lineHeight: 'normal',
-        fontFamily: 'Monaco,Menlo,Consolas,Courier New,monospace!important',
-        border: '1px solid #1d1c1d21',
-        borderRadius: '3px',
-        color: colorMode === 'light' ? 'code.color.light' : 'code.color.dark',
-        backgroundColor: colorMode === 'light' ? 'code.bg.light' : 'code.bg.dark'
-    },
-    th: {
-        backgroundColor: colorMode === 'light' ? 'gray.50' : 'whiteAlpha.100',
-        fontWeight: 'semibold',
-        padding: '2',
-        fontSize: 'sm'
-    },
-    hr: {
-        marginTop: 10
-    }
+    // '.inlinecode': {
+    //     rounded: 'sm',
+    //     px: '1',
+    //     fontSize: '0.875em',
+    //     py: '2px',
+    //     whiteSpace: 'nowrap',
+    //     lineHeight: 'normal',
+    //     fontFamily: 'Monaco,Menlo,Consolas,Courier New,monospace!important',
+    //     border: '1px solid #1d1c1d21',
+    //     borderRadius: '3px',
+    //     color: colorMode === 'light' ? 'code.color.light' : 'code.color.dark',
+    //     backgroundColor: colorMode === 'light' ? 'code.bg.light' : 'code.bg.dark'
+    // },
+    // th: {
+    //     backgroundColor: colorMode === 'light' ? 'gray.50' : 'whiteAlpha.100',
+    //     fontWeight: 'semibold',
+    //     padding: '2',
+    //     fontSize: 'sm'
+    // },
+    // hr: {
+    //     marginTop: 10
+    // }
 });
 
 export { injectColorMode };

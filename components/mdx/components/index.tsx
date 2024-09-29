@@ -1,4 +1,3 @@
-import { Alert, Box, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 // import { ChakraNextImage } from 'components/chakra-next-image';
 import NextImage from 'next/image';
@@ -7,13 +6,18 @@ import { QuizHighlight } from './quiz-highlight';
 import { TWHeadingLink, TWMDXLink } from '@/components/tailwind/link';
 
 // Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
+const InlineCode = (props: object): ReactElement => {
+    return (
+        <code
+            className="rounded-md border-2 border-neutral-300 bg-neutral-100 px-1 py-1 font-mono text-sm 
+            font-medium text-rose-800 dark:border-neutral-700
+            dark:bg-neutral-800 dark:text-orange-300"
+            {...props}
+        />
+    );
+};
 
-const InlineCode = (props: object): ReactElement => (
-    // .inlinecode is styled in mdx-styles file
-    <ChakraCode className="inlinecode" {...props} />
-);
-
-const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
+const Pre = (props) => <div className="my-[2em] rounded-sm" {...props} />;
 
 const MDXComponents = {
     h2: (props) => (
@@ -36,15 +40,17 @@ const MDXComponents = {
             {...props}
         />
     ),
-    strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
+    strong: (props): ReactElement => (
+        <strong className="font-extrabold text-red-700 dark:text-amber-500" {...props} />
+    ),
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
         const props = preToCodeBlock(preProps);
         if (props) {
             return (
-                <Box mt={5}>
+                <div className="mt-5">
                     <Code {...props} />
-                </Box>
+                </div>
             );
         } else {
             return <Pre {...preProps} />;
@@ -52,33 +58,26 @@ const MDXComponents = {
     },
     code: InlineCode,
     blockquote: (props): ReactElement => (
-        <Alert
-            mt="4"
+        <blockquote
+            className="blockQuotePara relative my-6 mt-4 flex w-full items-center
+            overflow-hidden rounded-sm border-s-4 border-s-orange-600 bg-amber-100 py-3 pe-4 ps-3 dark:border-s-amber-300 dark:bg-opacity-20"
             role="none"
-            status="warning"
-            variant="left-accent"
-            as="blockquote"
-            rounded="4px"
-            my="1.5rem"
-            sx={{
-                // > p needed to override common p tag styles under mdx-styles
-                '> p': {
-                    mt: 0
-                }
-            }}
             {...props}
         />
     ),
     a: TWMDXLink,
-    p: (props): ReactElement => <chakra.p {...props} />,
-    ul: (props): ReactElement => <chakra.ul {...props} />,
-    ol: (props): ReactElement => <chakra.ol {...props} />,
-    li: (props): ReactElement => <chakra.li {...props} />,
-    em: (props): ReactElement => <chakra.p as="em" {...props} />,
+    p: (props): ReactElement => <p className="mt-5 lg:text-lg" {...props} />,
+    ul: (props): ReactElement => <ul className="ml-5 mt-4 list-disc leading-relaxed" {...props} />,
+    ol: (props): ReactElement => <ol className="ml-5 mt-4 list-disc leading-relaxed" {...props} />,
+    li: (props): ReactElement => <li className="pb-1 lg:text-lg" {...props} />,
+    em: (props): ReactElement => (
+        <em className="mr-1 mt-1 text-purple-600 dark:text-fuchsia-400" {...props} />
+    ),
+    hr: (props): ReactElement => <hr className="mt-10" {...props} />,
     Image: (props): ReactElement => (
-        <Center mt="5">
+        <div className="mt-5 flex items-center justify-center">
             <NextImage {...props} />
-        </Center>
+        </div>
     ),
     QuizHighlight: QuizHighlight
 };

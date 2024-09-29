@@ -1,6 +1,6 @@
 import theme from 'styles/theme/dracula-soft';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
-import { useColorModeValue, Box } from '@chakra-ui/react';
+import { cn } from '@/lib/utils';
 
 // Code is Provided by Kent.C.Dodds https://github.com/kentcdodds/kentcdodds.com/blob/main/src/components/mdx/code.js
 // Same is used in chakra UI - https://github.com/chakra-ui/chakra-ui/blob/97b6b0111f21af8bfce675e34d7c32f3ff2cadf0/website/src/components/codeblock/highlight.tsx
@@ -34,40 +34,24 @@ interface CodeProps {
 function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Element {
     const shouldHighlightLine = calculateLinesToHighlight(highlight);
     const shouldHideLineNums = checkToHideLineNums(noline);
-    const color = useColorModeValue('#0a1126', '#0a0707');
+    // const color = useColorModeValue('#0a1126', '#0a0707');
     return (
         <Highlight {...defaultProps} code={codeString} language={language} theme={theme}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => {
-                const customStyles = {
-                    ...style,
-                    backgroundColor: color
-                };
                 return (
-                    <Box
-                        overflow="auto"
-                        ml="-20px"
-                        mr="-20px"
-                        sx={{
-                            '@media (min-width: 1201px)': {
-                                marginLeft: '-60px',
-                                marginRight: '-60px'
-                            }
-                        }}>
-                        <Box
-                            as="pre"
-                            className={className}
-                            style={customStyles}
-                            float="left"
-                            minW="100%"
-                            overflow="initial"
-                            lineHeight="1.6"
-                            borderRadius="4px"
-                            fontSize={{
-                                base: '0.75rem',
-                                lg: '0.875rem',
-                                xl: '1rem'
-                            }}
-                            p="10px">
+                    <div
+                        className="ml-[-20px] mr-[-20px] overflow-auto
+                        xl:ml-[-60px]
+                        xl:mr-[-60px]">
+                        <pre
+                            className={cn(
+                                `!dark:bg-[#0a0707] min-w-full rounded-sm
+                                !bg-[#0a1126] p-[10px] text-xs leading-relaxed
+                                lg:text-sm xl:text-base xl:leading-relaxed
+                            `,
+                                className
+                            )}
+                            style={style}>
                             {tokens.map((line, i) => {
                                 const objProps = shouldHighlightLine(i)
                                     ? {
@@ -79,7 +63,7 @@ function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Eleme
                                       }
                                     : {};
                                 return (
-                                    <Box
+                                    <div
                                         key={i}
                                         {...getLineProps({
                                             line,
@@ -87,25 +71,20 @@ function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Eleme
                                         })}
                                         {...objProps}>
                                         {shouldHideLineNums ? (
-                                            <Box as="span" pl="2em"></Box>
+                                            <span className="pl-[2em]"></span>
                                         ) : (
-                                            <Box
-                                                as="span"
-                                                display="inline-block"
-                                                width="2em"
-                                                userSelect="none"
-                                                color="rgb(246 246 244 / 50%)">
+                                            <span className=" inline-block w-[2em] select-none text-[#f6f6f480]">
                                                 {i + 1}
-                                            </Box>
+                                            </span>
                                         )}
                                         {line.map((token, key) => (
                                             <span key={key} {...getTokenProps({ token, key })} />
                                         ))}
-                                    </Box>
+                                    </div>
                                 );
                             })}
-                        </Box>
-                    </Box>
+                        </pre>
+                    </div>
                 );
             }}
         </Highlight>
