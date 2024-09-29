@@ -62,26 +62,26 @@ const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleO
             fontSize: '1.125rem'
         }
     },
-    ul: {
-        ...listStyles
-    },
-    ol: {
-        ...listStyles
-    },
-    li: {
-        fontSize: '1rem',
-        paddingBottom: '4px',
-        [`@media (min-width: ${theme.breakpoints.lg})`]: {
-            fontSize: '1.15rem'
-        }
-    },
-    strong: {
-        color: colorMode === 'light' ? 'strong.light' : 'strong.dark'
-    },
-    em: {
-        color: colorMode === 'light' ? 'em.light' : 'em.dark',
-        marginRight: '0.25rem'
-    },
+    // ul: {
+    //     ...listStyles
+    // },
+    // ol: {
+    //     ...listStyles
+    // },
+    // li: {
+    //     fontSize: '1rem',
+    //     paddingBottom: '4px',
+    //     [`@media (min-width: ${theme.breakpoints.lg})`]: {
+    //         fontSize: '1.15rem'
+    //     }
+    // },
+    // strong: {
+    //     color: colorMode === 'light' ? 'strong.light' : 'strong.dark'
+    // },
+    // em: {
+    //     color: colorMode === 'light' ? 'em.light' : 'em.dark',
+    //     marginRight: '0.25rem'
+    // },
     '.inlinecode': {
         rounded: 'sm',
         px: '1',

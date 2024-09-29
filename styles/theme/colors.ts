@@ -1,17 +1,17 @@
 // Extend the theme to include custom colors
 const colors = {
-    heading: {
-        light: '#3e02ab',
-        dark: '#21c54b'
-    },
-    strong: {
-        light: '#ab0202',
-        dark: '#ffb256'
-    },
-    em: {
-        light: '#8600d4',
-        dark: '#d895ff'
-    },
+    // heading: {
+    //     light: '#3e02ab',
+    //     dark: '#21c54b'
+    // },
+    // strong: {
+    //     light: '#ab0202',
+    //     dark: '#ffb256'
+    // },
+    // em: {
+    //     light: '#8600d4',
+    //     dark: '#d895ff'
+    // },
     code: {
         color: {
             light: '#a31641',
