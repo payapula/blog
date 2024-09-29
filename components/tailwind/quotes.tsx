@@ -59,7 +59,7 @@ export const Quotes = (): JSX.Element => {
                     <VisuallyHidden>Previous Quote</VisuallyHidden>
                     <FaArrowAltCircleLeft className="h-5 w-5" />
                 </Button>
-                <Heading>Favourite Quotes</Heading>
+                <Heading className="text-3xl font-bold md:text-4xl">Favourite Quotes</Heading>
                 <Button onClick={() => toggleQuotes('next')} className="ml-2">
                     <VisuallyHidden>Next Quote</VisuallyHidden>
                     <FaArrowAltCircleRight className="h-5 w-5" />

@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import { forwardRef, Ref } from 'react';
-import { Heading, HeadingProps, Link, LinkProps, useColorModeValue } from '@chakra-ui/react';
+
+import { cn } from '@/lib/utils';
+import { Heading, HeadingProps } from './heading';
 
 /**
  * Refer to sidebar-link.tsx of chakra-ui
@@ -43,46 +45,54 @@ const TWLink = forwardRef(function StyledTWLink(props: TWLinkProps, ref: Ref<HTM
     );
 });
 
-const ChakraMDXLink = ({ href, ...rest }: LinkProps): ReturnType<typeof Link> => {
+interface TWMDXLinkProps {
+    href?: string;
+    className?: string;
+    children?: React.ReactNode;
+}
+
+const TWMDXLink = ({ href, className = '', ...rest }: TWMDXLinkProps) => {
     const isInternal = href.startsWith('/') || href.startsWith('#');
     return (
-        <Link
+        <a
             aria-current={undefined}
             rel={isInternal ? undefined : 'noopener noreferrer'}
             target={isInternal ? undefined : '_blank'}
             href={href}
-            apply="general.link"
-            color={useColorModeValue('link.color.light', 'link.color.dark')}
-            _hover={{
-                color: useColorModeValue('link.hover.light', 'link.hover.dark')
-            }}
+            className={cn(
+                `border-b border-dashed border-current
+                font-semibold text-teal-800
+                outline-offset-2 hover:border-solid
+                dark:text-teal-400
+                dark:hover:text-teal-200
+                `,
+                className
+            )}
             {...rest}
         />
     );
 };
 
-type ChakraHeadingLinkProps = {
+type TWHeadingLinkProps = {
     id: string;
     children: React.ReactNode;
-} & HeadingProps;
+    as: HeadingProps['as'];
+    className?: string;
+};
 
-const ChakraHeadingLink = ({ id, as = 'h2', children, ...props }: ChakraHeadingLinkProps) => {
+const TWHeadingLink = ({ id, as = 'h2', children, className, ...props }: TWHeadingLinkProps) => {
     return (
         <>
-            <Heading {...props} id={id} role="group" as={as}>
+            <Heading {...props} id={id} role="group" as={as} className={`${className} group`}>
                 {children}
-                <ChakraMDXLink
-                    ml={2}
-                    href={`#${id}`}
-                    aria-current={undefined}
-                    opacity={0}
-                    _focus={{ opacity: 1, boxShadow: 'outline' }}
-                    _groupHover={{ opacity: 1 }}>
+                <TWMDXLink
+                    className="ml-2 opacity-0 focus:opacity-100 focus:shadow-sm group-hover:opacity-100"
+                    href={`#${id}`}>
                     #
-                </ChakraMDXLink>
+                </TWMDXLink>
             </Heading>
         </>
     );
 };
 
-export { TWLink, ChakraMDXLink, ChakraHeadingLink };
+export { TWLink, TWMDXLink, TWHeadingLink };

@@ -110,10 +110,14 @@ body {
     .border-teal {
         border: 1px solid theme('colors.teal.600');
     }
+
+    .blockQuotePara > p {
+        margin-top: 0;
+    }
 }
 
 @layer base {
-  :root {
-    --radius: 0.5rem;
-  }
+    :root {
+        --radius: 0.5rem;
+    }
 }
