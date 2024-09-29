@@ -1,4 +1,4 @@
-import { Alert, Box, Heading, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
+import { Alert, Box, chakra, Center, Code as ChakraCode } from '@chakra-ui/react';
 import { Code, preToCodeBlock } from './code';
 // import { ChakraNextImage } from 'components/chakra-next-image';
 import NextImage from 'next/image';
@@ -13,32 +13,29 @@ const InlineCode = (props: object): ReactElement => (
     <ChakraCode className="inlinecode" {...props} />
 );
 
-const Table = (props: object): ReactElement => (
-    <chakra.div overflowX="auto">
-        <chakra.table textAlign="left" mt="32px" width="full" {...props} />
-    </chakra.div>
-);
-
-const THead = (props: object): ReactElement => <chakra.th {...props} />;
-
-const TData = (props: object): ReactElement => (
-    <chakra.td
-        p={2}
-        borderTopWidth="1px"
-        borderColor="inherit"
-        fontSize="sm"
-        whiteSpace="normal"
-        {...props}
-    />
-);
-
 const Pre = (props) => <chakra.div my="2em" borderRadius="sm" {...props} />;
 
 const MDXComponents = {
-    h1: (props): ReactElement => <Heading {...props} />,
-    h2: (props) => <TWHeadingLink {...props} />,
-    h3: (props) => <TWHeadingLink as="h3" {...props} />,
-    h4: (props) => <TWHeadingLink as="h4" {...props} />,
+    h2: (props) => (
+        <TWHeadingLink
+            className="mb-2 mt-8 text-2xl font-semibold  text-green-800 lg:mt-12 lg:text-4xl dark:text-green-400"
+            {...props}
+        />
+    ),
+    h3: (props) => (
+        <TWHeadingLink
+            className="mt-12 text-lg font-semibold  text-green-800 lg:text-xl dark:text-green-400"
+            as="h3"
+            {...props}
+        />
+    ),
+    h4: (props) => (
+        <TWHeadingLink
+            as="h4"
+            className="mt-12 font-semibold  text-green-800 md:text-lg dark:text-green-400"
+            {...props}
+        />
+    ),
     strong: (props): ReactElement => <Box as="strong" fontWeight="extrabold" {...props} />,
     pre: (preProps) => {
         // Refer Kent C Dodds Implementation below
@@ -54,9 +51,6 @@ const MDXComponents = {
         }
     },
     code: InlineCode,
-    table: Table,
-    th: THead,
-    td: TData,
     blockquote: (props): ReactElement => (
         <Alert
             mt="4"

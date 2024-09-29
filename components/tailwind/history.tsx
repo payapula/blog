@@ -4,7 +4,6 @@ import { SiDotnet } from 'react-icons/si';
 import { DiReact } from 'react-icons/di';
 import { FaGraduationCap } from 'react-icons/fa';
 import { IconType } from 'react-icons';
-import { defaultHeadingStyles } from './heading';
 
 const CustomIcon = ({ icon, colorClass }: { icon: IconType; colorClass: string }) => {
     const IconComponent = icon;
@@ -50,7 +49,7 @@ const CustomVerticalTimeLine = ({
 function History(): JSX.Element {
     return (
         <div className="mt-24 flex flex-col items-center">
-            <h2 className={`text-center ${defaultHeadingStyles}`}>
+            <h2 className={`text-center text-3xl font-bold md:text-4xl`}>
                 Work Experience and Education{' '}
             </h2>
             <VerticalTimeline className="!mt-10">

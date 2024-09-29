@@ -64,7 +64,7 @@ const iconSet: IconSet = {
 function Technologies(): ReactElement {
     return (
         <div className="relative left-[calc(-50vw+50%)] mt-10 flex w-screen flex-col items-center bg-sky-50 py-10 dark:bg-gray-chakra">
-            <Heading>Technologies</Heading>
+            <Heading className="text-3xl font-bold md:text-4xl">Technologies</Heading>
             <p className="sm:text-md mt-7 text-center text-sm lg:text-lg">
                 These are the toolstacks I have hands-on experience on
             </p>

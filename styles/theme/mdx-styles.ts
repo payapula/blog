@@ -16,40 +16,40 @@ const headingColor = (colorMode: ColorMode) =>
     colorMode === 'light' ? 'heading.light' : 'heading.dark';
 
 const injectColorMode = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleObject => ({
-    h2: {
-        mt: '2rem',
-        mb: '0.5rem',
-        lineHeight: 1.3,
-        fontWeight: 'semibold',
-        fontSize: '1.5rem',
-        letterSpacing: '-.025em',
-        '& + h3': {
-            mt: '1.5rem'
-        },
-        color: headingColor(colorMode),
-        [`@media (min-width: ${theme.breakpoints.lg})`]: {
-            mt: '3rem',
-            fontSize: '4xl'
-        }
-    },
-    h3: {
-        mt: '3rem',
-        lineHeight: 1.25,
-        fontWeight: 'semibold',
-        fontSize: '1.15rem',
-        letterSpacing: '-.025em',
-        color: headingColor(colorMode),
-        [`@media (min-width: ${theme.breakpoints.lg})`]: {
-            fontSize: '1.25rem'
-        }
-    },
-    h4: {
-        mt: '3rem',
-        lineHeight: 1.375,
-        fontWeight: 'semibold',
-        fontSize: '1.125rem',
-        color: headingColor(colorMode)
-    },
+    // h2: {
+    //     mt: '2rem',
+    //     mb: '0.5rem',
+    //     lineHeight: 1.3,
+    //     fontWeight: 'semibold',
+    //     fontSize: '1.5rem',
+    //     letterSpacing: '-.025em',
+    //     '& + h3': {
+    //         mt: '1.5rem'
+    //     },
+    //     color: headingColor(colorMode),
+    //     [`@media (min-width: ${theme.breakpoints.lg})`]: {
+    //         mt: '3rem',
+    //         fontSize: '4xl'
+    //     }
+    // },
+    // h3: {
+    //     mt: '3rem',
+    //     lineHeight: 1.25,
+    //     fontWeight: 'semibold',
+    //     fontSize: '1.15rem',
+    //     letterSpacing: '-.025em',
+    //     color: headingColor(colorMode),
+    //     [`@media (min-width: ${theme.breakpoints.lg})`]: {
+    //         fontSize: '1.25rem'
+    //     }
+    // },
+    // h4: {
+    //     mt: '3rem',
+    //     lineHeight: 1.375,
+    //     fontWeight: 'semibold',
+    //     fontSize: '1.125rem',
+    //     color: headingColor(colorMode)
+    // },
     p: {
         mt: '1.25rem',
         lineHeight: 1.7,

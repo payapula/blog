@@ -77,12 +77,13 @@ type TWHeadingLinkProps = {
     id: string;
     children: React.ReactNode;
     as: HeadingProps['as'];
+    className?: string;
 };
 
-const TWHeadingLink = ({ id, as = 'h2', children, ...props }: TWHeadingLinkProps) => {
+const TWHeadingLink = ({ id, as = 'h2', children, className, ...props }: TWHeadingLinkProps) => {
     return (
         <>
-            <Heading {...props} id={id} role="group" as={as}>
+            <Heading {...props} id={id} role="group" as={as} className={`${className} group`}>
                 {children}
                 <TWMDXLink
                     className="ml-2 opacity-0 focus:opacity-100 focus:shadow-sm group-hover:opacity-100"
