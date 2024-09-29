@@ -1,5 +1,5 @@
 ---
-title: 'Learn How to Pre-render Pages Using Static Generation with Next.js'
+title: 'Hello World - MDX Components Testing'
 excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus.'
 date: '2020-03-16T05:35:07.322Z'
 description: 'This displays all the markup content'
@@ -12,6 +12,7 @@ cover:
 ogImage:
     url: '/assets/blog/react-is-just-javascript/hello-world-cover.jpg'
     alt: 'hello world alt'
+keywords: 'React,Context'
 ---
 
 [Source](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
@@ -19,8 +20,6 @@ ogImage:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
 
 Venenatis cras sed felis eget velit. Consectetur libero id faucibus nisl tincidunt. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus. Volutpat consequat mauris nunc congue nisi vitae. Id aliquet risus feugiat in ante metus dictum at tempor. Sed blandit libero volutpat sed cras. Sed odio morbi quis commodo odio aenean sed adipiscing. Velit euismod in pellentesque massa placerat. Mi bibendum neque egestas congue quisque egestas diam in arcu. Nisi lacus sed viverra tellus in. Nibh cras pulvinar mattis nunc sed. Luctus accumsan tortor posuere ac ut consequat semper viverra. Fringilla ut morbi tincidunt augue interdum velit euismod.
-
-<Test />
 
 # Heading 1
 
@@ -43,19 +42,9 @@ _Emphasized text_
 
 [heading-1](#heading-1 'Goto heading-1')
 
-| First Header | Second Header |
-| ------------ | ------------- |
-| Content Cell | Content Cell  |
-| Content Cell | Content Cell  |
-
-| Left aligned Header | Right aligned Header | Center aligned Header |
-| :------------------ | -------------------: | :-------------------: |
-| Content Cell        |         Content Cell |     Content Cell      |
-| Content Cell        |         Content Cell |     Content Cell      |
-
 Some Inline code `javascript`
 
-```jsx {2,3,4}
+```jsx hightlight={[2,3,4]}
 function calculateLinesToHighlight(meta) {
   if (RE.test(meta)) {
     const lineNumbers = RE.exec(meta)[1]
@@ -79,7 +68,7 @@ function calculateLinesToHighlight(meta) {
         - Sub-nested bullet etc
 - Bullet list item 2
 
-```javascript {2,6,13,15}
+```javascript hightlight={[2,6,13,15]}
 const counterElement = {
   type: 'div',
   props: {
