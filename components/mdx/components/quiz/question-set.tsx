@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Children } from 'react';
-import { Radio, Flex, Text } from '@chakra-ui/react';
+import { Radio } from '@chakra-ui/react';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { CardWrapper } from './card-wrapper';
 
@@ -35,7 +35,7 @@ export function QuestionSet({
                 isDisabled={answerSubmitted}
                 minH={14}
                 padding={2}>
-                <Flex alignItems={'baseline'}>{child.props.children}</Flex>
+                <div className="flex items-baseline">{child.props.children}</div>
             </Radio>
         );
     });
@@ -57,7 +57,7 @@ export function QuestionSet({
     return (
         <CardWrapper>
             {Question}
-            <Flex as="form" onSubmit={submitAnswer} direction="column">
+            <form className="flex flex-col" onSubmit={submitAnswer}>
                 {ChoisesWithAdditionalProps}
                 <QuizNavigationButton
                     mt="20px"
@@ -66,7 +66,7 @@ export function QuestionSet({
                     type="submit">
                     Submit
                 </QuizNavigationButton>
-            </Flex>
+            </form>
             {answerSubmitted && <AnswerStatus isCorrect={isCorrect} />}
             {answerSubmitted ? Answer : null}
         </CardWrapper>
@@ -75,8 +75,6 @@ export function QuestionSet({
 
 function AnswerStatus({ isCorrect }: { isCorrect: boolean }) {
     return (
-        <Text textAlign="center" fontWeight="700">
-            {isCorrect ? '🎉 Correct 🎉' : '❌ Incorrect ❌'}
-        </Text>
+        <p className="text-center font-bold">{isCorrect ? '🎉 Correct 🎉' : '❌ Incorrect ❌'}</p>
     );
 }

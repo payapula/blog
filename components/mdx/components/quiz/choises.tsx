@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Children } from 'react';
-import { Box, Radio, RadioGroup, Flex, useColorModeValue } from '@chakra-ui/react';
+import { Radio, RadioGroup, useColorModeValue } from '@chakra-ui/react';
 
 interface ChoisesProps {
     value: string;
@@ -17,9 +17,7 @@ export function Choises({ value, setValue, choiseElements }: ChoisesProps) {
     Children.forEach(choiseElements, (child, index) => {
         choiseWithSeparator.push(child);
         if (totalChoises - 1 !== index) {
-            choiseWithSeparator.push(
-                <Box key={index} mt={2} mb={2} borderTopWidth={'1px'} borderStyle={'outset'} />
-            );
+            choiseWithSeparator.push(<div className="mb-2 mt-2 border-t-2" key={index} />);
         }
     });
 
@@ -69,7 +67,7 @@ export function Choises({ value, setValue, choiseElements }: ChoisesProps) {
                     mt: 0
                 }
             }}>
-            <Flex direction={'column'}>{choiseWithSeparator}</Flex>
+            <div className="flex flex-col">{choiseWithSeparator}</div>
         </RadioGroup>
     );
 }

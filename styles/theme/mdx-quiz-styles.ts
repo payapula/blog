@@ -18,7 +18,7 @@ const overrides = (colorMode: ColorMode): SystemStyleObject => {
 
 export const getMDXQuizStyles = (colorMode: ColorMode, theme: ChakraTheme): SystemStyleObject => {
     return {
-        ...injectColorMode(colorMode, theme),
+        // ...injectColorMode(colorMode, theme),
         ...overrides(colorMode)
     };
 };

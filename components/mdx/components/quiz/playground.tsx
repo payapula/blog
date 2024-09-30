@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Children } from 'react';
-import { Container, Text, Icon } from '@chakra-ui/react';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { ComponentWithChildren } from './utils';
 import { QuizNavigationButton } from './quiz-navigation-button';
@@ -55,10 +54,10 @@ export function Playground({ children }: ComponentWithChildren) {
     }
 
     return (
-        <Container maxW={'700px'} display="flex" flexDirection="column" justifyContent="center">
-            <Text align={'center'} mb={2}>
+        <div className="me-auto ms-auto flex max-w-3xl flex-col justify-center pe-4 ps-4">
+            <p className="mb-2 text-center">
                 Question {questionNo} of {totalQuestions}
-            </Text>
+            </p>
             {QuestionSetWithAddedProps}
             {answerSubmitted && (
                 <QuizNavigationButton
@@ -74,9 +73,9 @@ export function Playground({ children }: ComponentWithChildren) {
                     w={isFinalQuestion ? 40 : 24}
                     alignSelf="center">
                     {isFinalQuestion ? 'Show Results' : 'Next'}
-                    <Icon as={FaLongArrowAltRight} w="8" h="6" ml="2" />
+                    <FaLongArrowAltRight className="ml-2 h-6 w-8" />
                 </QuizNavigationButton>
             )}
-        </Container>
+        </div>
     );
 }
