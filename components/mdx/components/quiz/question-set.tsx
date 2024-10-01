@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Children } from 'react';
-import { Radio } from '@chakra-ui/react';
+// import { Radio } from '@chakra-ui/react';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { CardWrapper } from './card-wrapper';
+import { RadioItem } from '@/components/shadcn/radio-item';
 
 interface QuestionSetProps {
     children: React.ReactNode;
@@ -29,14 +30,9 @@ export function QuestionSet({
             validAnswer.current = index.toString();
         }
         return (
-            <Radio
-                size="md"
-                value={index.toString()}
-                isDisabled={answerSubmitted}
-                minH={14}
-                padding={2}>
-                <div className="flex items-baseline">{child.props.children}</div>
-            </Radio>
+            <RadioItem value={index.toString()} disabled={answerSubmitted}>
+                <div className="flex items-baseline [&>p]:mt-0">{child.props.children}</div>
+            </RadioItem>
         );
     });
 

@@ -114,6 +114,37 @@ body {
     .blockQuotePara > p {
         margin-top: 0;
     }
+
+    /**
+    * The order of the following classess matter
+    */
+    .labelChecked:has(button[data-state='unchecked']):hover {
+        background-color: theme('colors.teal.100');
+    }
+
+    .labelChecked:has(button[data-disabled]):hover {
+        background-color: initial;
+        cursor: not-allowed;
+    }
+
+    .labelChecked:has(button[data-state='checked']),
+    .labelChecked:has(button[data-state='checked']):hover {
+        background-color: theme('colors.teal.400');
+    }
+
+    .dark .labelChecked:has(button[data-state='unchecked']):hover {
+        background-color: theme('colors.orange.700');
+    }
+
+    .dark .labelChecked:has(button[data-disabled]):hover {
+        background-color: initial;
+        cursor: not-allowed;
+    }
+
+    .dark .labelChecked:has(button[data-state='checked']),
+    .dark .labelChecked:has(button[data-state='checked']):hover {
+        background-color: theme('colors.orange.500');
+    }
 }
 
 @layer base {
