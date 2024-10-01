@@ -15,9 +15,11 @@ export function RadioItem({
         <div>
             <Label
                 htmlFor={value}
-                className="labelChecked group flex min-h-14 cursor-pointer items-center space-x-2 rounded-lg
-                 p-2 
-                 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]
+                /**
+                 * labelChecked is styled from globals.css
+                 */
+                className="labelChecked radioOptionShadow group flex min-h-14 cursor-pointer items-center space-x-2
+                 rounded-lg p-2
                 hover:bg-teal-100
                  dark:hover:bg-orange-700  
                  ">

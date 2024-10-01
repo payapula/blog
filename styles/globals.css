@@ -145,6 +145,14 @@ body {
     .dark .labelChecked:has(button[data-state='checked']):hover {
         background-color: theme('colors.orange.500');
     }
+
+    .radioOptionShadow {
+        box-shadow: 0px 1px 0px 2px rgba(0, 0, 0, 0.12), 0 1px 2px 0px rgba(0, 0, 0, 0.24);
+    }
+
+    .dark .radioOptionShadow {
+        box-shadow: rgba(255, 130, 47, 0.25) 0px 1px 0px 2px, rgba(95, 83, 76, 0.22) 0px 1px 2px 0px;
+    }
 }
 
 @layer base {
