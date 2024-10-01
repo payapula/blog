@@ -56,7 +56,7 @@ export function QuestionSet({
             <form className="flex flex-col" onSubmit={submitAnswer}>
                 {ChoisesWithAdditionalProps}
                 <QuizNavigationButton
-                    mt="20px"
+                    className="mt-4"
                     onClick={submitAnswer}
                     disabled={!value || answerSubmitted}
                     type="submit">

@@ -4,6 +4,7 @@ import { FaLongArrowAltRight } from 'react-icons/fa';
 import { ComponentWithChildren } from './utils';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { ResultsTable } from './results-table';
+import { cn } from '@/lib/utils';
 
 type QuizState = 'idle' | 'playing' | 'over';
 
@@ -69,9 +70,10 @@ export function Playground({ children }: ComponentWithChildren) {
                         setAnswerSubmitted(false);
                         setQuestionNo((n) => n + 1);
                     }}
-                    mt={4}
-                    w={isFinalQuestion ? 40 : 24}
-                    alignSelf="center">
+                    className={cn('mt-4 self-center', {
+                        'w-40': isFinalQuestion,
+                        'w-24': !isFinalQuestion
+                    })}>
                     {isFinalQuestion ? 'Show Results' : 'Next'}
                     <FaLongArrowAltRight className="ml-2 h-6 w-8" />
                 </QuizNavigationButton>
