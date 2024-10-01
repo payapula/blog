@@ -71,6 +71,8 @@ export function QuestionSet({
 
 function AnswerStatus({ isCorrect }: { isCorrect: boolean }) {
     return (
-        <p className="text-center font-bold">{isCorrect ? '🎉 Correct 🎉' : '❌ Incorrect ❌'}</p>
+        <p className="mt-5 text-center font-bold">
+            {isCorrect ? '🎉 Correct 🎉' : '❌ Incorrect ❌'}
+        </p>
     );
 }
