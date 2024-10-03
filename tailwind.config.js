@@ -27,6 +27,9 @@ module.exports = {
                 gray: {
                     chakra: '#1A202C' //chakra's gray-800
                 }
+            },
+            data: {
+                checked: "state~='checked'"
             }
         }
     },

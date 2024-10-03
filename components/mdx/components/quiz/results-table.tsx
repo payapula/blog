@@ -61,7 +61,7 @@ export function ResultsTable({ totalQuestions, correctAnswers, resetQuiz }: Resu
                     <StatNumber>{score} %</StatNumber>
                 </Flex>
             </Stat>
-            <QuizNavigationButton w="38%" onClick={resetQuiz} mt={12}>
+            <QuizNavigationButton className="mt-12 w-[38%]" onClick={resetQuiz}>
                 <RepeatIcon w={8} /> Restart Quiz
             </QuizNavigationButton>
             <QuizFeedback />

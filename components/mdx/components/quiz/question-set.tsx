@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Children } from 'react';
-import { Radio, Flex, Text } from '@chakra-ui/react';
+// import { Radio } from '@chakra-ui/react';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { CardWrapper } from './card-wrapper';
+import { RadioItem } from '@/components/shadcn/radio-item';
 
 interface QuestionSetProps {
     children: React.ReactNode;
@@ -29,14 +30,9 @@ export function QuestionSet({
             validAnswer.current = index.toString();
         }
         return (
-            <Radio
-                size="md"
-                value={index.toString()}
-                isDisabled={answerSubmitted}
-                minH={14}
-                padding={2}>
-                <Flex alignItems={'baseline'}>{child.props.children}</Flex>
-            </Radio>
+            <RadioItem value={index.toString()} disabled={answerSubmitted}>
+                <div className="flex items-baseline [&>p]:mt-0">{child.props.children}</div>
+            </RadioItem>
         );
     });
 
@@ -57,16 +53,16 @@ export function QuestionSet({
     return (
         <CardWrapper>
             {Question}
-            <Flex as="form" onSubmit={submitAnswer} direction="column">
+            <form className="flex flex-col" onSubmit={submitAnswer}>
                 {ChoisesWithAdditionalProps}
                 <QuizNavigationButton
-                    mt="20px"
+                    className="mt-4"
                     onClick={submitAnswer}
                     disabled={!value || answerSubmitted}
                     type="submit">
                     Submit
                 </QuizNavigationButton>
-            </Flex>
+            </form>
             {answerSubmitted && <AnswerStatus isCorrect={isCorrect} />}
             {answerSubmitted ? Answer : null}
         </CardWrapper>
@@ -75,8 +71,8 @@ export function QuestionSet({
 
 function AnswerStatus({ isCorrect }: { isCorrect: boolean }) {
     return (
-        <Text textAlign="center" fontWeight="700">
+        <p className="mt-5 text-center font-bold">
             {isCorrect ? '🎉 Correct 🎉' : '❌ Incorrect ❌'}
-        </Text>
+        </p>
     );
 }

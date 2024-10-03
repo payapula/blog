@@ -1,27 +1,12 @@
 import * as React from 'react';
-import { Button, useColorModeValue, ButtonProps } from '@chakra-ui/react';
 import { ComponentWithChildren } from './utils';
+import { Button, ButtonProps } from '@/components/shadcn/button';
 
 type Props = ComponentWithChildren & ButtonProps;
 
-export function QuizNavigationButton({ children, ...props }: Props) {
-    const bg = useColorModeValue('blackAlpha.800', 'whiteAlpha.800');
-    const bgHover = useColorModeValue('blackAlpha.900', 'whiteAlpha.900');
-    const fg = useColorModeValue('white', 'black');
-
+export function QuizNavigationButton({ children, className, ...props }: Props) {
     return (
-        <Button
-            backgroundColor={bg}
-            color={fg}
-            _hover={{
-                backgroundColor: bgHover
-            }}
-            _focus={{
-                outline: '2px dashed teal',
-                boxShadow: 'none'
-            }}
-            {...props}
-            type="button">
+        <Button className={className} {...props}>
             {children}
         </Button>
     );
