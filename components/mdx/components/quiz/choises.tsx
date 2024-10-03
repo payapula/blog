@@ -15,7 +15,9 @@ export function Choises({ value, setValue, choiseElements }: ChoisesProps) {
     Children.forEach(choiseElements, (child, index) => {
         choiseWithSeparator.push(child);
         if (totalChoises - 1 !== index) {
-            choiseWithSeparator.push(<div className="mb-2 mt-2 border-t-2" key={index} />);
+            choiseWithSeparator.push(
+                <div className="mb-2 mt-2 border-t-[1px] dark:border-neutral-600" key={index} />
+            );
         }
     });
 
