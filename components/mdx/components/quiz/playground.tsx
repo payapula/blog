@@ -3,7 +3,7 @@ import { Children } from 'react';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { ComponentWithChildren } from './utils';
 import { QuizNavigationButton } from './quiz-navigation-button';
-import { ResultsTable } from './results-table';
+import { ResultsTable } from './results-table-tw';
 import { cn } from '@/lib/utils';
 
 type QuizState = 'idle' | 'playing' | 'over';
