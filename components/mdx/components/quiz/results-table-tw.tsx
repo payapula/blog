@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { QuizNavigationButton } from './quiz-navigation-button';
 import { RepeatIcon } from '@chakra-ui/icons';
-import { QuizFeedback } from './quiz-feeback';
+import { QuizFeedback } from './quiz-feeback-tw';
 
 interface ResultsTableProps {
     totalQuestions: number;
@@ -29,10 +29,10 @@ export function ResultsTable({ totalQuestions, correctAnswers, resetQuiz }: Resu
                     <caption className="caption-top">Quiz Results</caption>
                     <thead>
                         <TableRow>
-                            <th className="bg-gray-50 p-1 text-start xs:p-2 sm:p-4 md:p-5 lg:p-6 dark:bg-neutral-700">
+                            <th className="bg-gray-50 p-1 text-start xs:p-2 sm:p-4 md:p-5 lg:p-6 dark:bg-gray-800">
                                 DATA
                             </th>
-                            <th className="bg-gray-50 p-1 text-end xs:p-2 sm:p-4 md:p-5 lg:p-6 dark:bg-neutral-700">
+                            <th className="bg-gray-50 p-1 text-end xs:p-2 sm:p-4 md:p-5 lg:p-6 dark:bg-gray-800">
                                 NUMBER
                             </th>
                         </TableRow>
@@ -46,7 +46,7 @@ export function ResultsTable({ totalQuestions, correctAnswers, resetQuiz }: Resu
                             <TableData>Number of Correct Answers</TableData>
                             <TableData isEnd>{correctAnswers}</TableData>
                         </TableRow>
-                        <TableRow bgStyles="bg-gray-50 font-bold dark:bg-neutral-700">
+                        <TableRow bgStyles="bg-gray-50 font-bold dark:bg-gray-800">
                             <TableData>Percentage</TableData>
                             <TableData isEnd>{score} %</TableData>
                         </TableRow>
