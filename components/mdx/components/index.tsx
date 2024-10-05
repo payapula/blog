@@ -60,7 +60,6 @@ const MDXComponents = {
         <blockquote
             className="blockQuotePara relative my-6 mt-4 flex w-full items-center
             overflow-hidden rounded-sm border-s-4 border-s-orange-600 bg-amber-100 py-3 pe-4 ps-3 dark:border-s-amber-300 dark:bg-opacity-20"
-            role="none"
             {...props}
         />
     ),
