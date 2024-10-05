@@ -20,7 +20,7 @@ const githubURL = 'https://github.com/payapula/blog';
 const siteConfig: SiteConfig = {
     general: {
         siteUrl: hostedURL,
-        editUrl: `${githubURL}/edit/develop/_posts/`,
+        editUrl: `${githubURL}/edit/develop/_posts`,
         authorEmail: 'bharathikannanv05@gmail.com',
         twitter: 'https://twitter.com/bharathispeaks',
         linkedIn: 'https://linkedin.com/in/bharathikannanv',

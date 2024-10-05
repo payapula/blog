@@ -1,4 +1,3 @@
-import { chakra, Heading, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 import { getAllPosts } from 'lib/api';
 // import { BlogCard } from 'components/card';
 import { BlogCard } from 'components/tailwind/card';
@@ -14,6 +13,7 @@ import { Button } from '@/components/tailwind/button';
 import VisuallyHidden from '@/components/tailwind/visuallyHidden';
 import { IoCloseSharp } from 'react-icons/io5';
 import { FaSearch } from 'react-icons/fa';
+import { PageHeading } from '@/components/tailwind/page-heading';
 
 type Props = {
     allPosts: Post[];
@@ -44,18 +44,7 @@ export default function Index({ allPosts }: Props): ReactElement {
             <Head>
                 <title>Blogs | Bharathi Kannan</title>
             </Head>
-            <Heading
-                as="h1"
-                width="100px"
-                mx="auto"
-                mt="8"
-                bgClip="text"
-                bgGradient={useColorModeValue(
-                    'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
-                    'linear(to-r, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1)'
-                )}>
-                Posts
-            </Heading>
+            <PageHeading width="w-[100px]">Posts</PageHeading>
             <SearchPosts
                 allPosts={allPosts}
                 setFilteredPosts={setFilteredPosts}
@@ -67,13 +56,7 @@ export default function Index({ allPosts }: Props): ReactElement {
                     🤷🏾‍♂️ No posts available with this search. Showing all posts... 🛠
                 </p>
             )}
-            <SimpleGrid
-                columns={[1, null, null, null, 2, 3]}
-                mt="10"
-                spacing={10}
-                // Card styles are based on this className "posts-container"
-                // Refer: styles.ts file
-                className="posts-container">
+            <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 xl:grid-cols-3">
                 {postsDisplay.map((post) => {
                     return (
                         <NextLink
@@ -81,17 +64,17 @@ export default function Index({ allPosts }: Props): ReactElement {
                             key={post.slug}
                             href="/blog/[slug]"
                             passHref>
-                            <chakra.a _hover={{ textDecoration: 'none' }}>
+                            <a className="hover:no-underline">
                                 <BlogCard
                                     title={post.title}
                                     excerpt={post.excerpt}
                                     keywords={post.keywords}
                                 />
-                            </chakra.a>
+                            </a>
                         </NextLink>
                     );
                 })}
-            </SimpleGrid>
+            </div>
         </Layout>
     );
 }

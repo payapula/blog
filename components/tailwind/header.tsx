@@ -54,7 +54,7 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
             className={`w-full ${
                 home
                     ? 'static'
-                    : `fixed w-full border-b ${
+                    : `fixed w-full border-b border-b-neutral-500 ${
                           headerSticky
                               ? 'top-0 z-[10000] bg-white dark:bg-gray-chakra'
                               : '-top-[85px]'

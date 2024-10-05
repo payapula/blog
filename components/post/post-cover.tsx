@@ -1,6 +1,5 @@
 import Cover, { PlaiceHolderProps } from 'types/cover';
 import { ReactElement } from 'react';
-import { Text, Box } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ChakraLink } from 'components/chakra-link';
 import Image from 'next/image';
@@ -21,7 +20,7 @@ interface PostCoverProps {
  */
 function PostCover({ cover, plaiceHolder }: PostCoverProps): ReactElement {
     return (
-        <Box mt={8}>
+        <div className="mt-8">
             <Image
                 {...plaiceHolder.img}
                 alt={cover.alt}
@@ -30,13 +29,13 @@ function PostCover({ cover, plaiceHolder }: PostCoverProps): ReactElement {
                 objectFit="contain"
                 priority
             />
-            <Text align="center">
+            <p className="text-center">
                 Photo By
                 <NextLink href={cover.author.url} passHref>
                     <ChakraLink ml={1}>{cover.author.name}</ChakraLink>
                 </NextLink>
-            </Text>
-        </Box>
+            </p>
+        </div>
     );
 }
 
