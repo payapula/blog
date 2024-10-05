@@ -113,7 +113,7 @@ Run `npx playwright test --update-snapshots`, it will generate new screenshot fi
 The downside of this approach is, after updating linux screenshots, on local we again need
 to remove `node_modules` and do fresh `npm install` for running the app.
 
-## Find and Remove Unused Packages
+## 💣 Find and Remove Unused Packages
 
 ### Check Unused Packages
 
