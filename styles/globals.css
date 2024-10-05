@@ -72,6 +72,26 @@ body {
     }
 }
 
+@layer base {
+    :root {
+        --radius: 0.5rem;
+    }
+
+    /**
+    * These styles were applied as base, copied from chakra's base styles to 
+    * maintain to maintain consistency.
+    */
+    html {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        font-family: system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        touch-action: manipulation;
+    }
+}
+
 @layer components {
     .quizWrapper {
         border: 1px solid black;
@@ -190,11 +210,5 @@ body {
             rgb(118, 188, 149),
             rgb(62, 196, 193)
         );
-    }
-}
-
-@layer base {
-    :root {
-        --radius: 0.5rem;
     }
 }

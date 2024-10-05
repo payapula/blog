@@ -1,6 +1,4 @@
 import { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import theme from 'styles/theme';
 import Head from 'next/head';
 import { ReactElement } from 'react';
 import { DefaultSeo } from 'next-seo';
@@ -18,12 +16,10 @@ export default function MyApp({ Component, pageProps }: AppProps): ReactElement 
                 <meta content="width=device-width, initial-scale=1" name="viewport" />
             </Head>
             <DefaultSeo {...seo} />
-            <ChakraProvider theme={theme}>
-                <ThemeProvider attribute="class">
-                    <Component {...pageProps} />
-                    <Toaster />
-                </ThemeProvider>
-            </ChakraProvider>
+            <ThemeProvider attribute="class" defaultTheme="system">
+                <Component {...pageProps} />
+                <Toaster />
+            </ThemeProvider>
         </>
     );
 }
