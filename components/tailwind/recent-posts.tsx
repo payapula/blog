@@ -1,7 +1,6 @@
 // import { Card } from 'components/card';
 import { Card } from 'components/tailwind/card';
 import NextLink from 'next/link';
-// import { ChakraLink } from 'components/chakra-link';
 import { TWLink } from 'components/tailwind/link';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import Post from 'types/post';
