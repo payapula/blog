@@ -1,7 +1,6 @@
 import Cover, { PlaiceHolderProps } from 'types/cover';
 import { ReactElement } from 'react';
 import NextLink from 'next/link';
-// import { ChakraLink } from 'components/chakra-link';
 import Image from 'next/image';
 import { TWLink } from '../tailwind/link';
 

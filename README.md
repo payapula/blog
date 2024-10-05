@@ -113,6 +113,22 @@ Run `npx playwright test --update-snapshots`, it will generate new screenshot fi
 The downside of this approach is, after updating linux screenshots, on local we again need
 to remove `node_modules` and do fresh `npm install` for running the app.
 
+## Find and Remove Unused Packages
+
+### Check Unused Packages
+
+Method 1: `npx npm-check`
+
+Method 2: `npx depcheck`
+
+### Remove Unused Packages
+
+Ran this script after removing chakra
+
+```bash
+npm uninstall @chakra-ui/icons @chakra-ui/react  @emotion/react @emotion/styled classnames framer-motion lucide-react --save
+```
+
 ## Notes
 
 Eslint, Prettier Configs provided by [Arpit Bharti](https://dev.to/onygami/eslint-and-prettier-for-react-apps-bonus-next-js-and-typescript-3e46)
