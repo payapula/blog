@@ -17,7 +17,7 @@ function HeroContent(): ReactElement {
                 <AuthorAvatar size={180} />
             </div>
             <div className="flex h-[260px]  max-w-[850px] flex-col items-center justify-between lg:items-start">
-                <h1 className="max-w-[23rem] text-center text-3xl font-bold md:max-w-[30rem] md:text-[30px] lg:text-left lg:text-[35px]">
+                <h1 className="max-w-[23rem] text-center text-3xl font-bold sm:leading-tight md:max-w-[30rem] md:text-[30px] lg:text-left lg:text-[35px]">
                     Hi, I&apos;m Bharathi Kannan, Fullstack Web Developer
                 </h1>
                 <p className="text-center text-sm sm:text-lg lg:text-left lg:text-lg">

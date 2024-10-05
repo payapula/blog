@@ -45,7 +45,7 @@ function Code({ codeString, language, highlight, noline }: CodeProps): JSX.Eleme
                         xl:mr-[-60px]">
                         <pre
                             className={cn(
-                                `min-w-full rounded-sm !bg-[#0a1126]
+                                `float-left min-w-full rounded-sm !bg-[#0a1126]
                                 p-[10px] text-xs leading-relaxed lg:text-sm
                                 xl:text-base xl:leading-relaxed dark:!bg-[#0a0707]
                             `,
