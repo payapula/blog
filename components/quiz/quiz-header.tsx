@@ -6,14 +6,7 @@ type Props = {
 };
 
 function QuizHeader({ title }: Props) {
-    return (
-        <GradientHeader
-            overrides={{
-                fontSize: ['2xl', null, null, '5xl']
-            }}>
-            {title}
-        </GradientHeader>
-    );
+    return <GradientHeader textSizeClass="text-2xl md:text-5xl">{title}</GradientHeader>;
 }
 
 export default QuizHeader;

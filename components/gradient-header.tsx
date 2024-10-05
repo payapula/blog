@@ -2,10 +2,7 @@ import * as React from 'react';
 
 interface GradientHeaderProps {
     children: React.ReactNode;
-    /**
-     * Accepts all HTML attributes
-     */
-    overrides?: React.HTMLAttributes<HTMLHeadingElement>;
+    textSizeClass: string;
 }
 
 // https://mycolor.space/
@@ -21,12 +18,8 @@ interface GradientHeaderProps {
 //background-image: linear-gradient(to left, #62e884, #88dc67, #a4ce4f, #b9c03d, #cbb135);
 // background-image: linear-gradient(to right, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1);
 
-export function GradientHeader({ children, overrides = {} }: GradientHeaderProps) {
+export function GradientHeader({ children, textSizeClass }: GradientHeaderProps) {
     return (
-        <h1
-            className="postQuizHeader mt-7 text-center text-4xl font-bold md:text-6xl"
-            {...overrides}>
-            {children}
-        </h1>
+        <h1 className={`postQuizHeader mt-7 text-center font-bold ${textSizeClass}`}>{children}</h1>
     );
 }
