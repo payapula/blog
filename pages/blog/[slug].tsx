@@ -7,7 +7,6 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
 import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 import { useScrollPosition } from 'utils/hooks';
-import { Box } from '@chakra-ui/react';
 import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';

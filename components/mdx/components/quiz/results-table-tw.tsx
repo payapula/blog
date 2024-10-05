@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { QuizNavigationButton } from './quiz-navigation-button';
-import { RepeatIcon } from '@chakra-ui/icons';
+import { FaRepeat } from 'react-icons/fa6';
 import { QuizFeedback } from './quiz-feeback-tw';
 
 interface ResultsTableProps {
@@ -64,7 +64,7 @@ export function ResultsTable({ totalQuestions, correctAnswers, resetQuiz }: Resu
                 </dl>
             </div>
             <QuizNavigationButton className="mt-12 w-[38%]" onClick={resetQuiz}>
-                <RepeatIcon w={8} /> Restart Quiz
+                <FaRepeat size={16} className="mr-2" /> Restart Quiz
             </QuizNavigationButton>
             <QuizFeedback />
         </div>

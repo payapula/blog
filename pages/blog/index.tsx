@@ -1,5 +1,4 @@
 import { getAllPosts } from 'lib/api';
-// import { BlogCard } from 'components/card';
 import { BlogCard } from 'components/tailwind/card';
 import { Layout } from 'components/layout';
 import { GetStaticProps } from 'next';
@@ -7,7 +6,6 @@ import React, { ReactElement } from 'react';
 import Post from 'types/post';
 import NextLink from 'next/link';
 import Head from 'next/head';
-// import { CloseIcon, Search2Icon } from '@chakra-ui/icons';
 import { Input } from '@/components/shadcn/input';
 import { Button } from '@/components/tailwind/button';
 import VisuallyHidden from '@/components/tailwind/visuallyHidden';
