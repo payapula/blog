@@ -1,5 +1,4 @@
 import { ReactElement, ReactNode } from 'react';
-// import { ChakraLink } from 'components/chakra-link';
 import { TWLink } from 'components/tailwind/link';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';

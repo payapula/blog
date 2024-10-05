@@ -1,11 +1,10 @@
 import { Code, preToCodeBlock } from './code';
-// import { ChakraNextImage } from 'components/chakra-next-image';
 import NextImage from 'next/image';
 import { ReactElement } from 'react';
 import { QuizHighlight } from './quiz-highlight';
 import { TWHeadingLink, TWMDXLink } from '@/components/tailwind/link';
 
-// Components provided by Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
+// Components inspired from Chakra UI https://github.com/chakra-ui/chakra-ui/blob/main/website/src/components/mdx-components.tsx
 const InlineCode = (props: object): ReactElement => {
     return (
         <code
@@ -61,7 +60,6 @@ const MDXComponents = {
         <blockquote
             className="blockQuotePara relative my-6 mt-4 flex w-full items-center
             overflow-hidden rounded-sm border-s-4 border-s-orange-600 bg-amber-100 py-3 pe-4 ps-3 dark:border-s-amber-300 dark:bg-opacity-20"
-            role="none"
             {...props}
         />
     ),

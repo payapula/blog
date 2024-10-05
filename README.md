@@ -8,7 +8,7 @@ Live at https://www.bharathikannan.com/
 ## 🚀 Tech Stack
 
 -   [Next JS](https://nextjs.org/)
--   [Chakra UI](https://chakra-ui.com/)
+-   [TailwindCSS](https://tailwindcss.com/)
 -   [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote)
 
 ---
@@ -109,9 +109,27 @@ Run `npx playwright test --update-snapshots`, it will generate new screenshot fi
 6. `npx playwright test --update-snapshots` - Runs and updates screenshots
     - This step will generate new screenshots based on linux platform (`-linux.png`).
 7. Commit the same to the repository.
+8. Exit the docker shell with `exit`
 
-The downside of this approach is, after updating linux screenshots, on local we again need
-to remove `node_modules` and do fresh `npm install` for running the app.
+> [!NOTE]  
+> The downside of this approach is, after updating linux screenshots, on local we again need
+> to remove `node_modules` and do fresh `npm install` for running the app.
+
+## 💣 Find and Remove Unused Packages
+
+### Check Unused Packages
+
+Method 1: `npx npm-check`
+
+Method 2: `npx depcheck`
+
+### Remove Unused Packages
+
+Ran this script after removing chakra
+
+```bash
+npm uninstall @chakra-ui/icons @chakra-ui/react  @emotion/react @emotion/styled classnames framer-motion lucide-react --save
+```
 
 ## Notes
 

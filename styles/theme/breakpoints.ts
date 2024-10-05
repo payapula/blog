@@ -1,3 +1,9 @@
+/**
+ * This is not being used anywhere.
+ *
+ * This was once used for chakra settings. Keeping this here to refer any breakpoints
+ * for future use with tailwind.
+ */
 export const breakpoints = {
     /**
      * Chakra was adding base as 0 to the values

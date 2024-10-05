@@ -12,6 +12,7 @@ import { activeLinkBgClasses } from './header';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { IoCloseSharp } from 'react-icons/io5';
+import VisuallyHidden from './visuallyHidden';
 
 export function MobileMenu() {
     const [open, setOpen] = React.useState(false);
@@ -20,6 +21,7 @@ export function MobileMenu() {
             <DropdownMenuTrigger asChild>
                 <Button className="ml-auto mr-5 h-10 w-10 p-1 md:hidden">
                     {open ? <IoCloseSharp size={24} /> : <FaBars size={20} />}
+                    <VisuallyHidden>Menu Button</VisuallyHidden>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="flex w-56 flex-col gap-2" align="end" alignOffset={-2}>

@@ -1,11 +1,9 @@
-// import { Link } from '@chakra-ui/react';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 import React, { ReactElement } from 'react';
 import { SiGmail } from 'react-icons/si';
 import siteConfig from 'configs/site-configs';
-// import { ChakraLink } from '../chakra-link';
 import { TWLink } from './link';
 import VisuallyHidden from './visuallyHidden';
 import { toast as SonnerToast } from 'sonner';
