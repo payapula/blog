@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Heading, HeadingProps, useColorModeValue } from '@chakra-ui/react';
 
 interface GradientHeaderProps {
     children: React.ReactNode;
-    overrides?: HeadingProps;
+    /**
+     * Accepts all HTML attributes
+     */
+    overrides?: React.HTMLAttributes<HTMLHeadingElement>;
 }
 
 // https://mycolor.space/
@@ -21,19 +23,10 @@ interface GradientHeaderProps {
 
 export function GradientHeader({ children, overrides = {} }: GradientHeaderProps) {
     return (
-        <Heading
-            as="h1"
-            fontSize={['4xl', null, null, '6xl']}
-            fontWeight="bold"
-            textAlign="center"
-            bgClip="text"
-            bgGradient={useColorModeValue(
-                'linear(to-r,  #d26472, #c73d75, #b10a82, #8b0095, #3e02ab)',
-                'linear(to-r, #c19685, #b8a178, #9eaf7b, #76bc95, #3ec4c1)'
-            )}
-            mt="7"
+        <h1
+            className="postQuizHeader mt-7 text-center text-4xl font-bold md:text-6xl"
             {...overrides}>
             {children}
-        </Heading>
+        </h1>
     );
 }

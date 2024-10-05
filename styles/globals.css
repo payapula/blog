@@ -165,6 +165,32 @@ body {
     .blockQuotePara > p {
         margin-top: 0;
     }
+
+    .postQuizHeader {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(210, 100, 114),
+            rgb(199, 61, 117),
+            rgb(177, 10, 130),
+            rgb(139, 0, 149),
+            rgb(62, 2, 171)
+        );
+    }
+
+    .dark .postQuizHeader {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(193, 150, 133),
+            rgb(184, 161, 120),
+            rgb(158, 175, 123),
+            rgb(118, 188, 149),
+            rgb(62, 196, 193)
+        );
+    }
 }
 
 @layer base {
