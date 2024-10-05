@@ -1,5 +1,4 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Box } from '@chakra-ui/react';
 import { MDXQuizComponents } from 'components/mdx/components/quiz';
 import React from 'react';
 
@@ -9,9 +8,9 @@ type Props = {
 
 function QuizBody({ content }: Props) {
     return (
-        <Box mt={[2, null, null, 7]} className="quiz-global-styles">
+        <div className="mt-2 md:mt-7">
             <MDXRemote {...content} components={MDXQuizComponents} />
-        </Box>
+        </div>
     );
 }
 
