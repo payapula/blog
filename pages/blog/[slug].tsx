@@ -55,7 +55,7 @@ const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
 
     return (
         <Layout type="BLOG" headerSticky={sticky}>
-            <Box as="article">
+            <article>
                 <NextSeo
                     title={title}
                     description={description}
@@ -81,10 +81,10 @@ const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
                 <PostHeader title={title} />
                 <PostCover cover={cover} plaiceHolder={plaiceHolder} />
                 <PostBody content={content} intersectionRef={intersectionRef} />
-                <Box mt={5} />
+                <div className="mt-5" />
                 <hr />
                 <PostFooter slug={slug} dates={{ createdDate, modifiedDate }} />
-            </Box>
+            </article>
         </Layout>
     );
 };

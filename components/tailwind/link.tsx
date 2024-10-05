@@ -19,15 +19,30 @@ interface TWLinkProps {
     fontWeight?: string;
     display?: string;
     flex?: string;
+    shouldApplyBorder?: boolean;
 }
 
 const TWLink = forwardRef(function StyledTWLink(props: TWLinkProps, ref: Ref<HTMLAnchorElement>) {
-    const { isActive, href, rel, target, textSize, fontWeight, display, flex, ...rest } = props;
+    const {
+        isActive,
+        href,
+        rel,
+        target,
+        textSize,
+        fontWeight,
+        display,
+        flex,
+        shouldApplyBorder = true,
+        ...rest
+    } = props;
     const isInternal = href.startsWith('/') || href.startsWith('#');
     const textClasses = textSize ?? '';
     const fontClasses = fontWeight ?? 'font-semibold';
     const displayClasses = display ?? 'inline';
     const flexClasses = flex ?? '';
+    const borderStyles = shouldApplyBorder
+        ? `border-b border-dashed border-current hover:border-solid`
+        : '';
     return (
         <a
             aria-current={isActive ? 'page' : undefined}
@@ -35,9 +50,9 @@ const TWLink = forwardRef(function StyledTWLink(props: TWLinkProps, ref: Ref<HTM
             rel={isInternal ? rel : 'noopener noreferrer'}
             target={isInternal ? target : '_blank'}
             href={href}
-            className={`border-b border-dashed border-current
-                text-teal-800 hover:border-solid
-                dark:text-teal-300 ${textClasses} ${fontClasses}
+            className={`
+                text-teal-800 
+                dark:text-teal-300 ${borderStyles} ${textClasses} ${fontClasses}
                 ${displayClasses} ${flexClasses}
                 `}
             {...rest}

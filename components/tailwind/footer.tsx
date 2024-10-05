@@ -1,4 +1,4 @@
-import { Link } from '@chakra-ui/react';
+// import { Link } from '@chakra-ui/react';
 import { FaTwitter } from 'react-icons/fa';
 import { FaLinkedin } from 'react-icons/fa';
 import { IconType } from 'react-icons';
@@ -16,15 +16,10 @@ interface IconLinkProps {
     isExternal?: boolean;
 }
 
-const IconLink = ({ href, children, isExternal = false }: IconLinkProps) => (
-    <Link
-        href={href}
-        isExternal={isExternal}
-        sx={{
-            borderRadius: '4px'
-        }}>
+const IconLink = ({ href, children }: IconLinkProps) => (
+    <TWLink href={href} shouldApplyBorder={false}>
         {children}
-    </Link>
+    </TWLink>
 );
 
 function GMAIL() {
