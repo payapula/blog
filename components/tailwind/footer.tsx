@@ -57,7 +57,11 @@ function GMAIL() {
                 });
             }}>
             <VisuallyHidden>Copy Bharathi Kannan&apos;s Email address</VisuallyHidden>
-            <SocialIcons icon={SiGmail} hoverClass="text-[#ea4335]" ariaLabel="Logo of Gmail" />
+            <SocialIcons
+                icon={SiGmail}
+                hoverClass="text-[#ea4335] dark:hover:text-[#ea4335]"
+                ariaLabel="Logo of Gmail"
+            />
         </button>
     );
 }
@@ -72,7 +76,7 @@ function Footer(): ReactElement {
                         <VisuallyHidden>Open Twitter Profile of Bharathi Kannan</VisuallyHidden>
                         <SocialIcons
                             icon={FaTwitter}
-                            hoverClass="text-[#1DA1F2]"
+                            hoverClass="text-[#1DA1F2] dark:hover:text-[#1DA1F2]"
                             ariaLabel="Logo of Twitter"
                         />
                     </IconLink>
@@ -80,7 +84,7 @@ function Footer(): ReactElement {
                         <VisuallyHidden>Open LinkedIn Profile of Bharathi Kannan</VisuallyHidden>
                         <SocialIcons
                             icon={FaLinkedin}
-                            hoverClass="text-[#0e76a8]"
+                            hoverClass="text-[#0e76a8] dark:hover:text-[#0e76a8]"
                             ariaLabel="Logo of LinkedIn"
                         />
                     </IconLink>
@@ -108,7 +112,10 @@ interface SocialIconsProps {
 const SocialIcons = ({ icon, hoverClass, ariaLabel }: SocialIconsProps) => {
     const IconComponent = icon;
     return (
-        <IconComponent className={`h-8 w-8 cursor-pointer ${hoverClass}`} aria-label={ariaLabel} />
+        <IconComponent
+            className={`h-8 w-8 cursor-pointer dark:text-neutral-100 ${hoverClass}`}
+            aria-label={ariaLabel}
+        />
     );
 };
 
