@@ -1,6 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ColorModeScript } from '@chakra-ui/react';
-import theme from 'styles/theme';
 import { ReactElement } from 'react';
 
 export default class MyDocument extends Document {
@@ -32,8 +30,7 @@ export default class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
                         rel="stylesheet"></link> */}
                 </Head>
-                <body>
-                    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+                <body className="bg-white text-gray-chakra dark:bg-gray-chakra dark:text-white">
                     <Main />
                     <NextScript />
                 </body>

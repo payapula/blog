@@ -35,7 +35,7 @@ test.describe('All Desktop Browsers', () => {
          */
         await testVisible(page.getByRole('heading', { name: 'React useEffect Hook Flow' }));
         await testVisible(page.getByRole('img', { name: 'Waterfall' }));
-        await testVisible(page.getByText('Photo ByJames Morden'));
+        await testVisible(page.getByText('Photo By James Morden'));
 
         /**
          * Content
@@ -44,10 +44,7 @@ test.describe('All Desktop Browsers', () => {
         await testVisible(page.getByRole('code').filter({ hasText: 'useEffect' }));
         // blockquote
         await testVisible(
-            page.getByRole('blockquote').filter({
-                hasText:
-                    'If you are curious to know why the hooks are designed in this way, take a look a'
-            })
+            page.getByRole('blockquote').filter({ hasText: 'If you are curious to know' })
         );
 
         /**
@@ -100,7 +97,7 @@ test.describe('All Desktop Browsers', () => {
 
         await darkModeButton.click();
 
-        await expect(body).toHaveCSS('color', 'rgba(255, 255, 255, 0.92)');
+        await expect(body).toHaveCSS('color', 'rgb(255, 255, 255)');
         await expect(body).toHaveCSS('background-color', dark);
     });
 });

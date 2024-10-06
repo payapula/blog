@@ -7,7 +7,6 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
 import { PostHeader, PostCover, PostBody, PostFooter } from 'components/post';
 import { useScrollPosition } from 'utils/hooks';
-import { Box } from '@chakra-ui/react';
 import { getBasePath, getRandom5digit } from 'utils/utils';
 import { getPlaiceholder } from 'plaiceholder';
 import { PlaiceHolderProps } from 'types/cover';
@@ -55,7 +54,7 @@ const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
 
     return (
         <Layout type="BLOG" headerSticky={sticky}>
-            <Box as="article">
+            <article>
                 <NextSeo
                     title={title}
                     description={description}
@@ -81,10 +80,10 @@ const Post = ({ post, plaiceHolder }: PostProps): ReactElement => {
                 <PostHeader title={title} />
                 <PostCover cover={cover} plaiceHolder={plaiceHolder} />
                 <PostBody content={content} intersectionRef={intersectionRef} />
-                <Box mt={5} />
+                <div className="mt-5" />
                 <hr />
                 <PostFooter slug={slug} dates={{ createdDate, modifiedDate }} />
-            </Box>
+            </article>
         </Layout>
     );
 };

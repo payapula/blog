@@ -1,11 +1,7 @@
 import React, { ReactElement } from 'react';
-import { Icon, Flex, Box } from '@chakra-ui/react';
-import { ChakraLink } from 'components/chakra-link';
 import { FaGithub, FaLocationArrow } from 'react-icons/fa';
 import siteConfig from 'configs/site-configs';
-
-const responsiveTwitterSize = { base: 3, md: 5 };
-const responsiveGithubSize = { base: 3, md: 6 };
+import { TWLink } from '../tailwind/link';
 
 interface PostFooterProps {
     slug: string;
@@ -17,52 +13,45 @@ interface PostFooterProps {
 
 function TimeStamp({ date, text }: { text: string; date: string }): ReactElement {
     return (
-        <Box as="p" textAlign={'center'} fontSize={{ base: 'sm', md: 'md' }}>
+        <p className="text-center text-sm md:text-base">
             {text}
-            <Box as="span" fontWeight={'bold'} ml={2}>
-                {date}
-            </Box>
-        </Box>
+            <span className="ml-2 font-bold">{date}</span>
+        </p>
     );
 }
 
 function PostFooter({ slug, dates: { createdDate, modifiedDate } }: PostFooterProps): ReactElement {
     return (
-        <Flex direction={'column'} mt={5}>
-            <Flex justify={'space-between'}>
+        <div className="mt-5 flex flex-col">
+            <div className="flex justify-between">
                 <TimeStamp text="Published:" date={createdDate} />
                 <TimeStamp text="Updated:" date={modifiedDate} />
-            </Flex>
-            <Flex mt={5} justify="space-between" h="25px">
-                <Box textAlign="center">
-                    <ChakraLink
+            </div>
+            <div className="mt-5 flex h-[25px] justify-between">
+                <div className="text-center">
+                    <TWLink
                         href={`https://twitter.com/search?q=${siteConfig.general.siteUrl}/blog/${slug}`}>
                         Let&apos;s Discuss On Twitter
-                    </ChakraLink>
-                    <Icon
-                        as={FaLocationArrow}
-                        w={responsiveTwitterSize}
-                        h={responsiveTwitterSize}
-                        ml="2"
-                        cursor="pointer"
+                    </TWLink>
+                    <FaLocationArrow
+                        size={20}
+                        className="ml-2 inline-block h-3 w-3 cursor-pointer md:h-5 md:w-5"
                         title="Twitter"
                         color="#1ea1f2"
                     />
-                </Box>
-                <Box ml="auto" textAlign="center">
-                    <Icon
-                        as={FaGithub}
-                        w={responsiveGithubSize}
-                        h={responsiveGithubSize}
-                        cursor="pointer"
+                </div>
+                <div className="ml-auto text-center">
+                    <FaGithub
+                        size={20}
+                        className="mr-3 inline-block h-3 w-3 cursor-pointer md:h-6 md:w-6"
                         title="GitHub"
                     />
-                    <ChakraLink ml={3} href={`${siteConfig.general.editUrl}/${slug}.mdx`}>
+                    <TWLink href={`${siteConfig.general.editUrl}/${slug}.mdx`}>
                         Edit this Post On GitHub
-                    </ChakraLink>
-                </Box>
-            </Flex>
-        </Flex>
+                    </TWLink>
+                </div>
+            </div>
+        </div>
     );
 }
 

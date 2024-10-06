@@ -1,3 +1,5 @@
+# Updated on 6, Oct, 2024 with https://playwright.dev/docs/ci#via-containers
+# To match the local docker images to keep the screenshot testing consistent
 name: Playwright Tests
 on:
     push:
@@ -5,21 +7,25 @@ on:
     pull_request:
         branches: [main, develop]
 jobs:
-    test:
-        timeout-minutes: 60
+    playwright:
+        name: 'Playwright Tests'
         runs-on: ubuntu-latest
+        container:
+            image: mcr.microsoft.com/playwright:v1.33.0-jammy
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
               with:
                   node-version: 18
             - name: Install dependencies
               run: npm ci
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps
-            - name: Run Playwright tests
+            - name: Run your tests
               run: npx playwright test
-            - uses: actions/upload-artifact@v3
+              env:
+                  HOME: /root
+            - uses: actions/upload-artifact@v4
               if: always()
               with:
                   name: playwright-report

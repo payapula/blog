@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* https://kirazhang.com/posts/nextjs-custom-fonts 
    Make sure to preload the font for better performance 
    https://wp-rocket.me/blog/font-preloading-best-practices/ 
@@ -39,6 +43,168 @@ body {
     overflow-x: hidden;
 }
 
-#chakra-toast-manager-top-left {
-    z-index: 10000 !important;
+/**
+* Vertical Timeline overrides
+*/
+.vertical-timeline::before {
+    background-color: #319795 !important;
+}
+
+.dark .vertical-timeline::before {
+    background-color: white !important;
+}
+
+.vertical-timeline-element-date {
+    font-weight: bold !important;
+}
+
+@media only screen and (min-width: 1170px) {
+    .vertical-timeline-element-date {
+        color: black;
+    }
+
+    .dark .vertical-timeline-element-date {
+        color: white;
+    }
+}
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+    }
+
+    /**
+    * These styles were applied as base, copied from chakra's base styles to 
+    * maintain to maintain consistency.
+    */
+    html {
+        line-height: 1.7;
+        -webkit-text-size-adjust: 100%;
+        font-family: system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        touch-action: manipulation;
+    }
+}
+
+@layer components {
+    .quizWrapper {
+        border: 1px solid black;
+        box-shadow: rgba(0, 0, 0, 0.12) 1px 1px 6px 4px, rgba(0, 0, 0, 0.24) 0px 1px 1px 1px;
+    }
+
+    .dark .quizWrapper {
+        border: 1px solid teal;
+        box-shadow: rgba(255, 130, 47, 0.25) 1px 1px 6px 4px, rgba(95, 83, 76, 0.22) 0px 1px 1px 1px;
+    }
+
+    /**
+    * The order of the following classess matter
+    */
+    .labelChecked:has(button[data-state='unchecked']):hover {
+        background-color: theme('colors.teal.100');
+    }
+
+    .labelChecked:has(button[data-disabled]):hover {
+        background-color: initial;
+        cursor: not-allowed;
+    }
+
+    .labelChecked:has(button[data-state='checked']),
+    .labelChecked:has(button[data-state='checked']):hover {
+        background-color: theme('colors.teal.400');
+    }
+
+    .dark .labelChecked:has(button[data-state='unchecked']):hover {
+        background-color: theme('colors.orange.700');
+    }
+
+    .dark .labelChecked:has(button[data-disabled]):hover {
+        background-color: initial;
+        cursor: not-allowed;
+    }
+
+    .dark .labelChecked:has(button[data-state='checked']),
+    .dark .labelChecked:has(button[data-state='checked']):hover {
+        background-color: theme('colors.orange.500');
+    }
+
+    .radioOptionShadow {
+        box-shadow: 0px 1px 0px 2px rgba(0, 0, 0, 0.12), 0 1px 2px 0px rgba(0, 0, 0, 0.24);
+    }
+
+    .dark .radioOptionShadow {
+        box-shadow: rgba(255, 130, 47, 0.25) 0px 1px 0px 2px, rgba(95, 83, 76, 0.22) 0px 1px 2px 0px;
+    }
+}
+
+@layer utilities {
+    .focus-outline {
+        outline: 2px dashed theme('colors.teal.500');
+        box-shadow: none;
+        outline-offset: 2px;
+    }
+
+    .title-gradient-light {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(to right, #d26472, #c73d75, #b10a82, #8b0095, #3e02ab);
+    }
+    .title-gradient-dark {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(193, 150, 133),
+            rgb(184, 161, 120),
+            rgb(158, 175, 123),
+            rgb(118, 188, 149),
+            rgb(62, 196, 193)
+        );
+    }
+
+    .tag-light {
+        color: black;
+        background-color: hsl(324deg 86% 80% / 40%);
+    }
+
+    .tag-dark {
+        color: white;
+        background-color: hsl(324deg 52% 35% / 35%);
+    }
+
+    .border-teal {
+        border: 1px solid theme('colors.teal.600');
+    }
+
+    .blockQuotePara > p {
+        margin-top: 0;
+    }
+
+    .postQuizHeader {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(210, 100, 114),
+            rgb(199, 61, 117),
+            rgb(177, 10, 130),
+            rgb(139, 0, 149),
+            rgb(62, 2, 171)
+        );
+    }
+
+    .dark .postQuizHeader {
+        background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(
+            to right,
+            rgb(193, 150, 133),
+            rgb(184, 161, 120),
+            rgb(158, 175, 123),
+            rgb(118, 188, 149),
+            rgb(62, 196, 193)
+        );
+    }
 }

@@ -8,6 +8,7 @@ import siteConfig from 'configs/site-configs';
 // require('dotenv').config();
 
 const IS_DEV_MODE = false;
+const BUILD_PORT = 3002;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -36,14 +37,17 @@ export default defineConfig({
         ? {
               webServer: {
                   command: 'npm run build && npm run start',
-                  port: 3001
+                  port: BUILD_PORT,
+                  reuseExistingServer: IS_DEV_MODE
               }
           }
         : {}),
     use: {
         // headless: false,
         baseURL:
-            IS_DEV_MODE || process.env.CI ? 'http://localhost:3001/' : siteConfig.general.siteUrl,
+            IS_DEV_MODE || process.env.CI
+                ? `http://localhost:${BUILD_PORT}/`
+                : siteConfig.general.siteUrl,
         // baseURL: 'http://localhost:3001/',
         // baseURL: siteConfig.general.siteUrl,
         trace: IS_DEV_MODE ? 'on' : 'on-first-retry'

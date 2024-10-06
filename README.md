@@ -8,7 +8,7 @@ Live at https://www.bharathikannan.com/
 ## 🚀 Tech Stack
 
 -   [Next JS](https://nextjs.org/)
--   [Chakra UI](https://chakra-ui.com/)
+-   [TailwindCSS](https://tailwindcss.com/)
 -   [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote)
 
 ---
@@ -58,18 +58,30 @@ Ex: `192.168.1.9:3001`
 
 ## 🧵 Bundle Analyzer
 
-`npm run analyze`
+### Overall View
+
+`npm run analyze` - This will generate server and client bundle overviews.
+
+### Dive Deeper into each bundle
+
+If we want to dive deeper into each bundle, use the following technique with `source-map-explorer`
 
 Enable `productionBrowserSourceMaps: true` in `next.config.js`
 [Next Source Maps](https://nextjs.org/docs/advanced-features/source-maps)
 
 and then `npm run build` then run the source-map-explorer command
 
-`source-map-explorer chunk_name.js`
+Then navigate to `./next/static/chunks/pages/` directory and run the following command
+
+`source-map-explorer <chunk_name>.js`
 
 Make sure you have installed source-map-explorer:
 
 `npm install -g source-map-explorer`
+
+### More details with explanation
+
+More details on Bundle Sizes, Next Build output and, etc. can be found in this PR - [Replace Chakra with Tailwind](https://github.com/payapula/blog/pull/111)
 
 ## 📕 Sitemap
 
@@ -109,9 +121,27 @@ Run `npx playwright test --update-snapshots`, it will generate new screenshot fi
 6. `npx playwright test --update-snapshots` - Runs and updates screenshots
     - This step will generate new screenshots based on linux platform (`-linux.png`).
 7. Commit the same to the repository.
+8. Exit the docker shell with `exit`
 
-The downside of this approach is, after updating linux screenshots, on local we again need
-to remove `node_modules` and do fresh `npm install` for running the app.
+> [!NOTE]  
+> The downside of this approach is, after updating linux screenshots, on local we again need
+> to remove `node_modules` and do fresh `npm install` for running the app.
+
+## 💣 Find and Remove Unused Packages
+
+### Check Unused Packages
+
+Method 1: `npx npm-check`
+
+Method 2: `npx depcheck`
+
+### Remove Unused Packages
+
+Ran this script after removing chakra
+
+```bash
+npm uninstall @chakra-ui/icons @chakra-ui/react  @emotion/react @emotion/styled classnames framer-motion lucide-react --save
+```
 
 ## Notes
 
