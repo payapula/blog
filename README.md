@@ -58,18 +58,30 @@ Ex: `192.168.1.9:3001`
 
 ## 🧵 Bundle Analyzer
 
-`npm run analyze`
+### Overall View
+
+`npm run analyze` - This will generate server and client bundle overviews.
+
+### Dive Deeper into each bundle
+
+If we want to dive deeper into each bundle, use the following technique with `source-map-explorer`
 
 Enable `productionBrowserSourceMaps: true` in `next.config.js`
 [Next Source Maps](https://nextjs.org/docs/advanced-features/source-maps)
 
 and then `npm run build` then run the source-map-explorer command
 
-`source-map-explorer chunk_name.js`
+Then navigate to `./next/static/chunks/pages/` directory and run the following command
+
+`source-map-explorer <chunk_name>.js`
 
 Make sure you have installed source-map-explorer:
 
 `npm install -g source-map-explorer`
+
+### More details with explanation
+
+More details on Bundle Sizes, Next Build output and, etc. can be found in this PR - [Replace Chakra with Tailwind](https://github.com/payapula/blog/pull/111)
 
 ## 📕 Sitemap
 
