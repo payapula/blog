@@ -16,7 +16,7 @@ export default function MyApp({ Component, pageProps }: AppProps): ReactElement 
                 <meta content="width=device-width, initial-scale=1" name="viewport" />
             </Head>
             <DefaultSeo {...seo} />
-            <ThemeProvider attribute="class" defaultTheme="system">
+            <ThemeProvider attribute="class" enableSystem={false}>
                 <Component {...pageProps} />
                 <Toaster />
             </ThemeProvider>
