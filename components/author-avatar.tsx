@@ -3,9 +3,7 @@ import Image from 'next/image';
 import profilePic from 'public/assets/resume/bharathikannanavatar.jpg';
 
 /**
- * tw-TODO
- *
- * * When updating images
+ * ## When updating images
  *
  * 1. Make sure to resize them to reduce the file size.
  * 2. Make sure the image is not clipped/cropped: Read about `objectFit` property.

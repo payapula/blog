@@ -1,8 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 import Meta from './meta';
-// import { Header } from './header';
 import { Header } from './tailwind/header';
-// import Footer from 'components/footer';
 import Footer from 'components/tailwind/footer';
 
 interface LayoutProps {

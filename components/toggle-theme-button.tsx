@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-// import { FaSun } from 'react-icons/fa';
-// import { FaMoon } from 'react-icons/fa';
 import { IoSunny } from 'react-icons/io5';
 import { IoMdMoon } from 'react-icons/io';
 import VisuallyHidden from './tailwind/visuallyHidden';
 
-/**
- * tw-TODO
- */
 export const ToggleThemeButton = () => {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
