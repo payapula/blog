@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { GetStaticProps } from 'next';
 import { getAllQuizzes } from 'lib/quiz.api';
 import QuizType from 'types/quiz';
-// import { QuizCard } from 'components/card';
 import { QuizCard } from 'components/tailwind/card';
 import { PageHeading } from '@/components/tailwind/page-heading';
 

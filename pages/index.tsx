@@ -1,15 +1,10 @@
 import { ReactElement } from 'react';
 import { Layout } from '../components/layout';
-// import { RecentPosts } from 'components/recent-posts';
 import { RecentPosts } from 'components/tailwind/recent-posts';
-// import { HeroContent } from 'components/hero-content';
 import { HeroContent } from 'components/tailwind/hero-content';
-// import { Quotes } from 'components/quotes';
 import { Quotes } from 'components/tailwind/quotes';
-// import { Technologies } from 'components/technologies';
 import { Technologies } from 'components/tailwind/technologies';
 import Head from 'next/head';
-// import { History } from 'components/history';
 import { History } from 'components/tailwind/history';
 import { GetStaticProps } from 'next';
 import { getAllPosts } from 'lib/api';
