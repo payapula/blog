@@ -30,7 +30,7 @@ export function RadioItem({
                     className={cn(
                         `data-checked:scale-150 data-checked:bg-teal-300  dark:data-checked:bg-orange-700`,
                         {
-                            'group-hover:scale-150 group-hover:border-teal-300 dark:group-hover:border-orange-500':
+                            'focus-visible:scale-150 focus-visible:border-teal-300 group-hover:scale-150 group-hover:border-teal-300 dark:focus-visible:border-orange-500 dark:group-hover:border-orange-500':
                                 !disabled
                         }
                     )}
