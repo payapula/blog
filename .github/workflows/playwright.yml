@@ -1,3 +1,5 @@
+# Updated on 6, Oct, 2024 with https://playwright.dev/docs/ci#via-containers
+# To match the local docker images to keep the screenshot testing consistent
 name: Playwright Tests
 on:
     push:
