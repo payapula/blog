@@ -23,13 +23,13 @@ test.describe('Mobile Browsers Only', () => {
          * Menu is collapsed in Mobile devices and appears
          * when clicking Menu button
          */
-        await expect(page.getByRole('link', { name: 'Blog' })).not.toBeInViewport();
-        await expect(page.getByRole('link', { name: 'Quiz' })).not.toBeInViewport();
+        await expect(page.getByRole('menuitem', { name: 'Blog' })).not.toBeInViewport();
+        await expect(page.getByRole('menuitem', { name: 'Quiz' })).not.toBeInViewport();
 
         await page.getByRole('button', { name: 'Menu Button' }).click();
 
-        await expect(page.getByRole('link', { name: 'Blog' })).toBeInViewport();
-        await expect(page.getByRole('link', { name: 'Quiz' })).toBeInViewport();
+        await expect(page.getByRole('menuitem', { name: 'Blog' })).toBeInViewport();
+        await expect(page.getByRole('menuitem', { name: 'Quiz' })).toBeInViewport();
 
         /**
          * Visible
@@ -38,7 +38,7 @@ test.describe('Mobile Browsers Only', () => {
         await expect(page.getByRole('link', { name: 'View All' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Favourite Quotes' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Technologies' })).toBeVisible();
-        await expect(page.getByText('AWS Amplify')).toBeVisible();
+        await expect(page.getByText('AWS Amplify').nth(1)).toBeVisible();
 
         await expect(
             page.getByRole('heading', { name: 'Work Experience and Education' })

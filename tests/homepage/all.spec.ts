@@ -29,7 +29,7 @@ test.describe('All Desktop Browsers', () => {
         await expect(page.getByRole('link', { name: 'View All' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Favourite Quotes' })).toBeVisible();
         await expect(page.getByRole('heading', { name: 'Technologies' })).toBeVisible();
-        await expect(page.getByText('AWS Amplify')).toBeVisible();
+        await expect(page.getByText('AWS Amplify').nth(1)).toBeVisible();
 
         await expect(
             page.getByRole('heading', { name: 'Work Experience and Education' })
@@ -72,7 +72,7 @@ test.describe('All Desktop Browsers', () => {
 
         await darkModeButton.click();
 
-        await expect(body).toHaveCSS('color', 'rgba(255, 255, 255, 0.92)');
+        await expect(body).toHaveCSS('color', 'rgb(255, 255, 255)');
         await expect(body).toHaveCSS('background-color', dark);
     });
 });

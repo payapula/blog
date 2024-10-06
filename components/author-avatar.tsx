@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
-import { ChakraNextImage } from './chakra-next-image';
+import Image from 'next/image';
 import profilePic from 'public/assets/resume/bharathikannanavatar.jpg';
 
 /**
- * * When updating images
+ * ## When updating images
  *
  * 1. Make sure to resize them to reduce the file size.
  * 2. Make sure the image is not clipped/cropped: Read about `objectFit` property.
@@ -13,10 +13,10 @@ import profilePic from 'public/assets/resume/bharathikannanavatar.jpg';
  */
 function AuthorAvatar({ size }: { size: number }): ReactElement {
     return (
-        <ChakraNextImage
+        <Image
             src={profilePic}
             alt="Picture of Bharathi Kannan"
-            borderRadius="50%"
+            className="rounded-full"
             width={size}
             height={size}
             priority

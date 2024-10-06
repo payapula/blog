@@ -1,5 +1,4 @@
 import { MutableRefObject, ReactElement } from 'react';
-import { Box } from '@chakra-ui/react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { MDXComponents } from '../mdx/components';
 
@@ -18,9 +17,9 @@ function PostBody({ content, intersectionRef }: PostBodyProps): ReactElement {
     };
 
     return (
-        <Box mt={10} ref={intersectionRef} className="mdx-global-styles">
+        <div className="mt-10" ref={intersectionRef}>
             <MDXRemote {...content} components={usedComponents} />
-        </Box>
+        </div>
     );
 }
 

@@ -139,7 +139,7 @@ test.describe('All Desktop Browsers', () => {
 
         await darkModeButton.click();
 
-        await expect(body).toHaveCSS('color', 'rgba(255, 255, 255, 0.92)');
+        await expect(body).toHaveCSS('color', 'rgb(255, 255, 255)');
         await expect(body).toHaveCSS('background-color', dark);
     });
 });

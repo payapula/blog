@@ -16,7 +16,7 @@ test('Quiz Page Navigation Tests', async ({ page }) => {
     await expect(page.getByRole('link', { name: 'Quiz', exact: true })).toBeInViewport();
 
     // Opening a Quiz
-    await page.getByRole('link', { name: 'React is Just Javascript Quiz' }).click();
+    await page.getByRole('link').filter({ hasText: 'React is Just Javascript Quiz' }).click();
 
     // First question
     await expect(page.getByRole('button', { name: 'Submit' })).toBeDisabled();
@@ -65,7 +65,7 @@ test('Quiz Page Navigation Tests', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Show Results' }).click();
     await testVisible(page.getByText('Quiz Results'));
-    await testVisible(page.getByRole('gridcell', { name: '67 %' }));
+    await testVisible(page.getByRole('cell', { name: '67 %' }));
 
     await page.getByRole('button', { name: 'Report a correction or Provide feedback' }).click();
     await testVisible(page.getByText('I promise to respond as early as I can 😄'));

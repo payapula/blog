@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2018",
         "module": "esnext",
-        "jsx": "preserve",
+        "jsx": "preserve", // Update this to "react-jsx" after removing chakra
         "strict": false,
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -14,7 +14,10 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "baseUrl": ".",
-        "incremental": true
+        "incremental": true,
+        "paths": {
+            "@/*": ["./*"]
+        }
     },
     "exclude": ["node_modules"],
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

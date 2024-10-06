@@ -15,3 +15,5 @@ lib
 next-sitemap.config.js
 next.config.js
 scripts/
+tailwind.config.js
+postcss.config.js
