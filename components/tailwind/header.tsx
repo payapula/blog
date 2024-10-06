@@ -54,9 +54,7 @@ function Header({ home, headerSticky }: { home: boolean; headerSticky: boolean }
                 home
                     ? 'static'
                     : `fixed w-full border-b border-b-neutral-500 ${
-                          headerSticky
-                              ? 'top-0 z-[10000] bg-white dark:bg-gray-chakra'
-                              : '-top-[85px]'
+                          headerSticky ? 'top-0 z-[2] bg-white dark:bg-gray-chakra' : '-top-[85px]'
                       } transition-all duration-300 ease-in`
             }`}>
             <div className="flex h-[80px] w-full items-center">
