@@ -7,12 +7,22 @@ interface CardProps {
     keywords: string;
     border?: string;
     width?: string;
+    headingAs?: 'h2' | 'h3';
 }
 
-function Card({ title, excerpt, blogCard, width, keywords, border }: CardProps): ReactElement {
+function Card({
+    title,
+    excerpt,
+    blogCard,
+    width,
+    keywords,
+    border,
+    headingAs = 'h3'
+}: CardProps): ReactElement {
     const keywordsArray = keywords.split(',');
     const borderClass = border ?? '';
     const widthClass = width ?? '';
+    const HeadingComponent = headingAs;
     return (
         <article
             /* prettier-ignore */
@@ -27,9 +37,9 @@ function Card({ title, excerpt, blogCard, width, keywords, border }: CardProps):
              ${borderClass}
              ${widthClass}
              `}>
-            <h3 className="title-gradient-light dark:title-gradient-dark text-start text-2xl font-extrabold">
+            <HeadingComponent className="title-gradient-light dark:title-gradient-dark text-start text-2xl font-extrabold">
                 {title ? title : `How to use React Context effectively`}
-            </h3>
+            </HeadingComponent>
             <div className="mt-5 flex items-center gap-1">
                 <p>
                     {keywordsArray.map((keyword) => {
@@ -76,6 +86,7 @@ function BlogCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
             keywords={keywords}
             border="border-teal"
             width="w-full"
+            headingAs="h2"
             blogCard
         />
     );
@@ -95,6 +106,7 @@ function QuizCard({ title, excerpt, keywords }: BlogCardProps): ReactElement {
             keywords={keywords}
             width="w-full"
             border="border-teal"
+            headingAs="h2"
         />
     );
 }

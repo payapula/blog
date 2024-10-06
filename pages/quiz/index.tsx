@@ -18,7 +18,7 @@ export default function QuizIndex({ allQuizzes: allQuizzes }: Props) {
             <Head>
                 <title>Quiz | Bharathi Kannan</title>
             </Head>
-            <PageHeading width="w-[130px]">Quizzes</PageHeading>
+            <PageHeading width="w-fit">Quizzes</PageHeading>
             <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 xl:grid-cols-3">
                 {allQuizzes.map((quiz) => {
                     return (
