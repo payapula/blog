@@ -28,9 +28,13 @@ export function QuestionSet({
         if (child.props?.isAnswer) {
             validAnswer.current = index.toString();
         }
+        const value = index.toString();
+        const ariaLabel = `label_${value}`;
         return (
-            <RadioItem value={index.toString()} disabled={answerSubmitted}>
-                <div className="flex items-baseline [&>p]:mt-0">{child.props.children}</div>
+            <RadioItem value={value} disabled={answerSubmitted} ariaLabel={ariaLabel}>
+                <div className="flex items-baseline [&>p]:mt-0" id={ariaLabel}>
+                    {child.props.children}
+                </div>
             </RadioItem>
         );
     });
