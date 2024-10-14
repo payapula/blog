@@ -5,16 +5,17 @@ import { cn } from '@/lib/utils';
 export function RadioItem({
     children,
     disabled,
-    value
+    value,
+    ariaLabel
 }: {
     value: string;
     disabled: boolean;
     children: React.ReactNode;
+    ariaLabel: string;
 }) {
     return (
         <div>
             <Label
-                htmlFor={value}
                 /**
                  * labelChecked is styled from globals.css
                  */
@@ -26,7 +27,7 @@ export function RadioItem({
                 <RadioGroupItem
                     disabled={disabled}
                     value={value}
-                    id={value}
+                    aria-labelledby={ariaLabel}
                     className={cn(
                         `data-checked:scale-150 data-checked:bg-teal-300  dark:data-checked:bg-orange-700`,
                         {

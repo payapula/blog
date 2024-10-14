@@ -94,6 +94,20 @@ Sitemap file gets updated automatically by this awesome package - [next-sitemap]
 
 ## 🧪 Playwright Tests
 
+### Introduction
+
+- In Github Actions, we are using docker images to run the tests.
+- Refer to [PR that updates playwright actions](https://github.com/payapula/blog/pull/111/commits/b78b8864abbe3b979f7c1a3c8be1476c588f1872)
+- [Playwright documentation link](https://playwright.dev/docs/ci#via-containers)
+- This ensures the screenshot testing is consistent in local and in CI environments.
+
+### Env Variables
+
+- To properly switch environments, we have `.env.local` file.
+- Refer to `.env.example` file and `playwright.config.ts` file to know how this env file is being read.
+- DEV mode will use `html` report, compared to `list` report in production.
+- In order to test Production URL, update the `.env.local` file appropriately and do `npx playwright test`.
+
 ### Screenshots
 
 Its tricky to generate screenshots when tests are running in Github actions.
@@ -108,6 +122,10 @@ screenshots via docker in local.
 ##### For local mac
 
 Run `npx playwright test --update-snapshots`, it will generate new screenshot files for `-darwin.png`
+
+> [!NOTE]  
+> These screenshots are not validated in Github actions, as we are using docker container to run the
+> test in Github actions. This `-darwin.png` screenshots are only for local testing purposes.
 
 ##### For CI (linux)
 

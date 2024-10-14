@@ -29,6 +29,7 @@
         "clsx": "^2.1.1",
         "cross-env": "^7.0.3",
         "date-fns": "2.10.0",
+        "dotenv": "^16.4.5",
         "git-date-extractor": "^4.0.1",
         "gray-matter": "4.0.2",
         "next": "^12.2.3",

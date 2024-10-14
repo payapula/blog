@@ -1,13 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 import siteConfig from 'configs/site-configs';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
+ * https://playwright.dev/docs/test-parameterize#env-files
  */
-// require('dotenv').config();
+dotenv.config({ path: path.resolve(__dirname, '.env.local') });
 
-const IS_DEV_MODE = false;
+const IS_DEV_MODE = process.env.PLAYWRIGHT_EXECUTION_ENV === 'DEV';
 const BUILD_PORT = 3002;
 
 /**
