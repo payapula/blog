@@ -24,7 +24,7 @@ test('Quiz Page Navigation Tests', async ({ page }) => {
     await expect(page.getByRole('button', { name: 'Submit' })).toBeEnabled();
     await page.getByRole('button', { name: 'Submit' }).click();
     await assertIncorrectAnswer(page);
-    await testVisible(page.getByText('There are no magic here.'));
+    await testVisible(page.getByText('As expected in Javascript.'));
     await moveToNextPage(page);
 
     await page.locator('label').filter({ hasText: '<div>Hello World</div>' }).click();
