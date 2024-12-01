@@ -9,7 +9,7 @@ import { History } from 'components/tailwind/history';
 import { GetStaticProps } from 'next';
 import { getAllPosts } from 'lib/api';
 import Post from 'types/post';
-import TestimonialsSection from '@/components/testimonials-section';
+import ColleagueEndorsements from '@/components/tailwind/colleague-endorsements';
 
 interface IndexProps {
     recentPosts: Post[];
@@ -23,7 +23,7 @@ const Index = ({ recentPosts }: IndexProps): ReactElement => {
             </Head>
             <HeroContent />
             <RecentPosts recentPosts={recentPosts} />
-            <TestimonialsSection />
+            <ColleagueEndorsements />
             <Quotes />
             <Technologies />
             <History />

@@ -1,0 +1,10 @@
+## General Guidelines
+
+-   Use Tailwind CSS for styling
+-   Use Shadcn UI for components
+-   Use React Icons for icons
+-   Use NextJS Image for images
+-   Make sure the design is responsive and accessible
+-   Need to account for both dark and light mode
+-   Feel free to ask questions to get clarifications
+-   Suggest best practices for the code
