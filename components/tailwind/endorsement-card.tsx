@@ -15,7 +15,7 @@ export function EndorsementCard({ endorsement }: EndorsementCardProps) {
                 asChild
                 size="icon"
                 variant="link"
-                className="text-muted-foreground hover:text-foreground absolute right-4 top-4 h-8 w-8">
+                className="text-muted-foreground hover:text-foreground absolute right-4 top-4 h-8 w-8 text-teal-800 dark:text-teal-300">
                 <a
                     href={endorsement.sourceUrl}
                     target="_blank"
