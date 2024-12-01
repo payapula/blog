@@ -16,7 +16,7 @@ const testimonials: Testimonial[] = [
     },
     {
         name: 'Yuvaraj Bh',
-        role: 'Manager, Agile Program Management',
+        role: 'Manager, Agile PM',
         content:
             "Bharathi embodies a strong learning mindset that motivates the team to continuously expand their knowledge of cutting-edge technologies. Bharathi's introduced the use of storybook for all Ul components reflects his commitment to maintaining high-quality deliverables through rigorous unit testing. His proactive approach to staying informed and contributing to projects enhances productivity, delivery speed, and overall quality."
     },
@@ -41,13 +41,15 @@ export default function TestimonialsSection() {
                 <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
                     Colleague Endorsements
                 </h2>
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                     {testimonials.map((testimonial, index) => (
-                        <Card key={index} className=" bg-white/10 shadow-lg backdrop-blur-lg">
+                        <Card key={index} className=" bg-white/10 shadow-lg">
                             <CardContent className="flex h-full flex-col pt-6">
                                 <FaQuoteLeft className="mb-4 h-8 w-8 text-sky-400 dark:text-yellow-600" />
-                                <p className="mb-4 text-lg">{testimonial.content}</p>
-                                <div className="mt-auto self-end">
+                                <p className="sm:text-md mb-4 text-base md:text-lg">
+                                    {testimonial.content}
+                                </p>
+                                <div className="mt-auto flex flex-col items-end self-end">
                                     <h3 className="text-xl font-semibold">{testimonial.name}</h3>
                                     <p className="text-sm text-gray-700 dark:text-gray-300">
                                         {testimonial.role}

@@ -59,7 +59,7 @@ function History(): JSX.Element {
                     head={true}>
                     <Title>Lead Experience Engineer</Title>
                     <Subtitle>Publicis Sapient</Subtitle>
-                    <Description>React | Typescript | SCSS | HTML | CSS</Description>
+                    <Description>React | HTML | CSS | Recharts | Storybook</Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
                     date="2022 - 2023"
