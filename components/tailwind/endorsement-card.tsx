@@ -27,7 +27,7 @@ export function EndorsementCard({ endorsement }: EndorsementCardProps) {
 
             <CardContent className="flex h-full flex-col p-6">
                 <FaQuoteLeft className="mb-4 h-8 w-8 text-sky-400 dark:text-yellow-600" />
-                <blockquote className="sm:text-md mb-4 text-base md:text-lg">
+                <blockquote className="sm:text-md mb-4 text-base italic md:text-lg">
                     {endorsement.quote}
                 </blockquote>
                 <figcaption className="mt-auto flex flex-col items-end self-end">
