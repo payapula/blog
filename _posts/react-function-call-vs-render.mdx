@@ -15,7 +15,11 @@ ogImage:
 keywords: 'Javascript,React'
 ---
 
-React's rendering behavior can sometimes be surprising, especially when dealing with different data types. Let's break down this behavior with simple examples.
+React's rendering behavior can sometimes be surprising, especially when dealing with different data types. 
+
+Recently, I was working on a filter component with multiple select/dropdown components, where I observed a behavior that I found interesting. The gist of it is so simple, yet it was not obvious to me. I found myself testing the code wrongly for multiple times and I expected some magic ✨ to happen. Finally, I understood the root cause of it. 
+
+In this article, we will explore how React renders components when state changes. Understanding this behavior can help us write more efficient and predictable code.
 
 ## The Mental Model
 
@@ -135,9 +139,9 @@ function SetUserButton({ handleChangeUser }) {
 
 This is pretty much the same as the string state component except that we are using an object.
 
-Here, when we input the name as "John" and click the change user button, react re renders the `SampleComponentObj` component. This is because as per javascript, `{ name: "John" }` and `{ name: "John" }` are not the same values. We will get the console log as `Are objects same false`.
+Here, when we input the name as "John" and click the change user button, react re-renders the `SampleComponentObj` component. This is because as per Javascript, `{ name: "John" }` and `{ name: "John" }` are not the same values. We will get the console log as `Are objects same false`.
 
-A quick comparison of objects in javascript
+A quick comparison of objects in Javascript
 
 ```javascript noline highlight={[5]}
 const obj1 = { name: "John" };
@@ -150,9 +154,9 @@ console.log(JSON.stringify(obj1) === JSON.stringify(obj2)); // true
 
 In the above example, `===` and `==` both return false because they are checking for reference equality. `JSON.stringify` returns true because it is checking for value equality. React uses `Object.is` to check for equality. 
 
-Since, the equality fails, react re renders the `SampleComponentObj` component. 
+Since, the equality fails, react re-renders the `SampleComponentObj` component. 
 
-This is good. But what if we click the change user button again? In both the components?
+This is good, but what if we click the change user button again? In both the components?
 
 ## Clicking the button again
 
@@ -186,6 +190,8 @@ function SampleComponentObj() {
 }
 ```
 
+In the examples below, please ignore the first render with initial state.
+
 The output of string component is
 
 <Image
@@ -196,9 +202,9 @@ The output of string component is
   objectFit='contain'
 />
 
-(Please ignore the first render with initial state.)
 
-No surprise here. Once react knows that the state is not changing, it does not re render the component. So, our console log is not printed.
+
+No surprise here. Once react knows that the state is not changing, it does not re-render the component. So, our console log is not printed.
 
 The output of object component is
 
@@ -221,8 +227,6 @@ We are seeing a weird behavior. It looks like the component is rendered twice.
 If our understanding is correct, the component should not rerender once the objects become same.
 
 Can you guess why this is happening?
-
-Answer:
 
 Actually, our understanding is correct. There is a **mistake in the way we are checking** if react renders the component or not. 
 
@@ -307,6 +311,15 @@ In summary,
 > The **quicker** way to check if react renders the component is by using `useEffect` hook.
 
 > The **better** way to check if react renders the component is by using React Dev Tools.
+
+The next time when you are debugging a React component's rendering behavior, use the strategies mentioned above. Remember that:
+
+- Console logs can be misleading since function calls don't always mean renders
+- `useEffect` is a quick way to check for actual renders
+- React Dev Tools provides the most accurate picture of component rendering
+- Understanding how React handles equality checks for different data types (like strings vs objects) will help you write more predictable code
+
+Happy debugging! 🐛
 
 ----
 
