@@ -1,17 +1,18 @@
 ---
 title: 'React Function Call vs Render'
-excerpt: "Recently, I came across a behavior in React that I found interesting. It has to do with how React renders the component when state changes. This state can be a simple string or a object."
+excerpt: "React's rendering behavior can sometimes be surprising, especially when dealing with different data types. 
+Recently, I was working on a filter component with multiple select/dropdown components, where I observed a behavior that I found interesting. The gist of it is so simple, yet it was not obvious to me."
 date: '2024-12-08'
-description: "Recently, I came across a behavior in React that I found interesting. It has to do with how React renders the component when state changes. This state can be a simple string or a object."
+description: "React's rendering behavior can sometimes be surprising, especially when dealing with different data types.In this article, we will explore how React renders components when state changes. The important part is the data type of the state. Understanding this behavior can help us write more efficient and predictable code."
 cover: 
-    src: '/assets/blog/code-review-practices/cover.jpg' 
-    alt: 'You got this text on a road.'
+    src: '/assets/blog/react-function-call-vs-render/cover.jpg' 
+    alt: 'gray and black industrial machine'
     author: 
-      name: 'John Schnobrich'
-      url: https://unsplash.com/photos/person-using-laptop-FlPc9_VocJ4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+      name: 'Lalit Kumar'
+      url: https://unsplash.com/photos/gray-and-black-industrial-machine-P3zEXBwabwA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
 ogImage:
-    url: '/assets/blog/code-review-practices/ogCover.jpg'  
-    alt: 'You got this text on a road.'
+    url: '/assets/blog/react-function-call-vs-render/cover.jpg'  
+    alt: 'gray and black industrial machine'
 keywords: 'Javascript,React'
 ---
 
@@ -19,7 +20,7 @@ React's rendering behavior can sometimes be surprising, especially when dealing 
 
 Recently, I was working on a filter component with multiple select/dropdown components, where I observed a behavior that I found interesting. The gist of it is so simple, yet it was not obvious to me. I found myself testing the code wrongly for multiple times and I expected some magic ✨ to happen. Finally, I understood the root cause of it. 
 
-In this article, we will explore how React renders components when state changes. Understanding this behavior can help us write more efficient and predictable code.
+In this article, we will explore how React renders components when state changes. The important part is the data type of the state. Understanding this behavior can help us write more efficient and predictable code.
 
 ## The Mental Model
 
@@ -27,7 +28,7 @@ Before we dive in, let's establish a key concept:
 - A function call is just executing the component function
 - A render is when React actually updates the DOM
 
-## String vs Object State: A Tale of Two Components
+## String vs Object State
 
 Let's look at two seemingly similar components that behave differently
 
@@ -226,7 +227,7 @@ We are seeing a weird behavior. It looks like the component is rendered twice.
 
 If our understanding is correct, the component should not rerender once the objects become same.
 
-Can you guess why this is happening?
+Can you guess why this is happening? 🤔
 
 Actually, our understanding is correct. There is a **mistake in the way we are checking** if react renders the component or not. 
 
