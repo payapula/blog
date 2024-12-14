@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.bharathikannan.com</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/quiz</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/code-review-practices</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/context-redux-composition</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/what-is-this-javascript</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/positioned-layout</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/use-next-link-with-chakra-ui</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/minimizing-lodash-bundle-size</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/simple-introduction-to-chakra</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/react-hooks-dependencies-and-stale-closures</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/react-useeffect-flow</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.bharathikannan.com/blog/react-is-just-javascript</loc><lastmod>2024-10-05T19:09:10.357Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/quiz</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/react-function-call-vs-render</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/code-review-practices</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/context-redux-composition</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/what-is-this-javascript</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/positioned-layout</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/use-next-link-with-chakra-ui</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/minimizing-lodash-bundle-size</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/simple-introduction-to-chakra</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/react-hooks-dependencies-and-stale-closures</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/react-useeffect-flow</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.bharathikannan.com/blog/react-is-just-javascript</loc><lastmod>2024-12-14T14:47:34.280Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

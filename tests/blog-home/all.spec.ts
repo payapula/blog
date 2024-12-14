@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const TOTAL_BLOG_POSTS = 10;
+const TOTAL_BLOG_POSTS = 11;
 
 test.describe('All Desktop Browsers', () => {
     test('Elements Visible on Page', async ({ page }) => {
