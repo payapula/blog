@@ -1,0 +1,316 @@
+---
+title: 'React Function Call vs Render'
+excerpt: "Recently, I came across a behavior in React that I found interesting. It has to do with how React renders the component when state changes. This state can be a simple string or a object."
+date: '2024-12-08'
+description: "Recently, I came across a behavior in React that I found interesting. It has to do with how React renders the component when state changes. This state can be a simple string or a object."
+cover: 
+    src: '/assets/blog/code-review-practices/cover.jpg' 
+    alt: 'You got this text on a road.'
+    author: 
+      name: 'John Schnobrich'
+      url: https://unsplash.com/photos/person-using-laptop-FlPc9_VocJ4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash
+ogImage:
+    url: '/assets/blog/code-review-practices/ogCover.jpg'  
+    alt: 'You got this text on a road.'
+keywords: 'Javascript,React'
+---
+
+React's rendering behavior can sometimes be surprising, especially when dealing with different data types. Let's break down this behavior with simple examples.
+
+## The Mental Model
+
+Before we dive in, let's establish a key concept:
+- A function call is just executing the component function
+- A render is when React actually updates the DOM
+
+## String vs Object State: A Tale of Two Components
+
+Let's look at two seemingly similar components that behave differently
+
+First, let's look at the string state component
+
+### Example 1: String State
+
+In this example, we have `appliedUser` as a string state.
+
+```jsx highlight={[2,23,31,35]}
+function SampleComponentString() {
+  const [appliedUser, setAppliedUser] = React.useState("John");
+
+  const handleChangeUser = (newUser) => {
+    console.log("Are strings same", appliedUser === newUser);
+    setAppliedUser(newUser);
+  };
+
+  return (
+    <div >
+      <h2 >String State</h2>
+      <UserDisplayString user={appliedUser} />
+      <SetUserButtonString handleChangeUser={handleChangeUser} />
+    </div>
+  );
+}
+
+function UserDisplayString({ user }) {
+  return <div className="p-2">User: {user}</div>;
+}
+
+function SetUserButtonString({ handleChangeUser }) {
+  const [user, setUser] = React.useState("");
+  return (
+    <div >
+      <label htmlFor="userNameString">Update user to: </label>
+      <input
+        id="userNameString"
+        type="text"
+        value={user}
+        onChange={(e) => setUser(e.target.value)}
+        className="text-black"
+      />
+      <button
+        onClick={() => handleChangeUser(user)}
+      >
+        Change User
+      </button>
+    </div>
+  );
+}
+```
+
+(Skipping the explanation of component structure for brevity)
+
+Inside the `SetUserButtonString` component, we have a state `user` that is used to update the `appliedUser` state.
+
+When we change the `user` state, react re-renders the `SetUserButtonString` component. This is expected behavior.
+
+We have initialized the `appliedUser` state to "John". When we enter the name "John" and click the change user button, nothing happens. React does not re-render the component because it knows that the `appliedUser` state is not updated. We will get the console log as `Are strings same true`.
+
+### Example 2: Object State
+
+In this example, we have `appliedUser` as an object state with a name property.
+
+```jsx highlight={[2,23,31,35]}
+function SampleComponentObj() {
+  const [appliedUser, setAppliedUser] = React.useState({ name: "John" });
+
+  const handleChangeUser = (newUser) => {
+    console.log("Are objects same", Object.is(appliedUser, newUser));
+    setAppliedUser(newUser);
+  };
+
+  return (
+    <div>
+      <h2 >Object State</h2>
+      <UserDisplay user={appliedUser} />
+      <SetUserButton handleChangeUser={handleChangeUser} />
+    </div>
+  );
+}
+
+function UserDisplay({ user }) {
+  return <div className="p-2">User: {user.name}</div>;
+}
+
+function SetUserButton({ handleChangeUser }) {
+  const [user, setUser] = React.useState({ name: "" });
+  return (
+    <div >
+      <label htmlFor="userNameObj">Update user to: </label>
+      <input
+        id="userNameObj"
+        type="text"
+        value={user.name}
+        onChange={(e) => setUser({ name: e.target.value })}
+        className="text-black"
+      />
+      <button
+        onClick={() => handleChangeUser(user)}
+      >
+        Change User
+      </button>
+    </div>
+  );
+}
+```
+
+This is pretty much the same as the string state component except that we are using an object.
+
+Here, when we input the name as "John" and click the change user button, react re renders the `SampleComponentObj` component. This is because as per javascript, `{ name: "John" }` and `{ name: "John" }` are not the same values. We will get the console log as `Are objects same false`.
+
+A quick comparison of objects in javascript
+
+```javascript noline highlight={[5]}
+const obj1 = { name: "John" };
+const obj2 = { name: "John" };
+console.log(obj1 === obj2); // false
+console.log(obj1 == obj2); // false
+console.log(Object.is(obj1, obj2)); // false
+console.log(JSON.stringify(obj1) === JSON.stringify(obj2)); // true
+```
+
+In the above example, `===` and `==` both return false because they are checking for reference equality. `JSON.stringify` returns true because it is checking for value equality. React uses `Object.is` to check for equality. 
+
+Since, the equality fails, react re renders the `SampleComponentObj` component. 
+
+This is good. But what if we click the change user button again? In both the components?
+
+## Clicking the button again
+
+In the String component, no matter how many times we click the button, react does not re render the component. This is because react knows that the `appliedUser` state is not changing. 
+
+```javascript noline 
+const str1 = "John";
+const str2 = "John";
+console.log(Object.is(str1, str2)); // true
+```
+
+Even in the Object component, after the first click, react does not re render the component. How do we verify this?
+
+Let's add a console log in both the components.
+
+```jsx highlight={[4,12]}
+function SampleComponentString() {
+  const [appliedUser, setAppliedUser] = React.useState("John");
+
+  console.log("string component rerender");
+
+  return (/* Omitted for brevity */);
+}
+
+function SampleComponentObj() {
+  const [appliedUser, setAppliedUser] = React.useState({ name: "John" });
+
+  console.log("object component rerender");
+
+  return (/* Omitted for brevity */);
+}
+```
+
+The output of string component is
+
+<Image
+  alt="String Render"
+  src="/assets/blog/react-function-call-vs-render/string_render.gif"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+(Please ignore the first render with initial state.)
+
+No surprise here. Once react knows that the state is not changing, it does not re render the component. So, our console log is not printed.
+
+The output of object component is
+
+<Image
+  alt="Object Render"
+  src="/assets/blog/react-function-call-vs-render/object_render.gif"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+(Please ignore the first render with initial state.)
+
+We are seeing a weird behavior. It looks like the component is rendered twice. 
+
+- When user updates the state to "John", and clicks the button, we are seeing "object component rerender".
+- When user clicks the button again, we are seeing "object component rerender" again.
+- Next time when user clicks the button, we are not seeing "object component rerender"?
+
+If our understanding is correct, the component should not rerender once the objects become same.
+
+Can you guess why this is happening?
+
+Answer:
+
+Actually, our understanding is correct. There is a **mistake in the way we are checking** if react renders the component or not. 
+
+React rendering and function calls are not the same. React can sometimes skip the rendering phase if it can determine that the component is not changing. In these cases, the function call will be made but the rendering phase will be skipped. This is what is happening in the object component.
+
+The proper way to check if react renders the component is by using `useEffect` hook.
+
+```jsx highlight={[4,5,6]}
+function SampleComponentObj() {
+  const [appliedUser, setAppliedUser] = React.useState({ name: "John" });
+
+  React.useEffect(() => {
+    console.log("object component rerender");
+  });
+
+  return (/* Omitted for brevity */);
+}
+```
+
+Now, let's see this in action.
+
+<Image
+  alt="Object Render Correct Way"
+  src="/assets/blog/react-function-call-vs-render/object_proper.gif"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+(Please ignore the first render with initial state.)
+
+- When user clicks the button, we are seeing "object component rerender".
+- When user clicks the button again, we are not seeing "object component rerender". **Here react calls the component function but skips the rendering phase.**
+
+## React Dev Tools
+
+React Dev Tools is a powerful tool that can help you understand how React renders the component. Let's see how it works with our examples. In both of the examples, after entering the name as "John" I am clicking the button multiple times.
+
+### String Component
+
+<Image
+  alt="String Component"
+  src="/assets/blog/react-function-call-vs-render/dev_string_example.gif"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+Total number of commits are 5.
+
+1. Initial render.
+2. `SetUserButtonString` component is rendered for "J".
+3. `SetUserButtonString` component is rendered for "o".
+4. `SetUserButtonString` component is rendered for "h".
+5. `SetUserButtonString` component is rendered for "n".
+
+### Object Component
+
+<Image
+  alt="Object Component"
+  src="/assets/blog/react-function-call-vs-render/dev_object_example.gif"
+  width={700}
+  height={300}
+  objectFit='contain'
+/>
+
+Total number of commits are 6.
+
+1. Initial render.
+2. `SetUserButton` component is rendered for "J".
+3. `SetUserButton` component is rendered for "o".
+4. `SetUserButton` component is rendered for "h".
+5. `SetUserButton` component is rendered for "n".
+6. `SampleComponentObj` component is rendered for `{name: "John"}`.
+
+## Conclusion
+
+React rendering and function calls are not the same. React can sometimes skip the rendering phase if it can determine that the component is not changing. In these cases, the function call will be made but the rendering phase will be skipped. This is what is happening in the object component.
+
+In summary,
+
+> The **quicker** way to check if react renders the component is by using `useEffect` hook.
+
+> The **better** way to check if react renders the component is by using React Dev Tools.
+
+----
+
+References
+
+- [Stackoverflow answer on React rendering and function calls](https://stackoverflow.com/a/75895309/5155530)
+- [React Dev Tools](https://react.dev/learn/react-developer-tools)
