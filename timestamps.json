@@ -1,7 +1,7 @@
 {
   "_posts/code-review-practices.mdx": {
     "created": 1717334930,
-    "modified": 1728375840
+    "modified": 1736438671
   },
   "_posts/context-redux-composition.mdx": {
     "created": 1676562550,
@@ -9,11 +9,11 @@
   },
   "_posts/dynamic-routing-draft.mdx": {
     "created": 1616935776,
-    "modified": 1728237634
+    "modified": 1733058390
   },
   "_posts/hello-world-draft.mdx": {
     "created": 1616935776,
-    "modified": 1728237634
+    "modified": 1733058390
   },
   "_posts/minimizing-lodash-bundle-size.mdx": {
     "created": 1625390727,
@@ -25,7 +25,7 @@
   },
   "_posts/preview-draft.mdx": {
     "created": 1615646474,
-    "modified": 1728237634
+    "modified": 1733058390
   },
   "_posts/react-hooks-dependencies-and-stale-closures.mdx": {
     "created": 1620572695,
@@ -33,7 +33,7 @@
   },
   "_posts/react-is-just-javascript.mdx": {
     "created": 1617622490,
-    "modified": 1728376068
+    "modified": 1733058390
   },
   "_posts/react-useeffect-flow.mdx": {
     "created": 1619349104,
@@ -41,7 +41,7 @@
   },
   "_posts/simple-introduction-to-chakra.mdx": {
     "created": 1623495648,
-    "modified": 1728237634
+    "modified": 1733058390
   },
   "_posts/use-next-link-with-chakra-ui.mdx": {
     "created": 1630773420,
@@ -50,5 +50,9 @@
   "_posts/what-is-this-javascript.mdx": {
     "created": 1637409756,
     "modified": 1659963170
+  },
+  "_posts/react-function-call-vs-render.mdx": {
+    "created": 1733664498,
+    "modified": 1736438671
   }
 }
