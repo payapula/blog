@@ -58,7 +58,7 @@ function History(): JSX.Element {
                     icon={<CustomIcon icon={DiReact} colorClass="text-[#61dafb]" />}
                     head={true}>
                     <Title>Lead Experience Engineer</Title>
-                    <Subtitle>Publicis Sapient</Subtitle>
+                    <Subtitle>Publicis Sapient, Bangalore</Subtitle>
                     <Description>React | HTML | CSS | Recharts | Storybook</Description>
                 </CustomVerticalTimeLine>
                 <CustomVerticalTimeLine
