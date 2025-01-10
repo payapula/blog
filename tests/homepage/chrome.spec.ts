@@ -19,7 +19,7 @@ test.describe('Chrome Desktop Only', () => {
         ).not.toBeVisible();
 
         // Scroll down to kick in Experience Cards
-        await page.mouse.wheel(0, 2000);
+        await page.mouse.wheel(0, 3000);
 
         const firstSetOfExperience = [
             page.getByRole('heading', { name: 'Lead Experience Engineer' }),
@@ -32,7 +32,7 @@ test.describe('Chrome Desktop Only', () => {
         }
 
         // Scroll down to kick in Experience Cards
-        await page.mouse.wheel(0, 1000);
+        await page.mouse.wheel(0, 4000);
 
         const nextSetOfExperience = [
             page.getByRole('heading', { name: 'Software Development Senior Analyst' }),
