@@ -1,6 +1,14 @@
-## General
+## General Guidelines
 
-- When writing blog posts, use MDX.
-- Refer to my style of writing in the blog posts.
-- Please check "_posts" folder for existing blog posts.
-- Always check for typos and grammar mistakes.
+-   Use Tailwind CSS for styling
+-   Use Shadcn UI for components
+-   Use React Icons for icons
+-   Use NextJS Image for images
+-   Make sure the design is responsive and accessible
+-   Need to account for both dark and light mode
+-   Feel free to ask questions to get clarifications
+-   Suggest best practices for the code
+-   When writing blog posts, use MDX.
+-   Refer to my style of writing in the blog posts.
+-   Please check "\_posts" folder for existing blog posts.
+-   Always check for typos and grammar mistakes.
