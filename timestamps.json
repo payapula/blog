@@ -1,7 +1,7 @@
 {
   "_posts/code-review-practices.mdx": {
     "created": 1717334930,
-    "modified": 1733664769
+    "modified": 1736438671
   },
   "_posts/context-redux-composition.mdx": {
     "created": 1676562550,
@@ -53,6 +53,6 @@
   },
   "_posts/react-function-call-vs-render.mdx": {
     "created": 1733664498,
-    "modified": 1734185321
+    "modified": 1736438671
   }
 }

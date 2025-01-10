@@ -53,21 +53,22 @@ export const Quotes = (): JSX.Element => {
     };
 
     return (
-        <div className="mt-10 flex min-h-[300px] flex-col items-center md:min-h-[320px]">
-            <div className="flex basis-[60px] items-center text-center">
-                <Button onClick={() => toggleQuotes('previous')} className="mr-2">
-                    <VisuallyHidden>Previous Quote</VisuallyHidden>
-                    <FaArrowAltCircleLeft className="h-5 w-5" />
-                </Button>
-                <Heading className="text-3xl font-bold md:text-4xl">Favourite Quotes</Heading>
-                <Button onClick={() => toggleQuotes('next')} className="ml-2">
-                    <VisuallyHidden>Next Quote</VisuallyHidden>
-                    <FaArrowAltCircleRight className="h-5 w-5" />
-                </Button>
-            </div>
-            <figure className="m-auto flex flex-col p-2 sm:p-3 md:p-4">
-                <blockquote
-                    className="text-xl  italic before:font-serif before:text-[1.7rem]
+        <div className="relative left-[calc(-50vw+50%)] mt-10  w-screen bg-sky-50 pt-10 dark:bg-gray-chakra">
+            <div className="mx-auto flex min-h-[300px] w-[75%] flex-col items-center md:min-h-[320px] ">
+                <div className="flex basis-[60px] items-center text-center">
+                    <Button onClick={() => toggleQuotes('previous')} className="mr-2">
+                        <VisuallyHidden>Previous Quote</VisuallyHidden>
+                        <FaArrowAltCircleLeft className="h-5 w-5" />
+                    </Button>
+                    <Heading className="text-3xl font-bold md:text-4xl">Favourite Quotes</Heading>
+                    <Button onClick={() => toggleQuotes('next')} className="ml-2">
+                        <VisuallyHidden>Next Quote</VisuallyHidden>
+                        <FaArrowAltCircleRight className="h-5 w-5" />
+                    </Button>
+                </div>
+                <figure className="m-auto flex flex-col p-2 sm:p-3 md:p-4">
+                    <blockquote
+                        className="text-xl  italic before:font-serif before:text-[1.7rem]
                     before:font-bold
                         before:content-[open-quote]
                         after:ml-[3px]
@@ -83,12 +84,13 @@ export const Quotes = (): JSX.Element => {
                         before:lg:text-[3rem]
                         after:lg:text-[3rem]
                 ">
-                    {quoteData[quoteNo].text}
-                </blockquote>
-                <figcaption className="self-end text-xl font-bold md:text-2xl">
-                    - {quoteData[quoteNo].author}
-                </figcaption>
-            </figure>
+                        {quoteData[quoteNo].text}
+                    </blockquote>
+                    <figcaption className="self-end text-xl font-bold md:text-2xl">
+                        - {quoteData[quoteNo].author}
+                    </figcaption>
+                </figure>
+            </div>
         </div>
     );
 };
