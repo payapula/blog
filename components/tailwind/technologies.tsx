@@ -1,13 +1,14 @@
 // Inspired by https://github.com/guarmo/portfolio/blob/master/components/About.js
 import { ReactElement } from 'react';
 import { IconType } from 'react-icons';
-import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3, DiAndroid } from 'react-icons/di';
+import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3 } from 'react-icons/di';
 import {
     SiNextdotjs,
     SiTypescript,
-    SiCsharp,
-    SiFirebase,
+    SiShadcnui,
+    SiSupabase,
     SiAwsamplify,
+    SiTailwindcss,
     SiRemix
 } from 'react-icons/si';
 import { Heading } from './heading';
@@ -23,24 +24,34 @@ type IconSet = {
 };
 
 const iconSet: IconSet = {
+    react: { colorClasses: 'hover:text-[#61dafb] text-[#61dafb]', text: 'React', icon: DiReact },
+    next: { colorClasses: '', text: 'NextJS', icon: SiNextdotjs },
+    remix: { colorClasses: '', text: 'Remix', icon: SiRemix },
     ts: {
         colorClasses: 'hover:text-[#3178c6] text-[#3178c6]',
         text: 'TypeScript',
         icon: SiTypescript
     },
-    react: { colorClasses: 'hover:text-[#61dafb] text-[#61dafb]', text: 'React', icon: DiReact },
-    next: { colorClasses: '', text: 'NextJS', icon: SiNextdotjs },
-    remix: { colorClasses: '', text: 'Remix', icon: SiRemix },
-    node: { colorClasses: 'hover:text-[#026e00] text-[#026e00]', text: 'NodeJS', icon: DiNodejs },
     js: {
         colorClasses: 'hover:text-[#fcdc00] text-[#fcdc00]',
         text: 'Javascript',
         icon: DiJsBadge
     },
-    firebase: {
-        colorClasses: 'hover:text-[#FFCA28] text-[#FFCA28]',
-        text: 'Firebase',
-        icon: SiFirebase
+    tailwind: {
+        colorClasses: 'hover:text-[#34b7f1] text-[#34b7f1]',
+        text: 'TailwindCSS',
+        icon: SiTailwindcss
+    },
+    shadcn: {
+        colorClasses: 'hover:text-black text-black',
+        text: 'Shadcn/UI',
+        icon: SiShadcnui
+    },
+    node: { colorClasses: 'hover:text-[#026e00] text-[#026e00]', text: 'NodeJS', icon: DiNodejs },
+    supabase: {
+        colorClasses: 'hover:text-[#3dcf8e] text-[#3dcf8e]',
+        text: 'Supabase',
+        icon: SiSupabase
     },
     amplify: {
         colorClasses: 'hover:text-[#FF9900] text-[#FF9900]',
@@ -48,17 +59,7 @@ const iconSet: IconSet = {
         icon: SiAwsamplify
     },
     html: { colorClasses: 'hover:text-[#e54c21] text-[#e54c21]', text: 'HTML', icon: DiHtml5 },
-    css: { colorClasses: 'hover:text-[#1672b6] text-[#1672b6]', text: 'CSS', icon: DiCss3 },
-    csharp: {
-        colorClasses: 'hover:text-[#189f20] text-[#189f20]',
-        text: 'C Sharp',
-        icon: SiCsharp
-    },
-    android: {
-        colorClasses: 'hover:text-[#a5c736] text-[#a5c736]',
-        text: 'Android',
-        icon: DiAndroid
-    }
+    css: { colorClasses: 'hover:text-[#1672b6] text-[#1672b6]', text: 'CSS', icon: DiCss3 }
 };
 
 function Technologies(): ReactElement {
