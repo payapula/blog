@@ -1,7 +1,7 @@
 // Inspired by https://github.com/guarmo/portfolio/blob/master/components/About.js
 import { ReactElement } from 'react';
 import { IconType } from 'react-icons';
-import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3, DiAndroid } from 'react-icons/di';
+import { DiReact, DiJsBadge, DiNodejs, DiHtml5, DiCss3 } from 'react-icons/di';
 import {
     SiNextdotjs,
     SiTypescript,
