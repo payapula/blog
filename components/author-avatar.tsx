@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import Image from 'next/image';
-import profilePic from 'public/assets/resume/bharathikannanavatar.jpg';
+import profilePic from 'public/assets/resume/bharathikannanavatar.jpeg';
 
 /**
  * ## When updating images

@@ -54,7 +54,7 @@ Run `ifconfig` and get the ipaddress of your localhost
 
 Open that address on the mobile with the same portnumber.
 
-Ex: `192.168.1.9:3001`
+Ex: `192.168.1.9:3002`
 
 ## 🧵 Bundle Analyzer
 
