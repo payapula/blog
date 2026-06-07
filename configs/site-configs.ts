@@ -40,7 +40,7 @@ const siteConfig: SiteConfig = {
             url: hostedURL,
             images: [
                 {
-                    url: getBasePath('/assets/resume/bharathikannanavatar.jpg'),
+                    url: getBasePath('/assets/resume/bharathikannanavatar.jpeg'),
                     alt: 'Bharathi Kannan Avatar'
                 }
             ]
