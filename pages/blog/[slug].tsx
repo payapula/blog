@@ -115,7 +115,11 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             remarkPlugins: [remarkMdxCodeMeta as any],
             rehypePlugins: [rehypeSlug]
-        }
+        },
+        // next-mdx-remote v5+ strips all JSX expression attributes (e.g. width={600})
+        // when blockJS is on. Our posts are author-owned/trusted, so allow expressions
+        // while keeping blockDangerousJS (default true) to strip dangerous JS calls.
+        blockJS: false
     });
 
     return {
