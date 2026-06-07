@@ -53,7 +53,10 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
 
     const mdxSource = await serialize(post.content, {
         mdxOptions: {
-            remarkPlugins: [remarkMdxCodeMeta]
+            // remark-mdx-code-meta pins unified@10 types while next-mdx-remote v6 uses
+            // unified@11, so cast to bypass the type-only version skew (runtime is fine).
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            remarkPlugins: [remarkMdxCodeMeta as any]
         }
     });
 
